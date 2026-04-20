@@ -89,7 +89,7 @@ export const getHomepageData = createServerFn({ method: "GET" }).handler(async (
     .select(FIXTURE_SELECT)
     .in("status", ["scheduled"])
     .order("match_date", { ascending: true })
-    .limit(24);
+    .limit(100);
   return {
     live: (live ?? []) as unknown as Fixture[],
     upcoming: (upcoming ?? []) as unknown as Fixture[],
