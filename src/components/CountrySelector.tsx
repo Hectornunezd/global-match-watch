@@ -43,11 +43,14 @@ export function CountrySelector({
         setValue(v);
         setCountryCookieClient(v);
         const a3 = alpha2ToAlpha3(v);
-        if (a3) onChange?.(a3);
         if (typeof window !== "undefined") {
           const w = window as unknown as { gtag?: (...a: unknown[]) => void };
           w.gtag?.("event", "country_change", { country: v });
-          // Reload to refetch country-filtered data
+        }
+        if (onChange) {
+          if (a3) onChange(a3);
+        } else if (typeof window !== "undefined") {
+          // Reload to refetch country-filtered data when no handler is provided
           window.location.reload();
         }
       }}
