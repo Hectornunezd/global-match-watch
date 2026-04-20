@@ -83,7 +83,7 @@ function HomePage() {
             <div className="mt-7 flex flex-wrap items-center gap-3">
               <a
                 href="#upcoming"
-                className="rounded-md bg-primary px-5 py-3 font-display text-sm uppercase tracking-wider text-primary-foreground transition-opacity hover:opacity-90"
+                className="rounded-full bg-primary px-6 py-3 font-display text-sm uppercase tracking-wider text-primary-foreground transition-opacity hover:opacity-90"
               >
                 {m.hero.cta}
               </a>
