@@ -87,7 +87,17 @@ function HomePage() {
               >
                 {m.hero.cta}
               </a>
-              <CountrySelector initialAlpha2={geo.alpha2} />
+              <CountrySelector
+                initialAlpha2={geo.alpha2}
+                onChange={(alpha3) => {
+                  const g = countryToGroup[alpha3];
+                  if (g) setGroup(g);
+                  if (typeof window !== "undefined") {
+                    const el = document.getElementById("upcoming");
+                    el?.scrollIntoView({ behavior: "smooth", block: "start" });
+                  }
+                }}
+              />
             </div>
           </div>
 
