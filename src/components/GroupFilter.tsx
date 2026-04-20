@@ -14,7 +14,7 @@ export function GroupFilter({
 }) {
   const m = t(locale);
   return (
-    <div className="flex gap-2 overflow-x-auto pb-2 [&::-webkit-scrollbar]:hidden">
+    <div className="flex flex-wrap gap-2 pb-2">
       <button
         onClick={() => onChange(null)}
         className={`shrink-0 rounded-full border px-4 py-1.5 font-display text-sm uppercase tracking-wider transition-colors ${
