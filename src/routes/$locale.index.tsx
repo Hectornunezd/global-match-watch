@@ -1,0 +1,220 @@
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { useMemo, useState } from "react";
+import { isLocale, type Locale, t, localeUrl } from "@/lib/i18n";
+import { getHomepageData } from "@/lib/data";
+import { detectGeo } from "@/lib/geolocation";
+import { MatchCard } from "@/components/MatchCard";
+import { GroupFilter } from "@/components/GroupFilter";
+import { CountrySelector } from "@/components/CountrySelector";
+import { AdSlot } from "@/components/AdSlot";
+import { buildMeta, jsonLdScript, organizationJsonLd, websiteJsonLd } from "@/lib/seo";
+import { notFound } from "@tanstack/react-router";
+
+const WORLD_CUP_START = "2026-06-11T16:00:00Z";
+
+export const Route = createFileRoute("/$locale/")({
+  beforeLoad: ({ params }) => {
+    if (!isLocale(params.locale)) throw notFound();
+  },
+  loader: async ({ params }) => {
+    const [data, geo] = await Promise.all([getHomepageData(), detectGeo()]);
+    return { ...data, geo, locale: params.locale as Locale };
+  },
+  head: ({ loaderData }) => {
+    if (!loaderData) return {};
+    const locale = loaderData.locale;
+    const m = t(locale);
+    const path = `/${locale}`;
+    const altPath = `/${locale === "en" ? "es" : "en"}`;
+    const { meta, links } = buildMeta({
+      title: locale === "en"
+        ? "MatchLiveNow — Watch the FIFA World Cup 2026 from any country"
+        : "MatchLiveNow — Ver el Mundial FIFA 2026 desde cualquier país",
+      description: m.hero.subtitle,
+      path,
+      altPath,
+      locale,
+    });
+    return {
+      meta,
+      links,
+      scripts: [jsonLdScript([organizationJsonLd(), websiteJsonLd()])],
+    };
+  },
+  component: HomePage,
+});
+
+function HomePage() {
+  const { live, upcoming, geo, locale } = Route.useLoaderData() as {
+    live: import("@/lib/data").Fixture[];
+    upcoming: import("@/lib/data").Fixture[];
+    geo: { alpha2: string; alpha3: string };
+    locale: Locale;
+  };
+  const m = t(locale);
+  const [group, setGroup] = useState<string | null>(null);
+  const groups = useMemo(() => {
+    const g = new Set<string>();
+    upcoming.forEach((f) => {
+      if (f.round?.startsWith("Group ")) g.add(f.round.replace("Group ", ""));
+    });
+    return Array.from(g).sort();
+  }, [upcoming]);
+  const filtered = useMemo(() => {
+    if (!group) return upcoming;
+    return upcoming.filter((f) => f.round === `Group ${group}`);
+  }, [upcoming, group]);
+
+  const countdown = useCountdown(WORLD_CUP_START);
+
+  return (
+    <>
+      {/* Hero */}
+      <section className="gradient-hero">
+        <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20">
+          <div className="max-w-3xl">
+            <span className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 font-mono text-[11px] font-bold uppercase tracking-wider text-primary">
+              FIFA World Cup 2026
+            </span>
+            <h1 className="text-balance mt-5 font-display text-4xl uppercase leading-[0.95] sm:text-6xl md:text-7xl">
+              {m.hero.title}
+            </h1>
+            <p className="mt-5 max-w-xl text-base text-muted-foreground sm:text-lg">{m.hero.subtitle}</p>
+            <div className="mt-7 flex flex-wrap items-center gap-3">
+              <a
+                href="#upcoming"
+                className="rounded-md bg-primary px-5 py-3 font-display text-sm uppercase tracking-wider text-primary-foreground transition-opacity hover:opacity-90"
+              >
+                {m.hero.cta}
+              </a>
+              <CountrySelector initialAlpha2={geo.alpha2} />
+            </div>
+          </div>
+
+          {/* Countdown */}
+          <div className="mt-10 flex flex-wrap gap-3">
+            {[
+              { v: countdown.days, l: m.countdown.days },
+              { v: countdown.hours, l: m.countdown.hours },
+              { v: countdown.minutes, l: m.countdown.minutes },
+              { v: countdown.seconds, l: m.countdown.seconds },
+            ].map((c, i) => (
+              <div key={i} className="flex min-w-[78px] flex-col items-center rounded-xl border border-border bg-card px-4 py-3">
+                <span className="font-mono text-2xl font-bold tabular-nums">
+                  {String(c.v).padStart(2, "0")}
+                </span>
+                <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">{c.l}</span>
+              </div>
+            ))}
+            <span className="self-center text-xs uppercase tracking-wider text-muted-foreground">
+              {m.countdown.to}
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
+        <AdSlot slot="leaderboard" />
+      </div>
+
+      {/* Live */}
+      {live.length > 0 && (
+        <section className="mx-auto max-w-6xl px-4 sm:px-6">
+          <div className="mb-4 flex items-center gap-3">
+            <span className="live-pulse h-2.5 w-2.5 rounded-full bg-[var(--success)]" />
+            <h2 className="text-2xl">{m.sections.liveNow}</h2>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {live.map((f) => (
+              <MatchCard key={f.id} fixture={f} locale={locale} />
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Upcoming */}
+      <section id="upcoming" className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
+        <div className="mb-5 flex items-end justify-between gap-4">
+          <h2 className="text-2xl">{m.sections.upcoming}</h2>
+        </div>
+        <div className="mb-5">
+          <GroupFilter locale={locale} groups={groups} active={group} onChange={(g) => {
+            setGroup(g);
+            if (typeof window !== "undefined") {
+              const w = window as unknown as { gtag?: (...a: unknown[]) => void };
+              w.gtag?.("event", "match_filter", { group: g });
+            }
+          }} />
+        </div>
+        <div className="grid gap-3 sm:grid-cols-2">
+          {filtered.map((f) => (
+            <MatchCard key={f.id} fixture={f} locale={locale} />
+          ))}
+        </div>
+      </section>
+
+      {/* Country guides nav */}
+      <section className="mx-auto max-w-6xl px-4 pb-8 sm:px-6">
+        <h2 className="mb-4 text-xl">{locale === "es" ? "Guías por país" : "Country guides"}</h2>
+        <div className="flex flex-wrap gap-2">
+          {[
+            { code: "USA", flag: "🇺🇸", name: "United States" },
+            { code: "GBR", flag: "🇬🇧", name: "United Kingdom" },
+            { code: "MEX", flag: "🇲🇽", name: "Mexico" },
+            { code: "ESP", flag: "🇪🇸", name: "Spain" },
+            { code: "ARG", flag: "🇦🇷", name: "Argentina" },
+            { code: "BRA", flag: "🇧🇷", name: "Brazil" },
+            { code: "CAN", flag: "🇨🇦", name: "Canada" },
+            { code: "AUS", flag: "🇦🇺", name: "Australia" },
+          ].map((c) => {
+            const slug = locale === "es"
+              ? slugMapEs[c.code] ?? ""
+              : slugMapEn[c.code] ?? "";
+            const path = locale === "es"
+              ? `/es/donde-ver-mundial-en-${slug}`
+              : `/en/how-to-watch-world-cup-in-${slug}`;
+            return (
+              <Link
+                key={c.code}
+                to={path}
+                className="flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-sm transition-colors hover:border-primary"
+              >
+                <span>{c.flag}</span>
+                <span>{c.name}</span>
+              </Link>
+            );
+          })}
+        </div>
+      </section>
+
+      <div className="mx-auto max-w-6xl px-4 pb-10 sm:px-6">
+        <AdSlot slot="responsive" />
+      </div>
+    </>
+  );
+}
+
+const slugMapEn: Record<string, string> = {
+  USA: "united-states", GBR: "united-kingdom", MEX: "mexico", ESP: "spain",
+  ARG: "argentina", BRA: "brazil", CAN: "canada", AUS: "australia",
+};
+const slugMapEs: Record<string, string> = {
+  USA: "estados-unidos", GBR: "reino-unido", MEX: "mexico", ESP: "espana",
+  ARG: "argentina", BRA: "brasil", CAN: "canada", AUS: "australia",
+};
+
+function useCountdown(target: string) {
+  const [now, setNow] = useState(() => Date.now());
+  useMemo(() => {
+    if (typeof window === "undefined") return;
+    const id = window.setInterval(() => setNow(Date.now()), 1000);
+    return () => window.clearInterval(id);
+  }, []);
+  const diff = Math.max(0, new Date(target).getTime() - now);
+  return {
+    days: Math.floor(diff / 86_400_000),
+    hours: Math.floor((diff / 3_600_000) % 24),
+    minutes: Math.floor((diff / 60_000) % 60),
+    seconds: Math.floor((diff / 1000) % 60),
+  };
+}
