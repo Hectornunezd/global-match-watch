@@ -6,6 +6,7 @@ import { detectGeo, alpha3ToAlpha2 } from "@/lib/geolocation";
 import { ChannelCard } from "@/components/ChannelCard";
 import { VPNUpsell } from "@/components/VPNUpsell";
 import { MatchCard } from "@/components/MatchCard";
+import { Flag } from "@/components/Flag";
 import { CountrySelector } from "@/components/CountrySelector";
 import { AdSlot } from "@/components/AdSlot";
 import { buildMeta, jsonLdScript, sportsEventJsonLd } from "@/lib/seo";
