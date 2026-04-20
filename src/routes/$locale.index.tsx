@@ -213,6 +213,25 @@ const slugMapEs: Record<string, string> = {
   ARG: "argentina", BRA: "brasil", CAN: "canada", AUS: "australia",
 };
 
+// Map alpha3 country codes to their World Cup 2026 group letter.
+const countryToGroup: Record<string, string> = {
+  MEX: "A", KOR: "A",
+  CAN: "B", QAT: "B",
+  BRA: "C",
+  USA: "D", AUS: "D",
+  DEU: "E",
+  JPN: "F",
+  GBR: "L", // England
+  ESP: "H", SAU: "H",
+  FRA: "I",
+  ARG: "J",
+  COL: "K",
+};
+
+// Flag CDN URL for country guides list (alpha2 lowercase).
+const flagUrl = (alpha2: string) =>
+  `https://flagcdn.com/w40/${alpha2.toLowerCase()}.png`;
+
 function useCountdown(target: string) {
   const [now, setNow] = useState(() => Date.now());
   useMemo(() => {
