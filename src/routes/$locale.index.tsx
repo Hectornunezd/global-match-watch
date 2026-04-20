@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { isLocale, type Locale, t, localeUrl } from "@/lib/i18n";
 import { getHomepageData } from "@/lib/data";
 import { detectGeo } from "@/lib/geolocation";
@@ -83,7 +83,7 @@ function HomePage() {
             <div className="mt-7 flex flex-wrap items-center gap-3">
               <a
                 href="#upcoming"
-                className="rounded-full bg-primary px-6 py-3 font-display text-sm uppercase tracking-wider text-primary-foreground transition-opacity hover:opacity-90"
+                className="rounded-full border border-primary/40 bg-primary/20 px-6 py-3 font-display text-sm uppercase tracking-wider text-primary backdrop-blur-md shadow-[0_0_30px_-8px_var(--primary)] transition-all hover:bg-primary/30 hover:border-primary"
               >
                 {m.hero.cta}
               </a>
@@ -109,7 +109,7 @@ function HomePage() {
               { v: countdown.minutes, l: m.countdown.minutes },
               { v: countdown.seconds, l: m.countdown.seconds },
             ].map((c, i) => (
-              <div key={i} className="flex min-w-[78px] flex-col items-center rounded-xl border border-border bg-card px-4 py-3">
+              <div key={i} className="flex min-w-[78px] flex-col items-center rounded-2xl border border-white/10 bg-white/5 px-4 py-3 backdrop-blur-md">
                 <span className="font-mono text-2xl font-bold tabular-nums">
                   {String(c.v).padStart(2, "0")}
                 </span>
@@ -187,7 +187,7 @@ function HomePage() {
               <Link
                 key={c.code}
                 to={path}
-                className="flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-sm transition-colors hover:border-primary"
+                className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm backdrop-blur-md transition-colors hover:border-primary hover:bg-primary/10"
               >
                 <img
                   src={flagUrl(c.a2)}
@@ -238,13 +238,15 @@ const flagUrl = (alpha2: string) =>
   `https://flagcdn.com/w40/${alpha2.toLowerCase()}.png`;
 
 function useCountdown(target: string) {
-  const [now, setNow] = useState(() => Date.now());
-  useMemo(() => {
-    if (typeof window === "undefined") return;
+  const targetMs = new Date(target).getTime();
+  // Start from target so SSR & first client render match (diff=0), then update on mount.
+  const [now, setNow] = useState(targetMs);
+  useEffect(() => {
+    setNow(Date.now());
     const id = window.setInterval(() => setNow(Date.now()), 1000);
     return () => window.clearInterval(id);
   }, []);
-  const diff = Math.max(0, new Date(target).getTime() - now);
+  const diff = Math.max(0, targetMs - now);
   return {
     days: Math.floor(diff / 86_400_000),
     hours: Math.floor((diff / 3_600_000) % 24),
