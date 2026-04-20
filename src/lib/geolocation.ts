@@ -1,0 +1,57 @@
+import { createServerFn } from "@tanstack/react-start";
+import { getRequestHeader, getCookie, setCookie } from "@tanstack/react-start/server";
+import { defaultLocaleForCountry, type Locale } from "./i18n";
+
+// ISO 3166-1 alpha-2 → alpha-3 mapping for the countries we support
+const ALPHA2_TO_ALPHA3: Record<string, string> = {
+  US: "USA", GB: "GBR", CA: "CAN", AU: "AUS", MX: "MEX", ES: "ESP",
+  AR: "ARG", CO: "COL", BR: "BRA", FR: "FRA", DE: "DEU", IT: "ITA",
+  JP: "JPN", KR: "KOR", IN: "IND", SA: "SAU", QA: "QAT",
+};
+
+const ALPHA3_TO_ALPHA2: Record<string, string> = Object.fromEntries(
+  Object.entries(ALPHA2_TO_ALPHA3).map(([a2, a3]) => [a3, a2])
+);
+
+export const SUPPORTED_ALPHA3 = Object.values(ALPHA2_TO_ALPHA3);
+
+export function alpha2ToAlpha3(a2: string | null | undefined): string | null {
+  if (!a2) return null;
+  return ALPHA2_TO_ALPHA3[a2.toUpperCase()] ?? null;
+}
+
+export function alpha3ToAlpha2(a3: string | null | undefined): string | null {
+  if (!a3) return null;
+  return ALPHA3_TO_ALPHA2[a3.toUpperCase()] ?? null;
+}
+
+export const detectGeo = createServerFn({ method: "GET" }).handler(async () => {
+  const cfCountry = getRequestHeader("CF-IPCountry") ?? getRequestHeader("cf-ipcountry");
+  const cookieCountry = getCookie("user_country");
+  const alpha2 = (cookieCountry || cfCountry || "US").toUpperCase();
+  const alpha3 = alpha2ToAlpha3(alpha2) ?? "USA";
+  // Persist for next request if not already set
+  if (!cookieCountry && cfCountry) {
+    setCookie("user_country", alpha2, {
+      path: "/",
+      maxAge: 60 * 60 * 24 * 30,
+      sameSite: "lax",
+    });
+  }
+  const locale: Locale = defaultLocaleForCountry(alpha2);
+  return { alpha2, alpha3, locale };
+});
+
+/**
+ * Client-side cookie helpers for country override.
+ */
+export function setCountryCookieClient(alpha2: string): void {
+  if (typeof document === "undefined") return;
+  document.cookie = `user_country=${alpha2.toUpperCase()}; path=/; max-age=${60 * 60 * 24 * 30}; samesite=lax`;
+}
+
+export function getCountryCookieClient(): string | null {
+  if (typeof document === "undefined") return null;
+  const match = document.cookie.match(/(?:^|;\s*)user_country=([^;]+)/);
+  return match ? decodeURIComponent(match[1]).toUpperCase() : null;
+}
