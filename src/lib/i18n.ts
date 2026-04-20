@@ -130,12 +130,12 @@ const messages = {
     },
     countdown: { days: "días", hours: "hrs", minutes: "min", seconds: "seg", to: "para el inicio" },
   },
-} as const;
+};
 
 export type Messages = typeof messages.en;
 
 export function t(locale: Locale): Messages {
-  return messages[locale];
+  return messages[locale] as Messages;
 }
 
 export function otherLocale(locale: Locale): Locale {
