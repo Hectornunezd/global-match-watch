@@ -9,9 +9,14 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapIndexDotxmlRouteImport } from './routes/sitemap-index[.]xml'
+import { Route as SitemapEsDotxmlRouteImport } from './routes/sitemap-es[.]xml'
+import { Route as SitemapEnDotxmlRouteImport } from './routes/sitemap-en[.]xml'
+import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
 import { Route as LocaleRouteImport } from './routes/$locale'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LocaleIndexRouteImport } from './routes/$locale.index'
+import { Route as ApiTrackClickRouteImport } from './routes/api.track-click'
 import { Route as LocaleWatchSlugRouteImport } from './routes/$locale.watch-$slug'
 import { Route as LocaleVerSlugRouteImport } from './routes/$locale.ver-$slug'
 import { Route as LocaleTermsRouteImport } from './routes/$locale.terms'
@@ -21,6 +26,26 @@ import { Route as LocaleHowToWatchWorldCupInSlugRouteImport } from './routes/$lo
 import { Route as LocaleDondeVerMundialEnSlugRouteImport } from './routes/$locale.donde-ver-mundial-en-$slug'
 import { Route as LocaleTeamSlugRouteImport } from './routes/$locale.team.$slug'
 
+const SitemapIndexDotxmlRoute = SitemapIndexDotxmlRouteImport.update({
+  id: '/sitemap-index.xml',
+  path: '/sitemap-index.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapEsDotxmlRoute = SitemapEsDotxmlRouteImport.update({
+  id: '/sitemap-es.xml',
+  path: '/sitemap-es.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapEnDotxmlRoute = SitemapEnDotxmlRouteImport.update({
+  id: '/sitemap-en.xml',
+  path: '/sitemap-en.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
+  id: '/robots.txt',
+  path: '/robots.txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LocaleRoute = LocaleRouteImport.update({
   id: '/$locale',
   path: '/$locale',
@@ -35,6 +60,11 @@ const LocaleIndexRoute = LocaleIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => LocaleRoute,
+} as any)
+const ApiTrackClickRoute = ApiTrackClickRouteImport.update({
+  id: '/api/track-click',
+  path: '/api/track-click',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const LocaleWatchSlugRoute = LocaleWatchSlugRouteImport.update({
   id: '/watch-$slug',
@@ -83,6 +113,10 @@ const LocaleTeamSlugRoute = LocaleTeamSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$locale': typeof LocaleRouteWithChildren
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap-en.xml': typeof SitemapEnDotxmlRoute
+  '/sitemap-es.xml': typeof SitemapEsDotxmlRoute
+  '/sitemap-index.xml': typeof SitemapIndexDotxmlRoute
   '/$locale/donde-ver-mundial-en-$slug': typeof LocaleDondeVerMundialEnSlugRoute
   '/$locale/how-to-watch-world-cup-in-$slug': typeof LocaleHowToWatchWorldCupInSlugRoute
   '/$locale/privacy-policy': typeof LocalePrivacyPolicyRoute
@@ -90,11 +124,16 @@ export interface FileRoutesByFullPath {
   '/$locale/terms': typeof LocaleTermsRoute
   '/$locale/ver-$slug': typeof LocaleVerSlugRoute
   '/$locale/watch-$slug': typeof LocaleWatchSlugRoute
+  '/api/track-click': typeof ApiTrackClickRoute
   '/$locale/': typeof LocaleIndexRoute
   '/$locale/team/$slug': typeof LocaleTeamSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap-en.xml': typeof SitemapEnDotxmlRoute
+  '/sitemap-es.xml': typeof SitemapEsDotxmlRoute
+  '/sitemap-index.xml': typeof SitemapIndexDotxmlRoute
   '/$locale/donde-ver-mundial-en-$slug': typeof LocaleDondeVerMundialEnSlugRoute
   '/$locale/how-to-watch-world-cup-in-$slug': typeof LocaleHowToWatchWorldCupInSlugRoute
   '/$locale/privacy-policy': typeof LocalePrivacyPolicyRoute
@@ -102,6 +141,7 @@ export interface FileRoutesByTo {
   '/$locale/terms': typeof LocaleTermsRoute
   '/$locale/ver-$slug': typeof LocaleVerSlugRoute
   '/$locale/watch-$slug': typeof LocaleWatchSlugRoute
+  '/api/track-click': typeof ApiTrackClickRoute
   '/$locale': typeof LocaleIndexRoute
   '/$locale/team/$slug': typeof LocaleTeamSlugRoute
 }
@@ -109,6 +149,10 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/$locale': typeof LocaleRouteWithChildren
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap-en.xml': typeof SitemapEnDotxmlRoute
+  '/sitemap-es.xml': typeof SitemapEsDotxmlRoute
+  '/sitemap-index.xml': typeof SitemapIndexDotxmlRoute
   '/$locale/donde-ver-mundial-en-$slug': typeof LocaleDondeVerMundialEnSlugRoute
   '/$locale/how-to-watch-world-cup-in-$slug': typeof LocaleHowToWatchWorldCupInSlugRoute
   '/$locale/privacy-policy': typeof LocalePrivacyPolicyRoute
@@ -116,6 +160,7 @@ export interface FileRoutesById {
   '/$locale/terms': typeof LocaleTermsRoute
   '/$locale/ver-$slug': typeof LocaleVerSlugRoute
   '/$locale/watch-$slug': typeof LocaleWatchSlugRoute
+  '/api/track-click': typeof ApiTrackClickRoute
   '/$locale/': typeof LocaleIndexRoute
   '/$locale/team/$slug': typeof LocaleTeamSlugRoute
 }
@@ -124,6 +169,10 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/$locale'
+    | '/robots.txt'
+    | '/sitemap-en.xml'
+    | '/sitemap-es.xml'
+    | '/sitemap-index.xml'
     | '/$locale/donde-ver-mundial-en-$slug'
     | '/$locale/how-to-watch-world-cup-in-$slug'
     | '/$locale/privacy-policy'
@@ -131,11 +180,16 @@ export interface FileRouteTypes {
     | '/$locale/terms'
     | '/$locale/ver-$slug'
     | '/$locale/watch-$slug'
+    | '/api/track-click'
     | '/$locale/'
     | '/$locale/team/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/robots.txt'
+    | '/sitemap-en.xml'
+    | '/sitemap-es.xml'
+    | '/sitemap-index.xml'
     | '/$locale/donde-ver-mundial-en-$slug'
     | '/$locale/how-to-watch-world-cup-in-$slug'
     | '/$locale/privacy-policy'
@@ -143,12 +197,17 @@ export interface FileRouteTypes {
     | '/$locale/terms'
     | '/$locale/ver-$slug'
     | '/$locale/watch-$slug'
+    | '/api/track-click'
     | '/$locale'
     | '/$locale/team/$slug'
   id:
     | '__root__'
     | '/'
     | '/$locale'
+    | '/robots.txt'
+    | '/sitemap-en.xml'
+    | '/sitemap-es.xml'
+    | '/sitemap-index.xml'
     | '/$locale/donde-ver-mundial-en-$slug'
     | '/$locale/how-to-watch-world-cup-in-$slug'
     | '/$locale/privacy-policy'
@@ -156,6 +215,7 @@ export interface FileRouteTypes {
     | '/$locale/terms'
     | '/$locale/ver-$slug'
     | '/$locale/watch-$slug'
+    | '/api/track-click'
     | '/$locale/'
     | '/$locale/team/$slug'
   fileRoutesById: FileRoutesById
@@ -163,10 +223,43 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LocaleRoute: typeof LocaleRouteWithChildren
+  RobotsDottxtRoute: typeof RobotsDottxtRoute
+  SitemapEnDotxmlRoute: typeof SitemapEnDotxmlRoute
+  SitemapEsDotxmlRoute: typeof SitemapEsDotxmlRoute
+  SitemapIndexDotxmlRoute: typeof SitemapIndexDotxmlRoute
+  ApiTrackClickRoute: typeof ApiTrackClickRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap-index.xml': {
+      id: '/sitemap-index.xml'
+      path: '/sitemap-index.xml'
+      fullPath: '/sitemap-index.xml'
+      preLoaderRoute: typeof SitemapIndexDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap-es.xml': {
+      id: '/sitemap-es.xml'
+      path: '/sitemap-es.xml'
+      fullPath: '/sitemap-es.xml'
+      preLoaderRoute: typeof SitemapEsDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap-en.xml': {
+      id: '/sitemap-en.xml'
+      path: '/sitemap-en.xml'
+      fullPath: '/sitemap-en.xml'
+      preLoaderRoute: typeof SitemapEnDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/robots.txt': {
+      id: '/robots.txt'
+      path: '/robots.txt'
+      fullPath: '/robots.txt'
+      preLoaderRoute: typeof RobotsDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/$locale': {
       id: '/$locale'
       path: '/$locale'
@@ -187,6 +280,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/$locale/'
       preLoaderRoute: typeof LocaleIndexRouteImport
       parentRoute: typeof LocaleRoute
+    }
+    '/api/track-click': {
+      id: '/api/track-click'
+      path: '/api/track-click'
+      fullPath: '/api/track-click'
+      preLoaderRoute: typeof ApiTrackClickRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/$locale/watch-$slug': {
       id: '/$locale/watch-$slug'
@@ -277,7 +377,21 @@ const LocaleRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LocaleRoute: LocaleRouteWithChildren,
+  RobotsDottxtRoute: RobotsDottxtRoute,
+  SitemapEnDotxmlRoute: SitemapEnDotxmlRoute,
+  SitemapEsDotxmlRoute: SitemapEsDotxmlRoute,
+  SitemapIndexDotxmlRoute: SitemapIndexDotxmlRoute,
+  ApiTrackClickRoute: ApiTrackClickRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}

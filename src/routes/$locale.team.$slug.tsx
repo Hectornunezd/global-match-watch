@@ -37,7 +37,12 @@ export const Route = createFileRoute("/$locale/team/$slug")({
 });
 
 function TeamPage() {
-  const { team, upcoming, past, locale } = Route.useLoaderData();
+  const { team, upcoming, past, locale } = Route.useLoaderData() as {
+    team: import("@/lib/data").Team;
+    upcoming: import("@/lib/data").Fixture[];
+    past: import("@/lib/data").Fixture[];
+    locale: Locale;
+  };
   const m = t(locale);
   const name = locale === "es" ? team.name_es : team.name_en;
   return (

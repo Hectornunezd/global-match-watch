@@ -45,7 +45,12 @@ export const Route = createFileRoute("/$locale/")({
 });
 
 function HomePage() {
-  const { live, upcoming, geo, locale } = Route.useLoaderData();
+  const { live, upcoming, geo, locale } = Route.useLoaderData() as {
+    live: import("@/lib/data").Fixture[];
+    upcoming: import("@/lib/data").Fixture[];
+    geo: { alpha2: string; alpha3: string };
+    locale: Locale;
+  };
   const m = t(locale);
   const [group, setGroup] = useState<string | null>(null);
   const groups = useMemo(() => {
