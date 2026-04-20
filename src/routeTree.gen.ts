@@ -11,6 +11,15 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as LocaleRouteImport } from './routes/$locale'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as LocaleIndexRouteImport } from './routes/$locale.index'
+import { Route as LocaleWatchSlugRouteImport } from './routes/$locale.watch-$slug'
+import { Route as LocaleVerSlugRouteImport } from './routes/$locale.ver-$slug'
+import { Route as LocaleTermsRouteImport } from './routes/$locale.terms'
+import { Route as LocaleResponsibleGamblingRouteImport } from './routes/$locale.responsible-gambling'
+import { Route as LocalePrivacyPolicyRouteImport } from './routes/$locale.privacy-policy'
+import { Route as LocaleHowToWatchWorldCupInSlugRouteImport } from './routes/$locale.how-to-watch-world-cup-in-$slug'
+import { Route as LocaleDondeVerMundialEnSlugRouteImport } from './routes/$locale.donde-ver-mundial-en-$slug'
+import { Route as LocaleTeamSlugRouteImport } from './routes/$locale.team.$slug'
 
 const LocaleRoute = LocaleRouteImport.update({
   id: '/$locale',
@@ -22,31 +31,138 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LocaleIndexRoute = LocaleIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleWatchSlugRoute = LocaleWatchSlugRouteImport.update({
+  id: '/watch-$slug',
+  path: '/watch-$slug',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleVerSlugRoute = LocaleVerSlugRouteImport.update({
+  id: '/ver-$slug',
+  path: '/ver-$slug',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleTermsRoute = LocaleTermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleResponsibleGamblingRoute =
+  LocaleResponsibleGamblingRouteImport.update({
+    id: '/responsible-gambling',
+    path: '/responsible-gambling',
+    getParentRoute: () => LocaleRoute,
+  } as any)
+const LocalePrivacyPolicyRoute = LocalePrivacyPolicyRouteImport.update({
+  id: '/privacy-policy',
+  path: '/privacy-policy',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleHowToWatchWorldCupInSlugRoute =
+  LocaleHowToWatchWorldCupInSlugRouteImport.update({
+    id: '/how-to-watch-world-cup-in-$slug',
+    path: '/how-to-watch-world-cup-in-$slug',
+    getParentRoute: () => LocaleRoute,
+  } as any)
+const LocaleDondeVerMundialEnSlugRoute =
+  LocaleDondeVerMundialEnSlugRouteImport.update({
+    id: '/donde-ver-mundial-en-$slug',
+    path: '/donde-ver-mundial-en-$slug',
+    getParentRoute: () => LocaleRoute,
+  } as any)
+const LocaleTeamSlugRoute = LocaleTeamSlugRouteImport.update({
+  id: '/team/$slug',
+  path: '/team/$slug',
+  getParentRoute: () => LocaleRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/$locale': typeof LocaleRoute
+  '/$locale': typeof LocaleRouteWithChildren
+  '/$locale/donde-ver-mundial-en-$slug': typeof LocaleDondeVerMundialEnSlugRoute
+  '/$locale/how-to-watch-world-cup-in-$slug': typeof LocaleHowToWatchWorldCupInSlugRoute
+  '/$locale/privacy-policy': typeof LocalePrivacyPolicyRoute
+  '/$locale/responsible-gambling': typeof LocaleResponsibleGamblingRoute
+  '/$locale/terms': typeof LocaleTermsRoute
+  '/$locale/ver-$slug': typeof LocaleVerSlugRoute
+  '/$locale/watch-$slug': typeof LocaleWatchSlugRoute
+  '/$locale/': typeof LocaleIndexRoute
+  '/$locale/team/$slug': typeof LocaleTeamSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/$locale': typeof LocaleRoute
+  '/$locale/donde-ver-mundial-en-$slug': typeof LocaleDondeVerMundialEnSlugRoute
+  '/$locale/how-to-watch-world-cup-in-$slug': typeof LocaleHowToWatchWorldCupInSlugRoute
+  '/$locale/privacy-policy': typeof LocalePrivacyPolicyRoute
+  '/$locale/responsible-gambling': typeof LocaleResponsibleGamblingRoute
+  '/$locale/terms': typeof LocaleTermsRoute
+  '/$locale/ver-$slug': typeof LocaleVerSlugRoute
+  '/$locale/watch-$slug': typeof LocaleWatchSlugRoute
+  '/$locale': typeof LocaleIndexRoute
+  '/$locale/team/$slug': typeof LocaleTeamSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/$locale': typeof LocaleRoute
+  '/$locale': typeof LocaleRouteWithChildren
+  '/$locale/donde-ver-mundial-en-$slug': typeof LocaleDondeVerMundialEnSlugRoute
+  '/$locale/how-to-watch-world-cup-in-$slug': typeof LocaleHowToWatchWorldCupInSlugRoute
+  '/$locale/privacy-policy': typeof LocalePrivacyPolicyRoute
+  '/$locale/responsible-gambling': typeof LocaleResponsibleGamblingRoute
+  '/$locale/terms': typeof LocaleTermsRoute
+  '/$locale/ver-$slug': typeof LocaleVerSlugRoute
+  '/$locale/watch-$slug': typeof LocaleWatchSlugRoute
+  '/$locale/': typeof LocaleIndexRoute
+  '/$locale/team/$slug': typeof LocaleTeamSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/$locale'
+  fullPaths:
+    | '/'
+    | '/$locale'
+    | '/$locale/donde-ver-mundial-en-$slug'
+    | '/$locale/how-to-watch-world-cup-in-$slug'
+    | '/$locale/privacy-policy'
+    | '/$locale/responsible-gambling'
+    | '/$locale/terms'
+    | '/$locale/ver-$slug'
+    | '/$locale/watch-$slug'
+    | '/$locale/'
+    | '/$locale/team/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/$locale'
-  id: '__root__' | '/' | '/$locale'
+  to:
+    | '/'
+    | '/$locale/donde-ver-mundial-en-$slug'
+    | '/$locale/how-to-watch-world-cup-in-$slug'
+    | '/$locale/privacy-policy'
+    | '/$locale/responsible-gambling'
+    | '/$locale/terms'
+    | '/$locale/ver-$slug'
+    | '/$locale/watch-$slug'
+    | '/$locale'
+    | '/$locale/team/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/$locale'
+    | '/$locale/donde-ver-mundial-en-$slug'
+    | '/$locale/how-to-watch-world-cup-in-$slug'
+    | '/$locale/privacy-policy'
+    | '/$locale/responsible-gambling'
+    | '/$locale/terms'
+    | '/$locale/ver-$slug'
+    | '/$locale/watch-$slug'
+    | '/$locale/'
+    | '/$locale/team/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  LocaleRoute: typeof LocaleRoute
+  LocaleRoute: typeof LocaleRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +181,102 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/$locale/': {
+      id: '/$locale/'
+      path: '/'
+      fullPath: '/$locale/'
+      preLoaderRoute: typeof LocaleIndexRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/watch-$slug': {
+      id: '/$locale/watch-$slug'
+      path: '/watch-$slug'
+      fullPath: '/$locale/watch-$slug'
+      preLoaderRoute: typeof LocaleWatchSlugRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/ver-$slug': {
+      id: '/$locale/ver-$slug'
+      path: '/ver-$slug'
+      fullPath: '/$locale/ver-$slug'
+      preLoaderRoute: typeof LocaleVerSlugRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/terms': {
+      id: '/$locale/terms'
+      path: '/terms'
+      fullPath: '/$locale/terms'
+      preLoaderRoute: typeof LocaleTermsRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/responsible-gambling': {
+      id: '/$locale/responsible-gambling'
+      path: '/responsible-gambling'
+      fullPath: '/$locale/responsible-gambling'
+      preLoaderRoute: typeof LocaleResponsibleGamblingRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/privacy-policy': {
+      id: '/$locale/privacy-policy'
+      path: '/privacy-policy'
+      fullPath: '/$locale/privacy-policy'
+      preLoaderRoute: typeof LocalePrivacyPolicyRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/how-to-watch-world-cup-in-$slug': {
+      id: '/$locale/how-to-watch-world-cup-in-$slug'
+      path: '/how-to-watch-world-cup-in-$slug'
+      fullPath: '/$locale/how-to-watch-world-cup-in-$slug'
+      preLoaderRoute: typeof LocaleHowToWatchWorldCupInSlugRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/donde-ver-mundial-en-$slug': {
+      id: '/$locale/donde-ver-mundial-en-$slug'
+      path: '/donde-ver-mundial-en-$slug'
+      fullPath: '/$locale/donde-ver-mundial-en-$slug'
+      preLoaderRoute: typeof LocaleDondeVerMundialEnSlugRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/team/$slug': {
+      id: '/$locale/team/$slug'
+      path: '/team/$slug'
+      fullPath: '/$locale/team/$slug'
+      preLoaderRoute: typeof LocaleTeamSlugRouteImport
+      parentRoute: typeof LocaleRoute
+    }
   }
 }
 
+interface LocaleRouteChildren {
+  LocaleDondeVerMundialEnSlugRoute: typeof LocaleDondeVerMundialEnSlugRoute
+  LocaleHowToWatchWorldCupInSlugRoute: typeof LocaleHowToWatchWorldCupInSlugRoute
+  LocalePrivacyPolicyRoute: typeof LocalePrivacyPolicyRoute
+  LocaleResponsibleGamblingRoute: typeof LocaleResponsibleGamblingRoute
+  LocaleTermsRoute: typeof LocaleTermsRoute
+  LocaleVerSlugRoute: typeof LocaleVerSlugRoute
+  LocaleWatchSlugRoute: typeof LocaleWatchSlugRoute
+  LocaleIndexRoute: typeof LocaleIndexRoute
+  LocaleTeamSlugRoute: typeof LocaleTeamSlugRoute
+}
+
+const LocaleRouteChildren: LocaleRouteChildren = {
+  LocaleDondeVerMundialEnSlugRoute: LocaleDondeVerMundialEnSlugRoute,
+  LocaleHowToWatchWorldCupInSlugRoute: LocaleHowToWatchWorldCupInSlugRoute,
+  LocalePrivacyPolicyRoute: LocalePrivacyPolicyRoute,
+  LocaleResponsibleGamblingRoute: LocaleResponsibleGamblingRoute,
+  LocaleTermsRoute: LocaleTermsRoute,
+  LocaleVerSlugRoute: LocaleVerSlugRoute,
+  LocaleWatchSlugRoute: LocaleWatchSlugRoute,
+  LocaleIndexRoute: LocaleIndexRoute,
+  LocaleTeamSlugRoute: LocaleTeamSlugRoute,
+}
+
+const LocaleRouteWithChildren =
+  LocaleRoute._addFileChildren(LocaleRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  LocaleRoute: LocaleRoute,
+  LocaleRoute: LocaleRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
