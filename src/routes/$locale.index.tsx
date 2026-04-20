@@ -168,14 +168,14 @@ function HomePage() {
         <h2 className="mb-4 text-xl">{locale === "es" ? "Guías por país" : "Country guides"}</h2>
         <div className="flex flex-wrap gap-2">
           {[
-            { code: "USA", flag: "🇺🇸", name: "United States" },
-            { code: "GBR", flag: "🇬🇧", name: "United Kingdom" },
-            { code: "MEX", flag: "🇲🇽", name: "Mexico" },
-            { code: "ESP", flag: "🇪🇸", name: "Spain" },
-            { code: "ARG", flag: "🇦🇷", name: "Argentina" },
-            { code: "BRA", flag: "🇧🇷", name: "Brazil" },
-            { code: "CAN", flag: "🇨🇦", name: "Canada" },
-            { code: "AUS", flag: "🇦🇺", name: "Australia" },
+            { code: "USA", a2: "us", name: "United States" },
+            { code: "GBR", a2: "gb", name: "United Kingdom" },
+            { code: "MEX", a2: "mx", name: "Mexico" },
+            { code: "ESP", a2: "es", name: "Spain" },
+            { code: "ARG", a2: "ar", name: "Argentina" },
+            { code: "BRA", a2: "br", name: "Brazil" },
+            { code: "CAN", a2: "ca", name: "Canada" },
+            { code: "AUS", a2: "au", name: "Australia" },
           ].map((c) => {
             const slug = locale === "es"
               ? slugMapEs[c.code] ?? ""
@@ -189,7 +189,12 @@ function HomePage() {
                 to={path}
                 className="flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-sm transition-colors hover:border-primary"
               >
-                <span>{c.flag}</span>
+                <img
+                  src={flagUrl(c.a2)}
+                  alt=""
+                  loading="lazy"
+                  className="h-4 w-6 rounded-sm object-cover"
+                />
                 <span>{c.name}</span>
               </Link>
             );
