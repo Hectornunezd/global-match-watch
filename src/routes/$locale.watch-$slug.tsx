@@ -111,9 +111,7 @@ export function MatchPage({ locale }: { locale: Locale }) {
           </span>
           <div className="mt-5 grid grid-cols-3 items-center gap-4 sm:gap-8">
             <div className="flex flex-col items-center gap-2 sm:flex-row sm:gap-4">
-              {home.flag_url ? (
-                <img src={home.flag_url} alt="" className="h-14 w-20 rounded-md object-cover sm:h-20 sm:w-28" />
-              ) : null}
+              <Flag src={home.flag_url} name={homeName} className="h-14 w-20 rounded-md sm:h-20 sm:w-28" fallbackTextClassName="text-2xl" />
               <span className="text-balance text-center font-display text-xl uppercase sm:text-left sm:text-3xl">{homeName}</span>
             </div>
             <div className="text-center">
@@ -126,9 +124,7 @@ export function MatchPage({ locale }: { locale: Locale }) {
               )}
             </div>
             <div className="flex flex-col items-center gap-2 sm:flex-row-reverse sm:gap-4">
-              {away.flag_url ? (
-                <img src={away.flag_url} alt="" className="h-14 w-20 rounded-md object-cover sm:h-20 sm:w-28" />
-              ) : null}
+              <Flag src={away.flag_url} name={awayName} className="h-14 w-20 rounded-md sm:h-20 sm:w-28" fallbackTextClassName="text-2xl" />
               <span className="text-balance text-center font-display text-xl uppercase sm:text-right sm:text-3xl">{awayName}</span>
             </div>
           </div>

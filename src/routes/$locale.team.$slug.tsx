@@ -2,6 +2,7 @@ import { createFileRoute, notFound } from "@tanstack/react-router";
 import { isLocale, type Locale, t } from "@/lib/i18n";
 import { getTeamBySlug } from "@/lib/data";
 import { MatchCard } from "@/components/MatchCard";
+import { Flag } from "@/components/Flag";
 import { buildMeta, jsonLdScript, sportsTeamJsonLd } from "@/lib/seo";
 
 export const Route = createFileRoute("/$locale/team/$slug")({
@@ -49,7 +50,7 @@ function TeamPage() {
     <>
       <section className="border-b border-border gradient-hero">
         <div className="mx-auto flex max-w-6xl items-center gap-5 px-4 py-10 sm:px-6">
-          {team.flag_url ? <img src={team.flag_url} alt="" className="h-16 w-24 rounded-md object-cover sm:h-20 sm:w-32" /> : null}
+          <Flag src={team.flag_url} name={name} className="h-16 w-24 rounded-md sm:h-20 sm:w-32" fallbackTextClassName="text-3xl" />
           <div>
             <span className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
               {m.sections.group} {team.group_letter}

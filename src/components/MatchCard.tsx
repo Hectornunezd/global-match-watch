@@ -3,6 +3,7 @@ import type { Fixture } from "@/lib/data";
 import type { Locale } from "@/lib/i18n";
 import { t, localeUrl } from "@/lib/i18n";
 import { LiveBadge } from "./LiveBadge";
+import { Flag } from "./Flag";
 
 interface Props {
   fixture: Fixture;
@@ -52,9 +53,7 @@ export function MatchCard({ fixture, locale }: Props) {
 
       <div className="flex items-center justify-between gap-3">
         <div className="flex flex-1 items-center gap-2.5 min-w-0">
-          {home.flag_url ? (
-            <img src={home.flag_url} alt="" loading="lazy" className="h-6 w-9 rounded-sm object-cover" />
-          ) : null}
+          <Flag src={home.flag_url} name={homeName} className="h-6 w-9 rounded-sm" />
           <span className="truncate font-display text-base uppercase">{homeName}</span>
         </div>
         {showScore ? (
@@ -68,9 +67,7 @@ export function MatchCard({ fixture, locale }: Props) {
         )}
         <div className="flex flex-1 items-center justify-end gap-2.5 min-w-0">
           <span className="truncate text-right font-display text-base uppercase">{awayName}</span>
-          {away.flag_url ? (
-            <img src={away.flag_url} alt="" loading="lazy" className="h-6 w-9 rounded-sm object-cover" />
-          ) : null}
+          <Flag src={away.flag_url} name={awayName} className="h-6 w-9 rounded-sm" />
         </div>
       </div>
 
