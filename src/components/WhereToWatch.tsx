@@ -40,7 +40,11 @@ export function WhereToWatch({ channels, countryCode, locale }: Props) {
         <h2 className="mb-4 text-2xl">
           {m.sections.whereToWatch} <span className="text-primary">{country}</span>
         </h2>
-        <VPNUpsell locale={locale} fromCountry="United Kingdom" />
+        <VPNUpsell
+          locale={locale}
+          countryWithFreeStream="United Kingdom"
+          countryCode={countryCode}
+        />
       </section>
     );
   }
