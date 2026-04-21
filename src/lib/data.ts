@@ -77,24 +77,37 @@ function setCache(seconds: number) {
   }
 }
 
-export const getHomepageData = createServerFn({ method: "GET" }).handler(async () => {
-  setCache(60);
-  const { data: live } = await supabase
-    .from("fixtures")
-    .select(FIXTURE_SELECT)
-    .eq("status", "live")
-    .order("match_date", { ascending: true });
-  const { data: upcoming } = await supabase
-    .from("fixtures")
-    .select(FIXTURE_SELECT)
-    .in("status", ["scheduled"])
-    .order("match_date", { ascending: true })
-    .limit(100);
-  return {
-    live: (live ?? []) as unknown as Fixture[],
-    upcoming: (upcoming ?? []) as unknown as Fixture[],
-  };
-});
+export const getHomepageData = createServerFn({ method: "GET" })
+  .inputValidator((input: { countryCode?: string } | undefined) => input ?? {})
+  .handler(async ({ data }) => {
+    setCache(60);
+    const countryCode = (data.countryCode ?? "").toUpperCase().slice(0, 2);
+    const [liveRes, upcomingRes, channelsRes] = await Promise.all([
+      supabase
+        .from("fixtures")
+        .select(FIXTURE_SELECT)
+        .eq("status", "live")
+        .order("match_date", { ascending: true }),
+      supabase
+        .from("fixtures")
+        .select(FIXTURE_SELECT)
+        .in("status", ["scheduled"])
+        .order("match_date", { ascending: true })
+        .limit(100),
+      countryCode
+        ? supabase
+            .from("channels")
+            .select("*")
+            .eq("country_code", countryCode)
+            .order("sort_order", { ascending: true })
+        : Promise.resolve({ data: [] as Channel[] }),
+    ]);
+    return {
+      live: (liveRes.data ?? []) as unknown as Fixture[],
+      upcoming: (upcomingRes.data ?? []) as unknown as Fixture[],
+      channels: (channelsRes.data ?? []) as unknown as Channel[],
+    };
+  });
 
 export const getFixtureBySlug = createServerFn({ method: "GET" })
   .inputValidator((input: { slug: string; locale: "en" | "es" }) => input)

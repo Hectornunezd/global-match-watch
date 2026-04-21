@@ -7,6 +7,7 @@ import { MatchCard } from "@/components/MatchCard";
 import { GroupFilter } from "@/components/GroupFilter";
 import { CountrySelector } from "@/components/CountrySelector";
 import { AdSlot } from "@/components/AdSlot";
+import { WhereToWatch } from "@/components/WhereToWatch";
 import { buildMeta, jsonLdScript, organizationJsonLd, websiteJsonLd } from "@/lib/seo";
 import { notFound } from "@tanstack/react-router";
 
@@ -17,7 +18,8 @@ export const Route = createFileRoute("/$locale/")({
     if (!isLocale(params.locale)) throw notFound();
   },
   loader: async ({ params }) => {
-    const [data, geo] = await Promise.all([getHomepageData(), detectGeo()]);
+    const geo = await detectGeo();
+    const data = await getHomepageData({ data: { countryCode: geo.alpha2 } });
     return { ...data, geo, locale: params.locale as Locale };
   },
   head: ({ loaderData }) => {
@@ -45,9 +47,10 @@ export const Route = createFileRoute("/$locale/")({
 });
 
 function HomePage() {
-  const { live, upcoming, geo, locale } = Route.useLoaderData() as {
+  const { live, upcoming, channels, geo, locale } = Route.useLoaderData() as {
     live: import("@/lib/data").Fixture[];
     upcoming: import("@/lib/data").Fixture[];
+    channels: import("@/lib/data").Channel[];
     geo: { alpha2: string; alpha3: string };
     locale: Locale;
   };
@@ -126,6 +129,9 @@ function HomePage() {
       <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
         <AdSlot slot="leaderboard" />
       </div>
+
+      {/* Where to watch from user's country */}
+      <WhereToWatch channels={channels} countryCode={geo.alpha2} locale={locale} />
 
       {/* Live */}
       {live.length > 0 && (
