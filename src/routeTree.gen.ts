@@ -16,6 +16,7 @@ import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
 import { Route as LocaleRouteImport } from './routes/$locale'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LocaleIndexRouteImport } from './routes/$locale.index'
+import { Route as HooksSyncFixturesRouteImport } from './routes/hooks/sync-fixtures'
 import { Route as ApiTrackClickRouteImport } from './routes/api.track-click'
 import { Route as LocaleWatchSlugRouteImport } from './routes/$locale.watch-$slug'
 import { Route as LocaleVerSlugRouteImport } from './routes/$locale.ver-$slug'
@@ -60,6 +61,11 @@ const LocaleIndexRoute = LocaleIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => LocaleRoute,
+} as any)
+const HooksSyncFixturesRoute = HooksSyncFixturesRouteImport.update({
+  id: '/hooks/sync-fixtures',
+  path: '/hooks/sync-fixtures',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const ApiTrackClickRoute = ApiTrackClickRouteImport.update({
   id: '/api/track-click',
@@ -125,6 +131,7 @@ export interface FileRoutesByFullPath {
   '/$locale/ver-$slug': typeof LocaleVerSlugRoute
   '/$locale/watch-$slug': typeof LocaleWatchSlugRoute
   '/api/track-click': typeof ApiTrackClickRoute
+  '/hooks/sync-fixtures': typeof HooksSyncFixturesRoute
   '/$locale/': typeof LocaleIndexRoute
   '/$locale/team/$slug': typeof LocaleTeamSlugRoute
 }
@@ -142,6 +149,7 @@ export interface FileRoutesByTo {
   '/$locale/ver-$slug': typeof LocaleVerSlugRoute
   '/$locale/watch-$slug': typeof LocaleWatchSlugRoute
   '/api/track-click': typeof ApiTrackClickRoute
+  '/hooks/sync-fixtures': typeof HooksSyncFixturesRoute
   '/$locale': typeof LocaleIndexRoute
   '/$locale/team/$slug': typeof LocaleTeamSlugRoute
 }
@@ -161,6 +169,7 @@ export interface FileRoutesById {
   '/$locale/ver-$slug': typeof LocaleVerSlugRoute
   '/$locale/watch-$slug': typeof LocaleWatchSlugRoute
   '/api/track-click': typeof ApiTrackClickRoute
+  '/hooks/sync-fixtures': typeof HooksSyncFixturesRoute
   '/$locale/': typeof LocaleIndexRoute
   '/$locale/team/$slug': typeof LocaleTeamSlugRoute
 }
@@ -181,6 +190,7 @@ export interface FileRouteTypes {
     | '/$locale/ver-$slug'
     | '/$locale/watch-$slug'
     | '/api/track-click'
+    | '/hooks/sync-fixtures'
     | '/$locale/'
     | '/$locale/team/$slug'
   fileRoutesByTo: FileRoutesByTo
@@ -198,6 +208,7 @@ export interface FileRouteTypes {
     | '/$locale/ver-$slug'
     | '/$locale/watch-$slug'
     | '/api/track-click'
+    | '/hooks/sync-fixtures'
     | '/$locale'
     | '/$locale/team/$slug'
   id:
@@ -216,6 +227,7 @@ export interface FileRouteTypes {
     | '/$locale/ver-$slug'
     | '/$locale/watch-$slug'
     | '/api/track-click'
+    | '/hooks/sync-fixtures'
     | '/$locale/'
     | '/$locale/team/$slug'
   fileRoutesById: FileRoutesById
@@ -228,6 +240,7 @@ export interface RootRouteChildren {
   SitemapEsDotxmlRoute: typeof SitemapEsDotxmlRoute
   SitemapIndexDotxmlRoute: typeof SitemapIndexDotxmlRoute
   ApiTrackClickRoute: typeof ApiTrackClickRoute
+  HooksSyncFixturesRoute: typeof HooksSyncFixturesRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -280,6 +293,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/$locale/'
       preLoaderRoute: typeof LocaleIndexRouteImport
       parentRoute: typeof LocaleRoute
+    }
+    '/hooks/sync-fixtures': {
+      id: '/hooks/sync-fixtures'
+      path: '/hooks/sync-fixtures'
+      fullPath: '/hooks/sync-fixtures'
+      preLoaderRoute: typeof HooksSyncFixturesRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/api/track-click': {
       id: '/api/track-click'
@@ -382,6 +402,7 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapEsDotxmlRoute: SitemapEsDotxmlRoute,
   SitemapIndexDotxmlRoute: SitemapIndexDotxmlRoute,
   ApiTrackClickRoute: ApiTrackClickRoute,
+  HooksSyncFixturesRoute: HooksSyncFixturesRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
