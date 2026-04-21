@@ -12,12 +12,15 @@ interface Props {
 
 function fmtTime(date: string, locale: Locale): string {
   try {
+    // Force UTC to keep SSR (server tz) and client output identical → no hydration mismatch.
     return new Date(date).toLocaleString(locale === "es" ? "es-ES" : "en-US", {
       weekday: "short",
       month: "short",
       day: "numeric",
       hour: "2-digit",
       minute: "2-digit",
+      timeZone: "UTC",
+      timeZoneName: "short",
     });
   } catch {
     return date;
