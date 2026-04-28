@@ -26,6 +26,7 @@ import { Route as LocalePrivacyPolicyRouteImport } from './routes/$locale.privac
 import { Route as LocaleHowToWatchWorldCupInSlugRouteImport } from './routes/$locale.how-to-watch-world-cup-in-$slug'
 import { Route as LocaleDondeVerMundialEnSlugRouteImport } from './routes/$locale.donde-ver-mundial-en-$slug'
 import { Route as LocaleTeamSlugRouteImport } from './routes/$locale.team.$slug'
+import { Route as ApiPublicHooksSyncFixturesRouteImport } from './routes/api/public/hooks/sync-fixtures'
 
 const SitemapIndexDotxmlRoute = SitemapIndexDotxmlRouteImport.update({
   id: '/sitemap-index.xml',
@@ -115,6 +116,12 @@ const LocaleTeamSlugRoute = LocaleTeamSlugRouteImport.update({
   path: '/team/$slug',
   getParentRoute: () => LocaleRoute,
 } as any)
+const ApiPublicHooksSyncFixturesRoute =
+  ApiPublicHooksSyncFixturesRouteImport.update({
+    id: '/api/public/hooks/sync-fixtures',
+    path: '/api/public/hooks/sync-fixtures',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -134,6 +141,7 @@ export interface FileRoutesByFullPath {
   '/hooks/sync-fixtures': typeof HooksSyncFixturesRoute
   '/$locale/': typeof LocaleIndexRoute
   '/$locale/team/$slug': typeof LocaleTeamSlugRoute
+  '/api/public/hooks/sync-fixtures': typeof ApiPublicHooksSyncFixturesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -152,6 +160,7 @@ export interface FileRoutesByTo {
   '/hooks/sync-fixtures': typeof HooksSyncFixturesRoute
   '/$locale': typeof LocaleIndexRoute
   '/$locale/team/$slug': typeof LocaleTeamSlugRoute
+  '/api/public/hooks/sync-fixtures': typeof ApiPublicHooksSyncFixturesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -172,6 +181,7 @@ export interface FileRoutesById {
   '/hooks/sync-fixtures': typeof HooksSyncFixturesRoute
   '/$locale/': typeof LocaleIndexRoute
   '/$locale/team/$slug': typeof LocaleTeamSlugRoute
+  '/api/public/hooks/sync-fixtures': typeof ApiPublicHooksSyncFixturesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -193,6 +203,7 @@ export interface FileRouteTypes {
     | '/hooks/sync-fixtures'
     | '/$locale/'
     | '/$locale/team/$slug'
+    | '/api/public/hooks/sync-fixtures'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -211,6 +222,7 @@ export interface FileRouteTypes {
     | '/hooks/sync-fixtures'
     | '/$locale'
     | '/$locale/team/$slug'
+    | '/api/public/hooks/sync-fixtures'
   id:
     | '__root__'
     | '/'
@@ -230,6 +242,7 @@ export interface FileRouteTypes {
     | '/hooks/sync-fixtures'
     | '/$locale/'
     | '/$locale/team/$slug'
+    | '/api/public/hooks/sync-fixtures'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -241,6 +254,7 @@ export interface RootRouteChildren {
   SitemapIndexDotxmlRoute: typeof SitemapIndexDotxmlRoute
   ApiTrackClickRoute: typeof ApiTrackClickRoute
   HooksSyncFixturesRoute: typeof HooksSyncFixturesRoute
+  ApiPublicHooksSyncFixturesRoute: typeof ApiPublicHooksSyncFixturesRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -364,6 +378,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocaleTeamSlugRouteImport
       parentRoute: typeof LocaleRoute
     }
+    '/api/public/hooks/sync-fixtures': {
+      id: '/api/public/hooks/sync-fixtures'
+      path: '/api/public/hooks/sync-fixtures'
+      fullPath: '/api/public/hooks/sync-fixtures'
+      preLoaderRoute: typeof ApiPublicHooksSyncFixturesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -403,6 +424,7 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapIndexDotxmlRoute: SitemapIndexDotxmlRoute,
   ApiTrackClickRoute: ApiTrackClickRoute,
   HooksSyncFixturesRoute: HooksSyncFixturesRoute,
+  ApiPublicHooksSyncFixturesRoute: ApiPublicHooksSyncFixturesRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
