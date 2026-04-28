@@ -202,7 +202,7 @@ async function syncFixtures(key: string, teamIdMap: Map<number, string>) {
   return upserted;
 }
 
-export const Route = createFileRoute("/hooks/sync-fixtures")({
+export const Route = createFileRoute("/api/public/hooks/sync-fixtures")({
   server: {
     handlers: {
       POST: async ({ request }) => {
