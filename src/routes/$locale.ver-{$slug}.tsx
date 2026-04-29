@@ -3,7 +3,7 @@ import { isLocale } from "@/lib/i18n";
 import { getFixtureBySlug } from "@/lib/data";
 import { detectGeo } from "@/lib/geolocation";
 import { buildMeta, jsonLdScript, sportsEventJsonLd } from "@/lib/seo";
-import { MatchPage } from "./$locale.watch-$slug";
+import { MatchPage } from "./$locale.watch-{$slug}";
 
 export const Route = createFileRoute("/$locale/ver-{$slug}")({
   beforeLoad: ({ params }) => {
