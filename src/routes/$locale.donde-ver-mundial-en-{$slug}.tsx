@@ -4,7 +4,7 @@ import { getCountryBySlug } from "@/lib/data";
 import { buildMeta, jsonLdScript, faqJsonLd } from "@/lib/seo";
 import { CountryGuide } from "./$locale.how-to-watch-world-cup-in-$slug";
 
-export const Route = createFileRoute("/$locale/donde-ver-mundial-en-$slug")({
+export const Route = createFileRoute("/$locale/donde-ver-mundial-en-{$slug}")({
   beforeLoad: ({ params }) => {
     if (!isLocale(params.locale) || params.locale !== "es") throw notFound();
   },
