@@ -17,6 +17,7 @@ import { Route as LocaleRouteImport } from './routes/$locale'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LocaleIndexRouteImport } from './routes/$locale.index'
 import { Route as ApiTrackClickRouteImport } from './routes/api.track-click'
+import { Route as AdminSyncStatusRouteImport } from './routes/admin.sync-status'
 import { Route as LocaleWatchSlugRouteImport } from './routes/$locale.watch-$slug'
 import { Route as LocaleVerSlugRouteImport } from './routes/$locale.ver-$slug'
 import { Route as LocaleTermsRouteImport } from './routes/$locale.terms'
@@ -65,6 +66,11 @@ const LocaleIndexRoute = LocaleIndexRouteImport.update({
 const ApiTrackClickRoute = ApiTrackClickRouteImport.update({
   id: '/api/track-click',
   path: '/api/track-click',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminSyncStatusRoute = AdminSyncStatusRouteImport.update({
+  id: '/admin/sync-status',
+  path: '/admin/sync-status',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LocaleWatchSlugRoute = LocaleWatchSlugRouteImport.update({
@@ -131,6 +137,7 @@ export interface FileRoutesByFullPath {
   '/$locale/terms': typeof LocaleTermsRoute
   '/$locale/ver-$slug': typeof LocaleVerSlugRoute
   '/$locale/watch-$slug': typeof LocaleWatchSlugRoute
+  '/admin/sync-status': typeof AdminSyncStatusRoute
   '/api/track-click': typeof ApiTrackClickRoute
   '/$locale/': typeof LocaleIndexRoute
   '/$locale/team/$slug': typeof LocaleTeamSlugRoute
@@ -149,6 +156,7 @@ export interface FileRoutesByTo {
   '/$locale/terms': typeof LocaleTermsRoute
   '/$locale/ver-$slug': typeof LocaleVerSlugRoute
   '/$locale/watch-$slug': typeof LocaleWatchSlugRoute
+  '/admin/sync-status': typeof AdminSyncStatusRoute
   '/api/track-click': typeof ApiTrackClickRoute
   '/$locale': typeof LocaleIndexRoute
   '/$locale/team/$slug': typeof LocaleTeamSlugRoute
@@ -169,6 +177,7 @@ export interface FileRoutesById {
   '/$locale/terms': typeof LocaleTermsRoute
   '/$locale/ver-$slug': typeof LocaleVerSlugRoute
   '/$locale/watch-$slug': typeof LocaleWatchSlugRoute
+  '/admin/sync-status': typeof AdminSyncStatusRoute
   '/api/track-click': typeof ApiTrackClickRoute
   '/$locale/': typeof LocaleIndexRoute
   '/$locale/team/$slug': typeof LocaleTeamSlugRoute
@@ -190,6 +199,7 @@ export interface FileRouteTypes {
     | '/$locale/terms'
     | '/$locale/ver-$slug'
     | '/$locale/watch-$slug'
+    | '/admin/sync-status'
     | '/api/track-click'
     | '/$locale/'
     | '/$locale/team/$slug'
@@ -208,6 +218,7 @@ export interface FileRouteTypes {
     | '/$locale/terms'
     | '/$locale/ver-$slug'
     | '/$locale/watch-$slug'
+    | '/admin/sync-status'
     | '/api/track-click'
     | '/$locale'
     | '/$locale/team/$slug'
@@ -227,6 +238,7 @@ export interface FileRouteTypes {
     | '/$locale/terms'
     | '/$locale/ver-$slug'
     | '/$locale/watch-$slug'
+    | '/admin/sync-status'
     | '/api/track-click'
     | '/$locale/'
     | '/$locale/team/$slug'
@@ -240,6 +252,7 @@ export interface RootRouteChildren {
   SitemapEnDotxmlRoute: typeof SitemapEnDotxmlRoute
   SitemapEsDotxmlRoute: typeof SitemapEsDotxmlRoute
   SitemapIndexDotxmlRoute: typeof SitemapIndexDotxmlRoute
+  AdminSyncStatusRoute: typeof AdminSyncStatusRoute
   ApiTrackClickRoute: typeof ApiTrackClickRoute
   ApiPublicHooksSyncFixturesRoute: typeof ApiPublicHooksSyncFixturesRoute
 }
@@ -300,6 +313,13 @@ declare module '@tanstack/react-router' {
       path: '/api/track-click'
       fullPath: '/api/track-click'
       preLoaderRoute: typeof ApiTrackClickRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/sync-status': {
+      id: '/admin/sync-status'
+      path: '/admin/sync-status'
+      fullPath: '/admin/sync-status'
+      preLoaderRoute: typeof AdminSyncStatusRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/$locale/watch-$slug': {
@@ -402,6 +422,7 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapEnDotxmlRoute: SitemapEnDotxmlRoute,
   SitemapEsDotxmlRoute: SitemapEsDotxmlRoute,
   SitemapIndexDotxmlRoute: SitemapIndexDotxmlRoute,
+  AdminSyncStatusRoute: AdminSyncStatusRoute,
   ApiTrackClickRoute: ApiTrackClickRoute,
   ApiPublicHooksSyncFixturesRoute: ApiPublicHooksSyncFixturesRoute,
 }
