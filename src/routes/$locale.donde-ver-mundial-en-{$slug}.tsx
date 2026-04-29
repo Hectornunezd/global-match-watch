@@ -2,7 +2,8 @@ import { createFileRoute, notFound } from "@tanstack/react-router";
 import { isLocale } from "@/lib/i18n";
 import { getCountryBySlug } from "@/lib/data";
 import { buildMeta, jsonLdScript, faqJsonLd } from "@/lib/seo";
-import { CountryGuide } from "./$locale.how-to-watch-world-cup-in-{$slug}";
+import { CountryGuide } from "@/components/CountryGuide";
+import type { Country, Channel, Fixture } from "@/lib/data";
 
 export const Route = createFileRoute("/$locale/donde-ver-mundial-en-{$slug}")({
   beforeLoad: ({ params }) => {
@@ -28,5 +29,14 @@ export const Route = createFileRoute("/$locale/donde-ver-mundial-en-{$slug}")({
     ];
     return { meta, links, scripts: [jsonLdScript(faqJsonLd(faqs))] };
   },
-  component: () => <CountryGuide locale="es" />,
+  component: DondeVerPage,
 });
+
+function DondeVerPage() {
+  const { country, channels, fixtures } = Route.useLoaderData() as {
+    country: Country;
+    channels: Channel[];
+    fixtures: Fixture[];
+  };
+  return <CountryGuide locale="es" country={country} channels={channels} fixtures={fixtures} />;
+}
