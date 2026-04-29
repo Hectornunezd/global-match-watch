@@ -2,7 +2,7 @@ import { createFileRoute, notFound } from "@tanstack/react-router";
 import { isLocale } from "@/lib/i18n";
 import { getCountryBySlug } from "@/lib/data";
 import { buildMeta, jsonLdScript, faqJsonLd } from "@/lib/seo";
-import { CountryGuide } from "./$locale.how-to-watch-world-cup-in-$slug";
+import { CountryGuide } from "./$locale.how-to-watch-world-cup-in-{$slug}";
 
 export const Route = createFileRoute("/$locale/donde-ver-mundial-en-{$slug}")({
   beforeLoad: ({ params }) => {
