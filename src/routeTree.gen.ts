@@ -18,8 +18,8 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as LocaleIndexRouteImport } from './routes/$locale.index'
 import { Route as ApiTrackClickRouteImport } from './routes/api.track-click'
 import { Route as AdminSyncStatusRouteImport } from './routes/admin.sync-status'
-import { Route as LocaleWatchSlugRouteImport } from './routes/$locale.watch-$slug'
-import { Route as LocaleVerSlugRouteImport } from './routes/$locale.ver-$slug'
+import { Route as LocaleWatchChar123slugChar125RouteImport } from './routes/$locale.watch-{$slug}'
+import { Route as LocaleVerChar123slugChar125RouteImport } from './routes/$locale.ver-{$slug}'
 import { Route as LocaleTermsRouteImport } from './routes/$locale.terms'
 import { Route as LocaleResponsibleGamblingRouteImport } from './routes/$locale.responsible-gambling'
 import { Route as LocalePrivacyPolicyRouteImport } from './routes/$locale.privacy-policy'
@@ -73,16 +73,18 @@ const AdminSyncStatusRoute = AdminSyncStatusRouteImport.update({
   path: '/admin/sync-status',
   getParentRoute: () => rootRouteImport,
 } as any)
-const LocaleWatchSlugRoute = LocaleWatchSlugRouteImport.update({
-  id: '/watch-$slug',
-  path: '/watch-$slug',
-  getParentRoute: () => LocaleRoute,
-} as any)
-const LocaleVerSlugRoute = LocaleVerSlugRouteImport.update({
-  id: '/ver-$slug',
-  path: '/ver-$slug',
-  getParentRoute: () => LocaleRoute,
-} as any)
+const LocaleWatchChar123slugChar125Route =
+  LocaleWatchChar123slugChar125RouteImport.update({
+    id: '/watch-{$slug}',
+    path: '/watch-{$slug}',
+    getParentRoute: () => LocaleRoute,
+  } as any)
+const LocaleVerChar123slugChar125Route =
+  LocaleVerChar123slugChar125RouteImport.update({
+    id: '/ver-{$slug}',
+    path: '/ver-{$slug}',
+    getParentRoute: () => LocaleRoute,
+  } as any)
 const LocaleTermsRoute = LocaleTermsRouteImport.update({
   id: '/terms',
   path: '/terms',
@@ -135,8 +137,8 @@ export interface FileRoutesByFullPath {
   '/$locale/privacy-policy': typeof LocalePrivacyPolicyRoute
   '/$locale/responsible-gambling': typeof LocaleResponsibleGamblingRoute
   '/$locale/terms': typeof LocaleTermsRoute
-  '/$locale/ver-$slug': typeof LocaleVerSlugRoute
-  '/$locale/watch-$slug': typeof LocaleWatchSlugRoute
+  '/$locale/ver-{$slug}': typeof LocaleVerChar123slugChar125Route
+  '/$locale/watch-{$slug}': typeof LocaleWatchChar123slugChar125Route
   '/admin/sync-status': typeof AdminSyncStatusRoute
   '/api/track-click': typeof ApiTrackClickRoute
   '/$locale/': typeof LocaleIndexRoute
@@ -154,8 +156,8 @@ export interface FileRoutesByTo {
   '/$locale/privacy-policy': typeof LocalePrivacyPolicyRoute
   '/$locale/responsible-gambling': typeof LocaleResponsibleGamblingRoute
   '/$locale/terms': typeof LocaleTermsRoute
-  '/$locale/ver-$slug': typeof LocaleVerSlugRoute
-  '/$locale/watch-$slug': typeof LocaleWatchSlugRoute
+  '/$locale/ver-{$slug}': typeof LocaleVerChar123slugChar125Route
+  '/$locale/watch-{$slug}': typeof LocaleWatchChar123slugChar125Route
   '/admin/sync-status': typeof AdminSyncStatusRoute
   '/api/track-click': typeof ApiTrackClickRoute
   '/$locale': typeof LocaleIndexRoute
@@ -175,8 +177,8 @@ export interface FileRoutesById {
   '/$locale/privacy-policy': typeof LocalePrivacyPolicyRoute
   '/$locale/responsible-gambling': typeof LocaleResponsibleGamblingRoute
   '/$locale/terms': typeof LocaleTermsRoute
-  '/$locale/ver-$slug': typeof LocaleVerSlugRoute
-  '/$locale/watch-$slug': typeof LocaleWatchSlugRoute
+  '/$locale/ver-{$slug}': typeof LocaleVerChar123slugChar125Route
+  '/$locale/watch-{$slug}': typeof LocaleWatchChar123slugChar125Route
   '/admin/sync-status': typeof AdminSyncStatusRoute
   '/api/track-click': typeof ApiTrackClickRoute
   '/$locale/': typeof LocaleIndexRoute
@@ -197,8 +199,8 @@ export interface FileRouteTypes {
     | '/$locale/privacy-policy'
     | '/$locale/responsible-gambling'
     | '/$locale/terms'
-    | '/$locale/ver-$slug'
-    | '/$locale/watch-$slug'
+    | '/$locale/ver-{$slug}'
+    | '/$locale/watch-{$slug}'
     | '/admin/sync-status'
     | '/api/track-click'
     | '/$locale/'
@@ -216,8 +218,8 @@ export interface FileRouteTypes {
     | '/$locale/privacy-policy'
     | '/$locale/responsible-gambling'
     | '/$locale/terms'
-    | '/$locale/ver-$slug'
-    | '/$locale/watch-$slug'
+    | '/$locale/ver-{$slug}'
+    | '/$locale/watch-{$slug}'
     | '/admin/sync-status'
     | '/api/track-click'
     | '/$locale'
@@ -236,8 +238,8 @@ export interface FileRouteTypes {
     | '/$locale/privacy-policy'
     | '/$locale/responsible-gambling'
     | '/$locale/terms'
-    | '/$locale/ver-$slug'
-    | '/$locale/watch-$slug'
+    | '/$locale/ver-{$slug}'
+    | '/$locale/watch-{$slug}'
     | '/admin/sync-status'
     | '/api/track-click'
     | '/$locale/'
@@ -322,18 +324,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminSyncStatusRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/$locale/watch-$slug': {
-      id: '/$locale/watch-$slug'
-      path: '/watch-$slug'
-      fullPath: '/$locale/watch-$slug'
-      preLoaderRoute: typeof LocaleWatchSlugRouteImport
+    '/$locale/watch-{$slug}': {
+      id: '/$locale/watch-{$slug}'
+      path: '/watch-{$slug}'
+      fullPath: '/$locale/watch-{$slug}'
+      preLoaderRoute: typeof LocaleWatchChar123slugChar125RouteImport
       parentRoute: typeof LocaleRoute
     }
-    '/$locale/ver-$slug': {
-      id: '/$locale/ver-$slug'
-      path: '/ver-$slug'
-      fullPath: '/$locale/ver-$slug'
-      preLoaderRoute: typeof LocaleVerSlugRouteImport
+    '/$locale/ver-{$slug}': {
+      id: '/$locale/ver-{$slug}'
+      path: '/ver-{$slug}'
+      fullPath: '/$locale/ver-{$slug}'
+      preLoaderRoute: typeof LocaleVerChar123slugChar125RouteImport
       parentRoute: typeof LocaleRoute
     }
     '/$locale/terms': {
@@ -394,8 +396,8 @@ interface LocaleRouteChildren {
   LocalePrivacyPolicyRoute: typeof LocalePrivacyPolicyRoute
   LocaleResponsibleGamblingRoute: typeof LocaleResponsibleGamblingRoute
   LocaleTermsRoute: typeof LocaleTermsRoute
-  LocaleVerSlugRoute: typeof LocaleVerSlugRoute
-  LocaleWatchSlugRoute: typeof LocaleWatchSlugRoute
+  LocaleVerChar123slugChar125Route: typeof LocaleVerChar123slugChar125Route
+  LocaleWatchChar123slugChar125Route: typeof LocaleWatchChar123slugChar125Route
   LocaleIndexRoute: typeof LocaleIndexRoute
   LocaleTeamSlugRoute: typeof LocaleTeamSlugRoute
 }
@@ -406,8 +408,8 @@ const LocaleRouteChildren: LocaleRouteChildren = {
   LocalePrivacyPolicyRoute: LocalePrivacyPolicyRoute,
   LocaleResponsibleGamblingRoute: LocaleResponsibleGamblingRoute,
   LocaleTermsRoute: LocaleTermsRoute,
-  LocaleVerSlugRoute: LocaleVerSlugRoute,
-  LocaleWatchSlugRoute: LocaleWatchSlugRoute,
+  LocaleVerChar123slugChar125Route: LocaleVerChar123slugChar125Route,
+  LocaleWatchChar123slugChar125Route: LocaleWatchChar123slugChar125Route,
   LocaleIndexRoute: LocaleIndexRoute,
   LocaleTeamSlugRoute: LocaleTeamSlugRoute,
 }
