@@ -6,7 +6,7 @@ import { MatchCard } from "@/components/MatchCard";
 import { AdSlot } from "@/components/AdSlot";
 import { buildMeta, jsonLdScript, faqJsonLd } from "@/lib/seo";
 
-export const Route = createFileRoute("/$locale/how-to-watch-world-cup-in-$slug")({
+export const Route = createFileRoute("/$locale/how-to-watch-world-cup-in-{$slug}")({
   beforeLoad: ({ params }) => {
     if (!isLocale(params.locale) || params.locale !== "en") throw notFound();
   },

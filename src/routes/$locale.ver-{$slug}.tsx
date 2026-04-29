@@ -5,7 +5,7 @@ import { detectGeo } from "@/lib/geolocation";
 import { buildMeta, jsonLdScript, sportsEventJsonLd } from "@/lib/seo";
 import { MatchPage } from "./$locale.watch-$slug";
 
-export const Route = createFileRoute("/$locale/ver-$slug")({
+export const Route = createFileRoute("/$locale/ver-{$slug}")({
   beforeLoad: ({ params }) => {
     if (!isLocale(params.locale) || params.locale !== "es") throw notFound();
   },
