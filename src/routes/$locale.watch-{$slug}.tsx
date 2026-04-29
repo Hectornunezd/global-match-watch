@@ -11,7 +11,7 @@ import { CountrySelector } from "@/components/CountrySelector";
 import { AdSlot } from "@/components/AdSlot";
 import { buildMeta, jsonLdScript, sportsEventJsonLd } from "@/lib/seo";
 
-export const Route = createFileRoute("/$locale/watch-$slug")({
+export const Route = createFileRoute("/$locale/watch-{$slug}")({
   beforeLoad: ({ params }) => {
     if (!isLocale(params.locale) || params.locale !== "en") throw notFound();
   },
