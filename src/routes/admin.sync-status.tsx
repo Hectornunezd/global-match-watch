@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { getSyncStats } from "@/server/sync-stats.functions";
+import { getSyncStats, type SyncStats } from "@/server/sync-stats.functions";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 
@@ -27,7 +27,7 @@ function fmtDateTime(iso: string | null): string {
 }
 
 function SyncStatusPage() {
-  const stats = Route.useLoaderData();
+  const stats = Route.useLoaderData() as SyncStats;
 
   return (
     <div className="container mx-auto max-w-6xl px-4 py-10 space-y-10">
