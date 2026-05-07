@@ -26,6 +26,7 @@ const TEAM_IMAGES: Record<string, string[]> = {
   CAN: [canadaImg], CA: [canadaImg],
   GER: [germanyImg, germany2Img, germany3Img], DE: [germanyImg, germany2Img, germany3Img], DEU: [germanyImg, germany2Img, germany3Img],
   HAI: [haitiImg, haiti2Img], HT: [haitiImg, haiti2Img], HTI: [haitiImg, haiti2Img],
+  KOR: [koreaImg, korea2Img], KR: [koreaImg, korea2Img],
 };
 
 function pickCover(id: string, homeCode?: string, awayCode?: string): string {
