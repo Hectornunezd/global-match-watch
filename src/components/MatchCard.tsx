@@ -10,9 +10,9 @@ import argentinaImg from "@/assets/teams/argentina.jpg";
 import argentina2Img from "@/assets/teams/argentina-2.jpg";
 
 const TEAM_IMAGES: Record<string, string[]> = {
-  MEX: [mexicoImg],
-  BRA: [brazilImg],
-  ARG: [argentinaImg, argentina2Img],
+  MEX: [mexicoImg], MX: [mexicoImg],
+  BRA: [brazilImg], BR: [brazilImg],
+  ARG: [argentinaImg, argentina2Img], AR: [argentinaImg, argentina2Img],
 };
 
 function pickCover(id: string, homeCode?: string, awayCode?: string): string {
