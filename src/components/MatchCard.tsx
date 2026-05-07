@@ -19,6 +19,9 @@ import koreaImg from "@/assets/teams/korea.jpg";
 import korea2Img from "@/assets/teams/korea-2.jpg";
 import japanImg from "@/assets/teams/japan.jpg";
 import japan2Img from "@/assets/teams/japan-2.jpg";
+import englandImg from "@/assets/teams/england.jpg";
+import england2Img from "@/assets/teams/england-2.jpg";
+import england3Img from "@/assets/teams/england-3.jpg";
 
 const TEAM_IMAGES: Record<string, string[]> = {
   MEX: [mexicoImg], MX: [mexicoImg],
@@ -30,6 +33,7 @@ const TEAM_IMAGES: Record<string, string[]> = {
   HAI: [haitiImg, haiti2Img], HT: [haitiImg, haiti2Img], HTI: [haitiImg, haiti2Img],
   KOR: [koreaImg, korea2Img], KR: [koreaImg, korea2Img],
   JPN: [japanImg, japan2Img], JP: [japanImg, japan2Img],
+  ENG: [englandImg, england2Img, england3Img], GB: [englandImg, england2Img, england3Img], GBR: [englandImg, england2Img, england3Img],
 };
 
 function pickCover(id: string, homeCode?: string, awayCode?: string): string {
