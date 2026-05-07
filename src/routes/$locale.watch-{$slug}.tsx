@@ -112,20 +112,22 @@ export function MatchPage({ locale }: { locale: Locale }) {
           </span>
           <div className="mt-5 grid grid-cols-3 items-center gap-4 sm:gap-8">
             <div className="flex flex-col items-center gap-2 sm:flex-row sm:gap-4">
-              <Flag src={home.flag_url} name={homeName} className="h-14 w-20 rounded-md sm:h-20 sm:w-28" fallbackTextClassName="text-2xl" />
+              <Flag src={home.flag_url} name={homeName} className="h-14 w-20 sm:h-20 sm:w-28" fallbackTextClassName="text-2xl" />
               <span className="text-balance text-center font-display text-xl uppercase sm:text-left sm:text-3xl">{homeName}</span>
             </div>
             <div className="text-center">
               {fixture.status === "scheduled" ? (
-                <div className="font-display text-3xl uppercase text-muted-foreground sm:text-5xl">{m.labels.vs}</div>
+                <div className="font-display text-3xl uppercase text-primary sm:text-5xl">[{m.labels.vs}]</div>
               ) : (
-                <div className="font-mono text-4xl font-bold tabular-nums sm:text-6xl">
-                  {fixture.home_score ?? 0}<span className="px-2 text-muted-foreground">-</span>{fixture.away_score ?? 0}
+                <div className="font-display text-4xl font-bold tabular-nums sm:text-6xl">
+                  <span className="text-primary">[</span>{String(fixture.home_score ?? 0).padStart(2, "0")}<span className="text-primary">]</span>
+                  <span className="px-2 text-muted-foreground">-</span>
+                  <span className="text-primary">[</span>{String(fixture.away_score ?? 0).padStart(2, "0")}<span className="text-primary">]</span>
                 </div>
               )}
             </div>
             <div className="flex flex-col items-center gap-2 sm:flex-row-reverse sm:gap-4">
-              <Flag src={away.flag_url} name={awayName} className="h-14 w-20 rounded-md sm:h-20 sm:w-28" fallbackTextClassName="text-2xl" />
+              <Flag src={away.flag_url} name={awayName} className="h-14 w-20 sm:h-20 sm:w-28" fallbackTextClassName="text-2xl" />
               <span className="text-balance text-center font-display text-xl uppercase sm:text-right sm:text-3xl">{awayName}</span>
             </div>
           </div>
@@ -145,9 +147,9 @@ export function MatchPage({ locale }: { locale: Locale }) {
         <div>
           {/* Where to watch */}
           <section>
-            <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
-              <h2 className="text-2xl">
-                {m.sections.whereToWatch} {countryName}
+            <div className="mb-4 flex flex-wrap items-end justify-between gap-3 border-b border-primary pb-2">
+              <h2 className="font-display text-2xl uppercase">
+                <span className="text-primary">[ {locale === "es" ? "DÓNDE VER" : "WHERE TO WATCH"} ]</span> {countryName}
               </h2>
               <CountrySelector initialAlpha2={geo.alpha2} />
             </div>
