@@ -9,6 +9,8 @@ import brazilImg from "@/assets/teams/brazil.jpg";
 import argentinaImg from "@/assets/teams/argentina.jpg";
 import argentina2Img from "@/assets/teams/argentina-2.jpg";
 import usaImg from "@/assets/teams/usa.jpg";
+import usa2Img from "@/assets/teams/usa-2.jpg";
+import usa3Img from "@/assets/teams/usa-3.jpg";
 import canadaImg from "@/assets/teams/canada.jpg";
 import germanyImg from "@/assets/teams/germany.jpg";
 import germany2Img from "@/assets/teams/germany-2.jpg";
@@ -27,7 +29,7 @@ const TEAM_IMAGES: Record<string, string[]> = {
   MEX: [mexicoImg], MX: [mexicoImg],
   BRA: [brazilImg], BR: [brazilImg],
   ARG: [argentinaImg, argentina2Img], AR: [argentinaImg, argentina2Img],
-  USA: [usaImg], US: [usaImg],
+  USA: [usaImg, usa2Img, usa3Img], US: [usaImg, usa2Img, usa3Img],
   CAN: [canadaImg], CA: [canadaImg],
   GER: [germanyImg, germany2Img, germany3Img], DE: [germanyImg, germany2Img, germany3Img], DEU: [germanyImg, germany2Img, germany3Img],
   HAI: [haitiImg, haiti2Img], HT: [haitiImg, haiti2Img], HTI: [haitiImg, haiti2Img],
