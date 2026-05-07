@@ -25,13 +25,46 @@ export function alpha3ToAlpha2(a3: string | null | undefined): string | null {
   return ALPHA3_TO_ALPHA2[a3.toUpperCase()] ?? null;
 }
 
+async function lookupCountryByIP(ip: string): Promise<string | null> {
+  try {
+    const res = await fetch(`https://ipapi.co/${ip}/country/`, {
+      headers: { "User-Agent": "matchlivenow/1.0" },
+      signal: AbortSignal.timeout(2000),
+    });
+    if (!res.ok) return null;
+    const text = (await res.text()).trim().toUpperCase();
+    return /^[A-Z]{2}$/.test(text) ? text : null;
+  } catch {
+    return null;
+  }
+}
+
 export const detectGeo = createServerFn({ method: "GET" }).handler(async () => {
-  const cfCountry = getRequestHeader("CF-IPCountry") ?? getRequestHeader("cf-ipcountry");
   const cookieCountry = getCookie("user_country");
-  const alpha2 = (cookieCountry || cfCountry || "US").toUpperCase();
+  const cfCountry =
+    getRequestHeader("CF-IPCountry") ?? getRequestHeader("cf-ipcountry");
+  const vercelCountry =
+    getRequestHeader("X-Vercel-IP-Country") ?? getRequestHeader("x-vercel-ip-country");
+
+  let alpha2 = (cookieCountry || cfCountry || vercelCountry || "").toUpperCase();
+
+  // Fallback: real IP lookup when no edge geo header (e.g. Lovable preview)
+  if (!alpha2) {
+    const fwd =
+      getRequestHeader("x-forwarded-for") ?? getRequestHeader("X-Forwarded-For");
+    const realIp =
+      getRequestHeader("x-real-ip") ?? getRequestHeader("X-Real-IP");
+    const ip = (fwd?.split(",")[0]?.trim() || realIp || "").trim();
+    if (ip && !ip.startsWith("127.") && !ip.startsWith("10.") && !ip.startsWith("192.168.")) {
+      const looked = await lookupCountryByIP(ip);
+      if (looked) alpha2 = looked;
+    }
+  }
+
+  if (!alpha2) alpha2 = "US";
   const alpha3 = alpha2ToAlpha3(alpha2) ?? "USA";
   // Persist for next request if not already set
-  if (!cookieCountry && cfCountry) {
+  if (!cookieCountry) {
     setCookie("user_country", alpha2, {
       path: "/",
       maxAge: 60 * 60 * 24 * 30,
