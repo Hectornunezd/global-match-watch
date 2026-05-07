@@ -9,6 +9,7 @@ import { CountrySelector } from "@/components/CountrySelector";
 import { AdSlot } from "@/components/AdSlot";
 import { WhereToWatch } from "@/components/WhereToWatch";
 import { buildMeta, jsonLdScript, organizationJsonLd, websiteJsonLd } from "@/lib/seo";
+import heroTrophy from "@/assets/hero-trophy.jpg";
 import { notFound } from "@tanstack/react-router";
 
 const WORLD_CUP_START = "2026-06-11T16:00:00Z";
@@ -73,8 +74,20 @@ function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="border-b border-primary/30 gradient-hero">
-        <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20">
+      <section className="group relative isolate overflow-hidden border-b border-primary/30 gradient-hero">
+        {/* Background trophy image — visible on hover */}
+        <img
+          src={heroTrophy}
+          alt=""
+          aria-hidden
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center opacity-0 grayscale transition-opacity duration-700 group-hover:opacity-40"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[var(--background)] via-[var(--background)]/80 to-transparent"
+        />
+
+        <div className="relative z-10 mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20">
           <div className="max-w-3xl">
             <span className="inline-flex items-center font-display text-[11px] font-bold uppercase tracking-[0.2em] text-primary">
               [ FIFA WORLD CUP 2026 ]
