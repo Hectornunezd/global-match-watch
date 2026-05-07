@@ -1,7 +1,9 @@
+import { useState } from "react";
 import type { Channel, Fixture } from "@/lib/data";
 import type { Locale } from "@/lib/i18n";
 import { t } from "@/lib/i18n";
 import { withUtm, trackClick } from "@/lib/affiliates";
+import { channelLogoUrl } from "@/lib/channel-logos";
 
 interface Props {
   channel: Channel;
@@ -40,11 +42,21 @@ export function ChannelCard({ channel, locale, fixture, pageType, countryCode }:
     ? "border-[var(--success)]/40 bg-[var(--success)]/10 text-[var(--success)]"
     : "border-border bg-[var(--surface-hover)] text-muted-foreground";
 
+  const fallbackLogo = channelLogoUrl(channel.channel_name, channel.affiliate_partner);
+  const logoSrc = channel.logo_url || fallbackLogo;
+  const [logoFailed, setLogoFailed] = useState(false);
+
   return (
     <div className="flex items-center gap-3 rounded-xl border border-border bg-card p-3.5 transition-colors hover:border-primary">
-      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-[var(--surface-hover)] font-display text-sm uppercase">
-        {channel.logo_url ? (
-          <img src={channel.logo_url} alt="" loading="lazy" className="h-full w-full rounded-md object-contain" />
+      <div className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-md bg-white/95 font-display text-sm uppercase text-black">
+        {logoSrc && !logoFailed ? (
+          <img
+            src={logoSrc}
+            alt={channel.channel_name}
+            loading="lazy"
+            onError={() => setLogoFailed(true)}
+            className="h-full w-full object-contain p-1"
+          />
         ) : (
           channel.channel_name.charAt(0)
         )}

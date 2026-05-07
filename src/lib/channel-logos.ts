@@ -1,0 +1,112 @@
+// Mapping of affiliate_partner / channel name → official broadcaster domain.
+// We resolve the logo via Clearbit's free logo API: https://logo.clearbit.com/<domain>
+// Falls back to the channel name initial when nothing matches.
+
+const PARTNER_DOMAIN: Record<string, string> = {
+  // Americas
+  azteca: "tvazteca.com",
+  caliente: "caliente.mx",
+  televisa: "televisa.com",
+  tudn: "tudn.com",
+  vix: "vix.com",
+  telemundo: "telemundo.com",
+  fox: "foxsports.com",
+  fubotv: "fubo.tv",
+  peacock: "peacocktv.com",
+  tsn: "tsn.ca",
+  ctv: "ctv.ca",
+  globo: "globo.com",
+  sportv: "sportv.globo.com",
+  caracol: "caracoltv.com",
+  rcn: "canalrcn.com",
+  directv: "directv.com",
+  dsports: "directvsports.com",
+  tyc: "tycsports.com",
+  tvpublica: "tvpublica.com.ar",
+  // Europe
+  bbc: "bbc.co.uk",
+  itv: "itv.com",
+  tf1: "tf1.fr",
+  rai: "rai.it",
+  rtve: "rtve.es",
+  movistar: "movistarplus.es",
+  ard: "ard.de",
+  zdf: "zdf.de",
+  magenta: "magentatv.de",
+  sky: "sky.it",
+  // MENA
+  bein: "beinsports.com",
+  "bein-mena": "beinsports.com",
+  ssc: "ssc.sa",
+  shahid: "shahid.net",
+  // Asia / Oceania
+  abema: "abema.tv",
+  nhk: "nhk.or.jp",
+  kbs: "kbs.co.kr",
+  sbs: "sbs.com.au",
+  "sbs-kr": "sbs.co.kr",
+  optus: "sport.optus.com.au",
+  jiocinema: "jiocinema.com",
+  sports18: "sports18.com",
+  // VPN / betting
+  expressvpn: "expressvpn.com",
+  nordvpn: "nordvpn.com",
+  bet365: "bet365.com",
+};
+
+const NAME_DOMAIN: Record<string, string> = {
+  "BBC One": "bbc.co.uk",
+  "BBC iPlayer": "bbc.co.uk",
+  "FOX Sports": "foxsports.com",
+  "Sky Sport": "sky.it",
+  "Sky Sport NZ": "skysport.co.nz",
+  "RAI 1": "rai.it",
+  "TRT 1": "trt.net.tr",
+  "TRT Spor": "trtspor.com.tr",
+  "RTP1": "rtp.pt",
+  "SIC": "sic.pt",
+  "NOS": "nos.pt",
+  "Sport TV": "sporttv.pt",
+  "RTÉ": "rte.ie",
+  "RTBF": "rtbf.be",
+  "VRT": "vrt.be",
+  "NPO 1": "npo.nl",
+  "SRF": "srf.ch",
+  "RTS": "rts.ch",
+  "RTS1": "rts.ch",
+  "HRT": "hrt.hr",
+  "Polsat Sport": "polsatsport.pl",
+  "TVP Sport": "sport.tvp.pl",
+  "Al Aoula": "snrt.ma",
+  "Arryadia": "snrt.ma",
+  "On Sport": "onsport.tv",
+  "SABC Sport": "sabcsport.com",
+  "SuperSport": "supersport.com",
+  "Canal 10": "canal10.com.uy",
+  "Canal 13": "canal13.cl",
+  "Chilevisión": "chilevision.cl",
+  "Latina TV": "latina.pe",
+  "América TV": "americatv.com.pe",
+  "Movistar Deportes": "movistarplus.es",
+  "Teleamazonas": "teleamazonas.com",
+  "Teledoce": "teledoce.com",
+  "Teletica": "teletica.com",
+  "Repretel": "repretel.com",
+  "Televicentro": "televicentro.hn",
+  "Tigo Sports": "tigosports.com",
+  "TVN": "tvn.cl",
+  "Venevisión": "venevision.com",
+  "VTV": "vtv.com.uy",
+  "Azteca 7": "tvazteca.com",
+  "beIN Sports": "beinsports.com",
+  "beIN Sports MENA": "beinsports.com",
+};
+
+export function channelLogoUrl(channelName: string, partner?: string | null): string | null {
+  const domain =
+    (partner && PARTNER_DOMAIN[partner]) ||
+    NAME_DOMAIN[channelName] ||
+    null;
+  if (!domain) return null;
+  return `https://logo.clearbit.com/${domain}`;
+}
