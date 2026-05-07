@@ -9,12 +9,14 @@ import brazilImg from "@/assets/teams/brazil.jpg";
 import argentinaImg from "@/assets/teams/argentina.jpg";
 import argentina2Img from "@/assets/teams/argentina-2.jpg";
 import usaImg from "@/assets/teams/usa.jpg";
+import canadaImg from "@/assets/teams/canada.jpg";
 
 const TEAM_IMAGES: Record<string, string[]> = {
   MEX: [mexicoImg], MX: [mexicoImg],
   BRA: [brazilImg], BR: [brazilImg],
   ARG: [argentinaImg, argentina2Img], AR: [argentinaImg, argentina2Img],
   USA: [usaImg], US: [usaImg],
+  CAN: [canadaImg], CA: [canadaImg],
 };
 
 function pickCover(id: string, homeCode?: string, awayCode?: string): string {
