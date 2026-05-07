@@ -73,11 +73,11 @@ function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="gradient-hero">
+      <section className="border-b border-primary/30 gradient-hero">
         <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20">
           <div className="max-w-3xl">
-            <span className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 font-mono text-[11px] font-bold uppercase tracking-wider text-primary">
-              FIFA World Cup 2026
+            <span className="inline-flex items-center font-display text-[11px] font-bold uppercase tracking-[0.2em] text-primary">
+              [ FIFA WORLD CUP 2026 ]
             </span>
             <h1 className="text-balance mt-5 font-display text-4xl uppercase leading-[0.95] sm:text-6xl md:text-7xl">
               {m.hero.title}
@@ -86,9 +86,9 @@ function HomePage() {
             <div className="mt-7 flex flex-wrap items-center gap-3">
               <a
                 href="#upcoming"
-                className="rounded-full border border-primary/40 bg-primary/20 px-6 py-3 font-display text-sm uppercase tracking-wider text-primary backdrop-blur-md shadow-[0_0_30px_-8px_var(--primary)] transition-all hover:bg-primary/30 hover:border-primary"
+                className="border border-primary bg-transparent px-6 py-3 font-display text-sm uppercase tracking-wider text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
               >
-                {m.hero.cta}
+                ▸ {m.hero.cta}
               </a>
               <CountrySelector
                 initialAlpha2={geo.alpha2}
@@ -112,11 +112,11 @@ function HomePage() {
               { v: countdown.minutes, l: m.countdown.minutes },
               { v: countdown.seconds, l: m.countdown.seconds },
             ].map((c, i) => (
-              <div key={i} className="flex min-w-[78px] flex-col items-center rounded-2xl border border-white/10 bg-white/5 px-4 py-3 backdrop-blur-md">
-                <span className="font-mono text-2xl font-bold tabular-nums">
-                  {String(c.v).padStart(2, "0")}
+              <div key={i} className="flex min-w-[80px] flex-col items-center border border-primary/40 bg-[var(--surface)] px-4 py-3">
+                <span className="font-display text-2xl font-bold tabular-nums text-foreground">
+                  <span className="text-primary">[</span>{String(c.v).padStart(2, "0")}<span className="text-primary">]</span>
                 </span>
-                <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">{c.l}</span>
+                <span className="mt-1 font-display text-[10px] uppercase tracking-wider text-muted-foreground">{c.l}</span>
               </div>
             ))}
             <span className="self-center text-xs uppercase tracking-wider text-muted-foreground">
@@ -193,13 +193,13 @@ function HomePage() {
               <Link
                 key={c.code}
                 to={path}
-                className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm backdrop-blur-md transition-colors hover:border-primary hover:bg-primary/10"
+                className="flex items-center gap-2 border border-primary/40 bg-[var(--surface)] px-4 py-2 font-display text-xs uppercase tracking-wider transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"
               >
                 <img
                   src={flagUrl(c.a2)}
                   alt=""
                   loading="lazy"
-                  className="h-4 w-6 rounded-sm object-cover"
+                  className="h-4 w-6 object-cover"
                 />
                 <span>{c.name}</span>
               </Link>
