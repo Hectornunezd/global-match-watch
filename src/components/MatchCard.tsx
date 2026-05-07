@@ -4,6 +4,19 @@ import type { Locale } from "@/lib/i18n";
 import { t, localeUrl } from "@/lib/i18n";
 import { LiveBadge } from "./LiveBadge";
 import matchCover from "@/assets/match-cover.jpg";
+import mexicoImg from "@/assets/teams/mexico.jpg";
+import brazilImg from "@/assets/teams/brazil.jpg";
+
+const TEAM_IMAGES: Record<string, string> = {
+  MEX: mexicoImg,
+  BRA: brazilImg,
+};
+
+function pickCover(homeCode?: string, awayCode?: string): string {
+  if (homeCode && TEAM_IMAGES[homeCode]) return TEAM_IMAGES[homeCode];
+  if (awayCode && TEAM_IMAGES[awayCode]) return TEAM_IMAGES[awayCode];
+  return matchCover;
+}
 
 interface Props {
   fixture: Fixture;
