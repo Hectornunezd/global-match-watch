@@ -62,9 +62,9 @@ export function ChannelCard({ channel, locale, fixture, pageType, countryCode }:
         target="_blank"
         rel="sponsored noopener noreferrer"
         onClick={handleClick}
-        className="shrink-0 rounded-md bg-primary px-3.5 py-2 text-xs font-bold uppercase tracking-wider text-primary-foreground transition-opacity hover:opacity-90"
+        className="shrink-0 border border-primary bg-transparent px-3.5 py-2 text-xs font-bold uppercase tracking-wider text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
       >
-        {m.labels.watchNow}
+        ▸ {m.labels.watchNow}
       </a>
     </div>
   );
