@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import type { Locale } from "@/lib/i18n";
 import { t, localeUrl } from "@/lib/i18n";
 import { LanguageSwitcher } from "./LanguageSwitcher";
+import { SearchBox } from "./SearchBox";
 
 export function Header({ locale, altPath }: { locale: Locale; altPath?: string }) {
   const [open, setOpen] = useState(false);
@@ -29,16 +30,7 @@ export function Header({ locale, altPath }: { locale: Locale; altPath?: string }
 
         <div className="flex items-center gap-4">
           <LanguageSwitcher locale={locale} altPath={altPath} />
-          <button
-            type="button"
-            aria-label="Search"
-            className="text-foreground/90 hover:text-primary"
-          >
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="11" cy="11" r="7" />
-              <path d="m20 20-3.5-3.5" strokeLinecap="square" />
-            </svg>
-          </button>
+          <SearchBox locale={locale} />
           <button
             type="button"
             aria-label="Account"
