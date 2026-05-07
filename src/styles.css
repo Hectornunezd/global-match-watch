@@ -38,36 +38,36 @@
 }
 
 :root {
-  /* Pitch Black #0A0A0F */
-  --background: oklch(0.07 0.01 280);
+  /* MLN base black #1A1A1A */
+  --background: oklch(0.18 0 0);
   --foreground: oklch(1 0 0);
-  /* Surface #111118 */
-  --surface: oklch(0.11 0.012 280);
-  --surface-hover: oklch(0.15 0.014 280);
-  --card: oklch(0.11 0.012 280);
+  /* Header/footer #111111 */
+  --surface: oklch(0.13 0 0);
+  --surface-hover: oklch(0.22 0 0);
+  --card: oklch(0.13 0 0);
   --card-foreground: oklch(1 0 0);
-  --popover: oklch(0.11 0.012 280);
+  --popover: oklch(0.13 0 0);
   --popover-foreground: oklch(1 0 0);
-  /* Signal Green #10D86A */
-  --primary: oklch(0.78 0.22 145);
-  --primary-foreground: oklch(0.15 0.02 145);
-  --secondary: oklch(0.18 0.015 280);
+  /* MLN Red #FF0000 */
+  --primary: oklch(0.628 0.2577 29.23);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.22 0 0);
   --secondary-foreground: oklch(1 0 0);
-  --muted: oklch(0.18 0.015 280);
-  --muted-foreground: oklch(0.68 0.02 260);
-  --accent: oklch(0.78 0.22 145);
-  --accent-foreground: oklch(0.15 0.02 145);
-  --destructive: oklch(0.62 0.22 25);
+  --muted: oklch(0.22 0 0);
+  /* Secondary text #999999 */
+  --muted-foreground: oklch(0.65 0 0);
+  --accent: oklch(0.628 0.2577 29.23);
+  --accent-foreground: oklch(1 0 0);
+  --destructive: oklch(0.628 0.2577 29.23);
   --destructive-foreground: oklch(1 0 0);
-  /* Border #2D2D3A */
-  --border: oklch(0.25 0.02 280);
-  --input: oklch(0.18 0.015 280);
-  --ring: oklch(0.78 0.22 145);
-  /* Success green #10B981 */
-  --success: oklch(0.7 0.16 162);
-  /* Warning #F59E0B */
-  --warning: oklch(0.78 0.16 65);
-  --radius: 0.75rem;
+  /* Subtle border — red-tinted at low opacity used inline; default neutral */
+  --border: oklch(0.28 0 0);
+  --input: oklch(0.22 0 0);
+  --ring: oklch(0.628 0.2577 29.23);
+  --success: oklch(0.628 0.2577 29.23);
+  --warning: oklch(0.628 0.2577 29.23);
+  /* Square corners — MLN brand */
+  --radius: 0rem;
 }
 
 @layer base {
@@ -101,11 +101,23 @@
   }
   .gradient-hero {
     background:
-      radial-gradient(ellipse at top, oklch(0.78 0.22 145 / 0.20), transparent 60%),
-      linear-gradient(180deg, oklch(0.11 0.012 280), oklch(0.07 0.01 280));
+      radial-gradient(ellipse at top, oklch(0.628 0.2577 29.23 / 0.18), transparent 60%),
+      linear-gradient(180deg, oklch(0.13 0 0), oklch(0.18 0 0));
+  }
+  .img-mln-duotone {
+    filter: grayscale(100%) contrast(1.05);
+    position: relative;
+  }
+  .img-mln-duotone::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 0, 0, 0.35);
+    pointer-events: none;
+    mix-blend-mode: multiply;
   }
   .btn-pill {
-    @apply inline-flex items-center justify-center rounded-full border border-border bg-card/60 px-5 py-2 font-display text-sm uppercase tracking-wider text-foreground transition-colors hover:border-primary;
+    @apply inline-flex items-center justify-center border border-primary bg-transparent px-5 py-2 font-display text-sm uppercase tracking-wider text-primary transition-colors hover:bg-primary hover:text-primary-foreground;
   }
   .btn-pill-active {
     @apply border-primary bg-primary text-primary-foreground;
