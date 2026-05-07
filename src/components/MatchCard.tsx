@@ -6,15 +6,24 @@ import { LiveBadge } from "./LiveBadge";
 import matchCover from "@/assets/match-cover.jpg";
 import mexicoImg from "@/assets/teams/mexico.jpg";
 import brazilImg from "@/assets/teams/brazil.jpg";
+import argentinaImg from "@/assets/teams/argentina.jpg";
+import argentina2Img from "@/assets/teams/argentina-2.jpg";
 
-const TEAM_IMAGES: Record<string, string> = {
-  MEX: mexicoImg,
-  BRA: brazilImg,
+const TEAM_IMAGES: Record<string, string[]> = {
+  MEX: [mexicoImg],
+  BRA: [brazilImg],
+  ARG: [argentinaImg, argentina2Img],
 };
 
-function pickCover(homeCode?: string, awayCode?: string): string {
-  if (homeCode && TEAM_IMAGES[homeCode]) return TEAM_IMAGES[homeCode];
-  if (awayCode && TEAM_IMAGES[awayCode]) return TEAM_IMAGES[awayCode];
+function pickCover(id: string, homeCode?: string, awayCode?: string): string {
+  const code = (homeCode && TEAM_IMAGES[homeCode] && homeCode) || (awayCode && TEAM_IMAGES[awayCode] && awayCode);
+  if (code) {
+    const arr = TEAM_IMAGES[code];
+    // Stable pick based on fixture id hash
+    let h = 0;
+    for (let i = 0; i < id.length; i++) h = (h * 31 + id.charCodeAt(i)) >>> 0;
+    return arr[h % arr.length];
+  }
   return matchCover;
 }
 
@@ -55,7 +64,7 @@ export function MatchCard({ fixture, locale }: Props) {
     >
       {/* Background image — grayscale, turns red duotone on hover */}
       <img
-        src={pickCover(home.country_code, away.country_code)}
+        src={pickCover(fixture.id, home.country_code, away.country_code)}
         alt=""
         loading="lazy"
         width={1024}
