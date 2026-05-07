@@ -15,6 +15,8 @@ import germany2Img from "@/assets/teams/germany-2.jpg";
 import germany3Img from "@/assets/teams/germany-3.jpg";
 import haitiImg from "@/assets/teams/haiti.jpg";
 import haiti2Img from "@/assets/teams/haiti-2.jpg";
+import koreaImg from "@/assets/teams/korea.jpg";
+import korea2Img from "@/assets/teams/korea-2.jpg";
 
 const TEAM_IMAGES: Record<string, string[]> = {
   MEX: [mexicoImg], MX: [mexicoImg],
