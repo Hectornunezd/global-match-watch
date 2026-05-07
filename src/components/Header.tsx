@@ -27,16 +27,6 @@ export function Header({ locale, altPath }: { locale: Locale; altPath?: string }
           MATCH<span className="mx-0.5 text-primary">[·LIVE]</span>NOW
         </Link>
 
-        {/* Centered spinning ball badge */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center gap-2 font-display text-xl font-bold text-primary sm:flex"
-        >
-          <span>[</span>
-          <span className="inline-block animate-spin-slow text-2xl leading-none">⚽</span>
-          <span>]</span>
-        </div>
-
         <div className="flex items-center gap-4">
           <LanguageSwitcher locale={locale} altPath={altPath} />
           <button
