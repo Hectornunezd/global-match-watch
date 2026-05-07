@@ -39,15 +39,14 @@ const TEAM_IMAGES: Record<string, string[]> = {
 };
 
 function pickCover(id: string, homeCode?: string, awayCode?: string): string {
-  const code = (homeCode && TEAM_IMAGES[homeCode] && homeCode) || (awayCode && TEAM_IMAGES[awayCode] && awayCode);
-  if (code) {
-    const arr = TEAM_IMAGES[code];
-    // Stable pick based on fixture id hash
-    let h = 0;
-    for (let i = 0; i < id.length; i++) h = (h * 31 + id.charCodeAt(i)) >>> 0;
-    return arr[h % arr.length];
-  }
-  return matchCover;
+  const pool: string[] = [];
+  if (homeCode && TEAM_IMAGES[homeCode]) pool.push(...TEAM_IMAGES[homeCode]);
+  if (awayCode && TEAM_IMAGES[awayCode]) pool.push(...TEAM_IMAGES[awayCode]);
+  if (pool.length === 0) return matchCover;
+  // Stable pick based on fixture id hash so each card stays consistent but differs across cards
+  let h = 0;
+  for (let i = 0; i < id.length; i++) h = (h * 131 + id.charCodeAt(i)) >>> 0;
+  return pool[h % pool.length];
 }
 
 interface Props {
