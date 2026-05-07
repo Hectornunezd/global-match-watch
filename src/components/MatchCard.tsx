@@ -60,13 +60,13 @@ export function MatchCard({ fixture, locale }: Props) {
           <span className="truncate font-display text-base uppercase">{homeName}</span>
         </div>
         {showScore ? (
-          <span className="font-mono text-xl font-bold tabular-nums">
-            {fixture.home_score ?? 0}
-            <span className="px-1.5 text-muted-foreground">-</span>
-            {fixture.away_score ?? 0}
+          <span className="font-display text-xl font-bold tabular-nums text-foreground">
+            <span className="text-primary">[</span>{String(fixture.home_score ?? 0).padStart(2, "0")}<span className="text-primary">]</span>
+            <span className="px-2 text-muted-foreground">-</span>
+            <span className="text-primary">[</span>{String(fixture.away_score ?? 0).padStart(2, "0")}<span className="text-primary">]</span>
           </span>
         ) : (
-          <span className="font-display text-xs text-muted-foreground">{m.labels.vs}</span>
+          <span className="font-display text-xs uppercase text-primary">[{m.labels.vs}]</span>
         )}
         <div className="flex flex-1 items-center justify-end gap-2.5 min-w-0">
           <span className="truncate text-right font-display text-base uppercase">{awayName}</span>
