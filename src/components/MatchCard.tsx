@@ -93,7 +93,7 @@ export function MatchCard({ fixture, locale }: Props) {
           )}
 
           <span className="mt-4 inline-flex items-center gap-2 rounded-full border border-primary px-4 py-1.5 font-display text-xs font-bold uppercase tracking-wider text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
-            ▸ {m.labels.findChannels}
+            ▸ {m.labels.watchNow}
           </span>
         </div>
       </div>
