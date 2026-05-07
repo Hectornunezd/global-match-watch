@@ -3,7 +3,7 @@ import type { Fixture } from "@/lib/data";
 import type { Locale } from "@/lib/i18n";
 import { t, localeUrl } from "@/lib/i18n";
 import { LiveBadge } from "./LiveBadge";
-import { Flag } from "./Flag";
+import matchCover from "@/assets/match-cover.jpg";
 
 interface Props {
   fixture: Fixture;
@@ -12,16 +12,12 @@ interface Props {
 
 function fmtTime(date: string, locale: Locale): string {
   try {
-    // Force UTC to keep SSR (server tz) and client output identical → no hydration mismatch.
     return new Date(date).toLocaleString(locale === "es" ? "es-ES" : "en-US", {
-      weekday: "short",
-      month: "short",
-      day: "numeric",
       hour: "2-digit",
       minute: "2-digit",
+      hour12: false,
       timeZone: "UTC",
-      timeZoneName: "short",
-    });
+    }) + " HRS";
   } catch {
     return date;
   }
@@ -37,51 +33,69 @@ export function MatchCard({ fixture, locale }: Props) {
   const isLive = fixture.status === "live";
   const isFinished = fixture.status === "finished";
   const showScore = isLive || isFinished;
+  const venueLine = [fixture.venue, fixture.city].filter(Boolean).join(" | ").toUpperCase();
 
   return (
     <Link
       to={localeUrl(locale, slug)}
-      className="group flex flex-col gap-3 rounded-xl border border-border bg-card p-4 transition-colors hover:border-primary hover:bg-[var(--surface-hover)]"
+      className="group relative isolate flex aspect-square flex-col overflow-hidden border border-border bg-[var(--surface)] transition-colors hover:border-primary"
     >
-      <div className="flex items-center justify-between">
-        <span className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
-          {fixture.round ?? "World Cup 2026"}
-        </span>
-        {isLive ? <LiveBadge locale={locale} /> : (
-          <span className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
-            {fmtTime(fixture.match_date, locale)}
-          </span>
-        )}
-      </div>
+      {/* Background image — grayscale, turns red duotone on hover */}
+      <img
+        src={matchCover}
+        alt=""
+        loading="lazy"
+        width={1024}
+        height={1024}
+        className="absolute inset-0 h-full w-full object-cover opacity-60 grayscale transition-all duration-500 group-hover:opacity-90"
+      />
+      {/* Red duotone overlay on hover */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-primary/0 mix-blend-multiply transition-colors duration-500 group-hover:bg-primary/45"
+      />
+      {/* Dark vignette for text legibility */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/40"
+      />
 
-      <div className="flex items-center justify-between gap-3">
-        <div className="flex flex-1 items-center gap-2.5 min-w-0">
-          <Flag src={home.flag_url} name={homeName} className="h-6 w-9 rounded-sm" />
-          <span className="truncate font-display text-base uppercase">{homeName}</span>
-        </div>
-        {showScore ? (
-          <span className="font-display text-xl font-bold tabular-nums text-foreground">
-            <span className="text-primary">[</span>{String(fixture.home_score ?? 0).padStart(2, "0")}<span className="text-primary">]</span>
-            <span className="px-2 text-muted-foreground">-</span>
-            <span className="text-primary">[</span>{String(fixture.away_score ?? 0).padStart(2, "0")}<span className="text-primary">]</span>
+      {/* Content */}
+      <div className="relative z-10 flex h-full flex-col justify-between p-5">
+        {/* Top: time / live */}
+        <div className="flex items-center justify-between">
+          <span className="font-display text-xs font-bold uppercase tracking-wider text-primary">
+            {isLive ? "" : fmtTime(fixture.match_date, locale)}
           </span>
-        ) : (
-          <span className="font-display text-xs uppercase text-primary">[{m.labels.vs}]</span>
-        )}
-        <div className="flex flex-1 items-center justify-end gap-2.5 min-w-0">
-          <span className="truncate text-right font-display text-base uppercase">{awayName}</span>
-          <Flag src={away.flag_url} name={awayName} className="h-6 w-9 rounded-sm" />
+          {isLive && <LiveBadge locale={locale} />}
         </div>
-      </div>
 
-      <div className="flex items-center justify-between border-t border-border pt-2.5">
-        <span className="text-xs text-muted-foreground truncate">
-          {fixture.venue ?? ""}
-          {fixture.city ? `, ${fixture.city}` : ""}
-        </span>
-        <span className="text-xs font-medium text-primary group-hover:underline">
-          {m.labels.findChannels} →
-        </span>
+        {/* Bottom: title block */}
+        <div>
+          <h3 className="font-display text-3xl font-bold uppercase leading-[0.95] text-foreground transition-colors duration-300 group-hover:text-primary sm:text-4xl">
+            {homeName}{" "}
+            <span className="text-primary group-hover:text-foreground">[{showScore ? String(fixture.home_score ?? 0).padStart(2, "0") : m.labels.vs}]</span>
+            <br />
+            {showScore ? (
+              <>
+                <span className="text-primary group-hover:text-foreground">[{String(fixture.away_score ?? 0).padStart(2, "0")}]</span>{" "}
+                {awayName}
+              </>
+            ) : (
+              awayName
+            )}
+          </h3>
+
+          {venueLine && (
+            <p className="mt-3 font-display text-[11px] font-semibold uppercase tracking-wider text-muted-foreground group-hover:text-foreground/90">
+              {venueLine}
+            </p>
+          )}
+
+          <span className="mt-4 inline-flex items-center gap-2 rounded-full border border-primary px-4 py-1.5 font-display text-xs font-bold uppercase tracking-wider text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+            ▸ {m.labels.watchNow}
+          </span>
+        </div>
       </div>
     </Link>
   );
