@@ -55,7 +55,7 @@ export function MatchCard({ fixture, locale }: Props) {
     >
       {/* Background image — grayscale, turns red duotone on hover */}
       <img
-        src={matchCover}
+        src={pickCover(home.country_code, away.country_code)}
         alt=""
         loading="lazy"
         width={1024}
