@@ -9,6 +9,7 @@ import { CountrySelector } from "@/components/CountrySelector";
 import { AdSlot } from "@/components/AdSlot";
 import { WhereToWatch } from "@/components/WhereToWatch";
 import { buildMeta, jsonLdScript, organizationJsonLd, websiteJsonLd } from "@/lib/seo";
+import heroTrophy from "@/assets/hero-trophy.jpg";
 import { notFound } from "@tanstack/react-router";
 
 const WORLD_CUP_START = "2026-06-11T16:00:00Z";
