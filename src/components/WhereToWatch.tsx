@@ -3,6 +3,7 @@ import type { Locale } from "@/lib/i18n";
 import { t } from "@/lib/i18n";
 import { ChannelCard } from "./ChannelCard";
 import { VPNUpsell } from "./VPNUpsell";
+import { AffiliateDisclosure } from "./AffiliateDisclosure";
 
 const COUNTRY_NAMES: Record<string, { en: string; es: string }> = {
   US: { en: "United States", es: "Estados Unidos" },
@@ -70,6 +71,7 @@ export function WhereToWatch({ channels, countryCode, locale }: Props) {
           />
         ))}
       </div>
+      <AffiliateDisclosure locale={locale} className="mt-3" />
     </section>
   );
 }
