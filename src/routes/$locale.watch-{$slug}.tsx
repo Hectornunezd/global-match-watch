@@ -9,6 +9,8 @@ import { MatchCard } from "@/components/MatchCard";
 import { Flag } from "@/components/Flag";
 import { CountrySelector } from "@/components/CountrySelector";
 import { AdSlot } from "@/components/AdSlot";
+import { AffiliateDisclosure } from "@/components/AffiliateDisclosure";
+import { GamblingDisclaimer } from "@/components/GamblingDisclaimer";
 import { buildMeta, jsonLdScript, sportsEventJsonLd } from "@/lib/seo";
 
 export const Route = createFileRoute("/$locale/watch-{$slug}")({
@@ -220,6 +222,8 @@ export function MatchPage({ locale }: { locale: Locale }) {
             >
               bet365 →
             </a>
+            <AffiliateDisclosure locale={locale} className="mt-2" />
+            <GamblingDisclaimer locale={locale} countryCode={geo.alpha2} className="mt-3" />
           </div>
           <AdSlot slot="rectangle" />
           <div className="rounded-xl border border-border bg-card p-5 text-sm text-muted-foreground">

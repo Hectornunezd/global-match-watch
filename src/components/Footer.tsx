@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import type { Locale } from "@/lib/i18n";
 import { t, localeUrl } from "@/lib/i18n";
+import { AffiliateDisclosure } from "./AffiliateDisclosure";
 
 export function Footer({ locale }: { locale: Locale }) {
   const m = t(locale);
@@ -47,6 +48,14 @@ export function Footer({ locale }: { locale: Locale }) {
               © 2026 ORIVANA S.A. DE C.V. ALL RIGHTS RESERVED
             </p>
           </div>
+        </div>
+        <div className="mt-8 border-t border-border pt-6">
+          <AffiliateDisclosure locale={locale} variant="block" />
+          <p className="mt-3 font-mono text-[10px] uppercase tracking-wider text-muted-foreground/70">
+            {locale === "es"
+              ? "Apuestas solo para mayores de 18 años (21+ en EE. UU.). Sujeto a restricciones por estado/país. Apuesta con responsabilidad."
+              : "Betting is 18+ only (21+ in the U.S.). Subject to state/country restrictions. Please gamble responsibly."}
+          </p>
         </div>
       </div>
     </footer>
