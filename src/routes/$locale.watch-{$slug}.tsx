@@ -223,7 +223,7 @@ export function MatchPage({ locale }: { locale: Locale }) {
               bet365 →
             </a>
             <AffiliateDisclosure locale={locale} className="mt-2" />
-            <GamblingDisclaimer locale={locale} countryCode={countryCode} className="mt-3" />
+            <GamblingDisclaimer locale={locale} countryCode={geo.alpha2} className="mt-3" />
           </div>
           <AdSlot slot="rectangle" />
           <div className="rounded-xl border border-border bg-card p-5 text-sm text-muted-foreground">
