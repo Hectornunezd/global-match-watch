@@ -24,6 +24,16 @@ import japan2Img from "@/assets/teams/japan-2.jpg";
 import englandImg from "@/assets/teams/england.jpg";
 import england2Img from "@/assets/teams/england-2.jpg";
 import england3Img from "@/assets/teams/england-3.jpg";
+import ivoryImg from "@/assets/teams/ivory-coast.jpg";
+import paraguayImg from "@/assets/teams/paraguay.jpg";
+import turkeyImg from "@/assets/teams/turkey.jpg";
+import australiaImg from "@/assets/teams/australia.jpg";
+import moroccoImg from "@/assets/teams/morocco.jpg";
+import scotlandImg from "@/assets/teams/scotland.jpg";
+import bosniaImg from "@/assets/teams/bosnia.jpg";
+import switzerlandImg from "@/assets/teams/switzerland.jpg";
+import qatarImg from "@/assets/teams/qatar.jpg";
+import czechImg from "@/assets/teams/czech.jpg";
 
 const TEAM_IMAGES: Record<string, string[]> = {
   MEX: [mexicoImg], MX: [mexicoImg],
