@@ -67,11 +67,6 @@ export function Header({ locale, altPath }: { locale: Locale; altPath?: string }
             </MenuLink>
           </MenuRow>
 
-          <MenuRow>
-            <MenuLink to={localeUrl(locale) + "#upcoming"} onClick={() => setOpen(false)}>
-              {locale === "es" ? "PROGRAMACIÓN" : "SCHEDULE"}
-            </MenuLink>
-          </MenuRow>
 
           <MenuRow>
             <MenuLink to={localeUrl(locale)} onClick={() => setOpen(false)}>
