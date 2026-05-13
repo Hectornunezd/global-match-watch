@@ -31,12 +31,18 @@ export const Route = createFileRoute("/$locale/")({
     const altPath = `/${locale === "en" ? "es" : "en"}`;
     const { meta, links } = buildMeta({
       title: locale === "en"
-        ? "MatchLiveNow — Watch the FIFA World Cup 2026 from any country"
-        : "MatchLiveNow — Ver el Mundial FIFA 2026 desde cualquier país",
-      description: m.hero.subtitle,
+        ? "MatchLiveNow — Watch the FIFA World Cup 2026 Live from Any Country"
+        : "MatchLiveNow — Ver el Mundial FIFA 2026 en vivo desde cualquier país",
+      description: locale === "en"
+        ? "Live scores, fixtures and every TV channel and streaming service for the FIFA World Cup 2026 — free and paid options for your country."
+        : "Marcadores en vivo, calendario y todos los canales de TV y streaming del Mundial FIFA 2026 — opciones gratis y de pago para tu país.",
       path,
       altPath,
       locale,
+      ogImage: `https://matchlivenow.com${heroTrophy}`,
+      keywords: locale === "en"
+        ? "FIFA World Cup 2026, where to watch World Cup 2026, World Cup 2026 streaming, World Cup 2026 live, World Cup channels, World Cup TV schedule, watch soccer live"
+        : "Mundial 2026, dónde ver el Mundial 2026, Mundial FIFA 2026 en vivo, canales Mundial 2026, streaming Mundial 2026, ver fútbol en vivo, transmisión Mundial",
     });
     return {
       meta,

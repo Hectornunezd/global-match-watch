@@ -20,7 +20,8 @@ export const Route = createFileRoute("/$locale/how-to-watch-world-cup-in-{$slug}
     const altPath = `/es/donde-ver-mundial-en-${c.slug_es}`;
     const title = c.meta_title_en ?? `How to Watch the World Cup 2026 in ${c.name_en}`;
     const description = c.meta_description_en ?? `Channels and streams for the World Cup 2026 in ${c.name_en}.`;
-    const { meta, links } = buildMeta({ title, description, path, altPath, locale: "en" });
+    const keywords = `how to watch World Cup 2026 in ${c.name_en}, ${c.name_en} World Cup channels, ${c.name_en} World Cup streaming, FIFA World Cup 2026 ${c.name_en}, watch soccer ${c.name_en}`;
+    const { meta, links } = buildMeta({ title, description, path, altPath, locale: "en", keywords });
     const faqs = buildCountryFaqs(c, "en");
     return { meta, links, scripts: [jsonLdScript(faqJsonLd(faqs))] };
   },
