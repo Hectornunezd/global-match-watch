@@ -59,14 +59,20 @@ const TEAM_IMAGES: Record<string, string[]> = {
 };
 
 function pickCover(id: string, homeCode?: string, awayCode?: string): string {
-  const pool: string[] = [];
-  if (homeCode && TEAM_IMAGES[homeCode]) pool.push(...TEAM_IMAGES[homeCode]);
-  if (awayCode && TEAM_IMAGES[awayCode]) pool.push(...TEAM_IMAGES[awayCode]);
-  if (pool.length === 0) return matchCover;
-  // Stable pick based on fixture id hash so each card stays consistent but differs across cards
-  let h = 0;
-  for (let i = 0; i < id.length; i++) h = (h * 131 + id.charCodeAt(i)) >>> 0;
-  return pool[h % pool.length];
+  // Prefer the home team's cover (first team in the match).
+  if (homeCode && TEAM_IMAGES[homeCode]) {
+    const pool = TEAM_IMAGES[homeCode];
+    let h = 0;
+    for (let i = 0; i < id.length; i++) h = (h * 131 + id.charCodeAt(i)) >>> 0;
+    return pool[h % pool.length];
+  }
+  if (awayCode && TEAM_IMAGES[awayCode]) {
+    const pool = TEAM_IMAGES[awayCode];
+    let h = 0;
+    for (let i = 0; i < id.length; i++) h = (h * 131 + id.charCodeAt(i)) >>> 0;
+    return pool[h % pool.length];
+  }
+  return matchCover;
 }
 
 interface Props {
