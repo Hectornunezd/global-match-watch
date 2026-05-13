@@ -38,9 +38,6 @@ export function Footer({ locale }: { locale: Locale }) {
           </div>
           <div>
             <h4 className="font-display text-sm uppercase tracking-wider text-primary">[ FOLLOW US ]</h4>
-            <p className="mt-3 text-xs uppercase tracking-wider text-muted-foreground">
-              © 2026 ORIVANA S.A. DE C.V. ALL RIGHTS RESERVED
-            </p>
           </div>
         </div>
         <div className="mt-8 border-t border-border pt-6">
