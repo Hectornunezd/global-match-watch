@@ -7,7 +7,7 @@ import { SearchBox } from "./SearchBox";
 
 export function Header({ locale, altPath }: { locale: Locale; altPath?: string }) {
   const [open, setOpen] = useState(false);
-  const [catsOpen, setCatsOpen] = useState(false);
+  
 
   // Lock body scroll when overlay is open
   useEffect(() => {
@@ -60,44 +60,6 @@ export function Header({ locale, altPath }: { locale: Locale; altPath?: string }
             </MenuLink>
           </MenuRow>
 
-          <MenuRow>
-            <button
-              type="button"
-              onClick={() => setCatsOpen((v) => !v)}
-              className="flex w-full items-center gap-6 px-6 py-6 text-left transition-colors hover:bg-primary/5 sm:px-12 sm:py-8"
-            >
-              <span className="font-display text-2xl text-primary sm:text-3xl">
-                {catsOpen ? "×" : "+"}
-              </span>
-              <span className="font-display text-4xl font-bold uppercase leading-none text-primary sm:text-6xl">
-                {locale === "es" ? "CATEGORÍAS" : "CATEGORIES"}
-              </span>
-              {catsOpen && (
-                <ul className="ml-6 hidden flex-col gap-2 sm:flex">
-                  {CATEGORIES.map((c) => (
-                    <li
-                      key={c.label}
-                      className="font-display text-base font-bold uppercase tracking-wider text-primary"
-                    >
-                      [ {c.icon} ] {c.label}
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </button>
-            {catsOpen && (
-              <ul className="flex flex-col gap-2 px-6 pb-6 sm:hidden">
-                {CATEGORIES.map((c) => (
-                  <li
-                    key={c.label}
-                    className="font-display text-base font-bold uppercase tracking-wider text-primary"
-                  >
-                    [ {c.icon} ] {c.label}
-                  </li>
-                ))}
-              </ul>
-            )}
-          </MenuRow>
 
           <MenuRow>
             <MenuLink to={localeUrl(locale)} onClick={() => setOpen(false)}>
@@ -128,13 +90,6 @@ export function Header({ locale, altPath }: { locale: Locale; altPath?: string }
   );
 }
 
-const CATEGORIES = [
-  { label: "SOCCER", icon: "⚽" },
-  { label: "TENNIS", icon: "🎾" },
-  { label: "BASKETBALL", icon: "🏀" },
-  { label: "PADEL", icon: "🎾" },
-  { label: "BASEBALL", icon: "⚾" },
-];
 
 function MenuRow({ children, last }: { children: React.ReactNode; last?: boolean }) {
   return (
