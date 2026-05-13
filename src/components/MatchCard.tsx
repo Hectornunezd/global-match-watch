@@ -46,6 +46,16 @@ const TEAM_IMAGES: Record<string, string[]> = {
   KOR: [koreaImg, korea2Img], KR: [koreaImg, korea2Img],
   JPN: [japanImg, japan2Img], JP: [japanImg, japan2Img],
   ENG: [englandImg, england2Img, england3Img], GB: [englandImg, england2Img, england3Img], GBR: [englandImg, england2Img, england3Img],
+  CIV: [ivoryImg], CI: [ivoryImg], IVC: [ivoryImg],
+  PAR: [paraguayImg], PY: [paraguayImg], PRY: [paraguayImg],
+  TUR: [turkeyImg], TR: [turkeyImg],
+  AUS: [australiaImg], AU: [australiaImg],
+  MAR: [moroccoImg], MA: [moroccoImg], MOR: [moroccoImg],
+  SCO: [scotlandImg], SCT: [scotlandImg],
+  BIH: [bosniaImg], BA: [bosniaImg], BOS: [bosniaImg],
+  SUI: [switzerlandImg], CH: [switzerlandImg], CHE: [switzerlandImg], SWI: [switzerlandImg],
+  QAT: [qatarImg], QA: [qatarImg],
+  CZE: [czechImg], CZ: [czechImg],
 };
 
 function pickCover(id: string, homeCode?: string, awayCode?: string): string {
