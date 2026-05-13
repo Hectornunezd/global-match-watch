@@ -13,12 +13,6 @@ export function Footer({ locale }: { locale: Locale }) {
             <span className="font-display text-lg uppercase tracking-wider text-foreground">
               MATCH<span className="mx-0.5 text-primary">[·LIVE]</span>NOW
             </span>
-            <p className="mt-3 text-xs uppercase tracking-wider text-muted-foreground">
-              LAKE ELSINORE, CALIFORNIA
-            </p>
-            <p className="mt-1 text-xs uppercase tracking-wider text-muted-foreground">
-              CONTACTO@MLN.COM | +52 333 333 3333
-            </p>
           </div>
           <div>
             <h4 className="font-display text-sm uppercase tracking-wider text-primary">
