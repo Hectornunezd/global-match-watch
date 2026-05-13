@@ -48,7 +48,7 @@ export const detectGeo = createServerFn({ method: "GET" }).handler(async () => {
 
   let alpha2 = (cookieCountry || cfCountry || vercelCountry || "").toUpperCase();
 
-  // Fallback: real IP lookup when no edge geo header (e.g. Lovable preview)
+  // Fallback: real IP lookup when no edge geo header is available
   if (!alpha2) {
     const fwd =
       getRequestHeader("x-forwarded-for") ?? getRequestHeader("X-Forwarded-For");
