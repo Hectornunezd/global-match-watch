@@ -7,7 +7,7 @@ import { SearchBox } from "./SearchBox";
 
 export function Header({ locale, altPath }: { locale: Locale; altPath?: string }) {
   const [open, setOpen] = useState(false);
-  const [catsOpen, setCatsOpen] = useState(false);
+  
 
   // Lock body scroll when overlay is open
   useEffect(() => {
