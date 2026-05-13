@@ -27,7 +27,10 @@ export const Route = createFileRoute("/$locale/team/$slug")({
     const description = locale === "es"
       ? `Calendario completo, resultados y canales para ver a ${name} en el Mundial FIFA 2026.`
       : `Full schedule, results and channels for ${name} at the FIFA World Cup 2026.`;
-    const { meta, links } = buildMeta({ title, description, path, altPath, locale });
+    const keywords = locale === "es"
+      ? `${name}, ${name} Mundial 2026, ${name} calendario, ${name} canales, dónde ver ${name}, FIFA Mundial 2026`
+      : `${name}, ${name} World Cup 2026, ${name} schedule, ${name} channels, where to watch ${name}, FIFA World Cup 2026`;
+    const { meta, links } = buildMeta({ title, description, path, altPath, locale, keywords, ogImage: t.flag_url ?? undefined });
     return {
       meta,
       links,

@@ -31,9 +31,10 @@ export const Route = createFileRoute("/$locale/watch-{$slug}")({
     const f = loaderData.fixture;
     const path = `/en/${f.slug_en}`;
     const altPath = `/es/${f.slug_es}`;
-    const title = f.meta_title_en ?? `${f.home_team.name_en} vs ${f.away_team.name_en} — Watch live`;
-    const description = f.meta_description_en ?? `How to watch ${f.home_team.name_en} vs ${f.away_team.name_en} at the World Cup 2026.`;
-    const { meta, links } = buildMeta({ title, description, path, altPath, locale: "en", ogType: "article" });
+    const title = f.meta_title_en ?? `${f.home_team.name_en} vs ${f.away_team.name_en} — Watch Live | World Cup 2026`;
+    const description = f.meta_description_en ?? `How and where to watch ${f.home_team.name_en} vs ${f.away_team.name_en} live at the FIFA World Cup 2026 — TV channels, streaming and free options.`;
+    const keywords = `${f.home_team.name_en} vs ${f.away_team.name_en}, watch ${f.home_team.name_en} vs ${f.away_team.name_en} live, ${f.round}, FIFA World Cup 2026, World Cup live stream`;
+    const { meta, links } = buildMeta({ title, description, path, altPath, locale: "en", ogType: "article", keywords, ogImage: f.home_team.flag_url ?? undefined });
     return {
       meta,
       links,

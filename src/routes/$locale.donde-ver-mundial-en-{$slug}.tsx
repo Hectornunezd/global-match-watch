@@ -21,7 +21,8 @@ export const Route = createFileRoute("/$locale/donde-ver-mundial-en-{$slug}")({
     const altPath = `/en/how-to-watch-world-cup-in-${c.slug_en}`;
     const title = c.meta_title_es ?? `Dónde ver el Mundial 2026 en ${c.name_es}`;
     const description = c.meta_description_es ?? `Canales y streaming del Mundial 2026 en ${c.name_es}.`;
-    const { meta, links } = buildMeta({ title, description, path, altPath, locale: "es" });
+    const keywords = `dónde ver el Mundial 2026 en ${c.name_es}, canales Mundial 2026 ${c.name_es}, streaming Mundial 2026 ${c.name_es}, FIFA Mundial 2026 ${c.name_es}, ver fútbol ${c.name_es}`;
+    const { meta, links } = buildMeta({ title, description, path, altPath, locale: "es", keywords });
     const faqs = [
       { q: `¿Es gratis ver el Mundial 2026 en ${c.name_es}?`, a: `Algunos canales en ${c.name_es} transmiten partidos del Mundial gratis.` },
       { q: `¿Qué canal transmite el Mundial 2026 en ${c.name_es}?`, a: `Los principales canales y servicios de streaming en ${c.name_es} aparecen en la guía completa.` },
