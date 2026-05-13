@@ -24,6 +24,16 @@ import japan2Img from "@/assets/teams/japan-2.jpg";
 import englandImg from "@/assets/teams/england.jpg";
 import england2Img from "@/assets/teams/england-2.jpg";
 import england3Img from "@/assets/teams/england-3.jpg";
+import ivoryImg from "@/assets/teams/ivory-coast.jpg";
+import paraguayImg from "@/assets/teams/paraguay.jpg";
+import turkeyImg from "@/assets/teams/turkey.jpg";
+import australiaImg from "@/assets/teams/australia.jpg";
+import moroccoImg from "@/assets/teams/morocco.jpg";
+import scotlandImg from "@/assets/teams/scotland.jpg";
+import bosniaImg from "@/assets/teams/bosnia.jpg";
+import switzerlandImg from "@/assets/teams/switzerland.jpg";
+import qatarImg from "@/assets/teams/qatar.jpg";
+import czechImg from "@/assets/teams/czech.jpg";
 
 const TEAM_IMAGES: Record<string, string[]> = {
   MEX: [mexicoImg], MX: [mexicoImg],
@@ -36,17 +46,33 @@ const TEAM_IMAGES: Record<string, string[]> = {
   KOR: [koreaImg, korea2Img], KR: [koreaImg, korea2Img],
   JPN: [japanImg, japan2Img], JP: [japanImg, japan2Img],
   ENG: [englandImg, england2Img, england3Img], GB: [englandImg, england2Img, england3Img], GBR: [englandImg, england2Img, england3Img],
+  CIV: [ivoryImg], CI: [ivoryImg], IVC: [ivoryImg],
+  PAR: [paraguayImg], PY: [paraguayImg], PRY: [paraguayImg],
+  TUR: [turkeyImg], TR: [turkeyImg],
+  AUS: [australiaImg], AU: [australiaImg],
+  MAR: [moroccoImg], MA: [moroccoImg], MOR: [moroccoImg],
+  SCO: [scotlandImg], SCT: [scotlandImg],
+  BIH: [bosniaImg], BA: [bosniaImg], BOS: [bosniaImg],
+  SUI: [switzerlandImg], CH: [switzerlandImg], CHE: [switzerlandImg], SWI: [switzerlandImg],
+  QAT: [qatarImg], QA: [qatarImg],
+  CZE: [czechImg], CZ: [czechImg],
 };
 
 function pickCover(id: string, homeCode?: string, awayCode?: string): string {
-  const pool: string[] = [];
-  if (homeCode && TEAM_IMAGES[homeCode]) pool.push(...TEAM_IMAGES[homeCode]);
-  if (awayCode && TEAM_IMAGES[awayCode]) pool.push(...TEAM_IMAGES[awayCode]);
-  if (pool.length === 0) return matchCover;
-  // Stable pick based on fixture id hash so each card stays consistent but differs across cards
-  let h = 0;
-  for (let i = 0; i < id.length; i++) h = (h * 131 + id.charCodeAt(i)) >>> 0;
-  return pool[h % pool.length];
+  // Prefer the home team's cover (first team in the match).
+  if (homeCode && TEAM_IMAGES[homeCode]) {
+    const pool = TEAM_IMAGES[homeCode];
+    let h = 0;
+    for (let i = 0; i < id.length; i++) h = (h * 131 + id.charCodeAt(i)) >>> 0;
+    return pool[h % pool.length];
+  }
+  if (awayCode && TEAM_IMAGES[awayCode]) {
+    const pool = TEAM_IMAGES[awayCode];
+    let h = 0;
+    for (let i = 0; i < id.length; i++) h = (h * 131 + id.charCodeAt(i)) >>> 0;
+    return pool[h % pool.length];
+  }
+  return matchCover;
 }
 
 interface Props {
