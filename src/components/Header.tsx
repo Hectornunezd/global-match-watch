@@ -90,13 +90,6 @@ export function Header({ locale, altPath }: { locale: Locale; altPath?: string }
   );
 }
 
-const CATEGORIES = [
-  { label: "SOCCER", icon: "⚽" },
-  { label: "TENNIS", icon: "🎾" },
-  { label: "BASKETBALL", icon: "🏀" },
-  { label: "PADEL", icon: "🎾" },
-  { label: "BASEBALL", icon: "⚾" },
-];
 
 function MenuRow({ children, last }: { children: React.ReactNode; last?: boolean }) {
   return (
