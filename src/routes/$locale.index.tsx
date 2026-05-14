@@ -21,7 +21,7 @@ export const Route = createFileRoute("/$locale/")({
   loader: async ({ params }) => {
     const geo = await detectGeo();
     const data = await getHomepageData({ data: { countryCode: geo.alpha2 } });
-    return { ...data, geo, locale: params.locale as Locale };
+    return { ...data, geo, locale: params.locale as Locale, serverNow: Date.now() };
   },
   head: ({ loaderData }) => {
     if (!loaderData) return {};
@@ -54,12 +54,13 @@ export const Route = createFileRoute("/$locale/")({
 });
 
 function HomePage() {
-  const { live, upcoming, channels, geo, locale } = Route.useLoaderData() as {
+  const { live, upcoming, channels, geo, locale, serverNow } = Route.useLoaderData() as {
     live: import("@/lib/data").Fixture[];
     upcoming: import("@/lib/data").Fixture[];
     channels: import("@/lib/data").Channel[];
     geo: { alpha2: string; alpha3: string };
     locale: Locale;
+    serverNow: number;
   };
   const m = t(locale);
   const [group, setGroup] = useState<string | null>(null);
@@ -75,7 +76,7 @@ function HomePage() {
     return upcoming.filter((f) => f.round === `Group ${group}`);
   }, [upcoming, group]);
 
-  const countdown = useCountdown(WORLD_CUP_START);
+  const countdown = useCountdown(WORLD_CUP_START, serverNow);
 
   return (
     <>
@@ -266,10 +267,9 @@ const countryToGroup: Record<string, string> = {
 const flagUrl = (alpha2: string) =>
   `https://flagcdn.com/w40/${alpha2.toLowerCase()}.png`;
 
-function useCountdown(target: string) {
+function useCountdown(target: string, initialNow: number) {
   const targetMs = new Date(target).getTime();
-  // Start from target so SSR & first client render match (diff=0), then update on mount.
-  const [now, setNow] = useState(targetMs);
+  const [now, setNow] = useState(initialNow);
   useEffect(() => {
     setNow(Date.now());
     const id = window.setInterval(() => setNow(Date.now()), 1000);
