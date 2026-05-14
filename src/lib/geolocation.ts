@@ -7,6 +7,8 @@ const ALPHA2_TO_ALPHA3: Record<string, string> = {
   US: "USA", GB: "GBR", CA: "CAN", AU: "AUS", MX: "MEX", ES: "ESP",
   AR: "ARG", CO: "COL", BR: "BRA", FR: "FRA", DE: "DEU", IT: "ITA",
   JP: "JPN", KR: "KOR", IN: "IND", SA: "SAU", QA: "QAT",
+  PT: "PRT", NL: "NLD", AT: "AUT", SE: "SWE", FI: "FIN", NO: "NOR",
+  DK: "DNK", SI: "SVN",
 };
 
 const ALPHA3_TO_ALPHA2: Record<string, string> = Object.fromEntries(
