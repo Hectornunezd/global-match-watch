@@ -5,6 +5,7 @@ import { t, localeUrl } from "@/lib/i18n";
 import { LiveBadge } from "./LiveBadge";
 import matchCover from "@/assets/match-cover.jpg";
 import mexicoImg from "@/assets/teams/mexico.jpg";
+import mexico2Img from "@/assets/teams/mexico-2.jpg";
 import brazilImg from "@/assets/teams/brazil.jpg";
 import argentinaImg from "@/assets/teams/argentina.jpg";
 import argentina2Img from "@/assets/teams/argentina-2.jpg";
@@ -67,7 +68,7 @@ import newZealandImg from "@/assets/teams/new-zealand.jpg";
 import portugal2Img from "@/assets/teams/portugal-2.jpg";
 
 const TEAM_IMAGES: Record<string, string[]> = {
-  MEX: [mexicoImg], MX: [mexicoImg],
+  MEX: [mexicoImg, mexico2Img], MX: [mexicoImg, mexico2Img],
   BRA: [brazilImg, brazil2Img], BR: [brazilImg, brazil2Img],
   ARG: [argentinaImg, argentina2Img], AR: [argentinaImg, argentina2Img],
   USA: [usaImg, usa2Img, usa3Img], US: [usaImg, usa2Img, usa3Img],
