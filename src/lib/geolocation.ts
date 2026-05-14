@@ -7,6 +7,11 @@ const ALPHA2_TO_ALPHA3: Record<string, string> = {
   US: "USA", GB: "GBR", CA: "CAN", AU: "AUS", MX: "MEX", ES: "ESP",
   AR: "ARG", CO: "COL", BR: "BRA", FR: "FRA", DE: "DEU", IT: "ITA",
   JP: "JPN", KR: "KOR", IN: "IND", SA: "SAU", QA: "QAT",
+  BE: "BEL", BZ: "BLZ", BO: "BOL", CH: "CHE", CL: "CHL", CR: "CRI",
+  EC: "ECU", EG: "EGY", GT: "GTM", GY: "GUY", HN: "HND", HR: "HRV",
+  IE: "IRL", MA: "MAR", NI: "NIC", NL: "NLD", NZ: "NZL", PA: "PAN",
+  PE: "PER", PL: "POL", PT: "PRT", PY: "PRY", SN: "SEN", SV: "SLV",
+  SR: "SUR", TR: "TUR", UY: "URY", VE: "VEN", ZA: "ZAF",
 };
 
 const ALPHA3_TO_ALPHA2: Record<string, string> = Object.fromEntries(
