@@ -155,7 +155,7 @@ function HomePage() {
       </div>
 
       {/* Where to watch from user's country */}
-      <WhereToWatch channels={channels} countryCode={geo.alpha2} locale={locale} />
+      <WhereToWatch channels={channels} countryCode={geo.alpha3} locale={locale} />
 
       {/* Live */}
       {live.length > 0 && (
