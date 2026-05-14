@@ -27,6 +27,9 @@ import england2Img from "@/assets/teams/england-2.jpg";
 import england3Img from "@/assets/teams/england-3.jpg";
 import england4Img from "@/assets/teams/england-4.jpg";
 import england5Img from "@/assets/teams/england-5.jpg";
+import england6Img from "@/assets/teams/england-6.jpg";
+import england7Img from "@/assets/teams/england-7.jpg";
+import england8Img from "@/assets/teams/england-8.jpg";
 import uzbekistanImg from "@/assets/teams/uzbekistan.jpg";
 import austriaImg from "@/assets/teams/austria.jpg";
 import saudiArabiaImg from "@/assets/teams/saudi-arabia.jpg";
@@ -77,7 +80,7 @@ const TEAM_IMAGES: Record<string, string[]> = {
   HAI: [haitiImg, haiti2Img], HT: [haitiImg, haiti2Img], HTI: [haitiImg, haiti2Img],
   KOR: [koreaImg, korea2Img], KR: [koreaImg, korea2Img],
   JPN: [japanImg, japan2Img], JP: [japanImg, japan2Img],
-  ENG: [englandImg, england2Img, england3Img, england4Img, england5Img], GB: [englandImg, england2Img, england3Img, england4Img, england5Img], GBR: [englandImg, england2Img, england3Img, england4Img, england5Img],
+  ENG: [englandImg, england2Img, england3Img, england4Img, england5Img, england6Img, england7Img, england8Img], GB: [englandImg, england2Img, england3Img, england4Img, england5Img, england6Img, england7Img, england8Img], GBR: [englandImg, england2Img, england3Img, england4Img, england5Img, england6Img, england7Img, england8Img],
   CIV: [ivoryImg, ivory2Img], CI: [ivoryImg, ivory2Img], IVC: [ivoryImg, ivory2Img],
   PAR: [paraguayImg], PY: [paraguayImg], PRY: [paraguayImg],
   TUR: [turkeyImg], TR: [turkeyImg],
