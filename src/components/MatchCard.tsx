@@ -49,6 +49,10 @@ import ivory2Img from "@/assets/teams/ivory-coast-2.jpg";
 import australia2Img from "@/assets/teams/australia-2.jpg";
 import australia3Img from "@/assets/teams/australia-3.jpg";
 import qatar2Img from "@/assets/teams/qatar-2.jpg";
+import portugalImg from "@/assets/teams/portugal.jpg";
+import norwayImg from "@/assets/teams/norway.jpg";
+import senegalImg from "@/assets/teams/senegal.jpg";
+import franceImg from "@/assets/teams/france.jpg";
 
 const TEAM_IMAGES: Record<string, string[]> = {
   MEX: [mexicoImg], MX: [mexicoImg],
@@ -80,6 +84,10 @@ const TEAM_IMAGES: Record<string, string[]> = {
   BEL: [belgiumImg], BE: [belgiumImg],
   URU: [uruguayImg], UY: [uruguayImg], URY: [uruguayImg],
   COL: [colombiaImg], CO: [colombiaImg],
+  POR: [portugalImg], PT: [portugalImg], PRT: [portugalImg],
+  NOR: [norwayImg], NO: [norwayImg],
+  SEN: [senegalImg], SN: [senegalImg],
+  FRA: [franceImg], FR: [franceImg],
 };
 
 function pickCover(id: string, homeCode?: string, awayCode?: string): string {
