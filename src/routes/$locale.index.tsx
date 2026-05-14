@@ -131,11 +131,13 @@ function HomePage() {
               { v: countdown.minutes, l: m.countdown.minutes },
               { v: countdown.seconds, l: m.countdown.seconds },
             ].map((c, i) => (
-              <div key={i} className="flex min-w-[80px] flex-col items-center border border-primary/40 bg-[var(--surface)] px-4 py-3">
-                <span className="font-display text-2xl font-bold tabular-nums text-foreground">
-                  <span className="text-primary">[</span>{String(c.v).padStart(2, "0")}<span className="text-primary">]</span>
+              <div key={i} className="flex min-w-[88px] flex-col items-center justify-center border border-primary/40 bg-[var(--surface)] px-4 py-3">
+                <span className="flex items-center justify-center gap-1.5 font-display text-2xl font-bold leading-none tabular-nums text-foreground">
+                  <span className="text-primary">[</span>
+                  <span className="inline-block min-w-[2ch] text-center">{String(c.v).padStart(2, "0")}</span>
+                  <span className="text-primary">]</span>
                 </span>
-                <span className="mt-1 font-display text-[10px] uppercase tracking-wider text-muted-foreground">{c.l}</span>
+                <span className="mt-2 font-display text-[10px] uppercase leading-none tracking-wider text-muted-foreground">{c.l}</span>
               </div>
             ))}
             <span className="self-center text-xs uppercase tracking-wider text-muted-foreground">
