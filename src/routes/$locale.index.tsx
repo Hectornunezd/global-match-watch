@@ -20,7 +20,7 @@ export const Route = createFileRoute("/$locale/")({
   },
   loader: async ({ params }) => {
     const geo = await detectGeo();
-    const data = await getHomepageData({ data: { countryCode: geo.alpha3 } });
+    const data = await getHomepageData({ data: { countryCode: geo.alpha2 } });
     return { ...data, geo, locale: params.locale as Locale, serverNow: Date.now() };
   },
   head: ({ loaderData }) => {
@@ -155,7 +155,7 @@ function HomePage() {
       </div>
 
       {/* Where to watch from user's country */}
-      <WhereToWatch channels={channels} countryCode={geo.alpha3} locale={locale} />
+      <WhereToWatch channels={channels} countryCode={geo.alpha2} locale={locale} />
 
       {/* Live */}
       {live.length > 0 && (
