@@ -48,6 +48,7 @@ const COUNTRY_NAMES: Record<string, { en: string; es: string }> = {
   SAU: { en: "Saudi Arabia", es: "Arabia Saudita" },
   SEN: { en: "Senegal", es: "Senegal" },
   SLV: { en: "El Salvador", es: "El Salvador" },
+  SVN: { en: "Slovenia", es: "Eslovenia" },
   SUR: { en: "Suriname", es: "Surinam" },
   TUR: { en: "Turkey", es: "Turquía" },
   URY: { en: "Uruguay", es: "Uruguay" },
