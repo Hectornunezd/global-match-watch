@@ -1,6 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { setResponseHeader } from "@tanstack/react-start/server";
 import { supabase } from "@/integrations/supabase/client";
+import { alpha2ToAlpha3 } from "./geolocation";
 
 export interface Team {
   id: string;
@@ -81,7 +82,8 @@ export const getHomepageData = createServerFn({ method: "GET" })
   .inputValidator((input: { countryCode?: string } | undefined) => input ?? {})
   .handler(async ({ data }) => {
     setCache(60);
-    const countryCode = (data.countryCode ?? "").toUpperCase().slice(0, 2);
+    const raw = (data.countryCode ?? "").toUpperCase();
+    const countryCode = raw.length === 3 ? raw : (alpha2ToAlpha3(raw) ?? "");
     const [liveRes, upcomingRes, channelsRes] = await Promise.all([
       supabase
         .from("fixtures")
