@@ -21,7 +21,7 @@ export const Route = createFileRoute("/$locale/")({
   loader: async ({ params }) => {
     const geo = await detectGeo();
     const data = await getHomepageData({ data: { countryCode: geo.alpha2 } });
-    return { ...data, geo, locale: params.locale as Locale };
+    return { ...data, geo, locale: params.locale as Locale, serverNow: Date.now() };
   },
   head: ({ loaderData }) => {
     if (!loaderData) return {};
@@ -54,12 +54,13 @@ export const Route = createFileRoute("/$locale/")({
 });
 
 function HomePage() {
-  const { live, upcoming, channels, geo, locale } = Route.useLoaderData() as {
+  const { live, upcoming, channels, geo, locale, serverNow } = Route.useLoaderData() as {
     live: import("@/lib/data").Fixture[];
     upcoming: import("@/lib/data").Fixture[];
     channels: import("@/lib/data").Channel[];
     geo: { alpha2: string; alpha3: string };
     locale: Locale;
+    serverNow: number;
   };
   const m = t(locale);
   const [group, setGroup] = useState<string | null>(null);
@@ -75,7 +76,7 @@ function HomePage() {
     return upcoming.filter((f) => f.round === `Group ${group}`);
   }, [upcoming, group]);
 
-  const countdown = useCountdown(WORLD_CUP_START);
+  const countdown = useCountdown(WORLD_CUP_START, serverNow);
 
   return (
     <>
@@ -124,23 +125,25 @@ function HomePage() {
           </div>
 
           {/* Countdown */}
-          <div className="mt-10 flex flex-wrap gap-3">
-            {[
-              { v: countdown.days, l: m.countdown.days },
-              { v: countdown.hours, l: m.countdown.hours },
-              { v: countdown.minutes, l: m.countdown.minutes },
-              { v: countdown.seconds, l: m.countdown.seconds },
-            ].map((c, i) => (
-              <div key={i} className="flex min-w-[76px] flex-col items-center justify-center border border-primary/40 bg-[var(--surface)] px-3 py-3 sm:min-w-[96px] sm:px-4">
-                <span className="flex items-baseline justify-center gap-1 font-display text-2xl font-bold leading-none tabular-nums text-foreground sm:text-3xl">
-                  <span className="text-primary">[</span>
-                  <span className="inline-block w-[2.4ch] text-center">{String(c.v).padStart(2, "0")}</span>
-                  <span className="text-primary">]</span>
-                </span>
-                <span className="mt-2 font-display text-[10px] uppercase leading-none tracking-wider text-muted-foreground">{c.l}</span>
-              </div>
-            ))}
-            <span className="self-center text-xs uppercase tracking-wider text-muted-foreground">
+          <div className="mt-10 flex flex-col items-start gap-3 lg:flex-row lg:items-center">
+            <div className="grid w-full max-w-[640px] grid-cols-2 gap-3 min-[520px]:grid-cols-4">
+              {[
+                { v: countdown.days, l: m.countdown.days },
+                { v: countdown.hours, l: m.countdown.hours },
+                { v: countdown.minutes, l: m.countdown.minutes },
+                { v: countdown.seconds, l: m.countdown.seconds },
+              ].map((c, i) => (
+                <div key={i} className="flex min-w-0 flex-col items-center justify-center border border-primary/40 bg-[var(--surface)] px-2 py-3 sm:px-4">
+                  <span className="grid grid-cols-[auto_2.15ch_auto] items-baseline justify-center gap-0.5 font-display text-3xl font-bold leading-none text-foreground sm:text-4xl">
+                    <span className="text-primary">[</span>
+                    <span className="block text-center font-mono text-[0.78em] font-bold leading-none tracking-[-0.08em] tabular-nums">{String(c.v).padStart(2, "0")}</span>
+                    <span className="text-primary">]</span>
+                  </span>
+                  <span className="mt-2 font-display text-[10px] uppercase leading-none tracking-wider text-muted-foreground">{c.l}</span>
+                </div>
+              ))}
+            </div>
+            <span className="text-xs uppercase tracking-wider text-muted-foreground">
               {m.countdown.to}
             </span>
           </div>
@@ -264,10 +267,9 @@ const countryToGroup: Record<string, string> = {
 const flagUrl = (alpha2: string) =>
   `https://flagcdn.com/w40/${alpha2.toLowerCase()}.png`;
 
-function useCountdown(target: string) {
+function useCountdown(target: string, initialNow: number) {
   const targetMs = new Date(target).getTime();
-  // Start from target so SSR & first client render match (diff=0), then update on mount.
-  const [now, setNow] = useState(targetMs);
+  const [now, setNow] = useState(initialNow);
   useEffect(() => {
     setNow(Date.now());
     const id = window.setInterval(() => setNow(Date.now()), 1000);
