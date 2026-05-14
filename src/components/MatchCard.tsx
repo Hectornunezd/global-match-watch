@@ -24,6 +24,11 @@ import japan2Img from "@/assets/teams/japan-2.jpg";
 import englandImg from "@/assets/teams/england.jpg";
 import england2Img from "@/assets/teams/england-2.jpg";
 import england3Img from "@/assets/teams/england-3.jpg";
+import england4Img from "@/assets/teams/england-4.jpg";
+import england5Img from "@/assets/teams/england-5.jpg";
+import uzbekistanImg from "@/assets/teams/uzbekistan.jpg";
+import austriaImg from "@/assets/teams/austria.jpg";
+import saudiArabiaImg from "@/assets/teams/saudi-arabia.jpg";
 import ivoryImg from "@/assets/teams/ivory-coast.jpg";
 import paraguayImg from "@/assets/teams/paraguay.jpg";
 import turkeyImg from "@/assets/teams/turkey.jpg";
@@ -71,7 +76,7 @@ const TEAM_IMAGES: Record<string, string[]> = {
   HAI: [haitiImg, haiti2Img], HT: [haitiImg, haiti2Img], HTI: [haitiImg, haiti2Img],
   KOR: [koreaImg, korea2Img], KR: [koreaImg, korea2Img],
   JPN: [japanImg, japan2Img], JP: [japanImg, japan2Img],
-  ENG: [englandImg, england2Img, england3Img], GB: [englandImg, england2Img, england3Img], GBR: [englandImg, england2Img, england3Img],
+  ENG: [englandImg, england2Img, england3Img, england4Img, england5Img], GB: [englandImg, england2Img, england3Img, england4Img, england5Img], GBR: [englandImg, england2Img, england3Img, england4Img, england5Img],
   CIV: [ivoryImg, ivory2Img], CI: [ivoryImg, ivory2Img], IVC: [ivoryImg, ivory2Img],
   PAR: [paraguayImg], PY: [paraguayImg], PRY: [paraguayImg],
   TUR: [turkeyImg], TR: [turkeyImg],
@@ -100,6 +105,9 @@ const TEAM_IMAGES: Record<string, string[]> = {
   JOR: [jordanImg], JO: [jordanImg], JRD: [jordanImg],
   IRN: [iranImg], IR: [iranImg], IRI: [iranImg],
   NZL: [newZealandImg], NZ: [newZealandImg],
+  UZB: [uzbekistanImg], UZ: [uzbekistanImg],
+  AUT: [austriaImg], AT: [austriaImg],
+  KSA: [saudiArabiaImg], SAU: [saudiArabiaImg], SA: [saudiArabiaImg], ARS: [saudiArabiaImg],
 };
 
 function pickCover(id: string, homeCode?: string, awayCode?: string): string {
