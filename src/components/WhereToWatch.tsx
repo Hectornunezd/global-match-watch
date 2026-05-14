@@ -18,6 +18,7 @@ const COUNTRY_NAMES: Record<string, { en: string; es: string }> = {
   COL: { en: "Colombia", es: "Colombia" },
   CRI: { en: "Costa Rica", es: "Costa Rica" },
   DEU: { en: "Germany", es: "Alemania" },
+  DNK: { en: "Denmark", es: "Dinamarca" },
   ECU: { en: "Ecuador", es: "Ecuador" },
   EGY: { en: "Egypt", es: "Egipto" },
   ESP: { en: "Spain", es: "España" },
