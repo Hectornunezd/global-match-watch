@@ -12,6 +12,7 @@ const ALPHA2_TO_ALPHA3: Record<string, string> = {
   IE: "IRL", MA: "MAR", NI: "NIC", NL: "NLD", NZ: "NZL", PA: "PAN",
   PE: "PER", PL: "POL", PT: "PRT", PY: "PRY", SN: "SEN", SV: "SLV",
   SR: "SUR", TR: "TUR", UY: "URY", VE: "VEN", ZA: "ZAF",
+  FI: "FIN", DK: "DNK", SI: "SVN",
 };
 
 const ALPHA3_TO_ALPHA2: Record<string, string> = Object.fromEntries(
