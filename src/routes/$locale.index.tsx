@@ -31,8 +31,8 @@ export const Route = createFileRoute("/$locale/")({
     const altPath = `/${locale === "en" ? "es" : "en"}`;
     const { meta, links } = buildMeta({
       title: locale === "en"
-        ? "MatchLiveNow — Watch the FIFA World Cup 2026 Live from Any Country"
-        : "MatchLiveNow — Ver el Mundial FIFA 2026 en vivo desde cualquier país",
+        ? "Watch FIFA World Cup 2026 Live — MatchLiveNow"
+        : "Ver el Mundial FIFA 2026 en vivo — MatchLiveNow",
       description: locale === "en"
         ? "Live scores, fixtures and every TV channel and streaming service for the FIFA World Cup 2026 — free and paid options for your country."
         : "Marcadores en vivo, calendario y todos los canales de TV y streaming del Mundial FIFA 2026 — opciones gratis y de pago para tu país.",
