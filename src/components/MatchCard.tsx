@@ -114,7 +114,19 @@ const TEAM_IMAGES: Record<string, string[]> = {
   KSA: [saudiArabiaImg], SAU: [saudiArabiaImg], SA: [saudiArabiaImg], ARS: [saudiArabiaImg],
 };
 
+// Per-fixture overrides: force a specific image pool for known matches.
+const FIXTURE_IMAGE_OVERRIDES: Record<string, string[]> = {
+  // England vs Ghana
+  "ef65d3a5-1ff2-4e80-8cd6-4f683395485f": [england6Img, england7Img, england8Img],
+};
+
 function pickCover(id: string, homeCode?: string, awayCode?: string): string {
+  const override = FIXTURE_IMAGE_OVERRIDES[id];
+  if (override) {
+    let h = 0;
+    for (let i = 0; i < id.length; i++) h = (h * 131 + id.charCodeAt(i)) >>> 0;
+    return override[h % override.length];
+  }
   // Prefer the home team's cover (first team in the match).
   if (homeCode && TEAM_IMAGES[homeCode]) {
     const pool = TEAM_IMAGES[homeCode];
