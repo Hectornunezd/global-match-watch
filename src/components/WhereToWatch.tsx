@@ -52,6 +52,15 @@ const COUNTRY_NAMES: Record<string, { en: string; es: string }> = {
   USA: { en: "United States", es: "Estados Unidos" },
   VEN: { en: "Venezuela", es: "Venezuela" },
   ZAF: { en: "South Africa", es: "Sudáfrica" },
+  AUT: { en: "Austria", es: "Austria" },
+  BIH: { en: "Bosnia and Herzegovina", es: "Bosnia y Herzegovina" },
+  CZE: { en: "Czech Republic", es: "República Checa" },
+  NOR: { en: "Norway", es: "Noruega" },
+  SWE: { en: "Sweden", es: "Suecia" },
+  IRN: { en: "Iran", es: "Irán" },
+  IRQ: { en: "Iraq", es: "Irak" },
+  JOR: { en: "Jordan", es: "Jordania" },
+  UZB: { en: "Uzbekistan", es: "Uzbekistán" },
 };
 
 interface Props {
