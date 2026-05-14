@@ -55,6 +55,15 @@ export const Route = createRootRoute({
         href: "https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap",
       },
     ],
+    scripts: import.meta.env.VITE_ADSENSE_CLIENT_ID
+      ? [
+          {
+            async: true,
+            src: `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${import.meta.env.VITE_ADSENSE_CLIENT_ID}`,
+            crossOrigin: "anonymous",
+          },
+        ]
+      : [],
   }),
   shellComponent: RootShell,
   component: RootComponent,
