@@ -53,10 +53,17 @@ import portugalImg from "@/assets/teams/portugal.jpg";
 import norwayImg from "@/assets/teams/norway.jpg";
 import senegalImg from "@/assets/teams/senegal.jpg";
 import franceImg from "@/assets/teams/france.jpg";
+import brazil2Img from "@/assets/teams/brazil-2.jpg";
+import croatiaImg from "@/assets/teams/croatia.jpg";
+import panamaImg from "@/assets/teams/panama.jpg";
+import jordanImg from "@/assets/teams/jordan.jpg";
+import iranImg from "@/assets/teams/iran.jpg";
+import newZealandImg from "@/assets/teams/new-zealand.jpg";
+import portugal2Img from "@/assets/teams/portugal-2.jpg";
 
 const TEAM_IMAGES: Record<string, string[]> = {
   MEX: [mexicoImg], MX: [mexicoImg],
-  BRA: [brazilImg], BR: [brazilImg],
+  BRA: [brazilImg, brazil2Img], BR: [brazilImg, brazil2Img],
   ARG: [argentinaImg, argentina2Img], AR: [argentinaImg, argentina2Img],
   USA: [usaImg, usa2Img, usa3Img], US: [usaImg, usa2Img, usa3Img],
   CAN: [canadaImg], CA: [canadaImg],
@@ -84,10 +91,15 @@ const TEAM_IMAGES: Record<string, string[]> = {
   BEL: [belgiumImg], BE: [belgiumImg],
   URU: [uruguayImg], UY: [uruguayImg], URY: [uruguayImg],
   COL: [colombiaImg], CO: [colombiaImg],
-  POR: [portugalImg], PT: [portugalImg], PRT: [portugalImg],
+  POR: [portugalImg, portugal2Img], PT: [portugalImg, portugal2Img], PRT: [portugalImg, portugal2Img],
   NOR: [norwayImg], NO: [norwayImg],
   SEN: [senegalImg], SN: [senegalImg],
   FRA: [franceImg], FR: [franceImg],
+  CRO: [croatiaImg], HR: [croatiaImg], HRV: [croatiaImg],
+  PAN: [panamaImg], PA: [panamaImg],
+  JOR: [jordanImg], JO: [jordanImg], JRD: [jordanImg],
+  IRN: [iranImg], IR: [iranImg], IRI: [iranImg],
+  NZL: [newZealandImg], NZ: [newZealandImg],
 };
 
 function pickCover(id: string, homeCode?: string, awayCode?: string): string {
