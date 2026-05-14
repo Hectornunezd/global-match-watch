@@ -167,7 +167,9 @@ export function MatchCard({ fixture, locale }: Props) {
       <img
         src={pickCover(fixture.id, home.country_code, away.country_code)}
         alt=""
-        loading="lazy"
+        loading="eager"
+        decoding="async"
+        fetchPriority="high"
         width={1024}
         height={1024}
         className="absolute inset-0 h-full w-full object-cover opacity-60 grayscale transition-all duration-500 group-hover:opacity-90"
