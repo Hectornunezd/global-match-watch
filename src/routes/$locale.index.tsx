@@ -172,6 +172,11 @@ function HomePage() {
         </section>
       )}
 
+      {/* In-feed ad between Live and Upcoming */}
+      <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
+        <AdSlot slot="in-feed" />
+      </div>
+
       {/* Upcoming */}
       <section id="upcoming" className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
         <div className="mb-5 flex items-end justify-between gap-4">
