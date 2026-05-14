@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SitemapIndexDotxmlRouteImport } from './routes/sitemap-index[.]xml'
 import { Route as SitemapEsDotxmlRouteImport } from './routes/sitemap-es[.]xml'
 import { Route as SitemapEnDotxmlRouteImport } from './routes/sitemap-en[.]xml'
@@ -28,6 +29,11 @@ import { Route as LocaleDondeVerMundialEnChar123slugChar125RouteImport } from '.
 import { Route as LocaleTeamSlugRouteImport } from './routes/$locale.team.$slug'
 import { Route as ApiPublicHooksSyncFixturesRouteImport } from './routes/api/public/hooks/sync-fixtures'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SitemapIndexDotxmlRoute = SitemapIndexDotxmlRouteImport.update({
   id: '/sitemap-index.xml',
   path: '/sitemap-index.xml',
@@ -132,6 +138,7 @@ export interface FileRoutesByFullPath {
   '/sitemap-en.xml': typeof SitemapEnDotxmlRoute
   '/sitemap-es.xml': typeof SitemapEsDotxmlRoute
   '/sitemap-index.xml': typeof SitemapIndexDotxmlRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/$locale/donde-ver-mundial-en-{$slug}': typeof LocaleDondeVerMundialEnChar123slugChar125Route
   '/$locale/how-to-watch-world-cup-in-{$slug}': typeof LocaleHowToWatchWorldCupInChar123slugChar125Route
   '/$locale/privacy-policy': typeof LocalePrivacyPolicyRoute
@@ -151,6 +158,7 @@ export interface FileRoutesByTo {
   '/sitemap-en.xml': typeof SitemapEnDotxmlRoute
   '/sitemap-es.xml': typeof SitemapEsDotxmlRoute
   '/sitemap-index.xml': typeof SitemapIndexDotxmlRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/$locale/donde-ver-mundial-en-{$slug}': typeof LocaleDondeVerMundialEnChar123slugChar125Route
   '/$locale/how-to-watch-world-cup-in-{$slug}': typeof LocaleHowToWatchWorldCupInChar123slugChar125Route
   '/$locale/privacy-policy': typeof LocalePrivacyPolicyRoute
@@ -172,6 +180,7 @@ export interface FileRoutesById {
   '/sitemap-en.xml': typeof SitemapEnDotxmlRoute
   '/sitemap-es.xml': typeof SitemapEsDotxmlRoute
   '/sitemap-index.xml': typeof SitemapIndexDotxmlRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/$locale/donde-ver-mundial-en-{$slug}': typeof LocaleDondeVerMundialEnChar123slugChar125Route
   '/$locale/how-to-watch-world-cup-in-{$slug}': typeof LocaleHowToWatchWorldCupInChar123slugChar125Route
   '/$locale/privacy-policy': typeof LocalePrivacyPolicyRoute
@@ -194,6 +203,7 @@ export interface FileRouteTypes {
     | '/sitemap-en.xml'
     | '/sitemap-es.xml'
     | '/sitemap-index.xml'
+    | '/sitemap.xml'
     | '/$locale/donde-ver-mundial-en-{$slug}'
     | '/$locale/how-to-watch-world-cup-in-{$slug}'
     | '/$locale/privacy-policy'
@@ -213,6 +223,7 @@ export interface FileRouteTypes {
     | '/sitemap-en.xml'
     | '/sitemap-es.xml'
     | '/sitemap-index.xml'
+    | '/sitemap.xml'
     | '/$locale/donde-ver-mundial-en-{$slug}'
     | '/$locale/how-to-watch-world-cup-in-{$slug}'
     | '/$locale/privacy-policy'
@@ -233,6 +244,7 @@ export interface FileRouteTypes {
     | '/sitemap-en.xml'
     | '/sitemap-es.xml'
     | '/sitemap-index.xml'
+    | '/sitemap.xml'
     | '/$locale/donde-ver-mundial-en-{$slug}'
     | '/$locale/how-to-watch-world-cup-in-{$slug}'
     | '/$locale/privacy-policy'
@@ -254,6 +266,7 @@ export interface RootRouteChildren {
   SitemapEnDotxmlRoute: typeof SitemapEnDotxmlRoute
   SitemapEsDotxmlRoute: typeof SitemapEsDotxmlRoute
   SitemapIndexDotxmlRoute: typeof SitemapIndexDotxmlRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   AdminSyncStatusRoute: typeof AdminSyncStatusRoute
   ApiTrackClickRoute: typeof ApiTrackClickRoute
   ApiPublicHooksSyncFixturesRoute: typeof ApiPublicHooksSyncFixturesRoute
@@ -261,6 +274,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sitemap-index.xml': {
       id: '/sitemap-index.xml'
       path: '/sitemap-index.xml'
@@ -426,6 +446,7 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapEnDotxmlRoute: SitemapEnDotxmlRoute,
   SitemapEsDotxmlRoute: SitemapEsDotxmlRoute,
   SitemapIndexDotxmlRoute: SitemapIndexDotxmlRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   AdminSyncStatusRoute: AdminSyncStatusRoute,
   ApiTrackClickRoute: ApiTrackClickRoute,
   ApiPublicHooksSyncFixturesRoute: ApiPublicHooksSyncFixturesRoute,

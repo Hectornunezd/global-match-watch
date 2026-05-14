@@ -1,0 +1,21 @@
+# MatchLiveNow
+
+> Find every TV channel and streaming service to watch the FIFA World Cup 2026 — live, free and paid options for every country.
+
+MatchLiveNow (MLN) is a bilingual (English / Spanish) guide that helps fans discover where to watch every FIFA World Cup 2026 match in their country. Each match page lists official broadcasters, free-to-air channels, and streaming platforms with affiliate links per country.
+
+## Pages
+
+- [Home (English)](/en): Live scores, fixtures and World Cup 2026 broadcasters worldwide.
+- [Home (Spanish)](/es): Marcadores en vivo, calendario y canales del Mundial 2026.
+- [Privacy Policy (EN)](/en/privacy-policy): How we handle data.
+- [Privacy Policy (ES)](/es/privacy-policy): Política de privacidad.
+- [Terms (EN)](/en/terms): Terms of service.
+- [Terms (ES)](/es/terms): Términos del servicio.
+- [Responsible Gambling (EN)](/en/responsible-gambling): Responsible gambling resources.
+- [Responsible Gambling (ES)](/es/responsible-gambling): Juego responsable.
+
+## Optional
+
+- [Sitemap Index](/sitemap-index.xml): All indexable URLs.
+- [Robots](/robots.txt): Crawler directives.
