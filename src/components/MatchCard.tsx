@@ -39,6 +39,16 @@ import netherlandsImg from "@/assets/teams/netherlands.jpg";
 import swedenImg from "@/assets/teams/sweden.webp";
 import ecuadorImg from "@/assets/teams/ecuador.jpg";
 import curacaoImg from "@/assets/teams/curacao.jpg";
+import spainImg from "@/assets/teams/spain.jpg";
+import spain2Img from "@/assets/teams/spain-2.jpg";
+import belgiumImg from "@/assets/teams/belgium.jpg";
+import uruguayImg from "@/assets/teams/uruguay.jpg";
+import colombiaImg from "@/assets/teams/colombia.jpg";
+import ecuador2Img from "@/assets/teams/ecuador-2.jpg";
+import ivory2Img from "@/assets/teams/ivory-coast-2.jpg";
+import australia2Img from "@/assets/teams/australia-2.jpg";
+import australia3Img from "@/assets/teams/australia-3.jpg";
+import qatar2Img from "@/assets/teams/qatar-2.jpg";
 
 const TEAM_IMAGES: Record<string, string[]> = {
   MEX: [mexicoImg], MX: [mexicoImg],
@@ -51,21 +61,25 @@ const TEAM_IMAGES: Record<string, string[]> = {
   KOR: [koreaImg, korea2Img], KR: [koreaImg, korea2Img],
   JPN: [japanImg, japan2Img], JP: [japanImg, japan2Img],
   ENG: [englandImg, england2Img, england3Img], GB: [englandImg, england2Img, england3Img], GBR: [englandImg, england2Img, england3Img],
-  CIV: [ivoryImg], CI: [ivoryImg], IVC: [ivoryImg],
+  CIV: [ivoryImg, ivory2Img], CI: [ivoryImg, ivory2Img], IVC: [ivoryImg, ivory2Img],
   PAR: [paraguayImg], PY: [paraguayImg], PRY: [paraguayImg],
   TUR: [turkeyImg], TR: [turkeyImg],
-  AUS: [australiaImg], AU: [australiaImg],
+  AUS: [australiaImg, australia2Img, australia3Img], AU: [australiaImg, australia2Img, australia3Img],
   MAR: [moroccoImg], MA: [moroccoImg], MOR: [moroccoImg],
   SCO: [scotlandImg], SCT: [scotlandImg],
   BIH: [bosniaImg], BA: [bosniaImg], BOS: [bosniaImg],
   SUI: [switzerlandImg], CH: [switzerlandImg], CHE: [switzerlandImg], SWI: [switzerlandImg],
-  QAT: [qatarImg], QA: [qatarImg],
+  QAT: [qatarImg, qatar2Img], QA: [qatarImg, qatar2Img],
   CZE: [czechImg], CZ: [czechImg],
   TUN: [tunisiaImg], TN: [tunisiaImg],
   NED: [netherlandsImg], NL: [netherlandsImg], NLD: [netherlandsImg], HOL: [netherlandsImg],
   SWE: [swedenImg], SE: [swedenImg],
-  ECU: [ecuadorImg], EC: [ecuadorImg],
+  ECU: [ecuadorImg, ecuador2Img], EC: [ecuadorImg, ecuador2Img],
   CUW: [curacaoImg], CW: [curacaoImg], CUR: [curacaoImg],
+  ESP: [spainImg, spain2Img], ES: [spainImg, spain2Img], SPA: [spainImg, spain2Img],
+  BEL: [belgiumImg], BE: [belgiumImg],
+  URU: [uruguayImg], UY: [uruguayImg], URY: [uruguayImg],
+  COL: [colombiaImg], CO: [colombiaImg],
 };
 
 function pickCover(id: string, homeCode?: string, awayCode?: string): string {
