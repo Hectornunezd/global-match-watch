@@ -22,6 +22,7 @@ const COUNTRY_NAMES: Record<string, { en: string; es: string }> = {
   ECU: { en: "Ecuador", es: "Ecuador" },
   EGY: { en: "Egypt", es: "Egipto" },
   ESP: { en: "Spain", es: "España" },
+  FIN: { en: "Finland", es: "Finlandia" },
   FRA: { en: "France", es: "Francia" },
   GBR: { en: "United Kingdom", es: "Reino Unido" },
   GTM: { en: "Guatemala", es: "Guatemala" },
