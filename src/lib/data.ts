@@ -1,6 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { setResponseHeader } from "@tanstack/react-start/server";
 import { supabase } from "@/integrations/supabase/client";
+import { alpha2ToAlpha3 } from "./geolocation";
 
 export interface Team {
   id: string;
