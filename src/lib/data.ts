@@ -81,7 +81,7 @@ export const getHomepageData = createServerFn({ method: "GET" })
   .inputValidator((input: { countryCode?: string } | undefined) => input ?? {})
   .handler(async ({ data }) => {
     setCache(60);
-    const countryCode = (data.countryCode ?? "").toUpperCase().slice(0, 2);
+    const countryCode = (data.countryCode ?? "").toUpperCase();
     const [liveRes, upcomingRes, channelsRes] = await Promise.all([
       supabase
         .from("fixtures")
