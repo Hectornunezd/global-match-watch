@@ -123,9 +123,7 @@ const FIXTURE_IMAGE_OVERRIDES: Record<string, string[]> = {
 function pickCover(id: string, homeCode?: string, awayCode?: string): string {
   const override = FIXTURE_IMAGE_OVERRIDES[id];
   if (override) {
-    let h = 0;
-    for (let i = 0; i < id.length; i++) h = (h * 131 + id.charCodeAt(i)) >>> 0;
-    return override[h % override.length];
+    return override[0];
   }
   // Prefer the home team's cover (first team in the match).
   if (homeCode && TEAM_IMAGES[homeCode]) {
