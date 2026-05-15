@@ -1,5 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useMemo } from "react";
+import { useLoaderData } from "@tanstack/react-router";
 import { isLocale, type Locale, t, localeUrl } from "@/lib/i18n";
 import { getFixtureBySlug, type Fixture, type Channel } from "@/lib/data";
 import { detectGeo, alpha3ToAlpha2 } from "@/lib/geolocation";
@@ -57,7 +58,7 @@ export const Route = createFileRoute("/$locale/watch-{$slug}")({
 });
 
 export function MatchPage({ locale }: { locale: Locale }) {
-  const { fixture, channels, related, geo } = Route.useLoaderData() as {
+  const { fixture, channels, related, geo } = useLoaderData({ strict: false }) as {
     fixture: Fixture;
     channels: Channel[];
     related: Fixture[];
