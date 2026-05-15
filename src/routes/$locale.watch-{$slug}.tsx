@@ -1,5 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useMemo } from "react";
+import { useLoaderData } from "@tanstack/react-router";
 import { isLocale, type Locale, t, localeUrl } from "@/lib/i18n";
 import { getFixtureBySlug, type Fixture, type Channel } from "@/lib/data";
 import { detectGeo, alpha3ToAlpha2 } from "@/lib/geolocation";
