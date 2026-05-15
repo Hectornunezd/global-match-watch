@@ -191,9 +191,12 @@ function HomePage() {
             }
           }} />
         </div>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((f) => (
-            <MatchCard key={f.id} fixture={f} locale={locale} />
+            <div key={f.id} className="flex flex-col gap-3">
+              <MatchCard fixture={f} locale={locale} />
+              <WhereToWatch channels={channels} countryCode={geo.alpha3} locale={locale} compact />
+            </div>
           ))}
         </div>
       </section>
