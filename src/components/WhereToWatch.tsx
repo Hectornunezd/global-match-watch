@@ -37,39 +37,11 @@ interface Props {
   channels: Channel[];
   countryCode: string;
   locale: Locale;
-  compact?: boolean;
 }
 
-export function WhereToWatch({ channels, countryCode, locale, compact = false }: Props) {
+export function WhereToWatch({ channels, countryCode, locale }: Props) {
   const m = t(locale);
   const country = COUNTRY_NAMES[countryCode]?.[locale] ?? countryCode;
-
-  if (compact) {
-    if (channels.length === 0) return null;
-    return (
-      <div className="rounded-lg border border-border bg-[var(--surface)] p-3">
-        <div className="mb-2 flex items-center justify-between gap-2">
-          <span className="font-display text-[10px] font-bold uppercase tracking-wider text-primary">
-            [ {locale === "es" ? "DÓNDE VER" : "WHERE TO WATCH"} ] {country}
-          </span>
-          <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
-            {channels.length}
-          </span>
-        </div>
-        <div className="grid gap-1.5">
-          {channels.map((channel) => (
-            <ChannelCard
-              key={channel.id}
-              channel={channel}
-              locale={locale}
-              pageType="home"
-              countryCode={countryCode}
-            />
-          ))}
-        </div>
-      </div>
-    );
-  }
 
   if (channels.length === 0) {
     return (
