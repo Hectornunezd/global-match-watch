@@ -81,26 +81,16 @@ export function MatchPage({ locale }: { locale: Locale }) {
   }, [channels, geo.alpha3]);
 
   const countryName = useMemo(() => {
-    const map: Record<string, string> = {
-      USA: locale === "es" ? "Estados Unidos" : "United States",
-      GBR: locale === "es" ? "Reino Unido" : "United Kingdom",
-      CAN: locale === "es" ? "Canadá" : "Canada",
-      AUS: "Australia",
-      MEX: locale === "es" ? "México" : "Mexico",
-      ESP: locale === "es" ? "España" : "Spain",
-      ARG: "Argentina",
-      COL: "Colombia",
-      BRA: locale === "es" ? "Brasil" : "Brazil",
-      FRA: locale === "es" ? "Francia" : "France",
-      DEU: locale === "es" ? "Alemania" : "Germany",
-      ITA: locale === "es" ? "Italia" : "Italy",
-      JPN: locale === "es" ? "Japón" : "Japan",
-      KOR: locale === "es" ? "Corea del Sur" : "South Korea",
-      IND: "India",
-      SAU: locale === "es" ? "Arabia Saudita" : "Saudi Arabia",
-      QAT: "Qatar",
-    };
-    return map[geo.alpha3] ?? geo.alpha3;
+    const a2 = alpha3ToAlpha2(geo.alpha3);
+    if (a2) {
+      try {
+        const dn = new Intl.DisplayNames([locale === "es" ? "es" : "en"], { type: "region" });
+        return dn.of(a2) ?? geo.alpha3;
+      } catch {
+        /* fall through */
+      }
+    }
+    return geo.alpha3;
   }, [geo.alpha3, locale]);
 
   return (
