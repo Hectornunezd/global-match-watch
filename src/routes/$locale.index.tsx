@@ -7,7 +7,7 @@ import { MatchCard } from "@/components/MatchCard";
 import { GroupFilter } from "@/components/GroupFilter";
 import { CountrySelector } from "@/components/CountrySelector";
 import { AdSlot } from "@/components/AdSlot";
-import { WhereToWatch } from "@/components/WhereToWatch";
+
 import { buildMeta, jsonLdScript, organizationJsonLd, websiteJsonLd } from "@/lib/seo";
 import heroTrophy from "@/assets/hero-trophy.jpg";
 import { notFound } from "@tanstack/react-router";
