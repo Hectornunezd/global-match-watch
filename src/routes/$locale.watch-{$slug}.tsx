@@ -58,7 +58,7 @@ export const Route = createFileRoute("/$locale/watch-{$slug}")({
 });
 
 export function MatchPage({ locale }: { locale: Locale }) {
-  const { fixture, channels, related, geo } = Route.useLoaderData() as {
+  const { fixture, channels, related, geo } = useLoaderData({ strict: false }) as {
     fixture: Fixture;
     channels: Channel[];
     related: Fixture[];
