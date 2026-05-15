@@ -154,9 +154,6 @@ function HomePage() {
         <AdSlot slot="leaderboard" />
       </div>
 
-      {/* Where to watch from user's country */}
-      <WhereToWatch channels={channels} countryCode={geo.alpha3} locale={locale} />
-
       {/* Live */}
       {live.length > 0 && (
         <section className="mx-auto max-w-6xl px-4 sm:px-6">
@@ -164,9 +161,12 @@ function HomePage() {
             <span className="live-pulse h-2.5 w-2.5 rounded-full bg-[var(--success)]" />
             <h2 className="text-2xl">{m.sections.liveNow}</h2>
           </div>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {live.map((f) => (
-              <MatchCard key={f.id} fixture={f} locale={locale} />
+              <div key={f.id} className="flex flex-col gap-3">
+                <MatchCard fixture={f} locale={locale} />
+                <WhereToWatch channels={channels} countryCode={geo.alpha3} locale={locale} compact />
+              </div>
             ))}
           </div>
         </section>
