@@ -9,6 +9,16 @@ const ALPHA2_TO_ALPHA3: Record<string, string> = {
   JP: "JPN", KR: "KOR", IN: "IND", SA: "SAU", QA: "QAT",
   PT: "PRT", NL: "NLD", AT: "AUT", SE: "SWE", FI: "FIN", NO: "NOR",
   DK: "DNK", SI: "SVN",
+  // Extended coverage for all countries with channels in DB
+  AE: "ARE", BE: "BEL", BA: "BIH", BZ: "BLZ", BO: "BOL", BN: "BRN",
+  CH: "CHE", CL: "CHL", CR: "CRI", CZ: "CZE", EC: "ECU", EG: "EGY",
+  GT: "GTM", GY: "GUY", HK: "HKG", HN: "HND", HR: "HRV", ID: "IDN",
+  IE: "IRL", IR: "IRN", IQ: "IRQ", JO: "JOR", KZ: "KAZ", KG: "KGZ",
+  KH: "KHM", KW: "KWT", LA: "LAO", MO: "MAC", MA: "MAR", MV: "MDV",
+  MN: "MNG", MY: "MYS", NI: "NIC", NP: "NPL", NZ: "NZL", PA: "PAN",
+  PE: "PER", PH: "PHL", PL: "POL", PY: "PRY", SN: "SEN", SG: "SGP",
+  SV: "SLV", SR: "SUR", TH: "THA", TJ: "TJK", TM: "TKM", TL: "TLS",
+  TR: "TUR", TW: "TWN", UY: "URY", UZ: "UZB", VE: "VEN", ZA: "ZAF",
 };
 
 const ALPHA3_TO_ALPHA2: Record<string, string> = Object.fromEntries(
