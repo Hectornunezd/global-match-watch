@@ -104,14 +104,15 @@ export function ChannelCard({ channel, locale, fixture, pageType, countryCode }:
 
   return (
     <div className="flex items-center gap-3 rounded-xl border border-border bg-card p-3.5 transition-colors hover:border-primary">
-      <div style={logoBgStyle} className={`flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-md font-display text-base uppercase ${logoBgClass}`}>
+      <div style={logoBgStyle} className={`flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-md font-display text-sm uppercase ${logoBgClass}`}>
+
         {logoSrc && !logoFailed ? (
           <img
             src={logoSrc}
             alt={channel.channel_name}
             loading="lazy"
             onError={() => setLogoFailed(true)}
-            className="h-full w-full object-cover"
+            className="h-full w-full object-contain p-1"
           />
         ) : (
           channel.channel_name.charAt(0)
