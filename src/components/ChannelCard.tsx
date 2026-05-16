@@ -104,7 +104,7 @@ export function ChannelCard({ channel, locale, fixture, pageType, countryCode }:
 
   return (
     <div className="flex items-center gap-3 rounded-xl border border-border bg-card p-3.5 transition-colors hover:border-primary">
-      <div className={`flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-md font-display text-sm uppercase ${logoBgClass}`}>
+      <div style={logoBgStyle} className={`flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-md font-display text-sm uppercase ${logoBgClass}`}>
 
         {logoSrc && !logoFailed ? (
           <img
