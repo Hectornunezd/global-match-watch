@@ -34,6 +34,11 @@ export function Footer({ locale }: { locale: Locale }) {
                   {locale === "es" ? "Juego responsable" : "Responsible gambling"}
                 </Link>
               </li>
+              <li>
+                <Link to={localeUrl(locale, "/partners")} className="hover:text-primary">
+                  {locale === "es" ? "Socios y afiliados" : "Partners & affiliates"}
+                </Link>
+              </li>
             </ul>
           </div>
           <div>
