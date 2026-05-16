@@ -29,6 +29,9 @@ const NAME_LOCAL_LOGO: Record<string, string> = {
   "Telemundo Deportes": telemundoLogo,
   "FOX Sports": foxSportsLogo,
   "Fox Sports": foxSportsLogo,
+  "ViX": vixLogo,
+  "Vix": vixLogo,
+  "ViX+": vixLogo,
 };
 
 const PARTNER_DOMAIN: Record<string, string> = {
