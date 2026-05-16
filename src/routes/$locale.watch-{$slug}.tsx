@@ -169,16 +169,6 @@ export function MatchPage({ locale }: { locale: Locale }) {
             )}
           </section>
 
-          {!hasFreeLocal && altCountryWithFree ? (
-            <div className="mt-6">
-              <VPNUpsell
-                locale={locale}
-                countryWithFreeStream={altCountryWithFree}
-                countryCode={geo.alpha3}
-                fixtureId={fixture.id}
-              />
-            </div>
-          ) : null}
 
           {/* Other matches */}
           {related.length > 0 ? (
