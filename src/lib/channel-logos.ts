@@ -147,6 +147,11 @@ const NAME_DOMAIN: Record<string, string> = {
 };
 
 export function channelLogoUrl(channelName: string, partner?: string | null): string | null {
+  const local =
+    (partner && PARTNER_LOCAL_LOGO[partner]) ||
+    NAME_LOCAL_LOGO[channelName] ||
+    null;
+  if (local) return local;
   const domain =
     (partner && PARTNER_DOMAIN[partner]) ||
     NAME_DOMAIN[channelName] ||
