@@ -33,6 +33,7 @@ export const Route = createRootRoute({
       { name: "color-scheme", content: "dark" },
       { name: "format-detection", content: "telephone=no" },
       { name: "mylead-verification", content: "98f2d3fe2bf7dc0c6541894d5faab5ab" },
+      { name: "impact-site-verification", content: "7b366caa-12fc-4f37-b629-e2e5a0e91ecc" },
       { title: "MatchLiveNow — Watch the FIFA World Cup 2026 Live" },
       { name: "description", content: "MatchLiveNow: find every TV channel and streaming service for the FIFA World Cup 2026 — live, free and paid options for every country." },
       { name: "application-name", content: "MatchLiveNow" },
