@@ -5,7 +5,7 @@ import { isLocale, type Locale, t, localeUrl } from "@/lib/i18n";
 import { getFixtureBySlug, type Fixture, type Channel } from "@/lib/data";
 import { detectGeo, alpha3ToAlpha2 } from "@/lib/geolocation";
 import { ChannelCard } from "@/components/ChannelCard";
-import { VPNUpsell } from "@/components/VPNUpsell";
+
 import { MatchCard } from "@/components/MatchCard";
 import { Flag } from "@/components/Flag";
 import { CountrySelector } from "@/components/CountrySelector";
@@ -74,11 +74,6 @@ export function MatchPage({ locale }: { locale: Locale }) {
     () => channels.filter((c) => c.country_code === geo.alpha3),
     [channels, geo.alpha3]
   );
-  const hasFreeLocal = localChannels.some((c) => c.is_free);
-  const altCountryWithFree = useMemo(() => {
-    const c = channels.find((c) => c.is_free && c.country_code !== geo.alpha3);
-    return c?.country_code ?? null;
-  }, [channels, geo.alpha3]);
 
   const countryName = useMemo(() => {
     const a2 = alpha3ToAlpha2(geo.alpha3);
