@@ -1,0 +1,1 @@
+DELETE FROM public.channels WHERE affiliate_partner = 'nordvpn' OR lower(channel_name) LIKE '%nordvpn%';
