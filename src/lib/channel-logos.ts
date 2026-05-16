@@ -2,6 +2,33 @@
 // We resolve the logo via Clearbit's free logo API: https://logo.clearbit.com/<domain>
 // Falls back to the channel name initial when nothing matches.
 
+import huluLogo from "@/assets/logos/hulu.jpg";
+import peacockLogo from "@/assets/logos/peacock.jpg";
+import fubotvLogo from "@/assets/logos/fubotv.jpg";
+import telemundoLogo from "@/assets/logos/telemundo.jpg";
+import foxSportsLogo from "@/assets/logos/fox-sports.jpg";
+
+// Local logo overrides (take priority over Clearbit domain lookup).
+const PARTNER_LOCAL_LOGO: Record<string, string> = {
+  hulu: huluLogo,
+  peacock: peacockLogo,
+  fubotv: fubotvLogo,
+  telemundo: telemundoLogo,
+  fox: foxSportsLogo,
+};
+
+const NAME_LOCAL_LOGO: Record<string, string> = {
+  "Hulu": huluLogo,
+  "Hulu + Live TV": huluLogo,
+  "Peacock": peacockLogo,
+  "fuboTV": fubotvLogo,
+  "FuboTV": fubotvLogo,
+  "Telemundo": telemundoLogo,
+  "Telemundo Deportes": telemundoLogo,
+  "FOX Sports": foxSportsLogo,
+  "Fox Sports": foxSportsLogo,
+};
+
 const PARTNER_DOMAIN: Record<string, string> = {
   // Americas
   azteca: "tvazteca.com",
@@ -120,6 +147,11 @@ const NAME_DOMAIN: Record<string, string> = {
 };
 
 export function channelLogoUrl(channelName: string, partner?: string | null): string | null {
+  const local =
+    (partner && PARTNER_LOCAL_LOGO[partner]) ||
+    NAME_LOCAL_LOGO[channelName] ||
+    null;
+  if (local) return local;
   const domain =
     (partner && PARTNER_DOMAIN[partner]) ||
     NAME_DOMAIN[channelName] ||
