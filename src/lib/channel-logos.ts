@@ -7,6 +7,7 @@ import peacockLogo from "@/assets/logos/peacock.jpg";
 import fubotvLogo from "@/assets/logos/fubotv.jpg";
 import telemundoLogo from "@/assets/logos/telemundo.jpg";
 import foxSportsLogo from "@/assets/logos/fox-sports.jpg";
+import vixLogo from "@/assets/logos/vix.jpg";
 
 // Local logo overrides (take priority over Clearbit domain lookup).
 const PARTNER_LOCAL_LOGO: Record<string, string> = {
@@ -15,6 +16,7 @@ const PARTNER_LOCAL_LOGO: Record<string, string> = {
   fubotv: fubotvLogo,
   telemundo: telemundoLogo,
   fox: foxSportsLogo,
+  vix: vixLogo,
 };
 
 const NAME_LOCAL_LOGO: Record<string, string> = {
@@ -27,6 +29,9 @@ const NAME_LOCAL_LOGO: Record<string, string> = {
   "Telemundo Deportes": telemundoLogo,
   "FOX Sports": foxSportsLogo,
   "Fox Sports": foxSportsLogo,
+  "ViX": vixLogo,
+  "Vix": vixLogo,
+  "ViX+": vixLogo,
 };
 
 const PARTNER_DOMAIN: Record<string, string> = {
