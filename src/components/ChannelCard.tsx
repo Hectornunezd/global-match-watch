@@ -52,8 +52,8 @@ export function ChannelCard({ channel, locale, fixture, pageType, countryCode }:
     peacock: "#000000",     // Peacock black
     fubotv: "#d10f1c",      // Fubo red
     telemundo: "#0033a0",   // Telemundo blue
-    fox: "#000000",         // FOX Sports black
-    foxsports: "#000000",
+    fox: "#e8e8e8",         // FOX Sports silver/white shield bg
+    foxsports: "#e8e8e8",
     apple: "#000000",
     appletv: "#000000",
     netflix: "#000000",
