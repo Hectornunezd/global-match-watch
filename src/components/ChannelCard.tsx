@@ -46,9 +46,17 @@ export function ChannelCard({ channel, locale, fixture, pageType, countryCode }:
   const logoSrc = channel.logo_url || fallbackLogo;
   const [logoFailed, setLogoFailed] = useState(false);
 
+  const DARK_BG_PARTNERS = new Set(["hulu", "peacock", "apple", "appletv", "netflix", "max", "hbomax", "primevideo", "prime"]);
+  const DARK_BG_NAMES = new Set(["Hulu", "Hulu + Live TV", "Peacock", "Apple TV", "Apple TV+", "Netflix", "Max", "HBO Max", "Prime Video", "Amazon Prime Video"]);
+  const useDarkBg =
+    (channel.affiliate_partner && DARK_BG_PARTNERS.has(channel.affiliate_partner)) ||
+    DARK_BG_NAMES.has(channel.channel_name);
+  const logoBgClass = useDarkBg ? "bg-black text-white" : "bg-white/95 text-black";
+
   return (
     <div className="flex items-center gap-3 rounded-xl border border-border bg-card p-3.5 transition-colors hover:border-primary">
-      <div className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-md bg-white/95 font-display text-sm uppercase text-black">
+      <div className={`flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-md font-display text-sm uppercase ${logoBgClass}`}>
+
         {logoSrc && !logoFailed ? (
           <img
             src={logoSrc}
