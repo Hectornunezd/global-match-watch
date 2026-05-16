@@ -46,12 +46,61 @@ export function ChannelCard({ channel, locale, fixture, pageType, countryCode }:
   const logoSrc = channel.logo_url || fallbackLogo;
   const [logoFailed, setLogoFailed] = useState(false);
 
-  const DARK_BG_PARTNERS = new Set(["hulu", "peacock", "apple", "appletv", "netflix", "max", "hbomax", "primevideo", "prime"]);
-  const DARK_BG_NAMES = new Set(["Hulu", "Hulu + Live TV", "Peacock", "Apple TV", "Apple TV+", "Netflix", "Max", "HBO Max", "Prime Video", "Amazon Prime Video"]);
-  const useDarkBg =
-    (channel.affiliate_partner && DARK_BG_PARTNERS.has(channel.affiliate_partner)) ||
-    DARK_BG_NAMES.has(channel.channel_name);
-  const logoBgClass = useDarkBg ? "bg-black text-white" : "bg-white/95 text-black";
+  // Per-brand background colors that match each logo's native background.
+  const PARTNER_BG: Record<string, string> = {
+    hulu: "#1ce783",        // Hulu green
+    peacock: "#000000",     // Peacock black
+    fubotv: "#d10f1c",      // Fubo red
+    telemundo: "#0033a0",   // Telemundo blue
+    fox: "#000000",         // FOX Sports black
+    foxsports: "#000000",
+    apple: "#000000",
+    appletv: "#000000",
+    netflix: "#000000",
+    max: "#000000",
+    hbomax: "#000000",
+    primevideo: "#00a8e1",
+    prime: "#00a8e1",
+    vix: "#ff0044",
+    dazn: "#f8f8f8",
+    bein: "#7a1f7a",
+  };
+  const NAME_BG: Record<string, string> = {
+    "Hulu": "#1ce783",
+    "Hulu + Live TV": "#1ce783",
+    "Peacock": "#000000",
+    "fuboTV": "#d10f1c",
+    "FuboTV": "#d10f1c",
+    "Telemundo": "#0033a0",
+    "Telemundo Deportes": "#0033a0",
+    "FOX Sports": "#000000",
+    "Fox Sports": "#000000",
+    "ViX": "#ff0044",
+    "Vix": "#ff0044",
+    "Apple TV": "#000000",
+    "Apple TV+": "#000000",
+    "Netflix": "#000000",
+    "Max": "#000000",
+    "HBO Max": "#000000",
+    "Prime Video": "#00a8e1",
+    "Amazon Prime Video": "#00a8e1",
+  };
+  const bgColor =
+    (channel.affiliate_partner && PARTNER_BG[channel.affiliate_partner]) ||
+    NAME_BG[channel.channel_name] ||
+    null;
+  // Compute readable text color for fallback initial.
+  const isDark = (hex: string) => {
+    const h = hex.replace("#", "");
+    const r = parseInt(h.slice(0, 2), 16);
+    const g = parseInt(h.slice(2, 4), 16);
+    const b = parseInt(h.slice(4, 6), 16);
+    return (r * 299 + g * 587 + b * 114) / 1000 < 140;
+  };
+  const logoBgStyle = bgColor ? { backgroundColor: bgColor } : undefined;
+  const logoBgClass = bgColor
+    ? isDark(bgColor) ? "text-white" : "text-black"
+    : "bg-white/95 text-black";
 
   return (
     <div className="flex items-center gap-3 rounded-xl border border-border bg-card p-3.5 transition-colors hover:border-primary">
