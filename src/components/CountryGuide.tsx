@@ -31,7 +31,7 @@ export function CountryGuide({ locale, country, channels, fixtures }: Props) {
   const m = t(locale);
   const name = locale === "es" ? country.name_es : country.name_en;
   const faqs = buildCountryFaqs(country, locale);
-  const hasFree = channels.some((c) => c.is_free);
+  
 
   return (
     <>
