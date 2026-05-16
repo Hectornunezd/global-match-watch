@@ -1,7 +1,5 @@
 # MatchLiveNow ads.txt
 # Authorized digital sellers for matchlivenow.com
 # Format: <domain>, <publisher_id>, <relationship>, <cert_authority_id>
-# Replace the placeholder line below with your real Google AdSense publisher ID
-# once your AdSense account is approved (e.g. ca-pub-XXXXXXXXXXXXXXXX).
 
-google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0
+google.com, pub-7422798753725684, DIRECT, f08c47fec0942fa0
