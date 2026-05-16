@@ -2,7 +2,6 @@ import type { Channel } from "@/lib/data";
 import type { Locale } from "@/lib/i18n";
 import { t } from "@/lib/i18n";
 import { ChannelCard } from "./ChannelCard";
-import { VPNUpsell } from "./VPNUpsell";
 import { AffiliateDisclosure } from "./AffiliateDisclosure";
 
 const COUNTRY_NAMES: Record<string, { en: string; es: string }> = {
@@ -49,11 +48,11 @@ export function WhereToWatch({ channels, countryCode, locale }: Props) {
         <h2 className="mb-4 text-2xl">
           {m.sections.whereToWatch} <span className="text-primary">{country}</span>
         </h2>
-        <VPNUpsell
-          locale={locale}
-          countryWithFreeStream="United Kingdom"
-          countryCode={countryCode}
-        />
+        <p className="rounded-xl border border-border bg-card p-5 text-sm text-muted-foreground">
+          {locale === "es"
+            ? "Aún no tenemos canales confirmados para tu país. Vuelve pronto."
+            : "No confirmed channels for your country yet. Check back soon."}
+        </p>
       </section>
     );
   }

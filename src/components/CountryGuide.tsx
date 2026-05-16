@@ -31,7 +31,7 @@ export function CountryGuide({ locale, country, channels, fixtures }: Props) {
   const m = t(locale);
   const name = locale === "es" ? country.name_es : country.name_en;
   const faqs = buildCountryFaqs(country, locale);
-  const hasFree = channels.some((c) => c.is_free);
+  
 
   return (
     <>
@@ -61,24 +61,6 @@ export function CountryGuide({ locale, country, channels, fixtures }: Props) {
             </div>
           </section>
 
-          {!hasFree && (
-            <section className="mt-8 rounded-xl border border-primary/40 bg-primary/5 p-5">
-              <h3 className="text-lg">{locale === "es" ? "¿Sin opciones gratis? Usa una VPN" : "No free options? Use a VPN"}</h3>
-              <p className="mt-2 text-sm text-muted-foreground">
-                {locale === "es"
-                  ? "Una VPN te permite acceder a transmisiones gratis disponibles en otros países."
-                  : "A VPN lets you access free streams available in other countries."}
-              </p>
-              <a
-                href="https://nordvpn.com/?ref=matchlivenow&utm_source=matchlivenow&utm_medium=affiliate&utm_campaign=worldcup2026"
-                target="_blank"
-                rel="sponsored noopener noreferrer"
-                className="mt-3 inline-block rounded-md bg-primary px-4 py-2 text-xs font-bold uppercase tracking-wider text-primary-foreground hover:opacity-90"
-              >
-                {locale === "es" ? "Probar NordVPN" : "Try NordVPN"}
-              </a>
-            </section>
-          )}
 
           {fixtures.length > 0 && (
             <section className="mt-10">
