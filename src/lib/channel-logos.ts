@@ -16,6 +16,7 @@ const PARTNER_LOCAL_LOGO: Record<string, string> = {
   fubotv: fubotvLogo,
   telemundo: telemundoLogo,
   fox: foxSportsLogo,
+  vix: vixLogo,
 };
 
 const NAME_LOCAL_LOGO: Record<string, string> = {
