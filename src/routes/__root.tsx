@@ -68,7 +68,7 @@ export const Route = createRootRoute({
             {
               async: true,
               src: `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${import.meta.env.VITE_ADSENSE_CLIENT_ID}`,
-              crossOrigin: "anonymous",
+              crossOrigin: "anonymous" as const,
             },
           ]
         : []),
