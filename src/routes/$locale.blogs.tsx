@@ -53,7 +53,8 @@ function BlogsIndex() {
             return (
               <Link
                 key={slug}
-                to={localeUrl(locale, `/blogs/${slug}`)}
+                to="/$locale/blogs/$slug"
+                params={{ locale, slug }}
                 className="group flex flex-col border border-border bg-card transition-colors hover:border-primary"
               >
                 <div className="aspect-[16/10] w-full overflow-hidden bg-black">
