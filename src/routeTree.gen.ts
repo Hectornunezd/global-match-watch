@@ -27,6 +27,7 @@ import { Route as LocalePrivacyPolicyRouteImport } from './routes/$locale.privac
 import { Route as LocalePartnersRouteImport } from './routes/$locale.partners'
 import { Route as LocaleHowToWatchWorldCupInChar123slugChar125RouteImport } from './routes/$locale.how-to-watch-world-cup-in-{$slug}'
 import { Route as LocaleDondeVerMundialEnChar123slugChar125RouteImport } from './routes/$locale.donde-ver-mundial-en-{$slug}'
+import { Route as LocaleBlogsRouteImport } from './routes/$locale.blogs'
 import { Route as LocaleBlogsIndexRouteImport } from './routes/$locale.blogs.index'
 import { Route as LocaleTeamSlugRouteImport } from './routes/$locale.team.$slug'
 import { Route as LocaleBlogsSlugRouteImport } from './routes/$locale.blogs.$slug'
@@ -127,10 +128,15 @@ const LocaleDondeVerMundialEnChar123slugChar125Route =
     path: '/donde-ver-mundial-en-{$slug}',
     getParentRoute: () => LocaleRoute,
   } as any)
-const LocaleBlogsIndexRoute = LocaleBlogsIndexRouteImport.update({
-  id: '/blogs/',
-  path: '/blogs/',
+const LocaleBlogsRoute = LocaleBlogsRouteImport.update({
+  id: '/blogs',
+  path: '/blogs',
   getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleBlogsIndexRoute = LocaleBlogsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => LocaleBlogsRoute,
 } as any)
 const LocaleTeamSlugRoute = LocaleTeamSlugRouteImport.update({
   id: '/team/$slug',
@@ -138,9 +144,9 @@ const LocaleTeamSlugRoute = LocaleTeamSlugRouteImport.update({
   getParentRoute: () => LocaleRoute,
 } as any)
 const LocaleBlogsSlugRoute = LocaleBlogsSlugRouteImport.update({
-  id: '/blogs/$slug',
-  path: '/blogs/$slug',
-  getParentRoute: () => LocaleRoute,
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => LocaleBlogsRoute,
 } as any)
 const ApiPublicHooksSyncFixturesRoute =
   ApiPublicHooksSyncFixturesRouteImport.update({
@@ -157,6 +163,7 @@ export interface FileRoutesByFullPath {
   '/sitemap-es.xml': typeof SitemapEsDotxmlRoute
   '/sitemap-index.xml': typeof SitemapIndexDotxmlRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/$locale/blogs': typeof LocaleBlogsRouteWithChildren
   '/$locale/donde-ver-mundial-en-{$slug}': typeof LocaleDondeVerMundialEnChar123slugChar125Route
   '/$locale/how-to-watch-world-cup-in-{$slug}': typeof LocaleHowToWatchWorldCupInChar123slugChar125Route
   '/$locale/partners': typeof LocalePartnersRoute
@@ -205,6 +212,7 @@ export interface FileRoutesById {
   '/sitemap-es.xml': typeof SitemapEsDotxmlRoute
   '/sitemap-index.xml': typeof SitemapIndexDotxmlRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/$locale/blogs': typeof LocaleBlogsRouteWithChildren
   '/$locale/donde-ver-mundial-en-{$slug}': typeof LocaleDondeVerMundialEnChar123slugChar125Route
   '/$locale/how-to-watch-world-cup-in-{$slug}': typeof LocaleHowToWatchWorldCupInChar123slugChar125Route
   '/$locale/partners': typeof LocalePartnersRoute
@@ -231,6 +239,7 @@ export interface FileRouteTypes {
     | '/sitemap-es.xml'
     | '/sitemap-index.xml'
     | '/sitemap.xml'
+    | '/$locale/blogs'
     | '/$locale/donde-ver-mundial-en-{$slug}'
     | '/$locale/how-to-watch-world-cup-in-{$slug}'
     | '/$locale/partners'
@@ -278,6 +287,7 @@ export interface FileRouteTypes {
     | '/sitemap-es.xml'
     | '/sitemap-index.xml'
     | '/sitemap.xml'
+    | '/$locale/blogs'
     | '/$locale/donde-ver-mundial-en-{$slug}'
     | '/$locale/how-to-watch-world-cup-in-{$slug}'
     | '/$locale/partners'
@@ -436,12 +446,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocaleDondeVerMundialEnChar123slugChar125RouteImport
       parentRoute: typeof LocaleRoute
     }
+    '/$locale/blogs': {
+      id: '/$locale/blogs'
+      path: '/blogs'
+      fullPath: '/$locale/blogs'
+      preLoaderRoute: typeof LocaleBlogsRouteImport
+      parentRoute: typeof LocaleRoute
+    }
     '/$locale/blogs/': {
       id: '/$locale/blogs/'
-      path: '/blogs'
+      path: '/'
       fullPath: '/$locale/blogs/'
       preLoaderRoute: typeof LocaleBlogsIndexRouteImport
-      parentRoute: typeof LocaleRoute
+      parentRoute: typeof LocaleBlogsRoute
     }
     '/$locale/team/$slug': {
       id: '/$locale/team/$slug'
@@ -452,10 +469,10 @@ declare module '@tanstack/react-router' {
     }
     '/$locale/blogs/$slug': {
       id: '/$locale/blogs/$slug'
-      path: '/blogs/$slug'
+      path: '/$slug'
       fullPath: '/$locale/blogs/$slug'
       preLoaderRoute: typeof LocaleBlogsSlugRouteImport
-      parentRoute: typeof LocaleRoute
+      parentRoute: typeof LocaleBlogsRoute
     }
     '/api/public/hooks/sync-fixtures': {
       id: '/api/public/hooks/sync-fixtures'
@@ -467,7 +484,22 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface LocaleBlogsRouteChildren {
+  LocaleBlogsSlugRoute: typeof LocaleBlogsSlugRoute
+  LocaleBlogsIndexRoute: typeof LocaleBlogsIndexRoute
+}
+
+const LocaleBlogsRouteChildren: LocaleBlogsRouteChildren = {
+  LocaleBlogsSlugRoute: LocaleBlogsSlugRoute,
+  LocaleBlogsIndexRoute: LocaleBlogsIndexRoute,
+}
+
+const LocaleBlogsRouteWithChildren = LocaleBlogsRoute._addFileChildren(
+  LocaleBlogsRouteChildren,
+)
+
 interface LocaleRouteChildren {
+  LocaleBlogsRoute: typeof LocaleBlogsRouteWithChildren
   LocaleDondeVerMundialEnChar123slugChar125Route: typeof LocaleDondeVerMundialEnChar123slugChar125Route
   LocaleHowToWatchWorldCupInChar123slugChar125Route: typeof LocaleHowToWatchWorldCupInChar123slugChar125Route
   LocalePartnersRoute: typeof LocalePartnersRoute
@@ -477,12 +509,11 @@ interface LocaleRouteChildren {
   LocaleVerChar123slugChar125Route: typeof LocaleVerChar123slugChar125Route
   LocaleWatchChar123slugChar125Route: typeof LocaleWatchChar123slugChar125Route
   LocaleIndexRoute: typeof LocaleIndexRoute
-  LocaleBlogsSlugRoute: typeof LocaleBlogsSlugRoute
   LocaleTeamSlugRoute: typeof LocaleTeamSlugRoute
-  LocaleBlogsIndexRoute: typeof LocaleBlogsIndexRoute
 }
 
 const LocaleRouteChildren: LocaleRouteChildren = {
+  LocaleBlogsRoute: LocaleBlogsRouteWithChildren,
   LocaleDondeVerMundialEnChar123slugChar125Route:
     LocaleDondeVerMundialEnChar123slugChar125Route,
   LocaleHowToWatchWorldCupInChar123slugChar125Route:
@@ -494,9 +525,7 @@ const LocaleRouteChildren: LocaleRouteChildren = {
   LocaleVerChar123slugChar125Route: LocaleVerChar123slugChar125Route,
   LocaleWatchChar123slugChar125Route: LocaleWatchChar123slugChar125Route,
   LocaleIndexRoute: LocaleIndexRoute,
-  LocaleBlogsSlugRoute: LocaleBlogsSlugRoute,
   LocaleTeamSlugRoute: LocaleTeamSlugRoute,
-  LocaleBlogsIndexRoute: LocaleBlogsIndexRoute,
 }
 
 const LocaleRouteWithChildren =
