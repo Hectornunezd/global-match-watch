@@ -67,7 +67,7 @@ export const BLOG_POSTS: BlogPost[] = [
         },
       ],
       outro:
-        "That's it — you're ready for kickoff. Bookmark MatchLiveNow, set your country once, and every match page will tell you exactly where to watch, whether it's free or paid, and link you straight to the broadcaster.",
+        "That's it — you're ready for kickoff. On matchlivenow.com you can find every match and exactly where to watch it: bookmark the site, set your country once, and every match page will show you the channels — free or paid — with a direct link to the broadcaster.",
       keywords:
         "how to watch World Cup 2026, World Cup 2026 streaming, watch World Cup live, World Cup 2026 channels, free World Cup streaming, World Cup VPN",
     },
@@ -105,7 +105,7 @@ export const BLOG_POSTS: BlogPost[] = [
         },
       ],
       outro:
-        "Listo — estás preparado para el pitazo inicial. Guarda MatchLiveNow en favoritos, configura tu país una vez y cada página de partido te dirá exactamente dónde ver, si es gratis o de pago, y te llevará directo al canal.",
+        "Listo — estás preparado para el pitazo inicial. En matchlivenow.com puedes encontrar todos los partidos y dónde verlos: guarda el sitio en favoritos, configura tu país una vez y cada página de partido te mostrará los canales — gratis o de pago — con enlace directo a la transmisión.",
       keywords:
         "cómo ver el Mundial 2026, Mundial 2026 streaming, ver Mundial en vivo, canales Mundial 2026, ver Mundial gratis, VPN Mundial",
     },
@@ -150,7 +150,7 @@ export const BLOG_POSTS: BlogPost[] = [
         },
       ],
       outro:
-        "Free coverage of the World Cup 2026 is widely available — you just need to know where to look. MatchLiveNow lists every free broadcaster per country, per match, so you'll never miss a game because you couldn't find the right app.",
+        "Free coverage of the World Cup 2026 is widely available — you just need to know where to look. On matchlivenow.com you can find every match and where to watch it, with every free broadcaster listed per country and per match, so you'll never miss a game because you couldn't find the right app.",
       keywords:
         "free World Cup streaming, watch World Cup free, BBC iPlayer World Cup, Telemundo Mundial, RTVE Mundial, free World Cup channels",
     },
@@ -188,7 +188,7 @@ export const BLOG_POSTS: BlogPost[] = [
         },
       ],
       outro:
-        "La cobertura gratuita del Mundial 2026 está al alcance — solo hay que saber dónde mirar. MatchLiveNow lista todos los canales gratuitos por país y por partido, para que nunca te pierdas un juego por no encontrar la app correcta.",
+        "La cobertura gratuita del Mundial 2026 está al alcance — solo hay que saber dónde mirar. En matchlivenow.com puedes encontrar todos los partidos y dónde verlos, con todos los canales gratuitos listados por país y por partido, para que nunca te pierdas un juego por no encontrar la app correcta.",
       keywords:
         "ver Mundial gratis, streaming gratis Mundial 2026, Telemundo Mundial, TUDN Mundial, RTVE Mundial, canales gratis Mundial",
     },
@@ -233,7 +233,7 @@ export const BLOG_POSTS: BlogPost[] = [
         },
       ],
       outro:
-        "A great watch party is 80% preparation and 20% football. Run through this checklist a few days before each match day and you'll spend the actual game enjoying it — not fixing it. ¡Que gane el mejor!",
+        "A great watch party is 80% preparation and 20% football. Run through this checklist a few days before each match day and you'll spend the actual game enjoying it — not fixing it. And remember: on matchlivenow.com you can find every match and where to watch it, so the only thing left to decide is the snacks. ¡Que gane el mejor!",
       keywords:
         "World Cup watch party, World Cup 2026 setup, how to host World Cup, World Cup home viewing, World Cup 2026 checklist",
     },
@@ -271,7 +271,7 @@ export const BLOG_POSTS: BlogPost[] = [
         },
       ],
       outro:
-        "Una buena reunión para ver fútbol es 80% preparación y 20% fútbol. Repasa esta lista unos días antes de cada partido y vivirás el juego disfrutándolo — no arreglándolo. ¡Que gane el mejor!",
+        "Una buena reunión para ver fútbol es 80% preparación y 20% fútbol. Repasa esta lista unos días antes de cada partido y vivirás el juego disfrutándolo — no arreglándolo. Y recuerda: en matchlivenow.com puedes encontrar todos los partidos y dónde verlos, así lo único que queda por decidir son los snacks. ¡Que gane el mejor!",
       keywords:
         "ver Mundial en casa, fiesta Mundial 2026, preparación Mundial 2026, cómo organizar Mundial, lista Mundial 2026",
     },
