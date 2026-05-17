@@ -1,5 +1,5 @@
-import heroTrophy from "@/assets/hero-trophy.jpg";
-import matchCover from "@/assets/match-cover.jpg";
+import watchCountry from "@/assets/blog-watch-country.jpg";
+import freeStreaming from "@/assets/blog-free-streaming.jpg";
 import fansWatching from "@/assets/blog-fans-watching.jpg";
 
 export type BlogPost = {
@@ -30,7 +30,7 @@ export const BLOG_POSTS: BlogPost[] = [
   {
     slug_en: "how-to-watch-world-cup-2026-live-from-your-country",
     slug_es: "como-ver-el-mundial-2026-en-vivo-desde-tu-pais",
-    cover: heroTrophy,
+    cover: watchCountry,
     date: "2026-05-10",
     author: "MatchLiveNow Team",
     en: {
@@ -113,7 +113,7 @@ export const BLOG_POSTS: BlogPost[] = [
   {
     slug_en: "best-free-streaming-services-for-world-cup-2026",
     slug_es: "mejores-servicios-gratis-para-ver-el-mundial-2026",
-    cover: matchCover,
+    cover: freeStreaming,
     date: "2026-05-12",
     author: "MatchLiveNow Team",
     en: {
