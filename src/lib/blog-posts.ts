@@ -283,3 +283,26 @@ export function getBlogPost(slug: string, locale: "en" | "es"): BlogPost | null 
     BLOG_POSTS.find((p) => (locale === "es" ? p.slug_es : p.slug_en) === slug) ?? null
   );
 }
+
+const BLOG_MONTHS = {
+  en: {
+    short: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    long: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+  },
+  es: {
+    short: ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"],
+    long: ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"],
+  },
+} as const;
+
+export function formatBlogDate(date: string, locale: "en" | "es", style: "short" | "long" = "short") {
+  const [yearText, monthText, dayText] = date.split("-");
+  const year = Number(yearText);
+  const month = Number(monthText);
+  const day = Number(dayText);
+  const monthName = BLOG_MONTHS[locale][style][month - 1];
+
+  if (!year || !monthName || !day) return date;
+  if (locale === "es") return style === "long" ? `${day} de ${monthName} de ${year}` : `${day} ${monthName} ${year}`;
+  return `${monthName} ${day}, ${year}`;
+}

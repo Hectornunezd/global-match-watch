@@ -1,4 +1,5 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import { useEffect } from "react";
 
 import appCss from "../styles.css?url";
 
@@ -66,11 +67,6 @@ export const Route = createRootRoute({
         children: `window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-TQH64JKYC5');`,
       },
       {
-        async: true,
-        src: "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7422798753725684",
-        crossOrigin: "anonymous" as const,
-      },
-      {
         children: `(function(i,m,p,a,c,t){c.ire_o=p;c[p]=c[p]||function(){(c[p].a=c[p].a||[]).push(arguments)};t=a.createElement(m);var z=a.getElementsByTagName(m)[0];t.async=1;t.src=i;z.parentNode.insertBefore(t,z)})('https://utt.impactcdn.com/P-A7313535-6ee4-45ea-8c3b-8c00d2ad44631.js','script','impactStat',document,window);impactStat('transformLinks');impactStat('trackImpression');`,
       },
     ],
@@ -95,5 +91,16 @@ function RootShell({ children }: { children: React.ReactNode }) {
 }
 
 function RootComponent() {
+  useEffect(() => {
+    const existing = document.querySelector('script[src^="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"]');
+    if (existing) return;
+
+    const script = document.createElement("script");
+    script.async = true;
+    script.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7422798753725684";
+    script.crossOrigin = "anonymous";
+    document.head.appendChild(script);
+  }, []);
+
   return <Outlet />;
 }

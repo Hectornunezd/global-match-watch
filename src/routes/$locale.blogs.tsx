@@ -1,7 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { isLocale, type Locale, localeUrl } from "@/lib/i18n";
 import { buildMeta } from "@/lib/seo";
-import { BLOG_POSTS } from "@/lib/blog-posts";
+import { BLOG_POSTS, formatBlogDate } from "@/lib/blog-posts";
 
 export const Route = createFileRoute("/$locale/blogs")({
   beforeLoad: ({ params }) => {
@@ -69,11 +69,7 @@ function BlogsIndex() {
                 </div>
                 <div className="flex flex-1 flex-col gap-3 p-5">
                   <span className="font-display text-[10px] uppercase tracking-[0.2em] text-primary">
-                    {new Date(post.date).toLocaleDateString(locale === "es" ? "es-ES" : "en-US", {
-                      year: "numeric",
-                      month: "short",
-                      day: "numeric",
-                    })}
+                    {formatBlogDate(post.date, locale, "short")}
                   </span>
                   <h2 className="font-display text-xl uppercase leading-tight text-foreground group-hover:text-primary">
                     {content.title}
