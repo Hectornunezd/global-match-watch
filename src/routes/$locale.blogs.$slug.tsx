@@ -1,7 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { isLocale, type Locale, localeUrl } from "@/lib/i18n";
 import { buildMeta, jsonLdScript } from "@/lib/seo";
-import { BLOG_POSTS, getBlogPost } from "@/lib/blog-posts";
+import { BLOG_POSTS, formatBlogDate, getBlogPost } from "@/lib/blog-posts";
 
 export const Route = createFileRoute("/$locale/blogs/$slug")({
   beforeLoad: ({ params }) => {
@@ -79,11 +79,7 @@ function BlogPostPage() {
           </h1>
           <p className="mt-4 text-base text-muted-foreground sm:text-lg">{content.excerpt}</p>
           <p className="mt-4 font-mono text-xs uppercase tracking-wider text-muted-foreground">
-            {new Date(post.date).toLocaleDateString(locale === "es" ? "es-ES" : "en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}{" "}
+            {formatBlogDate(post.date, locale, "long")} {" "}
             · {post.author}
           </p>
         </div>
@@ -130,7 +126,8 @@ function BlogPostPage() {
               return (
                 <Link
                   key={s}
-                  to={localeUrl(locale, `/blogs/${s}`)}
+                  to="/$locale/blogs/$slug"
+                  params={{ locale, slug: s }}
                   className="block border border-border bg-card p-4 transition-colors hover:border-primary"
                 >
                   <h3 className="font-display text-base uppercase leading-tight text-foreground">
