@@ -55,15 +55,15 @@ export function buildMeta(input: MetaInput) {
     { rel: "canonical", href: url },
     {
       rel: "alternate",
-      hreflang: input.locale === "en" ? "es" : "en",
+      hrefLang: input.locale === "en" ? "es" : "en",
       href: altUrl,
     },
     {
       rel: "alternate",
-      hreflang: input.locale,
+      hrefLang: input.locale,
       href: url,
     },
-    { rel: "alternate", hreflang: "x-default", href: `${SITE_URL}${input.path}` },
+    { rel: "alternate", hrefLang: "x-default", href: `${SITE_URL}${input.path}` },
   ];
   return { meta, links };
 }
