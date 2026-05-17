@@ -46,49 +46,8 @@ export function ChannelCard({ channel, locale, fixture, pageType, countryCode }:
   const logoSrc = channel.logo_url || fallbackLogo;
   const [logoFailed, setLogoFailed] = useState(false);
 
-  // Per-brand background colors that match each logo's native background.
-  const PARTNER_BG: Record<string, string> = {
-    hulu: "#1ce783",        // Hulu green
-    peacock: "#000000",     // Peacock black
-    fubotv: "#d10f1c",      // Fubo red
-    telemundo: "#0033a0",   // Telemundo blue
-    fox: "#e8e8e8",         // FOX Sports silver/white shield bg
-    foxsports: "#e8e8e8",
-    apple: "#000000",
-    appletv: "#000000",
-    netflix: "#000000",
-    max: "#000000",
-    hbomax: "#000000",
-    primevideo: "#00a8e1",
-    prime: "#00a8e1",
-    vix: "#ee6c1e",
-    dazn: "#f8f8f8",
-    bein: "#7a1f7a",
-  };
-  const NAME_BG: Record<string, string> = {
-    "Hulu": "#1ce783",
-    "Hulu + Live TV": "#1ce783",
-    "Peacock": "#000000",
-    "fuboTV": "#d10f1c",
-    "FuboTV": "#d10f1c",
-    "Telemundo": "#0033a0",
-    "Telemundo Deportes": "#0033a0",
-    "FOX Sports": "#e8e8e8",
-    "Fox Sports": "#e8e8e8",
-    "ViX": "#ee6c1e",
-    "Vix": "#ee6c1e",
-    "Apple TV": "#000000",
-    "Apple TV+": "#000000",
-    "Netflix": "#000000",
-    "Max": "#000000",
-    "HBO Max": "#000000",
-    "Prime Video": "#00a8e1",
-    "Amazon Prime Video": "#00a8e1",
-  };
-  const bgColor =
-    (channel.affiliate_partner && PARTNER_BG[channel.affiliate_partner]) ||
-    NAME_BG[channel.channel_name] ||
-    null;
+  // Use a white background for all logos for visual consistency.
+  const bgColor = "#ffffff";
   // Compute readable text color for fallback initial.
   const isDark = (hex: string) => {
     const h = hex.replace("#", "");
