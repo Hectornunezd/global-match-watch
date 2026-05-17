@@ -28,6 +28,7 @@ import { Route as LocalePartnersRouteImport } from './routes/$locale.partners'
 import { Route as LocaleHowToWatchWorldCupInChar123slugChar125RouteImport } from './routes/$locale.how-to-watch-world-cup-in-{$slug}'
 import { Route as LocaleDondeVerMundialEnChar123slugChar125RouteImport } from './routes/$locale.donde-ver-mundial-en-{$slug}'
 import { Route as LocaleBlogsRouteImport } from './routes/$locale.blogs'
+import { Route as LocaleBlogsIndexRouteImport } from './routes/$locale.blogs.index'
 import { Route as LocaleTeamSlugRouteImport } from './routes/$locale.team.$slug'
 import { Route as LocaleBlogsSlugRouteImport } from './routes/$locale.blogs.$slug'
 import { Route as ApiPublicHooksSyncFixturesRouteImport } from './routes/api/public/hooks/sync-fixtures'
@@ -132,6 +133,11 @@ const LocaleBlogsRoute = LocaleBlogsRouteImport.update({
   path: '/blogs',
   getParentRoute: () => LocaleRoute,
 } as any)
+const LocaleBlogsIndexRoute = LocaleBlogsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => LocaleBlogsRoute,
+} as any)
 const LocaleTeamSlugRoute = LocaleTeamSlugRouteImport.update({
   id: '/team/$slug',
   path: '/team/$slug',
@@ -171,6 +177,7 @@ export interface FileRoutesByFullPath {
   '/$locale/': typeof LocaleIndexRoute
   '/$locale/blogs/$slug': typeof LocaleBlogsSlugRoute
   '/$locale/team/$slug': typeof LocaleTeamSlugRoute
+  '/$locale/blogs/': typeof LocaleBlogsIndexRoute
   '/api/public/hooks/sync-fixtures': typeof ApiPublicHooksSyncFixturesRoute
 }
 export interface FileRoutesByTo {
@@ -180,7 +187,6 @@ export interface FileRoutesByTo {
   '/sitemap-es.xml': typeof SitemapEsDotxmlRoute
   '/sitemap-index.xml': typeof SitemapIndexDotxmlRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/$locale/blogs': typeof LocaleBlogsRouteWithChildren
   '/$locale/donde-ver-mundial-en-{$slug}': typeof LocaleDondeVerMundialEnChar123slugChar125Route
   '/$locale/how-to-watch-world-cup-in-{$slug}': typeof LocaleHowToWatchWorldCupInChar123slugChar125Route
   '/$locale/partners': typeof LocalePartnersRoute
@@ -194,6 +200,7 @@ export interface FileRoutesByTo {
   '/$locale': typeof LocaleIndexRoute
   '/$locale/blogs/$slug': typeof LocaleBlogsSlugRoute
   '/$locale/team/$slug': typeof LocaleTeamSlugRoute
+  '/$locale/blogs': typeof LocaleBlogsIndexRoute
   '/api/public/hooks/sync-fixtures': typeof ApiPublicHooksSyncFixturesRoute
 }
 export interface FileRoutesById {
@@ -219,6 +226,7 @@ export interface FileRoutesById {
   '/$locale/': typeof LocaleIndexRoute
   '/$locale/blogs/$slug': typeof LocaleBlogsSlugRoute
   '/$locale/team/$slug': typeof LocaleTeamSlugRoute
+  '/$locale/blogs/': typeof LocaleBlogsIndexRoute
   '/api/public/hooks/sync-fixtures': typeof ApiPublicHooksSyncFixturesRoute
 }
 export interface FileRouteTypes {
@@ -245,6 +253,7 @@ export interface FileRouteTypes {
     | '/$locale/'
     | '/$locale/blogs/$slug'
     | '/$locale/team/$slug'
+    | '/$locale/blogs/'
     | '/api/public/hooks/sync-fixtures'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -254,7 +263,6 @@ export interface FileRouteTypes {
     | '/sitemap-es.xml'
     | '/sitemap-index.xml'
     | '/sitemap.xml'
-    | '/$locale/blogs'
     | '/$locale/donde-ver-mundial-en-{$slug}'
     | '/$locale/how-to-watch-world-cup-in-{$slug}'
     | '/$locale/partners'
@@ -268,6 +276,7 @@ export interface FileRouteTypes {
     | '/$locale'
     | '/$locale/blogs/$slug'
     | '/$locale/team/$slug'
+    | '/$locale/blogs'
     | '/api/public/hooks/sync-fixtures'
   id:
     | '__root__'
@@ -292,6 +301,7 @@ export interface FileRouteTypes {
     | '/$locale/'
     | '/$locale/blogs/$slug'
     | '/$locale/team/$slug'
+    | '/$locale/blogs/'
     | '/api/public/hooks/sync-fixtures'
   fileRoutesById: FileRoutesById
 }
@@ -443,6 +453,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocaleBlogsRouteImport
       parentRoute: typeof LocaleRoute
     }
+    '/$locale/blogs/': {
+      id: '/$locale/blogs/'
+      path: '/'
+      fullPath: '/$locale/blogs/'
+      preLoaderRoute: typeof LocaleBlogsIndexRouteImport
+      parentRoute: typeof LocaleBlogsRoute
+    }
     '/$locale/team/$slug': {
       id: '/$locale/team/$slug'
       path: '/team/$slug'
@@ -469,10 +486,12 @@ declare module '@tanstack/react-router' {
 
 interface LocaleBlogsRouteChildren {
   LocaleBlogsSlugRoute: typeof LocaleBlogsSlugRoute
+  LocaleBlogsIndexRoute: typeof LocaleBlogsIndexRoute
 }
 
 const LocaleBlogsRouteChildren: LocaleBlogsRouteChildren = {
   LocaleBlogsSlugRoute: LocaleBlogsSlugRoute,
+  LocaleBlogsIndexRoute: LocaleBlogsIndexRoute,
 }
 
 const LocaleBlogsRouteWithChildren = LocaleBlogsRoute._addFileChildren(
