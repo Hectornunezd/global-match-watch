@@ -104,7 +104,7 @@ function BlogPostPage() {
           <p className="text-lg text-muted-foreground">{content.intro}</p>
 
           <ol className="space-y-8">
-            {content.steps.map((step, i) => (
+            {content.steps.map((step: { title: string; body: string }, i: number) => (
               <li key={i} className="border-l-2 border-primary pl-5">
                 <h2 className="font-display text-xl uppercase leading-tight text-foreground sm:text-2xl">
                   {step.title}
