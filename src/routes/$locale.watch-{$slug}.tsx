@@ -13,6 +13,7 @@ import { AdSlot } from "@/components/AdSlot";
 import { AffiliateDisclosure } from "@/components/AffiliateDisclosure";
 import { GamblingDisclaimer } from "@/components/GamblingDisclaimer";
 import { buildMeta, jsonLdScript, sportsEventJsonLd } from "@/lib/seo";
+import { trackClick } from "@/lib/affiliates";
 
 export const Route = createFileRoute("/$locale/watch-{$slug}")({
   beforeLoad: ({ params }) => {
@@ -185,24 +186,55 @@ export function MatchPage({ locale }: { locale: Locale }) {
 
         {/* Sidebar */}
         <aside className="space-y-6">
-          <div className="rounded-xl border border-border bg-card p-5">
-            <h3 className="text-base">{m.sections.odds}</h3>
-            <p className="mt-2 text-xs text-muted-foreground">
-              {locale === "es"
-                ? "Cuotas y promociones de socios. Apuesta de forma responsable."
-                : "Odds and promotions from partners. Bet responsibly."}
-            </p>
-            <a
-              href="https://bet365.com/?ref=matchlivenow&utm_source=matchlivenow&utm_medium=affiliate&utm_campaign=worldcup2026"
-              target="_blank"
-              rel="sponsored noopener noreferrer"
-              className="mt-3 block rounded-md bg-primary px-4 py-2 text-center text-xs font-bold uppercase tracking-wider text-primary-foreground hover:opacity-90"
-            >
-              bet365 →
-            </a>
-            <AffiliateDisclosure locale={locale} className="mt-2" />
-            <GamblingDisclaimer locale={locale} countryCode={geo.alpha2} className="mt-3" />
-          </div>
+          {geo.alpha3 === "DEU" ? (
+            <div className="rounded-xl border border-primary/40 bg-primary/5 p-5">
+              <h3 className="text-base">
+                {locale === "es" ? "Desbloquea más transmisiones" : "Unlock more streams"}
+              </h3>
+              <p className="mt-2 text-xs text-muted-foreground">
+                {locale === "es"
+                  ? "Accede a transmisiones gratuitas de otros países con una VPN segura."
+                  : "Access free streams from other countries with a secure VPN."}
+              </p>
+              <a
+                href="https://lowest-prices.eu/a/QWE9NHN1DNCrGV4"
+                target="_blank"
+                rel="sponsored noopener noreferrer"
+                onClick={() =>
+                  trackClick({
+                    fixtureId: fixture.id,
+                    countryCode: geo.alpha3,
+                    affiliatePartner: "lowest-prices-vpn",
+                    channelName: "VPN DE",
+                    pageType: "match",
+                  })
+                }
+                className="mt-3 block rounded-md bg-primary px-4 py-2 text-center text-xs font-bold uppercase tracking-wider text-primary-foreground hover:opacity-90"
+              >
+                {locale === "es" ? "Obtener VPN →" : "Get VPN →"}
+              </a>
+              <AffiliateDisclosure locale={locale} className="mt-2" />
+            </div>
+          ) : (
+            <div className="rounded-xl border border-border bg-card p-5">
+              <h3 className="text-base">{m.sections.odds}</h3>
+              <p className="mt-2 text-xs text-muted-foreground">
+                {locale === "es"
+                  ? "Cuotas y promociones de socios. Apuesta de forma responsable."
+                  : "Odds and promotions from partners. Bet responsibly."}
+              </p>
+              <a
+                href="https://bet365.com/?ref=matchlivenow&utm_source=matchlivenow&utm_medium=affiliate&utm_campaign=worldcup2026"
+                target="_blank"
+                rel="sponsored noopener noreferrer"
+                className="mt-3 block rounded-md bg-primary px-4 py-2 text-center text-xs font-bold uppercase tracking-wider text-primary-foreground hover:opacity-90"
+              >
+                bet365 →
+              </a>
+              <AffiliateDisclosure locale={locale} className="mt-2" />
+              <GamblingDisclaimer locale={locale} countryCode={geo.alpha2} className="mt-3" />
+            </div>
+          )}
           <AdSlot slot="rectangle" />
           <div className="rounded-xl border border-border bg-card p-5 text-sm text-muted-foreground">
             {m.labels.notIn} {countryName}?{" "}
