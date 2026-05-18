@@ -16,7 +16,13 @@ interface Props {
 export function ChannelCard({ channel, locale, fixture, pageType, countryCode }: Props) {
   const m = t(locale);
   const slug = fixture ? (locale === "es" ? fixture.slug_es : fixture.slug_en) : undefined;
-  const url = withUtm(channel.affiliate_url ?? channel.channel_url ?? "#", {
+  // Prefer a real affiliate URL, but fall back to the official channel URL
+  // when the affiliate link is missing or still a placeholder (example.com).
+  const isPlaceholder = (u?: string | null) => !u || /(^|\/\/)([^/]*\.)?example\.com/i.test(u);
+  const rawUrl = !isPlaceholder(channel.affiliate_url)
+    ? channel.affiliate_url!
+    : channel.channel_url ?? channel.affiliate_url ?? "#";
+  const url = withUtm(rawUrl, {
     pageType,
     matchSlug: slug,
     countryCode,
