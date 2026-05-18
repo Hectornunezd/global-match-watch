@@ -13,6 +13,7 @@ import { AdSlot } from "@/components/AdSlot";
 import { AffiliateDisclosure } from "@/components/AffiliateDisclosure";
 import { GamblingDisclaimer } from "@/components/GamblingDisclaimer";
 import { buildMeta, jsonLdScript, sportsEventJsonLd } from "@/lib/seo";
+import { trackClick } from "@/lib/affiliates";
 
 export const Route = createFileRoute("/$locale/watch-{$slug}")({
   beforeLoad: ({ params }) => {
