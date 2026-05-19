@@ -217,23 +217,45 @@ export function MatchPage({ locale }: { locale: Locale }) {
               <AffiliateDisclosure locale={locale} className="mt-2" />
             </div>
           ) : (
-            <div className="rounded-xl border border-border bg-card p-5">
-              <h3 className="text-base">{m.sections.odds}</h3>
-              <p className="mt-2 text-xs text-muted-foreground">
-                {locale === "es"
-                  ? "Cuotas y promociones de socios. Apuesta de forma responsable."
-                  : "Odds and promotions from partners. Bet responsibly."}
-              </p>
+            <div className="overflow-hidden rounded-xl border border-border bg-card">
               <a
-                href="https://bet365.com/?ref=matchlivenow&utm_source=matchlivenow&utm_medium=affiliate&utm_campaign=worldcup2026"
+                href="https://price-low.eu/a/PND3Mi5LYpC6mPM"
                 target="_blank"
                 rel="sponsored noopener noreferrer"
-                className="mt-3 block rounded-md bg-primary px-4 py-2 text-center text-xs font-bold uppercase tracking-wider text-primary-foreground hover:opacity-90"
+                onClick={() =>
+                  trackClick({
+                    fixtureId: fixture.id,
+                    countryCode: geo.alpha3,
+                    affiliatePartner: "surveoo",
+                    channelName: "Surveoo",
+                    pageType: "match",
+                  })
+                }
+                className="block transition-opacity hover:opacity-90"
               >
-                bet365 →
+                <img
+                  src={surveooBanner}
+                  alt={locale === "es" ? "Surveoo - Gana hasta 7€ por encuesta" : "Surveoo - Earn up to €7 per survey"}
+                  loading="lazy"
+                  className="block w-full"
+                />
+                <div className="p-4">
+                  <h3 className="text-base">
+                    {locale === "es" ? "Gana hasta 7€ por encuesta" : "Earn up to €7 per survey"}
+                  </h3>
+                  <p className="mt-2 text-xs text-muted-foreground">
+                    {locale === "es"
+                      ? "Únete a la comunidad Surveoo y gana dinero contestando encuestas pagadas."
+                      : "Join the Surveoo community and earn money by completing paid surveys."}
+                  </p>
+                  <span className="mt-3 block rounded-md bg-primary px-4 py-2 text-center text-xs font-bold uppercase tracking-wider text-primary-foreground">
+                    {locale === "es" ? "Empezar ahora →" : "Start now →"}
+                  </span>
+                </div>
               </a>
-              <AffiliateDisclosure locale={locale} className="mt-2" />
-              <GamblingDisclaimer locale={locale} countryCode={geo.alpha2} className="mt-3" />
+              <div className="px-4 pb-4">
+                <AffiliateDisclosure locale={locale} />
+              </div>
             </div>
           )}
           <AdSlot slot="rectangle" />
