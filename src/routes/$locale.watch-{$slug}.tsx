@@ -14,6 +14,7 @@ import { AffiliateDisclosure } from "@/components/AffiliateDisclosure";
 import { GamblingDisclaimer } from "@/components/GamblingDisclaimer";
 import { buildMeta, jsonLdScript, sportsEventJsonLd } from "@/lib/seo";
 import { trackClick } from "@/lib/affiliates";
+import surveooBanner from "@/assets/surveoo-banner.webp";
 
 export const Route = createFileRoute("/$locale/watch-{$slug}")({
   beforeLoad: ({ params }) => {
