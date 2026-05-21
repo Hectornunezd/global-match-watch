@@ -81,6 +81,8 @@ const PARTNER_LOCAL_LOGO: Record<string, string> = {
   bein: beinSportsLogo,
   m6: m6plusLogo,
   hrt: hrtLogo,
+  claro: claroSportsLogo,
+  televicentro: televicentroLogo,
 };
 
 const NAME_LOCAL_LOGO: Record<string, string> = {
