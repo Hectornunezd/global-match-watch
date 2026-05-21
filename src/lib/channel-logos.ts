@@ -28,6 +28,11 @@ import rdsLogo from "@/assets/logos/rds.jpg";
 import expressvpnLogo from "@/assets/logos/expressvpn.jpg";
 import ctvLogo from "@/assets/logos/ctv.jpg";
 import tsnLogo from "@/assets/logos/tsn.jpg";
+import winSportsLogo from "@/assets/logos/winsports.jpg";
+import rcnLogo from "@/assets/logos/rcn.jpg";
+import rcnAppLogo from "@/assets/logos/rcn-app.jpg";
+import caracolLogo from "@/assets/logos/caracol.jpg";
+import caracolPlayLogo from "@/assets/logos/caracol-play.jpg";
 
 // Local logo overrides (take priority over Clearbit domain lookup).
 const PARTNER_LOCAL_LOGO: Record<string, string> = {
@@ -57,6 +62,9 @@ const PARTNER_LOCAL_LOGO: Record<string, string> = {
   expressvpn: expressvpnLogo,
   ctv: ctvLogo,
   tsn: tsnLogo,
+  winsports: winSportsLogo,
+  rcn: rcnLogo,
+  caracol: caracolLogo,
 };
 
 const NAME_LOCAL_LOGO: Record<string, string> = {
@@ -129,6 +137,21 @@ const NAME_LOCAL_LOGO: Record<string, string> = {
   "TSN3": tsnLogo,
   "TSN4": tsnLogo,
   "TSN5": tsnLogo,
+  "Win Sports": winSportsLogo,
+  "Win Sports+": winSportsLogo,
+  "WIN Sports": winSportsLogo,
+  "WIN SPORTS": winSportsLogo,
+  "RCN": rcnLogo,
+  "Canal RCN": rcnLogo,
+  "Noticias RCN": rcnLogo,
+  "RCN App": rcnAppLogo,
+  "RCN Nuestra Tele": rcnAppLogo,
+  "Caracol": caracolLogo,
+  "Caracol TV": caracolLogo,
+  "Caracol Televisión": caracolLogo,
+  "Caracol Television": caracolLogo,
+  "Caracol Play": caracolPlayLogo,
+  "Noticias Caracol": caracolPlayLogo,
 };
 
 const PARTNER_DOMAIN: Record<string, string> = {
