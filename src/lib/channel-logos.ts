@@ -37,6 +37,8 @@ import rtveLogo from "@/assets/logos/rtve.jpg";
 import repretelLogo from "@/assets/logos/repretel.jpg";
 import tigoSportsLogo from "@/assets/logos/tigo-sports.jpg";
 import teleticaLogo from "@/assets/logos/teletica.jpg";
+import beinSportsLogo from "@/assets/logos/bein-sports.jpg";
+import m6plusLogo from "@/assets/logos/m6plus.jpg";
 
 // Local logo overrides (take priority over Clearbit domain lookup).
 const PARTNER_LOCAL_LOGO: Record<string, string> = {
@@ -73,6 +75,8 @@ const PARTNER_LOCAL_LOGO: Record<string, string> = {
   repretel: repretelLogo,
   tigo: tigoSportsLogo,
   teletica: teleticaLogo,
+  bein: beinSportsLogo,
+  m6: m6plusLogo,
 };
 
 const NAME_LOCAL_LOGO: Record<string, string> = {
@@ -171,6 +175,15 @@ const NAME_LOCAL_LOGO: Record<string, string> = {
   "Tigo Sports": tigoSportsLogo,
   "Tigo Sports+": tigoSportsLogo,
   "Teletica": teleticaLogo,
+  "beIN Sports": beinSportsLogo,
+  "beIN SPORTS": beinSportsLogo,
+  "Bein Sports": beinSportsLogo,
+  "BeIN Sports": beinSportsLogo,
+  "M6": m6plusLogo,
+  "M6+": m6plusLogo,
+  "6play": m6plusLogo,
+  "6Play": m6plusLogo,
+  "M6 / 6play": m6plusLogo,
 };
 
 const PARTNER_DOMAIN: Record<string, string> = {
