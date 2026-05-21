@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useLoaderData } from "@tanstack/react-router";
 import { isLocale, type Locale, t, localeUrl } from "@/lib/i18n";
 import { getFixtureBySlug, type Fixture, type Channel } from "@/lib/data";
@@ -34,10 +34,23 @@ export const Route = createFileRoute("/$locale/watch-{$slug}")({
     const f = loaderData.fixture;
     const path = `/en/${f.slug_en}`;
     const altPath = `/es/${f.slug_es}`;
-    const title = f.meta_title_en ?? `${f.home_team.name_en} vs ${f.away_team.name_en} — Watch Live | World Cup 2026`;
-    const description = f.meta_description_en ?? `How and where to watch ${f.home_team.name_en} vs ${f.away_team.name_en} live at the FIFA World Cup 2026 — TV channels, streaming and free options.`;
+    const title =
+      f.meta_title_en ??
+      `${f.home_team.name_en} vs ${f.away_team.name_en} — Watch Live | World Cup 2026`;
+    const description =
+      f.meta_description_en ??
+      `How and where to watch ${f.home_team.name_en} vs ${f.away_team.name_en} live at the FIFA World Cup 2026 — TV channels, streaming and free options.`;
     const keywords = `${f.home_team.name_en} vs ${f.away_team.name_en}, watch ${f.home_team.name_en} vs ${f.away_team.name_en} live, ${f.round}, FIFA World Cup 2026, World Cup live stream`;
-    const { meta, links } = buildMeta({ title, description, path, altPath, locale: "en", ogType: "article", keywords, ogImage: f.home_team.flag_url ?? undefined });
+    const { meta, links } = buildMeta({
+      title,
+      description,
+      path,
+      altPath,
+      locale: "en",
+      ogType: "article",
+      keywords,
+      ogImage: f.home_team.flag_url ?? undefined,
+    });
     return {
       meta,
       links,
@@ -50,8 +63,11 @@ export const Route = createFileRoute("/$locale/watch-{$slug}")({
             venue: f.venue,
             city: f.city,
             url: `https://matchlivenow.com${path}`,
-            channels: loaderData.channels.map((c) => ({ name: c.channel_name, url: c.channel_url })),
-          })
+            channels: loaderData.channels.map((c) => ({
+              name: c.channel_name,
+              url: c.channel_url,
+            })),
+          }),
         ),
       ],
     };
@@ -71,24 +87,25 @@ export function MatchPage({ locale }: { locale: Locale }) {
   const away = fixture.away_team;
   const homeName = locale === "es" ? home.name_es : home.name_en;
   const awayName = locale === "es" ? away.name_es : away.name_en;
+  const [selectedCountryCode, setSelectedCountryCode] = useState(geo.alpha3);
 
   const localChannels = useMemo(
-    () => channels.filter((c) => c.country_code === geo.alpha3),
-    [channels, geo.alpha3]
+    () => channels.filter((c) => c.country_code === selectedCountryCode),
+    [channels, selectedCountryCode],
   );
 
   const countryName = useMemo(() => {
-    const a2 = alpha3ToAlpha2(geo.alpha3);
+    const a2 = alpha3ToAlpha2(selectedCountryCode);
     if (a2) {
       try {
         const dn = new Intl.DisplayNames([locale === "es" ? "es" : "en"], { type: "region" });
-        return dn.of(a2) ?? geo.alpha3;
+        return dn.of(a2) ?? selectedCountryCode;
       } catch {
         /* fall through */
       }
     }
-    return geo.alpha3;
-  }, [geo.alpha3, locale]);
+    return selectedCountryCode;
+  }, [selectedCountryCode, locale]);
 
   return (
     <>
@@ -96,36 +113,59 @@ export function MatchPage({ locale }: { locale: Locale }) {
       <section className="border-b border-border gradient-hero">
         <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14">
           <span className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
-            {fixture.round} • {new Date(fixture.match_date).toLocaleString(locale === "es" ? "es-ES" : "en-US", {
+            {fixture.round} •{" "}
+            {new Date(fixture.match_date).toLocaleString(locale === "es" ? "es-ES" : "en-US", {
               dateStyle: "full",
               timeStyle: "short",
               timeZone: "UTC",
-            })} UTC
+            })}{" "}
+            UTC
           </span>
           <div className="mt-5 grid grid-cols-3 items-center gap-4 sm:gap-8">
             <div className="flex flex-col items-center gap-2 sm:flex-row sm:gap-4">
-              <Flag src={home.flag_url} name={homeName} className="h-14 w-20 sm:h-20 sm:w-28" fallbackTextClassName="text-2xl" />
-              <span className="text-balance text-center font-display text-xl uppercase sm:text-left sm:text-3xl">{homeName}</span>
+              <Flag
+                src={home.flag_url}
+                name={homeName}
+                className="h-14 w-20 sm:h-20 sm:w-28"
+                fallbackTextClassName="text-2xl"
+              />
+              <span className="text-balance text-center font-display text-xl uppercase sm:text-left sm:text-3xl">
+                {homeName}
+              </span>
             </div>
             <div className="text-center">
               {fixture.status === "scheduled" ? (
-                <div className="font-display text-3xl uppercase text-primary sm:text-5xl">[{m.labels.vs}]</div>
+                <div className="font-display text-3xl uppercase text-primary sm:text-5xl">
+                  [{m.labels.vs}]
+                </div>
               ) : (
                 <div className="font-display text-4xl font-bold tabular-nums sm:text-6xl">
-                  <span className="text-primary">[</span>{String(fixture.home_score ?? 0).padStart(2, "0")}<span className="text-primary">]</span>
+                  <span className="text-primary">[</span>
+                  {String(fixture.home_score ?? 0).padStart(2, "0")}
+                  <span className="text-primary">]</span>
                   <span className="px-2 text-muted-foreground">-</span>
-                  <span className="text-primary">[</span>{String(fixture.away_score ?? 0).padStart(2, "0")}<span className="text-primary">]</span>
+                  <span className="text-primary">[</span>
+                  {String(fixture.away_score ?? 0).padStart(2, "0")}
+                  <span className="text-primary">]</span>
                 </div>
               )}
             </div>
             <div className="flex flex-col items-center gap-2 sm:flex-row-reverse sm:gap-4">
-              <Flag src={away.flag_url} name={awayName} className="h-14 w-20 sm:h-20 sm:w-28" fallbackTextClassName="text-2xl" />
-              <span className="text-balance text-center font-display text-xl uppercase sm:text-right sm:text-3xl">{awayName}</span>
+              <Flag
+                src={away.flag_url}
+                name={awayName}
+                className="h-14 w-20 sm:h-20 sm:w-28"
+                fallbackTextClassName="text-2xl"
+              />
+              <span className="text-balance text-center font-display text-xl uppercase sm:text-right sm:text-3xl">
+                {awayName}
+              </span>
             </div>
           </div>
           {fixture.venue ? (
             <p className="mt-4 text-center text-sm text-muted-foreground">
-              {fixture.venue}{fixture.city ? `, ${fixture.city}` : ""}
+              {fixture.venue}
+              {fixture.city ? `, ${fixture.city}` : ""}
             </p>
           ) : null}
         </div>
@@ -141,9 +181,15 @@ export function MatchPage({ locale }: { locale: Locale }) {
           <section>
             <div className="mb-4 flex flex-wrap items-end justify-between gap-3 border-b border-primary pb-2">
               <h2 className="font-display text-2xl uppercase">
-                <span className="text-primary">[ {locale === "es" ? "DÓNDE VER" : "WHERE TO WATCH"} ]</span> {countryName}
+                <span className="text-primary">
+                  [ {locale === "es" ? "DÓNDE VER" : "WHERE TO WATCH"} ]
+                </span>{" "}
+                {countryName}
               </h2>
-              <CountrySelector initialAlpha2={geo.alpha2} />
+              <CountrySelector
+                initialAlpha2={alpha3ToAlpha2(selectedCountryCode) ?? geo.alpha2}
+                onChange={setSelectedCountryCode}
+              />
             </div>
             {localChannels.length > 0 ? (
               <div className="grid gap-3">
@@ -154,7 +200,7 @@ export function MatchPage({ locale }: { locale: Locale }) {
                     locale={locale}
                     fixture={fixture}
                     pageType="match"
-                    countryCode={geo.alpha3}
+                    countryCode={selectedCountryCode}
                   />
                 ))}
               </div>
@@ -166,7 +212,6 @@ export function MatchPage({ locale }: { locale: Locale }) {
               </p>
             )}
           </section>
-
 
           {/* Other matches */}
           {related.length > 0 ? (
@@ -187,7 +232,7 @@ export function MatchPage({ locale }: { locale: Locale }) {
 
         {/* Sidebar */}
         <aside className="space-y-6">
-          {geo.alpha3 === "DEU" ? (
+          {selectedCountryCode === "DEU" ? (
             <div className="rounded-xl border border-primary/40 bg-primary/5 p-5">
               <h3 className="text-base">
                 {locale === "es" ? "Desbloquea más transmisiones" : "Unlock more streams"}
@@ -204,7 +249,7 @@ export function MatchPage({ locale }: { locale: Locale }) {
                 onClick={() =>
                   trackClick({
                     fixtureId: fixture.id,
-                    countryCode: geo.alpha3,
+                    countryCode: selectedCountryCode,
                     affiliatePartner: "lowest-prices-vpn",
                     channelName: "VPN DE",
                     pageType: "match",
@@ -225,7 +270,7 @@ export function MatchPage({ locale }: { locale: Locale }) {
                 onClick={() =>
                   trackClick({
                     fixtureId: fixture.id,
-                    countryCode: geo.alpha3,
+                    countryCode: selectedCountryCode,
                     affiliatePartner: "surveoo",
                     channelName: "Surveoo",
                     pageType: "match",
@@ -235,7 +280,11 @@ export function MatchPage({ locale }: { locale: Locale }) {
               >
                 <img
                   src={surveooBanner}
-                  alt={locale === "es" ? "Surveoo - Gana hasta 7€ por encuesta" : "Surveoo - Earn up to €7 per survey"}
+                  alt={
+                    locale === "es"
+                      ? "Surveoo - Gana hasta 7€ por encuesta"
+                      : "Surveoo - Earn up to €7 per survey"
+                  }
                   loading="lazy"
                   className="block w-full"
                 />
