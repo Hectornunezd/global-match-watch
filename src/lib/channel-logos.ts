@@ -40,6 +40,8 @@ import teleticaLogo from "@/assets/logos/teletica.jpg";
 import beinSportsLogo from "@/assets/logos/bein-sports.jpg";
 import m6plusLogo from "@/assets/logos/m6plus.jpg";
 import hrtLogo from "@/assets/logos/hrt.jpg";
+import claroSportsLogo from "@/assets/logos/claro-sports.jpg";
+import televicentroLogo from "@/assets/logos/televicentro.jpg";
 
 // Local logo overrides (take priority over Clearbit domain lookup).
 const PARTNER_LOCAL_LOGO: Record<string, string> = {
