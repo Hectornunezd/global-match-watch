@@ -42,6 +42,8 @@ import m6plusLogo from "@/assets/logos/m6plus.jpg";
 import hrtLogo from "@/assets/logos/hrt.jpg";
 import claroSportsLogo from "@/assets/logos/claro-sports.jpg";
 import televicentroLogo from "@/assets/logos/televicentro.jpg";
+import tv2DenmarkLogo from "@/assets/logos/tv2-denmark.jpg";
+import drLogo from "@/assets/logos/dr.jpg";
 import tvnChileLogo from "@/assets/logos/tvn-chile.jpg";
 import canal13Logo from "@/assets/logos/canal-13.jpg";
 import chilevisionLogo from "@/assets/logos/chilevision.jpg";
