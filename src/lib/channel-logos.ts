@@ -223,6 +223,13 @@ const NAME_LOCAL_LOGO: Record<string, string> = {
   "Chilevisión": chilevisionLogo,
   "Chilevision": chilevisionLogo,
   "CHV": chilevisionLogo,
+  "NHK": nhkLogo,
+  "NHK World": nhkLogo,
+  "NHK World-Japan": nhkLogo,
+  "NHK G": nhkLogo,
+  "Fuji TV": fujiTvLogo,
+  "Fuji Television": fujiTvLogo,
+  "Fuji TV / TV Asahi": fujiTvLogo,
 };
 
 const PARTNER_DOMAIN: Record<string, string> = {
