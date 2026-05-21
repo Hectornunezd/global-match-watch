@@ -44,6 +44,8 @@ import claroSportsLogo from "@/assets/logos/claro-sports.jpg";
 import televicentroLogo from "@/assets/logos/televicentro.jpg";
 import tv2DenmarkLogo from "@/assets/logos/tv2-denmark.jpg";
 import drLogo from "@/assets/logos/dr.jpg";
+import nhkLogo from "@/assets/logos/nhk.jpg";
+import fujiTvLogo from "@/assets/logos/fuji-tv.jpg";
 import tvnChileLogo from "@/assets/logos/tvn-chile.jpg";
 import canal13Logo from "@/assets/logos/canal-13.jpg";
 import chilevisionLogo from "@/assets/logos/chilevision.jpg";
@@ -221,6 +223,13 @@ const NAME_LOCAL_LOGO: Record<string, string> = {
   "Chilevisión": chilevisionLogo,
   "Chilevision": chilevisionLogo,
   "CHV": chilevisionLogo,
+  "NHK": nhkLogo,
+  "NHK World": nhkLogo,
+  "NHK World-Japan": nhkLogo,
+  "NHK G": nhkLogo,
+  "Fuji TV": fujiTvLogo,
+  "Fuji Television": fujiTvLogo,
+  "Fuji TV / TV Asahi": fujiTvLogo,
 };
 
 const PARTNER_DOMAIN: Record<string, string> = {
