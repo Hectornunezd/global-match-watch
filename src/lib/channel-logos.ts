@@ -30,6 +30,7 @@ const PARTNER_LOCAL_LOGO: Record<string, string> = {
   dsports: dsportsLogo,
   sbs: sbsLogo,
   optus: optusSportLogo,
+  orf: orfLogo,
 };
 
 const NAME_LOCAL_LOGO: Record<string, string> = {
@@ -62,6 +63,10 @@ const NAME_LOCAL_LOGO: Record<string, string> = {
   "SBS On Demand": sbsLogo,
   "Optus Sport": optusSportLogo,
   "OPTUS SPORT": optusSportLogo,
+  "ORF": orfLogo,
+  "ORF 1": orfLogo,
+  "ORF1": orfLogo,
+  "ORF Sport+": orfLogo,
 };
 
 const PARTNER_DOMAIN: Record<string, string> = {
