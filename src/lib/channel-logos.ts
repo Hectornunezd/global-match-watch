@@ -201,6 +201,12 @@ const NAME_LOCAL_LOGO: Record<string, string> = {
   "HRT HD": hrtLogo,
   "HRTi": hrtLogo,
   "Hrvatska Radiotelevizija": hrtLogo,
+  "Claro Sports": claroSportsLogo,
+  "Claro": claroSportsLogo,
+  "Claro Video": claroSportsLogo,
+  "Televicentro": televicentroLogo,
+  "TVC": televicentroLogo,
+  "Canal 5 Televicentro": televicentroLogo,
 };
 
 const PARTNER_DOMAIN: Record<string, string> = {
