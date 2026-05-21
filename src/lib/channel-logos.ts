@@ -46,6 +46,7 @@ import tv2DenmarkLogo from "@/assets/logos/tv2-denmark.jpg";
 import drLogo from "@/assets/logos/dr.jpg";
 import nhkLogo from "@/assets/logos/nhk.jpg";
 import fujiTvLogo from "@/assets/logos/fuji-tv.jpg";
+import teleamazonasLogo from "@/assets/logos/teleamazonas.jpg";
 import tvnChileLogo from "@/assets/logos/tvn-chile.jpg";
 import canal13Logo from "@/assets/logos/canal-13.jpg";
 import chilevisionLogo from "@/assets/logos/chilevision.jpg";
@@ -230,6 +231,8 @@ const NAME_LOCAL_LOGO: Record<string, string> = {
   "Fuji TV": fujiTvLogo,
   "Fuji Television": fujiTvLogo,
   "Fuji TV / TV Asahi": fujiTvLogo,
+  "Teleamazonas": teleamazonasLogo,
+  "TELEAMAZONAS": teleamazonasLogo,
 };
 
 const PARTNER_DOMAIN: Record<string, string> = {
