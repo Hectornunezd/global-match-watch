@@ -42,6 +42,9 @@ import m6plusLogo from "@/assets/logos/m6plus.jpg";
 import hrtLogo from "@/assets/logos/hrt.jpg";
 import claroSportsLogo from "@/assets/logos/claro-sports.jpg";
 import televicentroLogo from "@/assets/logos/televicentro.jpg";
+import tvnChileLogo from "@/assets/logos/tvn-chile.jpg";
+import canal13Logo from "@/assets/logos/canal-13.jpg";
+import chilevisionLogo from "@/assets/logos/chilevision.jpg";
 
 // Local logo overrides (take priority over Clearbit domain lookup).
 const PARTNER_LOCAL_LOGO: Record<string, string> = {
@@ -207,6 +210,15 @@ const NAME_LOCAL_LOGO: Record<string, string> = {
   "Televicentro": televicentroLogo,
   "TVC": televicentroLogo,
   "Canal 5 Televicentro": televicentroLogo,
+  "TVN Play": tvnChileLogo,
+  "TVN Chile": tvnChileLogo,
+  "Televisión Nacional de Chile": tvnChileLogo,
+  "Canal 13": canal13Logo,
+  "Canal 13 Chile": canal13Logo,
+  "13": canal13Logo,
+  "Chilevisión": chilevisionLogo,
+  "Chilevision": chilevisionLogo,
+  "CHV": chilevisionLogo,
 };
 
 const PARTNER_DOMAIN: Record<string, string> = {
