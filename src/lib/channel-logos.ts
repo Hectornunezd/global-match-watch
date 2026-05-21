@@ -78,6 +78,7 @@ const PARTNER_LOCAL_LOGO: Record<string, string> = {
   teletica: teleticaLogo,
   bein: beinSportsLogo,
   m6: m6plusLogo,
+  hrt: hrtLogo,
 };
 
 const NAME_LOCAL_LOGO: Record<string, string> = {
