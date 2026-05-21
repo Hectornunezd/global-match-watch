@@ -42,6 +42,8 @@ import m6plusLogo from "@/assets/logos/m6plus.jpg";
 import hrtLogo from "@/assets/logos/hrt.jpg";
 import claroSportsLogo from "@/assets/logos/claro-sports.jpg";
 import televicentroLogo from "@/assets/logos/televicentro.jpg";
+import tv2DenmarkLogo from "@/assets/logos/tv2-denmark.jpg";
+import drLogo from "@/assets/logos/dr.jpg";
 import tvnChileLogo from "@/assets/logos/tvn-chile.jpg";
 import canal13Logo from "@/assets/logos/canal-13.jpg";
 import chilevisionLogo from "@/assets/logos/chilevision.jpg";
@@ -338,7 +340,29 @@ const NAME_DOMAIN: Record<string, string> = {
   "beIN Sports MENA": "beinsports.com",
 };
 
-export function channelLogoUrl(channelName: string, partner?: string | null): string | null {
+// Country-scoped overrides — used when the same channel name maps to different
+// broadcasters in different countries (e.g. TV2 in DNK vs NOR).
+const COUNTRY_NAME_LOCAL_LOGO: Record<string, Record<string, string>> = {
+  DNK: {
+    "TV2": tv2DenmarkLogo,
+    "TV 2": tv2DenmarkLogo,
+    "TV2 Play": tv2DenmarkLogo,
+    "DR": drLogo,
+    "DR1": drLogo,
+    "DR 1": drLogo,
+    "DRTV": drLogo,
+    "DR TV": drLogo,
+  },
+};
+
+export function channelLogoUrl(
+  channelName: string,
+  partner?: string | null,
+  countryCode?: string | null,
+): string | null {
+  const countryOverride =
+    (countryCode && COUNTRY_NAME_LOCAL_LOGO[countryCode]?.[channelName]) || null;
+  if (countryOverride) return countryOverride;
   const local =
     (partner && PARTNER_LOCAL_LOGO[partner]) ||
     NAME_LOCAL_LOGO[channelName] ||
@@ -351,3 +375,4 @@ export function channelLogoUrl(channelName: string, partner?: string | null): st
   if (!domain) return null;
   return `https://logo.clearbit.com/${domain}`;
 }
+

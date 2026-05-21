@@ -48,7 +48,7 @@ export function ChannelCard({ channel, locale, fixture, pageType, countryCode }:
     ? "border-[var(--success)]/40 bg-[var(--success)]/10 text-[var(--success)]"
     : "border-border bg-[var(--surface-hover)] text-muted-foreground";
 
-  const fallbackLogo = channelLogoUrl(channel.channel_name, channel.affiliate_partner);
+  const fallbackLogo = channelLogoUrl(channel.channel_name, channel.affiliate_partner, countryCode);
   const logoSrc = channel.logo_url || fallbackLogo;
   const [logoFailed, setLogoFailed] = useState(false);
 
