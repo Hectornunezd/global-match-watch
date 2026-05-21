@@ -8,6 +8,10 @@ import fubotvLogo from "@/assets/logos/fubotv.jpg";
 import telemundoLogo from "@/assets/logos/telemundo.jpg";
 import foxSportsLogo from "@/assets/logos/fox-sports.jpg";
 import vixLogo from "@/assets/logos/vix.jpg";
+import tycSportsLogo from "@/assets/logos/tyc-sports.jpg";
+import tvPublicaLogo from "@/assets/logos/tv-publica.jpg";
+import directvGoLogo from "@/assets/logos/directv-go.jpg";
+import dsportsLogo from "@/assets/logos/dsports.jpg";
 
 // Local logo overrides (take priority over Clearbit domain lookup).
 const PARTNER_LOCAL_LOGO: Record<string, string> = {
@@ -17,6 +21,10 @@ const PARTNER_LOCAL_LOGO: Record<string, string> = {
   telemundo: telemundoLogo,
   fox: foxSportsLogo,
   vix: vixLogo,
+  tyc: tycSportsLogo,
+  tvpublica: tvPublicaLogo,
+  directv: directvGoLogo,
+  dsports: dsportsLogo,
 };
 
 const NAME_LOCAL_LOGO: Record<string, string> = {
@@ -32,6 +40,19 @@ const NAME_LOCAL_LOGO: Record<string, string> = {
   "ViX": vixLogo,
   "Vix": vixLogo,
   "ViX+": vixLogo,
+  "TyC Sports": tycSportsLogo,
+  "TYC SPORTS": tycSportsLogo,
+  "TyC Sports Play": tycSportsLogo,
+  "TYC SPORTS PLAY": tycSportsLogo,
+  "TV Pública": tvPublicaLogo,
+  "TV PÚBLICA": tvPublicaLogo,
+  "TV Publica": tvPublicaLogo,
+  "DirecTV Go": directvGoLogo,
+  "DIRECTV GO": directvGoLogo,
+  "DirecTV GO": directvGoLogo,
+  "DSports": dsportsLogo,
+  "DSPORTS": dsportsLogo,
+  "DSports+": dsportsLogo,
 };
 
 const PARTNER_DOMAIN: Record<string, string> = {
