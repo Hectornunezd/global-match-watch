@@ -186,6 +186,14 @@ const NAME_LOCAL_LOGO: Record<string, string> = {
   "6play": m6plusLogo,
   "6Play": m6plusLogo,
   "M6 / 6play": m6plusLogo,
+  "HRT": hrtLogo,
+  "HRT 1": hrtLogo,
+  "HRT1": hrtLogo,
+  "HRT 2": hrtLogo,
+  "HRT2": hrtLogo,
+  "HRT HD": hrtLogo,
+  "HRTi": hrtLogo,
+  "Hrvatska Radiotelevizija": hrtLogo,
 };
 
 const PARTNER_DOMAIN: Record<string, string> = {
