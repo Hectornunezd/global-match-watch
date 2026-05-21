@@ -62,6 +62,9 @@ const PARTNER_LOCAL_LOGO: Record<string, string> = {
   expressvpn: expressvpnLogo,
   ctv: ctvLogo,
   tsn: tsnLogo,
+  winsports: winSportsLogo,
+  rcn: rcnLogo,
+  caracol: caracolLogo,
 };
 
 const NAME_LOCAL_LOGO: Record<string, string> = {
