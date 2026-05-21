@@ -1,0 +1,1 @@
+DELETE FROM channels a USING channels b WHERE a.country_code = b.country_code AND a.channel_name = b.channel_name AND (a.created_at > b.created_at OR (a.created_at = b.created_at AND a.id > b.id));
