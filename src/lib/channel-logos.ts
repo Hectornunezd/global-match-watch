@@ -14,6 +14,7 @@ import directvGoLogo from "@/assets/logos/directv-go.jpg";
 import dsportsLogo from "@/assets/logos/dsports.jpg";
 import sbsLogo from "@/assets/logos/sbs.jpg";
 import optusSportLogo from "@/assets/logos/optus-sport.jpg";
+import orfLogo from "@/assets/logos/orf.jpg";
 
 // Local logo overrides (take priority over Clearbit domain lookup).
 const PARTNER_LOCAL_LOGO: Record<string, string> = {
