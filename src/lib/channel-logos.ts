@@ -137,6 +137,21 @@ const NAME_LOCAL_LOGO: Record<string, string> = {
   "TSN3": tsnLogo,
   "TSN4": tsnLogo,
   "TSN5": tsnLogo,
+  "Win Sports": winSportsLogo,
+  "Win Sports+": winSportsLogo,
+  "WIN Sports": winSportsLogo,
+  "WIN SPORTS": winSportsLogo,
+  "RCN": rcnLogo,
+  "Canal RCN": rcnLogo,
+  "Noticias RCN": rcnLogo,
+  "RCN App": rcnAppLogo,
+  "RCN Nuestra Tele": rcnAppLogo,
+  "Caracol": caracolLogo,
+  "Caracol TV": caracolLogo,
+  "Caracol Televisión": caracolLogo,
+  "Caracol Television": caracolLogo,
+  "Caracol Play": caracolPlayLogo,
+  "Noticias Caracol": caracolPlayLogo,
 };
 
 const PARTNER_DOMAIN: Record<string, string> = {
