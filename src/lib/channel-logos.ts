@@ -15,6 +15,8 @@ import dsportsLogo from "@/assets/logos/dsports.jpg";
 import sbsLogo from "@/assets/logos/sbs.jpg";
 import optusSportLogo from "@/assets/logos/optus-sport.jpg";
 import orfLogo from "@/assets/logos/orf.jpg";
+import vrtLogo from "@/assets/logos/vrt.jpg";
+import rtbfLogo from "@/assets/logos/rtbf.jpg";
 
 // Local logo overrides (take priority over Clearbit domain lookup).
 const PARTNER_LOCAL_LOGO: Record<string, string> = {
@@ -31,6 +33,8 @@ const PARTNER_LOCAL_LOGO: Record<string, string> = {
   sbs: sbsLogo,
   optus: optusSportLogo,
   orf: orfLogo,
+  vrt: vrtLogo,
+  rtbf: rtbfLogo,
 };
 
 const NAME_LOCAL_LOGO: Record<string, string> = {
@@ -67,6 +71,12 @@ const NAME_LOCAL_LOGO: Record<string, string> = {
   "ORF 1": orfLogo,
   "ORF1": orfLogo,
   "ORF Sport+": orfLogo,
+  "VRT": vrtLogo,
+  "VRT 1": vrtLogo,
+  "VRT MAX": vrtLogo,
+  "RTBF": rtbfLogo,
+  "RTBF Auvio": rtbfLogo,
+  "La Une": rtbfLogo,
 };
 
 const PARTNER_DOMAIN: Record<string, string> = {
