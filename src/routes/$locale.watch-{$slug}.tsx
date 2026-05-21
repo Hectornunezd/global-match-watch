@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useLoaderData } from "@tanstack/react-router";
 import { isLocale, type Locale, t, localeUrl } from "@/lib/i18n";
 import { getFixtureBySlug, type Fixture, type Channel } from "@/lib/data";
@@ -71,24 +71,25 @@ export function MatchPage({ locale }: { locale: Locale }) {
   const away = fixture.away_team;
   const homeName = locale === "es" ? home.name_es : home.name_en;
   const awayName = locale === "es" ? away.name_es : away.name_en;
+  const [selectedCountryCode, setSelectedCountryCode] = useState(geo.alpha3);
 
   const localChannels = useMemo(
-    () => channels.filter((c) => c.country_code === geo.alpha3),
-    [channels, geo.alpha3]
+    () => channels.filter((c) => c.country_code === selectedCountryCode),
+    [channels, selectedCountryCode]
   );
 
   const countryName = useMemo(() => {
-    const a2 = alpha3ToAlpha2(geo.alpha3);
+    const a2 = alpha3ToAlpha2(selectedCountryCode);
     if (a2) {
       try {
         const dn = new Intl.DisplayNames([locale === "es" ? "es" : "en"], { type: "region" });
-        return dn.of(a2) ?? geo.alpha3;
+        return dn.of(a2) ?? selectedCountryCode;
       } catch {
         /* fall through */
       }
     }
-    return geo.alpha3;
-  }, [geo.alpha3, locale]);
+    return selectedCountryCode;
+  }, [selectedCountryCode, locale]);
 
   return (
     <>
@@ -143,7 +144,7 @@ export function MatchPage({ locale }: { locale: Locale }) {
               <h2 className="font-display text-2xl uppercase">
                 <span className="text-primary">[ {locale === "es" ? "DÓNDE VER" : "WHERE TO WATCH"} ]</span> {countryName}
               </h2>
-              <CountrySelector initialAlpha2={geo.alpha2} />
+              <CountrySelector initialAlpha2={alpha3ToAlpha2(selectedCountryCode) ?? geo.alpha2} onChange={setSelectedCountryCode} />
             </div>
             {localChannels.length > 0 ? (
               <div className="grid gap-3">
@@ -154,7 +155,7 @@ export function MatchPage({ locale }: { locale: Locale }) {
                     locale={locale}
                     fixture={fixture}
                     pageType="match"
-                    countryCode={geo.alpha3}
+                    countryCode={selectedCountryCode}
                   />
                 ))}
               </div>
@@ -187,7 +188,7 @@ export function MatchPage({ locale }: { locale: Locale }) {
 
         {/* Sidebar */}
         <aside className="space-y-6">
-          {geo.alpha3 === "DEU" ? (
+          {selectedCountryCode === "DEU" ? (
             <div className="rounded-xl border border-primary/40 bg-primary/5 p-5">
               <h3 className="text-base">
                 {locale === "es" ? "Desbloquea más transmisiones" : "Unlock more streams"}
@@ -204,7 +205,7 @@ export function MatchPage({ locale }: { locale: Locale }) {
                 onClick={() =>
                   trackClick({
                     fixtureId: fixture.id,
-                    countryCode: geo.alpha3,
+                    countryCode: selectedCountryCode,
                     affiliatePartner: "lowest-prices-vpn",
                     channelName: "VPN DE",
                     pageType: "match",
@@ -225,7 +226,7 @@ export function MatchPage({ locale }: { locale: Locale }) {
                 onClick={() =>
                   trackClick({
                     fixtureId: fixture.id,
-                    countryCode: geo.alpha3,
+                    countryCode: selectedCountryCode,
                     affiliatePartner: "surveoo",
                     channelName: "Surveoo",
                     pageType: "match",
