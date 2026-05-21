@@ -23,6 +23,11 @@ import sportvLogo from "@/assets/logos/sportv.jpg";
 import sporttvPlayLogo from "@/assets/logos/sporttv-play.jpg";
 import globoLogo from "@/assets/logos/globo.jpg";
 import globoplayLogo from "@/assets/logos/globoplay.jpg";
+import daznLogo from "@/assets/logos/dazn.jpg";
+import rdsLogo from "@/assets/logos/rds.jpg";
+import expressvpnLogo from "@/assets/logos/expressvpn.jpg";
+import ctvLogo from "@/assets/logos/ctv.jpg";
+import tsnLogo from "@/assets/logos/tsn.jpg";
 
 // Local logo overrides (take priority over Clearbit domain lookup).
 const PARTNER_LOCAL_LOGO: Record<string, string> = {
@@ -47,6 +52,11 @@ const PARTNER_LOCAL_LOGO: Record<string, string> = {
   sporttvplay: sporttvPlayLogo,
   globo: globoLogo,
   globoplay: globoplayLogo,
+  dazn: daznLogo,
+  rds: rdsLogo,
+  expressvpn: expressvpnLogo,
+  ctv: ctvLogo,
+  tsn: tsnLogo,
 };
 
 const NAME_LOCAL_LOGO: Record<string, string> = {
@@ -105,6 +115,20 @@ const NAME_LOCAL_LOGO: Record<string, string> = {
   "Globoplay": globoplayLogo,
   "GLOBOPLAY": globoplayLogo,
   "Globo Play": globoplayLogo,
+  "DAZN": daznLogo,
+  "DAZN Canada": daznLogo,
+  "RDS": rdsLogo,
+  "RDS2": rdsLogo,
+  "ExpressVPN": expressvpnLogo,
+  "Express VPN": expressvpnLogo,
+  "CTV": ctvLogo,
+  "CTV.ca": ctvLogo,
+  "TSN": tsnLogo,
+  "TSN1": tsnLogo,
+  "TSN2": tsnLogo,
+  "TSN3": tsnLogo,
+  "TSN4": tsnLogo,
+  "TSN5": tsnLogo,
 };
 
 const PARTNER_DOMAIN: Record<string, string> = {
