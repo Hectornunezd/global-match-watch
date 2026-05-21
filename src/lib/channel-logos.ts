@@ -210,6 +210,15 @@ const NAME_LOCAL_LOGO: Record<string, string> = {
   "Televicentro": televicentroLogo,
   "TVC": televicentroLogo,
   "Canal 5 Televicentro": televicentroLogo,
+  "TVN Play": tvnChileLogo,
+  "TVN Chile": tvnChileLogo,
+  "Televisión Nacional de Chile": tvnChileLogo,
+  "Canal 13": canal13Logo,
+  "Canal 13 Chile": canal13Logo,
+  "13": canal13Logo,
+  "Chilevisión": chilevisionLogo,
+  "Chilevision": chilevisionLogo,
+  "CHV": chilevisionLogo,
 };
 
 const PARTNER_DOMAIN: Record<string, string> = {
