@@ -34,6 +34,9 @@ import rcnAppLogo from "@/assets/logos/rcn-app.jpg";
 import caracolLogo from "@/assets/logos/caracol.jpg";
 import caracolPlayLogo from "@/assets/logos/caracol-play.jpg";
 import rtveLogo from "@/assets/logos/rtve.jpg";
+import repretelLogo from "@/assets/logos/repretel.jpg";
+import tigoSportsLogo from "@/assets/logos/tigo-sports.jpg";
+import teleticaLogo from "@/assets/logos/teletica.jpg";
 
 // Local logo overrides (take priority over Clearbit domain lookup).
 const PARTNER_LOCAL_LOGO: Record<string, string> = {
@@ -67,6 +70,9 @@ const PARTNER_LOCAL_LOGO: Record<string, string> = {
   rcn: rcnLogo,
   caracol: caracolLogo,
   rtve: rtveLogo,
+  repretel: repretelLogo,
+  tigo: tigoSportsLogo,
+  teletica: teleticaLogo,
 };
 
 const NAME_LOCAL_LOGO: Record<string, string> = {
@@ -161,6 +167,10 @@ const NAME_LOCAL_LOGO: Record<string, string> = {
   "RTVE": rtveLogo,
   "RTVE Play": rtveLogo,
   "rtve play": rtveLogo,
+  "Repretel": repretelLogo,
+  "Tigo Sports": tigoSportsLogo,
+  "Tigo Sports+": tigoSportsLogo,
+  "Teletica": teleticaLogo,
 };
 
 const PARTNER_DOMAIN: Record<string, string> = {
