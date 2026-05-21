@@ -12,6 +12,8 @@ import tycSportsLogo from "@/assets/logos/tyc-sports.jpg";
 import tvPublicaLogo from "@/assets/logos/tv-publica.jpg";
 import directvGoLogo from "@/assets/logos/directv-go.jpg";
 import dsportsLogo from "@/assets/logos/dsports.jpg";
+import sbsLogo from "@/assets/logos/sbs.jpg";
+import optusSportLogo from "@/assets/logos/optus-sport.jpg";
 
 // Local logo overrides (take priority over Clearbit domain lookup).
 const PARTNER_LOCAL_LOGO: Record<string, string> = {
@@ -25,6 +27,8 @@ const PARTNER_LOCAL_LOGO: Record<string, string> = {
   tvpublica: tvPublicaLogo,
   directv: directvGoLogo,
   dsports: dsportsLogo,
+  sbs: sbsLogo,
+  optus: optusSportLogo,
 };
 
 const NAME_LOCAL_LOGO: Record<string, string> = {
@@ -53,6 +57,10 @@ const NAME_LOCAL_LOGO: Record<string, string> = {
   "DSports": dsportsLogo,
   "DSPORTS": dsportsLogo,
   "DSports+": dsportsLogo,
+  "SBS": sbsLogo,
+  "SBS On Demand": sbsLogo,
+  "Optus Sport": optusSportLogo,
+  "OPTUS SPORT": optusSportLogo,
 };
 
 const PARTNER_DOMAIN: Record<string, string> = {
