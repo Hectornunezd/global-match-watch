@@ -28,6 +28,11 @@ import rdsLogo from "@/assets/logos/rds.jpg";
 import expressvpnLogo from "@/assets/logos/expressvpn.jpg";
 import ctvLogo from "@/assets/logos/ctv.jpg";
 import tsnLogo from "@/assets/logos/tsn.jpg";
+import winSportsLogo from "@/assets/logos/winsports.jpg";
+import rcnLogo from "@/assets/logos/rcn.jpg";
+import rcnAppLogo from "@/assets/logos/rcn-app.jpg";
+import caracolLogo from "@/assets/logos/caracol.jpg";
+import caracolPlayLogo from "@/assets/logos/caracol-play.jpg";
 
 // Local logo overrides (take priority over Clearbit domain lookup).
 const PARTNER_LOCAL_LOGO: Record<string, string> = {
