@@ -231,6 +231,8 @@ const NAME_LOCAL_LOGO: Record<string, string> = {
   "Fuji TV": fujiTvLogo,
   "Fuji Television": fujiTvLogo,
   "Fuji TV / TV Asahi": fujiTvLogo,
+  "Teleamazonas": teleamazonasLogo,
+  "TELEAMAZONAS": teleamazonasLogo,
 };
 
 const PARTNER_DOMAIN: Record<string, string> = {
