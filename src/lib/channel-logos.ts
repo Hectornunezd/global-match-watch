@@ -42,6 +42,9 @@ import m6plusLogo from "@/assets/logos/m6plus.jpg";
 import hrtLogo from "@/assets/logos/hrt.jpg";
 import claroSportsLogo from "@/assets/logos/claro-sports.jpg";
 import televicentroLogo from "@/assets/logos/televicentro.jpg";
+import tvnChileLogo from "@/assets/logos/tvn-chile.jpg";
+import canal13Logo from "@/assets/logos/canal-13.jpg";
+import chilevisionLogo from "@/assets/logos/chilevision.jpg";
 
 // Local logo overrides (take priority over Clearbit domain lookup).
 const PARTNER_LOCAL_LOGO: Record<string, string> = {
