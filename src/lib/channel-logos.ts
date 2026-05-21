@@ -18,6 +18,11 @@ import orfLogo from "@/assets/logos/orf.jpg";
 import vrtLogo from "@/assets/logos/vrt.jpg";
 import rtbfLogo from "@/assets/logos/rtbf.jpg";
 import fifaLogo from "@/assets/logos/fifa.jpg";
+import bandLogo from "@/assets/logos/band.jpg";
+import sportvLogo from "@/assets/logos/sportv.jpg";
+import sporttvPlayLogo from "@/assets/logos/sporttv-play.jpg";
+import globoLogo from "@/assets/logos/globo.jpg";
+import globoplayLogo from "@/assets/logos/globoplay.jpg";
 
 // Local logo overrides (take priority over Clearbit domain lookup).
 const PARTNER_LOCAL_LOGO: Record<string, string> = {
@@ -37,6 +42,11 @@ const PARTNER_LOCAL_LOGO: Record<string, string> = {
   vrt: vrtLogo,
   rtbf: rtbfLogo,
   fifaplus: fifaLogo,
+  band: bandLogo,
+  sportv: sportvLogo,
+  sporttvplay: sporttvPlayLogo,
+  globo: globoLogo,
+  globoplay: globoplayLogo,
 };
 
 const NAME_LOCAL_LOGO: Record<string, string> = {
@@ -82,6 +92,19 @@ const NAME_LOCAL_LOGO: Record<string, string> = {
   "FIFA+": fifaLogo,
   "FIFA Plus": fifaLogo,
   "FIFA": fifaLogo,
+  "Band": bandLogo,
+  "BAND": bandLogo,
+  "Bandeirantes": bandLogo,
+  "SporTV": sportvLogo,
+  "SPORTV": sportvLogo,
+  "SporTV Play": sporttvPlayLogo,
+  "SPORTV PLAY": sporttvPlayLogo,
+  "Globo": globoLogo,
+  "GLOBO": globoLogo,
+  "TV Globo": globoLogo,
+  "Globoplay": globoplayLogo,
+  "GLOBOPLAY": globoplayLogo,
+  "Globo Play": globoplayLogo,
 };
 
 const PARTNER_DOMAIN: Record<string, string> = {
