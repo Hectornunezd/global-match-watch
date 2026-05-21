@@ -17,6 +17,7 @@ import optusSportLogo from "@/assets/logos/optus-sport.jpg";
 import orfLogo from "@/assets/logos/orf.jpg";
 import vrtLogo from "@/assets/logos/vrt.jpg";
 import rtbfLogo from "@/assets/logos/rtbf.jpg";
+import fifaLogo from "@/assets/logos/fifa.jpg";
 
 // Local logo overrides (take priority over Clearbit domain lookup).
 const PARTNER_LOCAL_LOGO: Record<string, string> = {
@@ -35,6 +36,7 @@ const PARTNER_LOCAL_LOGO: Record<string, string> = {
   orf: orfLogo,
   vrt: vrtLogo,
   rtbf: rtbfLogo,
+  fifaplus: fifaLogo,
 };
 
 const NAME_LOCAL_LOGO: Record<string, string> = {
@@ -77,6 +79,9 @@ const NAME_LOCAL_LOGO: Record<string, string> = {
   "RTBF": rtbfLogo,
   "RTBF Auvio": rtbfLogo,
   "La Une": rtbfLogo,
+  "FIFA+": fifaLogo,
+  "FIFA Plus": fifaLogo,
+  "FIFA": fifaLogo,
 };
 
 const PARTNER_DOMAIN: Record<string, string> = {
