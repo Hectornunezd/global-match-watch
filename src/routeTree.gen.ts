@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WatchChar123slugChar125RouteImport } from './routes/watch-{$slug}'
+import { Route as VerChar123slugChar125RouteImport } from './routes/ver-{$slug}'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SitemapIndexDotxmlRouteImport } from './routes/sitemap-index[.]xml'
 import { Route as SitemapEsDotxmlRouteImport } from './routes/sitemap-es[.]xml'
@@ -37,6 +38,11 @@ import { Route as ApiPublicHooksSyncFixturesRouteImport } from './routes/api/pub
 const WatchChar123slugChar125Route = WatchChar123slugChar125RouteImport.update({
   id: '/watch-{$slug}',
   path: '/watch-{$slug}',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VerChar123slugChar125Route = VerChar123slugChar125RouteImport.update({
+  id: '/ver-{$slug}',
+  path: '/ver-{$slug}',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -169,6 +175,7 @@ export interface FileRoutesByFullPath {
   '/sitemap-es.xml': typeof SitemapEsDotxmlRoute
   '/sitemap-index.xml': typeof SitemapIndexDotxmlRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/ver-{$slug}': typeof VerChar123slugChar125Route
   '/watch-{$slug}': typeof WatchChar123slugChar125Route
   '/$locale/blogs': typeof LocaleBlogsRouteWithChildren
   '/$locale/donde-ver-mundial-en-{$slug}': typeof LocaleDondeVerMundialEnChar123slugChar125Route
@@ -194,6 +201,7 @@ export interface FileRoutesByTo {
   '/sitemap-es.xml': typeof SitemapEsDotxmlRoute
   '/sitemap-index.xml': typeof SitemapIndexDotxmlRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/ver-{$slug}': typeof VerChar123slugChar125Route
   '/watch-{$slug}': typeof WatchChar123slugChar125Route
   '/$locale/donde-ver-mundial-en-{$slug}': typeof LocaleDondeVerMundialEnChar123slugChar125Route
   '/$locale/how-to-watch-world-cup-in-{$slug}': typeof LocaleHowToWatchWorldCupInChar123slugChar125Route
@@ -220,6 +228,7 @@ export interface FileRoutesById {
   '/sitemap-es.xml': typeof SitemapEsDotxmlRoute
   '/sitemap-index.xml': typeof SitemapIndexDotxmlRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/ver-{$slug}': typeof VerChar123slugChar125Route
   '/watch-{$slug}': typeof WatchChar123slugChar125Route
   '/$locale/blogs': typeof LocaleBlogsRouteWithChildren
   '/$locale/donde-ver-mundial-en-{$slug}': typeof LocaleDondeVerMundialEnChar123slugChar125Route
@@ -248,6 +257,7 @@ export interface FileRouteTypes {
     | '/sitemap-es.xml'
     | '/sitemap-index.xml'
     | '/sitemap.xml'
+    | '/ver-{$slug}'
     | '/watch-{$slug}'
     | '/$locale/blogs'
     | '/$locale/donde-ver-mundial-en-{$slug}'
@@ -273,6 +283,7 @@ export interface FileRouteTypes {
     | '/sitemap-es.xml'
     | '/sitemap-index.xml'
     | '/sitemap.xml'
+    | '/ver-{$slug}'
     | '/watch-{$slug}'
     | '/$locale/donde-ver-mundial-en-{$slug}'
     | '/$locale/how-to-watch-world-cup-in-{$slug}'
@@ -298,6 +309,7 @@ export interface FileRouteTypes {
     | '/sitemap-es.xml'
     | '/sitemap-index.xml'
     | '/sitemap.xml'
+    | '/ver-{$slug}'
     | '/watch-{$slug}'
     | '/$locale/blogs'
     | '/$locale/donde-ver-mundial-en-{$slug}'
@@ -325,6 +337,7 @@ export interface RootRouteChildren {
   SitemapEsDotxmlRoute: typeof SitemapEsDotxmlRoute
   SitemapIndexDotxmlRoute: typeof SitemapIndexDotxmlRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  VerChar123slugChar125Route: typeof VerChar123slugChar125Route
   WatchChar123slugChar125Route: typeof WatchChar123slugChar125Route
   AdminSyncStatusRoute: typeof AdminSyncStatusRoute
   ApiTrackClickRoute: typeof ApiTrackClickRoute
@@ -338,6 +351,13 @@ declare module '@tanstack/react-router' {
       path: '/watch-{$slug}'
       fullPath: '/watch-{$slug}'
       preLoaderRoute: typeof WatchChar123slugChar125RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ver-{$slug}': {
+      id: '/ver-{$slug}'
+      path: '/ver-{$slug}'
+      fullPath: '/ver-{$slug}'
+      preLoaderRoute: typeof VerChar123slugChar125RouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sitemap.xml': {
@@ -559,6 +579,7 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapEsDotxmlRoute: SitemapEsDotxmlRoute,
   SitemapIndexDotxmlRoute: SitemapIndexDotxmlRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  VerChar123slugChar125Route: VerChar123slugChar125Route,
   WatchChar123slugChar125Route: WatchChar123slugChar125Route,
   AdminSyncStatusRoute: AdminSyncStatusRoute,
   ApiTrackClickRoute: ApiTrackClickRoute,
