@@ -23,6 +23,7 @@ import { Route as LocaleRouteImport } from './routes/$locale'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LocaleIndexRouteImport } from './routes/$locale.index'
 import { Route as TeamSlugRouteImport } from './routes/team.$slug'
+import { Route as BlogsSlugRouteImport } from './routes/blogs.$slug'
 import { Route as ApiTrackClickRouteImport } from './routes/api.track-click'
 import { Route as AdminSyncStatusRouteImport } from './routes/admin.sync-status'
 import { Route as LocaleWatchChar123slugChar125RouteImport } from './routes/$locale.watch-{$slug}'
@@ -111,6 +112,11 @@ const TeamSlugRoute = TeamSlugRouteImport.update({
   path: '/team/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogsSlugRoute = BlogsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => BlogsRoute,
+} as any)
 const ApiTrackClickRoute = ApiTrackClickRouteImport.update({
   id: '/api/track-click',
   path: '/api/track-click',
@@ -196,7 +202,7 @@ const ApiPublicHooksSyncFixturesRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$locale': typeof LocaleRouteWithChildren
-  '/blogs': typeof BlogsRoute
+  '/blogs': typeof BlogsRouteWithChildren
   '/donde-ver-mundial-en-{$slug}': typeof DondeVerMundialEnChar123slugChar125Route
   '/how-to-watch-world-cup-in-{$slug}': typeof HowToWatchWorldCupInChar123slugChar125Route
   '/robots.txt': typeof RobotsDottxtRoute
@@ -217,6 +223,7 @@ export interface FileRoutesByFullPath {
   '/$locale/watch-{$slug}': typeof LocaleWatchChar123slugChar125Route
   '/admin/sync-status': typeof AdminSyncStatusRoute
   '/api/track-click': typeof ApiTrackClickRoute
+  '/blogs/$slug': typeof BlogsSlugRoute
   '/team/$slug': typeof TeamSlugRoute
   '/$locale/': typeof LocaleIndexRoute
   '/$locale/blogs/$slug': typeof LocaleBlogsSlugRoute
@@ -226,7 +233,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/blogs': typeof BlogsRoute
+  '/blogs': typeof BlogsRouteWithChildren
   '/donde-ver-mundial-en-{$slug}': typeof DondeVerMundialEnChar123slugChar125Route
   '/how-to-watch-world-cup-in-{$slug}': typeof HowToWatchWorldCupInChar123slugChar125Route
   '/robots.txt': typeof RobotsDottxtRoute
@@ -246,6 +253,7 @@ export interface FileRoutesByTo {
   '/$locale/watch-{$slug}': typeof LocaleWatchChar123slugChar125Route
   '/admin/sync-status': typeof AdminSyncStatusRoute
   '/api/track-click': typeof ApiTrackClickRoute
+  '/blogs/$slug': typeof BlogsSlugRoute
   '/team/$slug': typeof TeamSlugRoute
   '/$locale': typeof LocaleIndexRoute
   '/$locale/blogs/$slug': typeof LocaleBlogsSlugRoute
@@ -257,7 +265,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/$locale': typeof LocaleRouteWithChildren
-  '/blogs': typeof BlogsRoute
+  '/blogs': typeof BlogsRouteWithChildren
   '/donde-ver-mundial-en-{$slug}': typeof DondeVerMundialEnChar123slugChar125Route
   '/how-to-watch-world-cup-in-{$slug}': typeof HowToWatchWorldCupInChar123slugChar125Route
   '/robots.txt': typeof RobotsDottxtRoute
@@ -278,6 +286,7 @@ export interface FileRoutesById {
   '/$locale/watch-{$slug}': typeof LocaleWatchChar123slugChar125Route
   '/admin/sync-status': typeof AdminSyncStatusRoute
   '/api/track-click': typeof ApiTrackClickRoute
+  '/blogs/$slug': typeof BlogsSlugRoute
   '/team/$slug': typeof TeamSlugRoute
   '/$locale/': typeof LocaleIndexRoute
   '/$locale/blogs/$slug': typeof LocaleBlogsSlugRoute
@@ -311,6 +320,7 @@ export interface FileRouteTypes {
     | '/$locale/watch-{$slug}'
     | '/admin/sync-status'
     | '/api/track-click'
+    | '/blogs/$slug'
     | '/team/$slug'
     | '/$locale/'
     | '/$locale/blogs/$slug'
@@ -340,6 +350,7 @@ export interface FileRouteTypes {
     | '/$locale/watch-{$slug}'
     | '/admin/sync-status'
     | '/api/track-click'
+    | '/blogs/$slug'
     | '/team/$slug'
     | '/$locale'
     | '/$locale/blogs/$slug'
@@ -371,6 +382,7 @@ export interface FileRouteTypes {
     | '/$locale/watch-{$slug}'
     | '/admin/sync-status'
     | '/api/track-click'
+    | '/blogs/$slug'
     | '/team/$slug'
     | '/$locale/'
     | '/$locale/blogs/$slug'
@@ -382,7 +394,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LocaleRoute: typeof LocaleRouteWithChildren
-  BlogsRoute: typeof BlogsRoute
+  BlogsRoute: typeof BlogsRouteWithChildren
   DondeVerMundialEnChar123slugChar125Route: typeof DondeVerMundialEnChar123slugChar125Route
   HowToWatchWorldCupInChar123slugChar125Route: typeof HowToWatchWorldCupInChar123slugChar125Route
   RobotsDottxtRoute: typeof RobotsDottxtRoute
@@ -497,6 +509,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/team/$slug'
       preLoaderRoute: typeof TeamSlugRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/blogs/$slug': {
+      id: '/blogs/$slug'
+      path: '/$slug'
+      fullPath: '/blogs/$slug'
+      preLoaderRoute: typeof BlogsSlugRouteImport
+      parentRoute: typeof BlogsRoute
     }
     '/api/track-click': {
       id: '/api/track-click'
@@ -653,10 +672,20 @@ const LocaleRouteChildren: LocaleRouteChildren = {
 const LocaleRouteWithChildren =
   LocaleRoute._addFileChildren(LocaleRouteChildren)
 
+interface BlogsRouteChildren {
+  BlogsSlugRoute: typeof BlogsSlugRoute
+}
+
+const BlogsRouteChildren: BlogsRouteChildren = {
+  BlogsSlugRoute: BlogsSlugRoute,
+}
+
+const BlogsRouteWithChildren = BlogsRoute._addFileChildren(BlogsRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LocaleRoute: LocaleRouteWithChildren,
-  BlogsRoute: BlogsRoute,
+  BlogsRoute: BlogsRouteWithChildren,
   DondeVerMundialEnChar123slugChar125Route:
     DondeVerMundialEnChar123slugChar125Route,
   HowToWatchWorldCupInChar123slugChar125Route:
