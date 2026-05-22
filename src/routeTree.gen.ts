@@ -18,6 +18,7 @@ import { Route as SitemapEnDotxmlRouteImport } from './routes/sitemap-en[.]xml'
 import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
 import { Route as HowToWatchWorldCupInChar123slugChar125RouteImport } from './routes/how-to-watch-world-cup-in-{$slug}'
 import { Route as DondeVerMundialEnChar123slugChar125RouteImport } from './routes/donde-ver-mundial-en-{$slug}'
+import { Route as BlogsRouteImport } from './routes/blogs'
 import { Route as LocaleRouteImport } from './routes/$locale'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LocaleIndexRouteImport } from './routes/$locale.index'
@@ -85,6 +86,11 @@ const DondeVerMundialEnChar123slugChar125Route =
     path: '/donde-ver-mundial-en-{$slug}',
     getParentRoute: () => rootRouteImport,
   } as any)
+const BlogsRoute = BlogsRouteImport.update({
+  id: '/blogs',
+  path: '/blogs',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LocaleRoute = LocaleRouteImport.update({
   id: '/$locale',
   path: '/$locale',
@@ -190,6 +196,7 @@ const ApiPublicHooksSyncFixturesRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$locale': typeof LocaleRouteWithChildren
+  '/blogs': typeof BlogsRoute
   '/donde-ver-mundial-en-{$slug}': typeof DondeVerMundialEnChar123slugChar125Route
   '/how-to-watch-world-cup-in-{$slug}': typeof HowToWatchWorldCupInChar123slugChar125Route
   '/robots.txt': typeof RobotsDottxtRoute
@@ -219,6 +226,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/blogs': typeof BlogsRoute
   '/donde-ver-mundial-en-{$slug}': typeof DondeVerMundialEnChar123slugChar125Route
   '/how-to-watch-world-cup-in-{$slug}': typeof HowToWatchWorldCupInChar123slugChar125Route
   '/robots.txt': typeof RobotsDottxtRoute
@@ -249,6 +257,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/$locale': typeof LocaleRouteWithChildren
+  '/blogs': typeof BlogsRoute
   '/donde-ver-mundial-en-{$slug}': typeof DondeVerMundialEnChar123slugChar125Route
   '/how-to-watch-world-cup-in-{$slug}': typeof HowToWatchWorldCupInChar123slugChar125Route
   '/robots.txt': typeof RobotsDottxtRoute
@@ -281,6 +290,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/$locale'
+    | '/blogs'
     | '/donde-ver-mundial-en-{$slug}'
     | '/how-to-watch-world-cup-in-{$slug}'
     | '/robots.txt'
@@ -310,6 +320,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/blogs'
     | '/donde-ver-mundial-en-{$slug}'
     | '/how-to-watch-world-cup-in-{$slug}'
     | '/robots.txt'
@@ -339,6 +350,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/$locale'
+    | '/blogs'
     | '/donde-ver-mundial-en-{$slug}'
     | '/how-to-watch-world-cup-in-{$slug}'
     | '/robots.txt'
@@ -370,6 +382,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LocaleRoute: typeof LocaleRouteWithChildren
+  BlogsRoute: typeof BlogsRoute
   DondeVerMundialEnChar123slugChar125Route: typeof DondeVerMundialEnChar123slugChar125Route
   HowToWatchWorldCupInChar123slugChar125Route: typeof HowToWatchWorldCupInChar123slugChar125Route
   RobotsDottxtRoute: typeof RobotsDottxtRoute
@@ -448,6 +461,13 @@ declare module '@tanstack/react-router' {
       path: '/donde-ver-mundial-en-{$slug}'
       fullPath: '/donde-ver-mundial-en-{$slug}'
       preLoaderRoute: typeof DondeVerMundialEnChar123slugChar125RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blogs': {
+      id: '/blogs'
+      path: '/blogs'
+      fullPath: '/blogs'
+      preLoaderRoute: typeof BlogsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/$locale': {
@@ -636,6 +656,7 @@ const LocaleRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LocaleRoute: LocaleRouteWithChildren,
+  BlogsRoute: BlogsRoute,
   DondeVerMundialEnChar123slugChar125Route:
     DondeVerMundialEnChar123slugChar125Route,
   HowToWatchWorldCupInChar123slugChar125Route:
