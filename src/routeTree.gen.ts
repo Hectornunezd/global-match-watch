@@ -17,6 +17,7 @@ import { Route as SitemapEsDotxmlRouteImport } from './routes/sitemap-es[.]xml'
 import { Route as SitemapEnDotxmlRouteImport } from './routes/sitemap-en[.]xml'
 import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
 import { Route as HowToWatchWorldCupInChar123slugChar125RouteImport } from './routes/how-to-watch-world-cup-in-{$slug}'
+import { Route as DondeVerMundialEnChar123slugChar125RouteImport } from './routes/donde-ver-mundial-en-{$slug}'
 import { Route as LocaleRouteImport } from './routes/$locale'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LocaleIndexRouteImport } from './routes/$locale.index'
@@ -76,6 +77,12 @@ const HowToWatchWorldCupInChar123slugChar125Route =
   HowToWatchWorldCupInChar123slugChar125RouteImport.update({
     id: '/how-to-watch-world-cup-in-{$slug}',
     path: '/how-to-watch-world-cup-in-{$slug}',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DondeVerMundialEnChar123slugChar125Route =
+  DondeVerMundialEnChar123slugChar125RouteImport.update({
+    id: '/donde-ver-mundial-en-{$slug}',
+    path: '/donde-ver-mundial-en-{$slug}',
     getParentRoute: () => rootRouteImport,
   } as any)
 const LocaleRoute = LocaleRouteImport.update({
@@ -183,6 +190,7 @@ const ApiPublicHooksSyncFixturesRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$locale': typeof LocaleRouteWithChildren
+  '/donde-ver-mundial-en-{$slug}': typeof DondeVerMundialEnChar123slugChar125Route
   '/how-to-watch-world-cup-in-{$slug}': typeof HowToWatchWorldCupInChar123slugChar125Route
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap-en.xml': typeof SitemapEnDotxmlRoute
@@ -211,6 +219,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/donde-ver-mundial-en-{$slug}': typeof DondeVerMundialEnChar123slugChar125Route
   '/how-to-watch-world-cup-in-{$slug}': typeof HowToWatchWorldCupInChar123slugChar125Route
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap-en.xml': typeof SitemapEnDotxmlRoute
@@ -240,6 +249,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/$locale': typeof LocaleRouteWithChildren
+  '/donde-ver-mundial-en-{$slug}': typeof DondeVerMundialEnChar123slugChar125Route
   '/how-to-watch-world-cup-in-{$slug}': typeof HowToWatchWorldCupInChar123slugChar125Route
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap-en.xml': typeof SitemapEnDotxmlRoute
@@ -271,6 +281,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/$locale'
+    | '/donde-ver-mundial-en-{$slug}'
     | '/how-to-watch-world-cup-in-{$slug}'
     | '/robots.txt'
     | '/sitemap-en.xml'
@@ -299,6 +310,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/donde-ver-mundial-en-{$slug}'
     | '/how-to-watch-world-cup-in-{$slug}'
     | '/robots.txt'
     | '/sitemap-en.xml'
@@ -327,6 +339,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/$locale'
+    | '/donde-ver-mundial-en-{$slug}'
     | '/how-to-watch-world-cup-in-{$slug}'
     | '/robots.txt'
     | '/sitemap-en.xml'
@@ -357,6 +370,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LocaleRoute: typeof LocaleRouteWithChildren
+  DondeVerMundialEnChar123slugChar125Route: typeof DondeVerMundialEnChar123slugChar125Route
   HowToWatchWorldCupInChar123slugChar125Route: typeof HowToWatchWorldCupInChar123slugChar125Route
   RobotsDottxtRoute: typeof RobotsDottxtRoute
   SitemapEnDotxmlRoute: typeof SitemapEnDotxmlRoute
@@ -427,6 +441,13 @@ declare module '@tanstack/react-router' {
       path: '/how-to-watch-world-cup-in-{$slug}'
       fullPath: '/how-to-watch-world-cup-in-{$slug}'
       preLoaderRoute: typeof HowToWatchWorldCupInChar123slugChar125RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/donde-ver-mundial-en-{$slug}': {
+      id: '/donde-ver-mundial-en-{$slug}'
+      path: '/donde-ver-mundial-en-{$slug}'
+      fullPath: '/donde-ver-mundial-en-{$slug}'
+      preLoaderRoute: typeof DondeVerMundialEnChar123slugChar125RouteImport
       parentRoute: typeof rootRouteImport
     }
     '/$locale': {
@@ -615,6 +636,8 @@ const LocaleRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LocaleRoute: LocaleRouteWithChildren,
+  DondeVerMundialEnChar123slugChar125Route:
+    DondeVerMundialEnChar123slugChar125Route,
   HowToWatchWorldCupInChar123slugChar125Route:
     HowToWatchWorldCupInChar123slugChar125Route,
   RobotsDottxtRoute: RobotsDottxtRoute,
