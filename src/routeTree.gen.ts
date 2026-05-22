@@ -16,6 +16,7 @@ import { Route as SitemapIndexDotxmlRouteImport } from './routes/sitemap-index[.
 import { Route as SitemapEsDotxmlRouteImport } from './routes/sitemap-es[.]xml'
 import { Route as SitemapEnDotxmlRouteImport } from './routes/sitemap-en[.]xml'
 import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
+import { Route as HowToWatchWorldCupInChar123slugChar125RouteImport } from './routes/how-to-watch-world-cup-in-{$slug}'
 import { Route as LocaleRouteImport } from './routes/$locale'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LocaleIndexRouteImport } from './routes/$locale.index'
@@ -71,6 +72,12 @@ const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
   path: '/robots.txt',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HowToWatchWorldCupInChar123slugChar125Route =
+  HowToWatchWorldCupInChar123slugChar125RouteImport.update({
+    id: '/how-to-watch-world-cup-in-{$slug}',
+    path: '/how-to-watch-world-cup-in-{$slug}',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const LocaleRoute = LocaleRouteImport.update({
   id: '/$locale',
   path: '/$locale',
@@ -176,6 +183,7 @@ const ApiPublicHooksSyncFixturesRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$locale': typeof LocaleRouteWithChildren
+  '/how-to-watch-world-cup-in-{$slug}': typeof HowToWatchWorldCupInChar123slugChar125Route
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap-en.xml': typeof SitemapEnDotxmlRoute
   '/sitemap-es.xml': typeof SitemapEsDotxmlRoute
@@ -203,6 +211,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/how-to-watch-world-cup-in-{$slug}': typeof HowToWatchWorldCupInChar123slugChar125Route
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap-en.xml': typeof SitemapEnDotxmlRoute
   '/sitemap-es.xml': typeof SitemapEsDotxmlRoute
@@ -231,6 +240,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/$locale': typeof LocaleRouteWithChildren
+  '/how-to-watch-world-cup-in-{$slug}': typeof HowToWatchWorldCupInChar123slugChar125Route
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap-en.xml': typeof SitemapEnDotxmlRoute
   '/sitemap-es.xml': typeof SitemapEsDotxmlRoute
@@ -261,6 +271,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/$locale'
+    | '/how-to-watch-world-cup-in-{$slug}'
     | '/robots.txt'
     | '/sitemap-en.xml'
     | '/sitemap-es.xml'
@@ -288,6 +299,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/how-to-watch-world-cup-in-{$slug}'
     | '/robots.txt'
     | '/sitemap-en.xml'
     | '/sitemap-es.xml'
@@ -315,6 +327,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/$locale'
+    | '/how-to-watch-world-cup-in-{$slug}'
     | '/robots.txt'
     | '/sitemap-en.xml'
     | '/sitemap-es.xml'
@@ -344,6 +357,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LocaleRoute: typeof LocaleRouteWithChildren
+  HowToWatchWorldCupInChar123slugChar125Route: typeof HowToWatchWorldCupInChar123slugChar125Route
   RobotsDottxtRoute: typeof RobotsDottxtRoute
   SitemapEnDotxmlRoute: typeof SitemapEnDotxmlRoute
   SitemapEsDotxmlRoute: typeof SitemapEsDotxmlRoute
@@ -406,6 +420,13 @@ declare module '@tanstack/react-router' {
       path: '/robots.txt'
       fullPath: '/robots.txt'
       preLoaderRoute: typeof RobotsDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/how-to-watch-world-cup-in-{$slug}': {
+      id: '/how-to-watch-world-cup-in-{$slug}'
+      path: '/how-to-watch-world-cup-in-{$slug}'
+      fullPath: '/how-to-watch-world-cup-in-{$slug}'
+      preLoaderRoute: typeof HowToWatchWorldCupInChar123slugChar125RouteImport
       parentRoute: typeof rootRouteImport
     }
     '/$locale': {
@@ -594,6 +615,8 @@ const LocaleRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LocaleRoute: LocaleRouteWithChildren,
+  HowToWatchWorldCupInChar123slugChar125Route:
+    HowToWatchWorldCupInChar123slugChar125Route,
   RobotsDottxtRoute: RobotsDottxtRoute,
   SitemapEnDotxmlRoute: SitemapEnDotxmlRoute,
   SitemapEsDotxmlRoute: SitemapEsDotxmlRoute,
