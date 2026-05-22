@@ -19,6 +19,7 @@ import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
 import { Route as LocaleRouteImport } from './routes/$locale'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LocaleIndexRouteImport } from './routes/$locale.index'
+import { Route as TeamSlugRouteImport } from './routes/team.$slug'
 import { Route as ApiTrackClickRouteImport } from './routes/api.track-click'
 import { Route as AdminSyncStatusRouteImport } from './routes/admin.sync-status'
 import { Route as LocaleWatchChar123slugChar125RouteImport } from './routes/$locale.watch-{$slug}'
@@ -84,6 +85,11 @@ const LocaleIndexRoute = LocaleIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => LocaleRoute,
+} as any)
+const TeamSlugRoute = TeamSlugRouteImport.update({
+  id: '/team/$slug',
+  path: '/team/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const ApiTrackClickRoute = ApiTrackClickRouteImport.update({
   id: '/api/track-click',
@@ -188,6 +194,7 @@ export interface FileRoutesByFullPath {
   '/$locale/watch-{$slug}': typeof LocaleWatchChar123slugChar125Route
   '/admin/sync-status': typeof AdminSyncStatusRoute
   '/api/track-click': typeof ApiTrackClickRoute
+  '/team/$slug': typeof TeamSlugRoute
   '/$locale/': typeof LocaleIndexRoute
   '/$locale/blogs/$slug': typeof LocaleBlogsSlugRoute
   '/$locale/team/$slug': typeof LocaleTeamSlugRoute
@@ -213,6 +220,7 @@ export interface FileRoutesByTo {
   '/$locale/watch-{$slug}': typeof LocaleWatchChar123slugChar125Route
   '/admin/sync-status': typeof AdminSyncStatusRoute
   '/api/track-click': typeof ApiTrackClickRoute
+  '/team/$slug': typeof TeamSlugRoute
   '/$locale': typeof LocaleIndexRoute
   '/$locale/blogs/$slug': typeof LocaleBlogsSlugRoute
   '/$locale/team/$slug': typeof LocaleTeamSlugRoute
@@ -241,6 +249,7 @@ export interface FileRoutesById {
   '/$locale/watch-{$slug}': typeof LocaleWatchChar123slugChar125Route
   '/admin/sync-status': typeof AdminSyncStatusRoute
   '/api/track-click': typeof ApiTrackClickRoute
+  '/team/$slug': typeof TeamSlugRoute
   '/$locale/': typeof LocaleIndexRoute
   '/$locale/blogs/$slug': typeof LocaleBlogsSlugRoute
   '/$locale/team/$slug': typeof LocaleTeamSlugRoute
@@ -270,6 +279,7 @@ export interface FileRouteTypes {
     | '/$locale/watch-{$slug}'
     | '/admin/sync-status'
     | '/api/track-click'
+    | '/team/$slug'
     | '/$locale/'
     | '/$locale/blogs/$slug'
     | '/$locale/team/$slug'
@@ -295,6 +305,7 @@ export interface FileRouteTypes {
     | '/$locale/watch-{$slug}'
     | '/admin/sync-status'
     | '/api/track-click'
+    | '/team/$slug'
     | '/$locale'
     | '/$locale/blogs/$slug'
     | '/$locale/team/$slug'
@@ -322,6 +333,7 @@ export interface FileRouteTypes {
     | '/$locale/watch-{$slug}'
     | '/admin/sync-status'
     | '/api/track-click'
+    | '/team/$slug'
     | '/$locale/'
     | '/$locale/blogs/$slug'
     | '/$locale/team/$slug'
@@ -341,6 +353,7 @@ export interface RootRouteChildren {
   WatchChar123slugChar125Route: typeof WatchChar123slugChar125Route
   AdminSyncStatusRoute: typeof AdminSyncStatusRoute
   ApiTrackClickRoute: typeof ApiTrackClickRoute
+  TeamSlugRoute: typeof TeamSlugRoute
   ApiPublicHooksSyncFixturesRoute: typeof ApiPublicHooksSyncFixturesRoute
 }
 
@@ -415,6 +428,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/$locale/'
       preLoaderRoute: typeof LocaleIndexRouteImport
       parentRoute: typeof LocaleRoute
+    }
+    '/team/$slug': {
+      id: '/team/$slug'
+      path: '/team/$slug'
+      fullPath: '/team/$slug'
+      preLoaderRoute: typeof TeamSlugRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/api/track-click': {
       id: '/api/track-click'
@@ -583,6 +603,7 @@ const rootRouteChildren: RootRouteChildren = {
   WatchChar123slugChar125Route: WatchChar123slugChar125Route,
   AdminSyncStatusRoute: AdminSyncStatusRoute,
   ApiTrackClickRoute: ApiTrackClickRoute,
+  TeamSlugRoute: TeamSlugRoute,
   ApiPublicHooksSyncFixturesRoute: ApiPublicHooksSyncFixturesRoute,
 }
 export const routeTree = rootRouteImport
