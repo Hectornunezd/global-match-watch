@@ -82,7 +82,6 @@ export function Flag({ src, name, className, fallbackTextClassName }: Props) {
       alt=""
       loading="lazy"
       referrerPolicy="no-referrer"
-      crossOrigin="anonymous"
       onError={() => {
         if (idx + 1 < sources.length) {
           setIdx(idx + 1);
