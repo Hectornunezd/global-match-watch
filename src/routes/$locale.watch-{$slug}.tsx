@@ -213,6 +213,8 @@ export function MatchPage({ locale }: { locale: Locale }) {
             )}
           </section>
 
+          <AdSlot slot="responsive" adSlot="1216235122" />
+
           {/* Other matches */}
           {related.length > 0 ? (
             <section className="mt-10">
