@@ -4,9 +4,9 @@ type SlotKind = "leaderboard" | "rectangle" | "responsive" | "in-feed";
 
 /**
  * Reserves visible space for a Google AdSense unit.
- * - When VITE_ADSENSE_CLIENT_ID is set, renders an <ins.adsbygoogle> and pushes it to the queue.
- * - When not set, still reserves the same vertical space with a subtle "Advertisement" placeholder
- *   so the layout doesn't shift once ads are enabled.
+ * Auto Ads is enabled site-wide in __root.tsx (Google decides placements).
+ * This component also renders an explicit <ins.adsbygoogle data-ad-format="auto">
+ * so Auto Ads can fill these reserved containers when appropriate.
  */
 export function AdSlot({
   slot,
@@ -17,7 +17,9 @@ export function AdSlot({
   format?: string;
   className?: string;
 }) {
-  const clientId = (import.meta.env.VITE_ADSENSE_CLIENT_ID as string | undefined) ?? "";
+  const clientId =
+    (import.meta.env.VITE_ADSENSE_CLIENT_ID as string | undefined) ??
+    "ca-pub-7422798753725684";
   const insRef = useRef<HTMLModElement | null>(null);
 
   useEffect(() => {
@@ -52,9 +54,8 @@ export function AdSlot({
         <ins
           ref={insRef}
           className="adsbygoogle block w-full"
-          style={{ display: "block" }}
+          style={{ display: "block", width: "100%", minHeight: "inherit" }}
           data-ad-client={clientId}
-          data-ad-slot={slot}
           data-ad-format={format}
           data-full-width-responsive="true"
         />
