@@ -101,20 +101,12 @@ function RootComponent() {
       script.crossOrigin = "anonymous";
       document.head.appendChild(script);
     }
-
-    // Enable AdSense Auto Ads (page-level ads) — Google decides placements
-    try {
-      const w = window as unknown as { adsbygoogle?: unknown[] };
-      w.adsbygoogle = w.adsbygoogle || [];
-      w.adsbygoogle.push({
-        google_ad_client: "ca-pub-7422798753725684",
-        enable_page_level_ads: true,
-      });
-    } catch {
-      /* noop */
-    }
+    // Auto Ads activation is handled by the <meta name="google-adsense-account">
+    // tag in <head>. Do NOT push { enable_page_level_ads: true } here — Google
+    // only allows that once per page and it throws TagError on re-renders.
   }, []);
 
   return <Outlet />;
 }
+
 
