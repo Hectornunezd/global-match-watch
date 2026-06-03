@@ -12,10 +12,12 @@ export function AdSlot({
   slot,
   format = "auto",
   className = "",
+  adSlot,
 }: {
   slot: SlotKind;
   format?: string;
   className?: string;
+  adSlot?: string;
 }) {
   const clientId =
     (import.meta.env.VITE_ADSENSE_CLIENT_ID as string | undefined) ??
@@ -56,6 +58,7 @@ export function AdSlot({
           className="adsbygoogle block w-full"
           style={{ display: "block", width: "100%", minHeight: "inherit" }}
           data-ad-client={clientId}
+          data-ad-slot={adSlot}
           data-ad-format={format}
           data-full-width-responsive="true"
         />
