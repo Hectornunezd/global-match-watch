@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { getSyncStats, type SyncStats } from "@/server/sync-stats.functions";
+import { getSyncStats, type SyncStats } from "@/lib/sync-stats.functions";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 
