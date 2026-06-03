@@ -48,6 +48,7 @@ export const Route = createRootRoute({
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "MatchLiveNow — Where to Watch Every Match" },
       { name: "twitter:description", content: "Every channel and stream for the FIFA World Cup 2026, in your country." },
+      { name: "google-adsense-account", content: "ca-pub-7422798753725684" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
