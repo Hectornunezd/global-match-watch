@@ -94,14 +94,27 @@ function RootShell({ children }: { children: React.ReactNode }) {
 function RootComponent() {
   useEffect(() => {
     const existing = document.querySelector('script[src^="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"]');
-    if (existing) return;
+    if (!existing) {
+      const script = document.createElement("script");
+      script.async = true;
+      script.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7422798753725684";
+      script.crossOrigin = "anonymous";
+      document.head.appendChild(script);
+    }
 
-    const script = document.createElement("script");
-    script.async = true;
-    script.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7422798753725684";
-    script.crossOrigin = "anonymous";
-    document.head.appendChild(script);
+    // Enable AdSense Auto Ads (page-level ads) — Google decides placements
+    try {
+      const w = window as unknown as { adsbygoogle?: unknown[] };
+      w.adsbygoogle = w.adsbygoogle || [];
+      w.adsbygoogle.push({
+        google_ad_client: "ca-pub-7422798753725684",
+        enable_page_level_ads: true,
+      });
+    } catch {
+      /* noop */
+    }
   }, []);
 
   return <Outlet />;
 }
+
