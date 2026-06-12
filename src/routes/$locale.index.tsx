@@ -54,7 +54,7 @@ export const Route = createFileRoute("/$locale/")({
 });
 
 function HomePage() {
-  const { live, upcoming, channels, geo, locale, serverNow } = Route.useLoaderData() as {
+  const { live: liveFromDb, upcoming, channels, geo, locale, serverNow } = Route.useLoaderData() as {
     live: import("@/lib/data").Fixture[];
     upcoming: import("@/lib/data").Fixture[];
     channels: import("@/lib/data").Channel[];
@@ -72,8 +72,27 @@ function HomePage() {
   }, []);
   // Hide matches whose kickoff has already passed (with ~2.5h grace for in-progress games).
   const MATCH_DURATION_MS = 2.5 * 60 * 60 * 1000;
+  // Derive "live" from time: any scheduled match whose kickoff has started but
+  // hasn't exceeded the grace window. This covers games the DB hasn't flipped to "live" yet.
+  const live = useMemo(() => {
+    const byId = new Map<string, import("@/lib/data").Fixture>();
+    liveFromDb.forEach((f) => byId.set(f.id, f));
+    upcoming.forEach((f) => {
+      const start = new Date(f.match_date).getTime();
+      if (start <= now && start + MATCH_DURATION_MS > now) byId.set(f.id, f);
+    });
+    return Array.from(byId.values()).sort(
+      (a, b) => new Date(a.match_date).getTime() - new Date(b.match_date).getTime(),
+    );
+  }, [liveFromDb, upcoming, now]);
   const futureUpcoming = useMemo(
-    () => upcoming.filter((f) => new Date(f.match_date).getTime() + MATCH_DURATION_MS > now),
+    () =>
+      upcoming.filter((f) => {
+        const start = new Date(f.match_date).getTime();
+        // Exclude matches already considered "live" so they don't appear twice.
+        if (start <= now && start + MATCH_DURATION_MS > now) return false;
+        return start + MATCH_DURATION_MS > now;
+      }),
     [upcoming, now],
   );
   const groups = useMemo(() => {
@@ -87,6 +106,7 @@ function HomePage() {
     if (!group) return futureUpcoming;
     return futureUpcoming.filter((f) => f.round === `Group ${group}`);
   }, [futureUpcoming, group]);
+
 
 
   
