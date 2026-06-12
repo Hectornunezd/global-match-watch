@@ -64,17 +64,30 @@ function HomePage() {
   };
   const m = t(locale);
   const [group, setGroup] = useState<string | null>(null);
+  const [now, setNow] = useState(serverNow);
+  useEffect(() => {
+    setNow(Date.now());
+    const id = window.setInterval(() => setNow(Date.now()), 30_000);
+    return () => window.clearInterval(id);
+  }, []);
+  // Hide matches whose kickoff has already passed (with ~2.5h grace for in-progress games).
+  const MATCH_DURATION_MS = 2.5 * 60 * 60 * 1000;
+  const futureUpcoming = useMemo(
+    () => upcoming.filter((f) => new Date(f.match_date).getTime() + MATCH_DURATION_MS > now),
+    [upcoming, now],
+  );
   const groups = useMemo(() => {
     const g = new Set<string>();
-    upcoming.forEach((f) => {
+    futureUpcoming.forEach((f) => {
       if (f.round?.startsWith("Group ")) g.add(f.round.replace("Group ", ""));
     });
     return Array.from(g).sort();
-  }, [upcoming]);
+  }, [futureUpcoming]);
   const filtered = useMemo(() => {
-    if (!group) return upcoming;
-    return upcoming.filter((f) => f.round === `Group ${group}`);
-  }, [upcoming, group]);
+    if (!group) return futureUpcoming;
+    return futureUpcoming.filter((f) => f.round === `Group ${group}`);
+  }, [futureUpcoming, group]);
+
 
   
 
