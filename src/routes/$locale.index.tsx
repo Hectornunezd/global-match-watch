@@ -76,7 +76,7 @@ function HomePage() {
     return upcoming.filter((f) => f.round === `Group ${group}`);
   }, [upcoming, group]);
 
-  const countdown = useCountdown(WORLD_CUP_START, serverNow);
+  
 
   return (
     <>
@@ -124,29 +124,9 @@ function HomePage() {
             </div>
           </div>
 
-          {/* Countdown */}
-          <div className="mt-10 flex flex-col items-start gap-3 lg:flex-row lg:items-center">
-            <div className="grid w-full max-w-[640px] grid-cols-4 gap-1.5 sm:gap-3">
-              {[
-                { v: countdown.days, l: m.countdown.days },
-                { v: countdown.hours, l: m.countdown.hours },
-                { v: countdown.minutes, l: m.countdown.minutes },
-                { v: countdown.seconds, l: m.countdown.seconds },
-              ].map((c, i) => (
-                <div key={i} className="flex min-w-0 flex-col items-center justify-center border border-primary/40 bg-[var(--surface)] px-1 py-2 sm:px-4 sm:py-3">
-                  <span className="grid grid-cols-[auto_2.15ch_auto] items-baseline justify-center gap-0.5 font-display text-xl font-bold leading-none text-foreground min-[380px]:text-2xl sm:text-4xl">
-                    <span className="text-primary">[</span>
-                    <span className="block text-center font-mono text-[0.78em] font-bold leading-none tracking-[-0.08em] tabular-nums">{String(c.v).padStart(2, "0")}</span>
-                    <span className="text-primary">]</span>
-                  </span>
-                  <span className="mt-1.5 font-display text-[8px] uppercase leading-none tracking-wider text-muted-foreground min-[380px]:text-[9px] sm:mt-2 sm:text-[10px]">{c.l}</span>
-                </div>
-              ))}
-            </div>
-            <span className="text-xs uppercase tracking-wider text-muted-foreground">
-              {m.countdown.to}
-            </span>
-          </div>
+          {/* World Cup is here — next match */}
+          <NextMatchBanner upcoming={upcoming} live={live} locale={locale} serverNow={serverNow} />
+
         </div>
       </section>
 
@@ -268,19 +248,118 @@ const countryToGroup: Record<string, string> = {
 const flagUrl = (alpha2: string) =>
   `https://flagcdn.com/w40/${alpha2.toLowerCase()}.png`;
 
-function useCountdown(target: string, initialNow: number) {
-  const targetMs = new Date(target).getTime();
+function useNow(initialNow: number) {
   const [now, setNow] = useState(initialNow);
   useEffect(() => {
     setNow(Date.now());
     const id = window.setInterval(() => setNow(Date.now()), 1000);
     return () => window.clearInterval(id);
   }, []);
-  const diff = Math.max(0, targetMs - now);
-  return {
-    days: Math.floor(diff / 86_400_000),
-    hours: Math.floor((diff / 3_600_000) % 24),
-    minutes: Math.floor((diff / 60_000) % 60),
-    seconds: Math.floor((diff / 1000) % 60),
-  };
+  return now;
+}
+
+function NextMatchBanner({
+  upcoming,
+  live,
+  locale,
+  serverNow,
+}: {
+  upcoming: import("@/lib/data").Fixture[];
+  live: import("@/lib/data").Fixture[];
+  locale: Locale;
+  serverNow: number;
+}) {
+  const now = useNow(serverNow);
+  const next = useMemo(() => {
+    return [...upcoming]
+      .filter((f) => new Date(f.match_date).getTime() > now)
+      .sort((a, b) => new Date(a.match_date).getTime() - new Date(b.match_date).getTime())[0];
+  }, [upcoming, now]);
+
+  const headline = locale === "es" ? "El Mundial está aquí" : "The World Cup is here";
+  const nextLabel = locale === "es" ? "Próximo partido" : "Next match";
+  const liveLabel = locale === "es" ? "En vivo ahora" : "Live now";
+  const inLabel = locale === "es" ? "en" : "in";
+
+  const hasLive = live.length > 0;
+  const target = next ? new Date(next.match_date).getTime() : 0;
+  const diff = Math.max(0, target - now);
+  const d = Math.floor(diff / 86_400_000);
+  const h = Math.floor((diff / 3_600_000) % 24);
+  const mm = Math.floor((diff / 60_000) % 60);
+  const s = Math.floor((diff / 1000) % 60);
+
+  const matchSlug = next ? (locale === "es" ? next.slug_es : next.slug_en) : "";
+  const matchPath = next ? `/${locale}/${locale === "es" ? "ver" : "watch"}-${matchSlug}` : "#";
+  const timeStr = next
+    ? new Date(next.match_date).toLocaleString(locale === "es" ? "es-ES" : "en-US", {
+        weekday: "short",
+        day: "numeric",
+        month: "short",
+        hour: "2-digit",
+        minute: "2-digit",
+      })
+    : "";
+
+  return (
+    <div className="mt-10 border border-primary/40 bg-[var(--surface)] p-4 sm:p-6">
+      <div className="flex flex-wrap items-center gap-2">
+        <span className="inline-flex items-center gap-1.5 bg-primary px-2.5 py-1 font-display text-[10px] font-bold uppercase tracking-wider text-primary-foreground">
+          <span className="live-pulse h-1.5 w-1.5 rounded-full bg-primary-foreground" />
+          {headline}
+        </span>
+        {hasLive && (
+          <span className="inline-flex items-center gap-1.5 border border-[var(--success)]/40 bg-[var(--success)]/10 px-2.5 py-1 font-display text-[10px] font-bold uppercase tracking-wider text-[var(--success)]">
+            <span className="live-pulse h-1.5 w-1.5 rounded-full bg-[var(--success)]" />
+            {liveLabel} · {live.length}
+          </span>
+        )}
+      </div>
+
+      {next ? (
+        <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <Link to={matchPath} className="group/next min-w-0 flex-1">
+            <div className="font-display text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+              [ {nextLabel} ]
+            </div>
+            <div className="mt-1 truncate font-display text-xl uppercase leading-tight text-foreground transition-colors group-hover/next:text-primary sm:text-2xl">
+              {next.home_team[locale === "es" ? "name_es" : "name_en"]}
+              <span className="mx-2 text-primary">·</span>
+              {next.away_team[locale === "es" ? "name_es" : "name_en"]}
+            </div>
+            <div className="mt-1 text-xs text-muted-foreground">
+              {timeStr}
+              {next.venue ? ` ${inLabel} ${next.venue}` : ""}
+            </div>
+          </Link>
+          <div className="grid grid-cols-4 gap-1.5 sm:gap-2">
+            {[
+              { v: d, l: locale === "es" ? "días" : "days" },
+              { v: h, l: locale === "es" ? "hrs" : "hrs" },
+              { v: mm, l: "min" },
+              { v: s, l: locale === "es" ? "seg" : "sec" },
+            ].map((c, i) => (
+              <div
+                key={i}
+                className="flex min-w-[44px] flex-col items-center border border-primary/40 px-2 py-1.5"
+              >
+                <span className="font-mono text-lg font-bold tabular-nums text-foreground sm:text-xl">
+                  {String(c.v).padStart(2, "0")}
+                </span>
+                <span className="font-display text-[8px] uppercase tracking-wider text-muted-foreground sm:text-[9px]">
+                  {c.l}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      ) : (
+        <div className="mt-3 text-sm text-muted-foreground">
+          {locale === "es"
+            ? "Mira los partidos en vivo y la lista completa abajo."
+            : "Check the live matches and full schedule below."}
+        </div>
+      )}
+    </div>
+  );
 }
