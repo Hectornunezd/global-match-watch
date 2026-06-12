@@ -292,9 +292,11 @@ function NextMatchBanner({
   const headline = locale === "es" ? "El Mundial está aquí" : "The World Cup is here";
   const nextLabel = locale === "es" ? "Próximo partido" : "Next match";
   const liveLabel = locale === "es" ? "En vivo ahora" : "Live now";
+  const happeningNowLabel = locale === "es" ? "EN VIVO AHORA" : "HAPPENING NOW";
   const inLabel = locale === "es" ? "en" : "in";
 
   const hasLive = live.length > 0;
+  const currentMatch = hasLive ? live[0] : null;
   const target = next ? new Date(next.match_date).getTime() : 0;
   const diff = Math.max(0, target - now);
   const d = Math.floor(diff / 86_400_000);
@@ -302,8 +304,8 @@ function NextMatchBanner({
   const mm = Math.floor((diff / 60_000) % 60);
   const s = Math.floor((diff / 1000) % 60);
 
-  const matchSlug = next ? (locale === "es" ? next.slug_es : next.slug_en) : "";
-  const matchPath = next ? `/${locale}/${locale === "es" ? "ver" : "watch"}-${matchSlug}` : "#";
+  const nextSlug = next ? (locale === "es" ? next.slug_es : next.slug_en) : "";
+  const nextPath = next ? `/${locale}/${locale === "es" ? "ver" : "watch"}-${nextSlug}` : "#";
   const timeStr = next
     ? new Date(next.match_date).toLocaleString(locale === "es" ? "es-ES" : "en-US", {
         weekday: "short",
@@ -313,6 +315,9 @@ function NextMatchBanner({
         minute: "2-digit",
       })
     : "";
+
+  const currentSlug = currentMatch ? (locale === "es" ? currentMatch.slug_es : currentMatch.slug_en) : "";
+  const currentPath = currentMatch ? `/${locale}/${locale === "es" ? "ver" : "watch"}-${currentSlug}` : "#";
 
   return (
     <div className="mt-10 border border-primary/40 bg-[var(--surface)] p-4 sm:p-6">
@@ -329,9 +334,34 @@ function NextMatchBanner({
         )}
       </div>
 
-      {next ? (
+      {currentMatch ? (
         <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <Link to={matchPath} className="group/next min-w-0 flex-1">
+          <Link to={currentPath} className="group/current min-w-0 flex-1">
+            <div className="font-display text-[10px] uppercase tracking-[0.2em] text-[var(--success)]">
+              <span className="live-pulse mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-[var(--success)]" />
+              [ {happeningNowLabel} ]
+            </div>
+            <div className="mt-1 truncate font-display text-xl uppercase leading-tight text-foreground transition-colors group-hover/current:text-primary sm:text-2xl">
+              {currentMatch.home_team[locale === "es" ? "name_es" : "name_en"]}
+              <span className="mx-2 text-primary">·</span>
+              {currentMatch.away_team[locale === "es" ? "name_es" : "name_en"]}
+            </div>
+            <div className="mt-1 text-xs text-muted-foreground">
+              {currentMatch.venue ? `${currentMatch.venue}` : ""}
+              {currentMatch.home_score !== null && currentMatch.away_score !== null
+                ? ` — ${currentMatch.home_score} : ${currentMatch.away_score}`
+                : ""}
+            </div>
+          </Link>
+          <div className="flex flex-col items-center justify-center border border-[var(--success)]/40 bg-[var(--success)]/10 px-4 py-3">
+            <span className="font-display text-[10px] font-bold uppercase tracking-wider text-[var(--success)]">
+              LIVE
+            </span>
+          </div>
+        </div>
+      ) : next ? (
+        <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <Link to={nextPath} className="group/next min-w-0 flex-1">
             <div className="font-display text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
               [ {nextLabel} ]
             </div>
