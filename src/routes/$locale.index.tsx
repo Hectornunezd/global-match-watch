@@ -76,7 +76,7 @@ function HomePage() {
     return upcoming.filter((f) => f.round === `Group ${group}`);
   }, [upcoming, group]);
 
-  const countdown = useCountdown(WORLD_CUP_START, serverNow);
+  
 
   return (
     <>
