@@ -124,29 +124,9 @@ function HomePage() {
             </div>
           </div>
 
-          {/* Countdown */}
-          <div className="mt-10 flex flex-col items-start gap-3 lg:flex-row lg:items-center">
-            <div className="grid w-full max-w-[640px] grid-cols-4 gap-1.5 sm:gap-3">
-              {[
-                { v: countdown.days, l: m.countdown.days },
-                { v: countdown.hours, l: m.countdown.hours },
-                { v: countdown.minutes, l: m.countdown.minutes },
-                { v: countdown.seconds, l: m.countdown.seconds },
-              ].map((c, i) => (
-                <div key={i} className="flex min-w-0 flex-col items-center justify-center border border-primary/40 bg-[var(--surface)] px-1 py-2 sm:px-4 sm:py-3">
-                  <span className="grid grid-cols-[auto_2.15ch_auto] items-baseline justify-center gap-0.5 font-display text-xl font-bold leading-none text-foreground min-[380px]:text-2xl sm:text-4xl">
-                    <span className="text-primary">[</span>
-                    <span className="block text-center font-mono text-[0.78em] font-bold leading-none tracking-[-0.08em] tabular-nums">{String(c.v).padStart(2, "0")}</span>
-                    <span className="text-primary">]</span>
-                  </span>
-                  <span className="mt-1.5 font-display text-[8px] uppercase leading-none tracking-wider text-muted-foreground min-[380px]:text-[9px] sm:mt-2 sm:text-[10px]">{c.l}</span>
-                </div>
-              ))}
-            </div>
-            <span className="text-xs uppercase tracking-wider text-muted-foreground">
-              {m.countdown.to}
-            </span>
-          </div>
+          {/* World Cup is here — next match */}
+          <NextMatchBanner upcoming={upcoming} live={live} locale={locale} serverNow={serverNow} />
+
         </div>
       </section>
 
