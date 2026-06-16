@@ -338,7 +338,6 @@ function NextMatchBanner({
     : "";
 
   const currentSlug = currentMatch ? (locale === "es" ? currentMatch.slug_es : currentMatch.slug_en) : "";
-  const currentPath = currentMatch ? `/${locale}/${locale === "es" ? "ver" : "watch"}-${currentSlug}` : "#";
 
   return (
     <div className="mt-10 border border-primary/40 bg-[var(--surface)] p-4 sm:p-6">
