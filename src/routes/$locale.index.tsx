@@ -381,7 +381,7 @@ function NextMatchBanner({
         </div>
       ) : next ? (
         <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <Link to={nextPath} className="group/next min-w-0 flex-1">
+          <Link to={localeUrl(locale, nextSlug)} className="group/next min-w-0 flex-1">
             <div className="font-display text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
               [ {nextLabel} ]
             </div>
