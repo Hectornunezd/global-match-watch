@@ -141,7 +141,7 @@ export function SearchBox({ locale }: { locale: Locale }) {
                 const date = new Date(f.match_date).toLocaleDateString(locale === "es" ? "es-ES" : "en-US", {
                   day: "2-digit",
                   month: "short",
-                  timeZone: "UTC",
+                  timeZone: "America/Chicago",
                 });
                 return (
                   <li key={f.id} className="border-t border-border first:border-t-0">
