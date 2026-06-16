@@ -152,8 +152,8 @@ function fmtTime(date: string, locale: Locale): string {
       hour: "2-digit",
       minute: "2-digit",
       hour12: false,
-      timeZone: "UTC",
-    }) + " HRS";
+      timeZone: "America/Chicago",
+    }) + " CT";
   } catch {
     return date;
   }

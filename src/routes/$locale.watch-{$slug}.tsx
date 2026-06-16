@@ -117,9 +117,9 @@ export function MatchPage({ locale }: { locale: Locale }) {
             {new Date(fixture.match_date).toLocaleString(locale === "es" ? "es-ES" : "en-US", {
               dateStyle: "full",
               timeStyle: "short",
-              timeZone: "UTC",
+              timeZone: "America/Chicago",
             })}{" "}
-            UTC
+            CT
           </span>
           <div className="mt-5 grid grid-cols-3 items-center gap-4 sm:gap-8">
             <div className="flex flex-col items-center gap-2 sm:flex-row sm:gap-4">

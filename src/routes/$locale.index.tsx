@@ -333,7 +333,8 @@ function NextMatchBanner({
         month: "short",
         hour: "2-digit",
         minute: "2-digit",
-      })
+        timeZone: "America/Chicago",
+      }) + " CT"
     : "";
 
   const currentSlug = currentMatch ? (locale === "es" ? currentMatch.slug_es : currentMatch.slug_en) : "";
