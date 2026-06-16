@@ -338,7 +338,6 @@ function NextMatchBanner({
     : "";
 
   const currentSlug = currentMatch ? (locale === "es" ? currentMatch.slug_es : currentMatch.slug_en) : "";
-  const currentPath = currentMatch ? `/${locale}/${locale === "es" ? "ver" : "watch"}-${currentSlug}` : "#";
 
   return (
     <div className="mt-10 border border-primary/40 bg-[var(--surface)] p-4 sm:p-6">
@@ -357,7 +356,7 @@ function NextMatchBanner({
 
       {currentMatch ? (
         <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <Link to={currentPath} className="group/current min-w-0 flex-1">
+          <Link to={localeUrl(locale, currentSlug)} className="group/current min-w-0 flex-1">
             <div className="font-display text-[10px] uppercase tracking-[0.2em] text-[var(--success)]">
               <span className="live-pulse mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-[var(--success)]" />
               [ {happeningNowLabel} ]
@@ -382,7 +381,7 @@ function NextMatchBanner({
         </div>
       ) : next ? (
         <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <Link to={nextPath} className="group/next min-w-0 flex-1">
+          <Link to={localeUrl(locale, nextSlug)} className="group/next min-w-0 flex-1">
             <div className="font-display text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
               [ {nextLabel} ]
             </div>
