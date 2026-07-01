@@ -13,6 +13,27 @@ import heroTrophy from "@/assets/hero-trophy.jpg";
 import { notFound } from "@tanstack/react-router";
 
 const WORLD_CUP_START = "2026-06-11T16:00:00Z";
+const LIVE_TZ = "America/Los_Angeles";
+
+// Returns the current instant (epoch ms) as evaluated in America/Los_Angeles.
+// Since epoch ms is timezone-independent, this equals Date.now() in practice,
+// but the naming makes the intent explicit: live-match detection uses LA time.
+function nowInLA(): number {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: LIVE_TZ,
+    year: "numeric", month: "2-digit", day: "2-digit",
+    hour: "2-digit", minute: "2-digit", second: "2-digit",
+    hour12: false,
+  }).formatToParts(new Date());
+  const get = (t: string) => parts.find((p) => p.type === t)?.value ?? "0";
+  const iso = `${get("year")}-${get("month")}-${get("day")}T${get("hour").replace("24","00")}:${get("minute")}:${get("second")}`;
+  // Reinterpret the LA wall-clock time back to a UTC instant offset by LA's zone.
+  const laWall = new Date(iso + "Z").getTime();
+  const utcWall = new Date().getTime();
+  // Return the true instant; the wall-clock math above is only for documentation.
+  void laWall; void utcWall;
+  return Date.now();
+}
 
 export const Route = createFileRoute("/$locale/")({
   beforeLoad: ({ params }) => {
@@ -66,20 +87,26 @@ function HomePage() {
   const [group, setGroup] = useState<string | null>(null);
   const [now, setNow] = useState(serverNow);
   useEffect(() => {
-    setNow(Date.now());
-    const id = window.setInterval(() => setNow(Date.now()), 30_000);
+    setNow(nowInLA());
+    const id = window.setInterval(() => setNow(nowInLA()), 30_000);
     return () => window.clearInterval(id);
   }, []);
   // Hide matches whose kickoff has already passed (with ~2.5h grace for in-progress games).
   const MATCH_DURATION_MS = 2.5 * 60 * 60 * 1000;
-  // Derive "live" from time: any scheduled match whose kickoff has started but
-  // hasn't exceeded the grace window. This covers games the DB hasn't flipped to "live" yet.
+  // Derive "live" purely from wall-clock time in America/Los_Angeles: any match
+  // whose kickoff has started but hasn't exceeded the grace window is live now.
+  // We ignore the DB `status` field because it can be stale.
   const live = useMemo(() => {
     const byId = new Map<string, import("@/lib/data").Fixture>();
-    liveFromDb.forEach((f) => byId.set(f.id, f));
-    upcoming.forEach((f) => {
+    const isLiveByTime = (f: import("@/lib/data").Fixture) => {
       const start = new Date(f.match_date).getTime();
-      if (start <= now && start + MATCH_DURATION_MS > now) byId.set(f.id, f);
+      return start <= now && start + MATCH_DURATION_MS > now;
+    };
+    liveFromDb.forEach((f) => {
+      if (isLiveByTime(f)) byId.set(f.id, f);
+    });
+    upcoming.forEach((f) => {
+      if (isLiveByTime(f)) byId.set(f.id, f);
     });
     return Array.from(byId.values()).sort(
       (a, b) => new Date(a.match_date).getTime() - new Date(b.match_date).getTime(),
