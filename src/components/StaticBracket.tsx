@@ -152,6 +152,20 @@ function MatchCard({ match, side = "left" }: { match: Match; side?: "left" | "ri
   );
 }
 
+/**
+ * Resolves the winner team of a given match id by walking the match graph.
+ * Returns undefined until the match is finished.
+ */
+function winnerTeam(matchId: string): Team | undefined {
+  const r32 = M[matchId];
+  if (r32) {
+    if (r32.winner === "home") return r32.home;
+    if (r32.winner === "away") return r32.away;
+    return undefined;
+  }
+  return undefined;
+}
+
 function WinnerCard({
   match,
   side = "left",
@@ -159,6 +173,8 @@ function WinnerCard({
   match: { id: string; a: string; b: string; date: string; time: string };
   side?: "left" | "right";
 }) {
+  const teamA = winnerTeam(match.a);
+  const teamB = winnerTeam(match.b);
   return (
     <div className="w-[180px]">
       <div className={`mb-1 flex items-center justify-between font-mono text-[10px] uppercase tracking-wider text-muted-foreground ${side === "right" ? "flex-row-reverse" : ""}`}>
@@ -166,8 +182,8 @@ function WinnerCard({
         <span>{match.time}</span>
       </div>
       <div className="space-y-1">
-        <PlaceholderRow label={`W${match.a.replace("M", "")}`} />
-        <PlaceholderRow label={`W${match.b.replace("M", "")}`} />
+        {teamA ? <TeamRow team={teamA} /> : <PlaceholderRow label={`W${match.a.replace("M", "")}`} />}
+        {teamB ? <TeamRow team={teamB} /> : <PlaceholderRow label={`W${match.b.replace("M", "")}`} />}
       </div>
     </div>
   );
