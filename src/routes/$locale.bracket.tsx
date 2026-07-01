@@ -3,6 +3,7 @@ import { isLocale, type Locale, localeUrl } from "@/lib/i18n";
 import { getHomepageData, type Fixture } from "@/lib/data";
 import { buildMeta } from "@/lib/seo";
 import bracketCover from "@/assets/bracket-cover.jpg";
+import { StaticBracket } from "@/components/StaticBracket";
 
 export const Route = createFileRoute("/$locale/bracket")({
   beforeLoad: ({ params }) => {

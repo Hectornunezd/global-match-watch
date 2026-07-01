@@ -7,6 +7,7 @@ import { MatchCard } from "@/components/MatchCard";
 import { GroupFilter } from "@/components/GroupFilter";
 import { CountrySelector } from "@/components/CountrySelector";
 import { AdSlot } from "@/components/AdSlot";
+import { StaticBracket } from "@/components/StaticBracket";
 
 import { buildMeta, jsonLdScript, organizationJsonLd, websiteJsonLd } from "@/lib/seo";
 import heroTrophy from "@/assets/hero-trophy.jpg";
@@ -272,6 +273,8 @@ function HomePage() {
           })}
         </div>
       </section>
+
+      <StaticBracket locale={locale} />
 
       <div className="mx-auto max-w-6xl px-4 pb-10 sm:px-6">
         <AdSlot slot="responsive" />
