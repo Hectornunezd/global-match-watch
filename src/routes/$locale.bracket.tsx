@@ -3,6 +3,7 @@ import { isLocale, type Locale, localeUrl } from "@/lib/i18n";
 import { getHomepageData, type Fixture } from "@/lib/data";
 import { buildMeta } from "@/lib/seo";
 import bracketCover from "@/assets/bracket-cover.jpg";
+import { StaticBracket } from "@/components/StaticBracket";
 
 export const Route = createFileRoute("/$locale/bracket")({
   beforeLoad: ({ params }) => {
@@ -93,84 +94,7 @@ function BracketPage() {
         </div>
       </section>
 
-      {/* Bracket grid */}
-      <section className="mx-auto max-w-[1400px] px-2 py-10 sm:px-6 sm:py-14">
-        {/* Round headers */}
-        <div className="mb-6 grid grid-cols-9 gap-2 text-center font-mono text-[10px] uppercase tracking-wider text-muted-foreground sm:text-xs">
-          <div className="col-span-1">{labels.rounds.r32}</div>
-          <div className="col-span-1">{labels.rounds.r16}</div>
-          <div className="col-span-1">{labels.rounds.qf}</div>
-          <div className="col-span-1">{labels.rounds.sf}</div>
-          <div className="col-span-1 text-primary">{labels.rounds.f}</div>
-          <div className="col-span-1">{labels.rounds.sf}</div>
-          <div className="col-span-1">{labels.rounds.qf}</div>
-          <div className="col-span-1">{labels.rounds.r16}</div>
-          <div className="col-span-1">{labels.rounds.r32}</div>
-        </div>
-
-        <div className="grid grid-cols-9 gap-2">
-          {/* Top half: R32 left */}
-          <BracketColumn fixtures={topHalf} locale={locale} labels={labels} side="left" />
-          <PlaceholderColumn count={4} labels={labels} />
-          <PlaceholderColumn count={2} labels={labels} />
-          <PlaceholderColumn count={1} labels={labels} />
-
-          {/* Final center */}
-          <div className="flex items-center justify-center">
-            <div className="rounded-xl border-2 border-primary bg-primary/10 p-3 text-center shadow-[0_0_30px_rgba(255,0,0,0.3)]">
-              <div className="font-mono text-[10px] uppercase tracking-wider text-primary">
-                {labels.rounds.f}
-              </div>
-              <div className="mt-2 font-display text-xs uppercase">
-                {labels.champion}
-              </div>
-              <div className="mt-1 font-display text-2xl text-primary">★</div>
-            </div>
-          </div>
-
-          {/* Right side */}
-          <PlaceholderColumn count={1} labels={labels} />
-          <PlaceholderColumn count={2} labels={labels} />
-          <PlaceholderColumn count={4} labels={labels} />
-          <BracketColumn fixtures={bottomHalf} locale={locale} labels={labels} side="right" />
-        </div>
-      </section>
-
-      {/* Mobile fallback list */}
-      <section className="mx-auto max-w-3xl px-4 pb-16 sm:hidden">
-        <h2 className="mb-4 font-display text-2xl uppercase">
-          <span className="text-primary">[</span> {labels.rounds.r32}{" "}
-          <span className="text-primary">]</span>
-        </h2>
-        <div className="space-y-2">
-          {r32.map((f) => {
-            const slug = locale === "es" ? f.slug_es : f.slug_en;
-            const home = locale === "es" ? f.home_team.name_es : f.home_team.name_en;
-            const away = locale === "es" ? f.away_team.name_es : f.away_team.name_en;
-            return (
-              <Link
-                key={f.id}
-                to={localeUrl(locale, slug)}
-                className="block rounded-lg border border-border bg-card p-3 text-sm hover:border-primary"
-              >
-                <div className="font-mono text-[10px] uppercase text-muted-foreground">
-                  {new Date(f.match_date).toLocaleString(locale === "es" ? "es-ES" : "en-US", {
-                    month: "short",
-                    day: "numeric",
-                    hour: "numeric",
-                    minute: "2-digit",
-                    timeZone: "America/Chicago",
-                  })}{" "}
-                  CT
-                </div>
-                <div className="mt-1">
-                  {home} <span className="text-primary">vs</span> {away}
-                </div>
-              </Link>
-            );
-          })}
-        </div>
-      </section>
+      <StaticBracket locale={locale} title={labels.title} />
     </>
   );
 }
