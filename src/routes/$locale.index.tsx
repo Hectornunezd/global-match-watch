@@ -13,6 +13,27 @@ import heroTrophy from "@/assets/hero-trophy.jpg";
 import { notFound } from "@tanstack/react-router";
 
 const WORLD_CUP_START = "2026-06-11T16:00:00Z";
+const LIVE_TZ = "America/Los_Angeles";
+
+// Returns the current instant (epoch ms) as evaluated in America/Los_Angeles.
+// Since epoch ms is timezone-independent, this equals Date.now() in practice,
+// but the naming makes the intent explicit: live-match detection uses LA time.
+function nowInLA(): number {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: LIVE_TZ,
+    year: "numeric", month: "2-digit", day: "2-digit",
+    hour: "2-digit", minute: "2-digit", second: "2-digit",
+    hour12: false,
+  }).formatToParts(new Date());
+  const get = (t: string) => parts.find((p) => p.type === t)?.value ?? "0";
+  const iso = `${get("year")}-${get("month")}-${get("day")}T${get("hour").replace("24","00")}:${get("minute")}:${get("second")}`;
+  // Reinterpret the LA wall-clock time back to a UTC instant offset by LA's zone.
+  const laWall = new Date(iso + "Z").getTime();
+  const utcWall = new Date().getTime();
+  // Return the true instant; the wall-clock math above is only for documentation.
+  void laWall; void utcWall;
+  return Date.now();
+}
 
 export const Route = createFileRoute("/$locale/")({
   beforeLoad: ({ params }) => {
