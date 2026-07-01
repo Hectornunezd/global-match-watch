@@ -66,20 +66,26 @@ function HomePage() {
   const [group, setGroup] = useState<string | null>(null);
   const [now, setNow] = useState(serverNow);
   useEffect(() => {
-    setNow(Date.now());
-    const id = window.setInterval(() => setNow(Date.now()), 30_000);
+    setNow(nowInLA());
+    const id = window.setInterval(() => setNow(nowInLA()), 30_000);
     return () => window.clearInterval(id);
   }, []);
   // Hide matches whose kickoff has already passed (with ~2.5h grace for in-progress games).
   const MATCH_DURATION_MS = 2.5 * 60 * 60 * 1000;
-  // Derive "live" from time: any scheduled match whose kickoff has started but
-  // hasn't exceeded the grace window. This covers games the DB hasn't flipped to "live" yet.
+  // Derive "live" purely from wall-clock time in America/Los_Angeles: any match
+  // whose kickoff has started but hasn't exceeded the grace window is live now.
+  // We ignore the DB `status` field because it can be stale.
   const live = useMemo(() => {
     const byId = new Map<string, import("@/lib/data").Fixture>();
-    liveFromDb.forEach((f) => byId.set(f.id, f));
-    upcoming.forEach((f) => {
+    const isLiveByTime = (f: import("@/lib/data").Fixture) => {
       const start = new Date(f.match_date).getTime();
-      if (start <= now && start + MATCH_DURATION_MS > now) byId.set(f.id, f);
+      return start <= now && start + MATCH_DURATION_MS > now;
+    };
+    liveFromDb.forEach((f) => {
+      if (isLiveByTime(f)) byId.set(f.id, f);
+    });
+    upcoming.forEach((f) => {
+      if (isLiveByTime(f)) byId.set(f.id, f);
     });
     return Array.from(byId.values()).sort(
       (a, b) => new Date(a.match_date).getTime() - new Date(b.match_date).getTime(),
