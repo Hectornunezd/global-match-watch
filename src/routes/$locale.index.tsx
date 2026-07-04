@@ -261,6 +261,8 @@ function HomePage() {
       <div className="mx-auto max-w-6xl px-4 pb-10 sm:px-6">
         <AdSlot slot="responsive" />
       </div>
+
+      <MatchTimeDebug fixtures={[...live, ...futureUpcoming]} />
     </>
   );
 }
