@@ -206,12 +206,20 @@ export function MatchCard({ fixture, locale }: Props) {
       {/* Content */}
       <div className="relative z-10 flex h-full flex-col justify-between p-5">
         {/* Top: time / live */}
-        <div className="flex items-center justify-between">
-          <span className="font-display text-xs font-bold uppercase tracking-wider text-primary">
-            {isLive ? "" : fmtTime(fixture.match_date, locale)}
-          </span>
+        <div className="flex items-start justify-between">
+          <div className="flex flex-col">
+            {!isLive && (
+              <span className="font-display text-[10px] font-bold uppercase tracking-wider text-primary/80">
+                {fmtDate(fixture.match_date, locale)}
+              </span>
+            )}
+            <span className="font-display text-xs font-bold uppercase tracking-wider text-primary">
+              {isLive ? "" : fmtTime(fixture.match_date, locale)}
+            </span>
+          </div>
           {isLive && <LiveBadge locale={locale} />}
         </div>
+
 
         {/* Bottom: title block */}
         <div>
