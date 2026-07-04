@@ -12,7 +12,7 @@ import { LIVE_TZ, LIVE_TZ_LABEL, formatLA, laWallClockToEpoch } from "./time";
 describe("constants", () => {
   it("exports LA timezone", () => {
     expect(LIVE_TZ).toBe("America/Los_Angeles");
-    expect(LIVE_TZ_LABEL).toBe("PT");
+    expect(LIVE_TZ_LABEL).toBe("CT");
   });
 });
 
@@ -78,10 +78,10 @@ describe("formatLA", () => {
 
   describe("time preset", () => {
     it("formats PDT time in en", () => {
-      expect(formatLA(pdt, "en", "time")).toBe("10:00 AM PT");
+      expect(formatLA(pdt, "en", "time")).toBe("10:00 AM CT");
     });
     it("formats PST time in en", () => {
-      expect(formatLA(pst, "en", "time")).toBe("09:00 AM PT");
+      expect(formatLA(pst, "en", "time")).toBe("09:00 AM CT");
     });
     it("formats time in es (24h source rendered as 12h)", () => {
       const s = formatLA(pdt, "es", "time");
@@ -113,7 +113,7 @@ describe("formatLA", () => {
   describe("full preset", () => {
     it("renders full string in en", () => {
       const s = formatLA(pdt, "en", "full");
-      expect(s).toBe("Saturday, July 4, 2026 · 10:00 AM PT");
+      expect(s).toBe("Saturday, July 4, 2026 · 10:00 AM CT");
     });
     it("renders full string in es", () => {
       const s = formatLA(pdt, "es", "full");
@@ -124,7 +124,7 @@ describe("formatLA", () => {
 
   describe("banner preset (default)", () => {
     it("renders banner in en", () => {
-      expect(formatLA(pdt, "en")).toBe("Sat, Jul 4 · 10:00 AM PT");
+      expect(formatLA(pdt, "en")).toBe("Sat, Jul 4 · 10:00 AM CT");
     });
     it("renders banner in es", () => {
       const s = formatLA(pdt, "es");
@@ -147,7 +147,7 @@ describe("formatLA", () => {
 
   it("is deterministic regardless of host TZ (round-trip via laWallClockToEpoch)", () => {
     const epoch = laWallClockToEpoch("04/07/2026", "10:00");
-    expect(formatLA(new Date(epoch), "en", "time")).toBe("10:00 AM PT");
+    expect(formatLA(new Date(epoch), "en", "time")).toBe("10:00 AM CT");
     expect(formatLA(new Date(epoch), "en", "dayMonth")).toBe("Jul 4");
   });
 });
