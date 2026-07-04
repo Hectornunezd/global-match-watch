@@ -93,20 +93,26 @@ export function formatLA(date: Date, locale: Locale, preset: Preset = "banner"):
 export function laWallClockToEpoch(dateDMY: string, timeHM: string): number {
   const [d, mo, y] = dateDMY.split("/");
   const [hh, mm] = timeHM.split(":");
-  // Compute the timezone offset for LA at that instant using a UTC anchor,
-  // then adjust so the wall-clock reads as LA time.
-  const utcGuess = Date.UTC(+y, +mo - 1, +d, +hh, +mm, 0);
-  const parts = new Intl.DateTimeFormat("en-US", {
+  const target = Date.UTC(+y, +mo - 1, +d, +hh, +mm, 0);
+  const fmt = new Intl.DateTimeFormat("en-US", {
     timeZone: LIVE_TZ,
     year: "numeric", month: "2-digit", day: "2-digit",
     hour: "2-digit", minute: "2-digit", second: "2-digit",
     hour12: false,
-  }).formatToParts(new Date(utcGuess));
-  const get = (t: string) => parts.find((p) => p.type === t)?.value ?? "0";
-  const asLA = Date.UTC(
-    +get("year"), +get("month") - 1, +get("day"),
-    +get("hour").replace("24", "00"), +get("minute"), +get("second"),
-  );
-  const offset = asLA - utcGuess; // LA is behind UTC → negative
-  return utcGuess - offset;
+  });
+  const offsetAt = (instant: number) => {
+    const parts = fmt.formatToParts(new Date(instant));
+    const get = (t: string) => parts.find((p) => p.type === t)?.value ?? "0";
+    const asLA = Date.UTC(
+      +get("year"), +get("month") - 1, +get("day"),
+      +get("hour").replace("24", "00"), +get("minute"), +get("second"),
+    );
+    return asLA - instant; // LA is behind UTC → negative
+  };
+  // Two-pass fix so DST transitions resolve correctly: the first offset is
+  // measured at the wrong instant, the second at the corrected one.
+  let epoch = target - offsetAt(target);
+  epoch = target - offsetAt(epoch);
+  return epoch;
 }
+
