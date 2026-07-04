@@ -132,21 +132,56 @@ function PlaceholderRow({ label }: { label: string }) {
   );
 }
 
+/**
+ * Derive a match's live-status from its LA wall-clock kickoff, not the
+ * server's local clock or the hardcoded `status` field. If the match has
+ * an explicit `finished` status (with scores) that wins; otherwise we
+ * compare `Date.now()` against the LA-epoch kickoff.
+ */
+const MATCH_DURATION_MS = 2.5 * 60 * 60 * 1000;
+type DerivedStatus = "finished" | "live" | "scheduled";
+function deriveStatus(
+  date: string,
+  time: string,
+  explicit?: "scheduled" | "finished",
+): DerivedStatus {
+  if (explicit === "finished") return "finished";
+  const kickoff = laWallClockToEpoch(date, time);
+  const now = Date.now();
+  if (now >= kickoff + MATCH_DURATION_MS) return "finished";
+  if (now >= kickoff) return "live";
+  return "scheduled";
+}
+
+function StatusLabel({ status, side }: { status: DerivedStatus; side: "left" | "right" }) {
+  if (status === "scheduled") return null;
+  const align = side === "right" ? "text-right" : "";
+  if (status === "live") {
+    return (
+      <div className={`mb-1 flex items-center gap-1 font-mono text-[9px] uppercase tracking-wider text-[var(--success)] ${side === "right" ? "flex-row-reverse" : ""}`}>
+        <span className="live-pulse h-1.5 w-1.5 rounded-full bg-[var(--success)]" />
+        <span>Live</span>
+      </div>
+    );
+  }
+  return (
+    <div className={`mb-1 font-mono text-[9px] uppercase tracking-wider text-primary/80 ${align}`}>
+      Full time
+    </div>
+  );
+}
+
 function MatchCard({ match, side = "left" }: { match: Match; side?: "left" | "right" }) {
   const homeWin = match.winner === "home";
   const awayWin = match.winner === "away";
-  const finished = match.status === "finished";
+  const status = deriveStatus(match.date, match.time, match.status);
   return (
     <div className="w-[180px]">
       <div className={`mb-1 flex items-center justify-between font-mono text-[10px] uppercase tracking-wider text-muted-foreground ${side === "right" ? "flex-row-reverse" : ""}`}>
         <span>{match.date}</span>
         <span>{match.time}</span>
       </div>
-      {finished && (
-        <div className={`mb-1 font-mono text-[9px] uppercase tracking-wider text-primary/80 ${side === "right" ? "text-right" : ""}`}>
-          Full time
-        </div>
-      )}
+      <StatusLabel status={status} side={side} />
       <div className="space-y-1">
         <TeamRow team={match.home} score={match.homeScore} winner={homeWin} />
         <TeamRow team={match.away} score={match.awayScore} winner={awayWin} />
@@ -182,7 +217,7 @@ function WinnerCard({
 }) {
   const teamA = winnerTeam(match.a);
   const teamB = winnerTeam(match.b);
-  const finished = match.status === "finished";
+  const status = deriveStatus(match.date, match.time, match.status);
   const homeWin = match.winner === "home";
   const awayWin = match.winner === "away";
   return (
@@ -191,11 +226,7 @@ function WinnerCard({
         <span>{match.date}</span>
         <span>{match.time}</span>
       </div>
-      {finished && (
-        <div className={`mb-1 font-mono text-[9px] uppercase tracking-wider text-primary/80 ${side === "right" ? "text-right" : ""}`}>
-          Full time
-        </div>
-      )}
+      <StatusLabel status={status} side={side} />
       <div className="space-y-1">
         {teamA ? <TeamRow team={teamA} score={match.homeScore} winner={homeWin} /> : <PlaceholderRow label={`W${match.a.replace("M", "")}`} />}
         {teamB ? <TeamRow team={teamB} score={match.awayScore} winner={awayWin} /> : <PlaceholderRow label={`W${match.b.replace("M", "")}`} />}
