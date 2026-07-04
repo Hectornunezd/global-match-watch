@@ -12,55 +12,9 @@ import { StaticBracket } from "@/components/StaticBracket";
 import { buildMeta, jsonLdScript, organizationJsonLd, websiteJsonLd } from "@/lib/seo";
 import heroTrophy from "@/assets/hero-trophy.jpg";
 import { notFound } from "@tanstack/react-router";
+import { formatLA } from "@/lib/time";
 
 const WORLD_CUP_START = "2026-06-11T16:00:00Z";
-const LIVE_TZ = "America/Los_Angeles";
-
-// Stable, hydration-safe formatter that always renders in Los Angeles time.
-// Uses formatToParts to avoid ICU locale-format differences ("," vs "at") between
-// Node (server) and browser that cause React hydration mismatches.
-function formatLA(date: Date, locale: Locale): string {
-  const parts = new Intl.DateTimeFormat(locale === "es" ? "es-ES" : "en-US", {
-    timeZone: LIVE_TZ,
-    weekday: "short",
-    day: "numeric",
-    month: "short",
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: true,
-  }).formatToParts(date);
-  const get = (t: string) => parts.find((p) => p.type === t)?.value ?? "";
-  const weekday = get("weekday").replace(/\.$/, "");
-  const month = get("month").replace(/\.$/, "");
-  const day = get("day");
-  const hour = get("hour");
-  const minute = get("minute");
-  const dayPeriod = get("dayPeriod").toUpperCase();
-  if (locale === "es") {
-    return `${weekday} ${day} ${month}, ${hour}:${minute} ${dayPeriod} PT`;
-  }
-  return `${weekday}, ${month} ${day} · ${hour}:${minute} ${dayPeriod} PT`;
-}
-
-// Returns the current instant (epoch ms) as evaluated in America/Los_Angeles.
-// Since epoch ms is timezone-independent, this equals Date.now() in practice,
-// but the naming makes the intent explicit: live-match detection uses LA time.
-function nowInLA(): number {
-  const parts = new Intl.DateTimeFormat("en-US", {
-    timeZone: LIVE_TZ,
-    year: "numeric", month: "2-digit", day: "2-digit",
-    hour: "2-digit", minute: "2-digit", second: "2-digit",
-    hour12: false,
-  }).formatToParts(new Date());
-  const get = (t: string) => parts.find((p) => p.type === t)?.value ?? "0";
-  const iso = `${get("year")}-${get("month")}-${get("day")}T${get("hour").replace("24","00")}:${get("minute")}:${get("second")}`;
-  // Reinterpret the LA wall-clock time back to a UTC instant offset by LA's zone.
-  const laWall = new Date(iso + "Z").getTime();
-  const utcWall = new Date().getTime();
-  // Return the true instant; the wall-clock math above is only for documentation.
-  void laWall; void utcWall;
-  return Date.now();
-}
 
 export const Route = createFileRoute("/$locale/")({
   beforeLoad: ({ params }) => {
