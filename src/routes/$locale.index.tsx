@@ -8,6 +8,7 @@ import { GroupFilter } from "@/components/GroupFilter";
 import { CountrySelector } from "@/components/CountrySelector";
 import { AdSlot } from "@/components/AdSlot";
 import { StaticBracket } from "@/components/StaticBracket";
+import { MatchTimeDebug } from "@/components/MatchTimeDebug";
 
 import { buildMeta, jsonLdScript, organizationJsonLd, websiteJsonLd } from "@/lib/seo";
 import heroTrophy from "@/assets/hero-trophy.jpg";
@@ -261,6 +262,8 @@ function HomePage() {
       <div className="mx-auto max-w-6xl px-4 pb-10 sm:px-6">
         <AdSlot slot="responsive" />
       </div>
+
+      <MatchTimeDebug fixtures={[...live, ...futureUpcoming]} />
     </>
   );
 }
