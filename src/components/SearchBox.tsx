@@ -138,11 +138,7 @@ export function SearchBox({ locale }: { locale: Locale }) {
                 const slug = locale === "es" ? f.slug_es : f.slug_en;
                 const home = locale === "es" ? f.home_team.name_es : f.home_team.name_en;
                 const away = locale === "es" ? f.away_team.name_es : f.away_team.name_en;
-                const date = new Date(f.match_date).toLocaleDateString(locale === "es" ? "es-ES" : "en-US", {
-                  day: "2-digit",
-                  month: "short",
-                  timeZone: "America/Chicago",
-                });
+                const date = formatLA(new Date(f.match_date), locale, "dayMonthShort");
                 return (
                   <li key={f.id} className="border-t border-border first:border-t-0">
                     <Link

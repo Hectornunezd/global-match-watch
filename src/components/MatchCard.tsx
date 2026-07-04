@@ -148,12 +148,7 @@ interface Props {
 
 function fmtTime(date: string, locale: Locale): string {
   try {
-    return new Date(date).toLocaleString(locale === "es" ? "es-ES" : "en-US", {
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: false,
-      timeZone: "America/Chicago",
-    }) + " CT";
+    return formatLA(new Date(date), locale, "time");
   } catch {
     return date;
   }

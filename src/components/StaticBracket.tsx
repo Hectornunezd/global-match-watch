@@ -269,10 +269,7 @@ export function StaticBracket({ locale, title }: { locale: Locale; title?: strin
     ...leftR32.map((id) => ({ ...M[id], side: "left" as const })),
     ...rightR32.map((id) => ({ ...M[id], side: "right" as const })),
   ].sort((a, b) => {
-    const parse = (m: Match) => {
-      const [d, mo, y] = m.date.split("/");
-      return new Date(`${y}-${mo}-${d}T${m.time}:00`).getTime();
-    };
+    const parse = (m: Match) => laWallClockToEpoch(m.date, m.time);
     return parse(a) - parse(b);
   });
 
