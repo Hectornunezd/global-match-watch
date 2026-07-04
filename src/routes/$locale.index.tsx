@@ -68,8 +68,8 @@ function HomePage() {
   const [group, setGroup] = useState<string | null>(null);
   const [now, setNow] = useState(serverNow);
   useEffect(() => {
-    setNow(nowInLA());
-    const id = window.setInterval(() => setNow(nowInLA()), 30_000);
+    setNow(Date.now());
+    const id = window.setInterval(() => setNow(Date.now()), 30_000);
     return () => window.clearInterval(id);
   }, []);
   // Hide matches whose kickoff has already passed (with ~2.5h grace for in-progress games).
