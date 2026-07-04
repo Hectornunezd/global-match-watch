@@ -66,6 +66,7 @@ function HomePage() {
     serverNow: number;
   };
   const m = t(locale);
+  useFixturesRealtime();
   const [group, setGroup] = useState<string | null>(null);
   const [now, setNow] = useState(serverNow);
   useEffect(() => {
