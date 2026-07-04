@@ -75,8 +75,10 @@ const M: Record<string, Match> = {
 };
 
 /* Round of 16 pairings (winner codes: W<matchId>) */
-const R16 = [
-  { id: "M97", a: "M81", b: "M84", date: "04/07/2026", time: "10:00", homeScore: 0, awayScore: 3, winner: "away" as const, status: "finished" as const }, // CAN 0-3 MAR
+type BracketMatch = { id: string; a: string; b: string; date: string; time: string; homeScore?: number; awayScore?: number; winner?: "home" | "away"; status?: "scheduled" | "finished" };
+
+const R16: BracketMatch[] = [
+  { id: "M97", a: "M81", b: "M84", date: "04/07/2026", time: "10:00", homeScore: 0, awayScore: 3, winner: "away", status: "finished" }, // CAN 0-3 MAR
   { id: "M98", a: "M83", b: "M86", date: "04/07/2026", time: "14:00" }, // PAR vs FRA
   { id: "M99", a: "M82", b: "M85", date: "05/07/2026", time: "13:00" }, // BRA vs NOR
   { id: "M100", a: "M87", b: "M88", date: "05/07/2026", time: "17:00" }, // MEX vs ENG
