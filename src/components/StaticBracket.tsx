@@ -81,7 +81,7 @@ type BracketMatch = { id: string; a: string; b: string; date: string; time: stri
 
 const R16: BracketMatch[] = [
   { id: "M97", a: "M81", b: "M84", date: "04/07/2026", time: "10:00", homeScore: 0, awayScore: 3, winner: "away", status: "finished" }, // CAN 0-3 MAR
-  { id: "M98", a: "M83", b: "M86", date: "04/07/2026", time: "14:00", homeScore: 1, awayScore: 1 }, // PAR vs FRA (live)
+  { id: "M98", a: "M83", b: "M86", date: "04/07/2026", time: "14:00", homeScore: 0, awayScore: 0 }, // PAR vs FRA (live)
   { id: "M99", a: "M82", b: "M85", date: "05/07/2026", time: "13:00" }, // BRA vs NOR
   { id: "M100", a: "M87", b: "M88", date: "05/07/2026", time: "17:00" }, // MEX vs ENG
   { id: "M101", a: "M90", b: "M89", date: "06/07/2026", time: "17:00" }, // USA vs BEL
