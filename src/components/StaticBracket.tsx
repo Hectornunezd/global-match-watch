@@ -217,7 +217,7 @@ function WinnerCard({
 }) {
   const teamA = winnerTeam(match.a);
   const teamB = winnerTeam(match.b);
-  const finished = match.status === "finished";
+  const status = deriveStatus(match.date, match.time, match.status);
   const homeWin = match.winner === "home";
   const awayWin = match.winner === "away";
   return (
@@ -226,11 +226,7 @@ function WinnerCard({
         <span>{match.date}</span>
         <span>{match.time}</span>
       </div>
-      {finished && (
-        <div className={`mb-1 font-mono text-[9px] uppercase tracking-wider text-primary/80 ${side === "right" ? "text-right" : ""}`}>
-          Full time
-        </div>
-      )}
+      <StatusLabel status={status} side={side} />
       <div className="space-y-1">
         {teamA ? <TeamRow team={teamA} score={match.homeScore} winner={homeWin} /> : <PlaceholderRow label={`W${match.a.replace("M", "")}`} />}
         {teamB ? <TeamRow team={teamB} score={match.awayScore} winner={awayWin} /> : <PlaceholderRow label={`W${match.b.replace("M", "")}`} />}
