@@ -419,15 +419,161 @@ export function StaticBracket({ locale, title }: { locale: Locale; title?: strin
         </div>
       </div>
 
-      {/* Mobile / tablet — chronological list of R32 cards */}
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:hidden">
-        {allMatches.map((m) => (
-          <div key={m.id} className="flex items-start gap-2">
-            <MatchIdBadge id={m.id} />
-            <MatchCard match={m} side="left" />
-          </div>
-        ))}
+      {/* Mobile / tablet — interactive round tabs */}
+      <div className="xl:hidden">
+        <MobileBracket
+          locale={locale}
+          leftR32={leftR32}
+          rightR32={rightR32}
+          leftR16={leftR16}
+          rightR16={rightR16}
+          leftQF={leftQF}
+          rightQF={rightQF}
+        />
       </div>
     </section>
+  );
+}
+
+type RoundKey = "R32" | "R16" | "QF" | "SF" | "F";
+
+function MobileBracket({
+  locale,
+  leftR32,
+  rightR32,
+  leftR16,
+  rightR16,
+  leftQF,
+  rightQF,
+}: {
+  locale: Locale;
+  leftR32: string[];
+  rightR32: string[];
+  leftR16: string[];
+  rightR16: string[];
+  leftQF: string[];
+  rightQF: string[];
+}) {
+  // Choose the initial round based on the most recent match with a scheduled
+  // or in-progress kickoff — so a visitor lands on the "current" round.
+  const now = Date.now();
+  const initialRound = useMemo<RoundKey>(() => {
+    const roundsOrder: { key: RoundKey; ids: string[]; source: "R32" | "R16" | "QF" | "SF" | "F" }[] = [
+      { key: "R32", ids: [...leftR32, ...rightR32], source: "R32" },
+      { key: "R16", ids: [...leftR16, ...rightR16], source: "R16" },
+      { key: "QF", ids: [...leftQF, ...rightQF], source: "QF" },
+      { key: "SF", ids: SF.map((s) => s.id), source: "SF" },
+      { key: "F", ids: [FINAL.id], source: "F" },
+    ];
+    for (const round of roundsOrder) {
+      const anyUpcoming = round.ids.some((id) => {
+        const match = round.source === "R32" ? M[id]
+          : round.source === "R16" ? R16.find((r) => r.id === id)
+          : round.source === "QF" ? QF.find((q) => q.id === id)
+          : round.source === "SF" ? SF.find((s) => s.id === id)
+          : FINAL;
+        if (!match) return false;
+        return laWallClockToEpoch(match.date, match.time) + 2.5 * 60 * 60 * 1000 > now;
+      });
+      if (anyUpcoming) return round.key;
+    }
+    return "F";
+  }, [leftR32, rightR32, leftR16, rightR16, leftQF, rightQF, now]);
+
+  const [active, setActive] = useState<RoundKey>(initialRound);
+
+  const labels: Record<RoundKey, { en: string; es: string }> = {
+    R32: { en: "Round of 32", es: "Ronda 32" },
+    R16: { en: "Round of 16", es: "Octavos" },
+    QF: { en: "Quarterfinals", es: "Cuartos" },
+    SF: { en: "Semifinals", es: "Semis" },
+    F: { en: "Final", es: "Final" },
+  };
+  const shortLabels: Record<RoundKey, string> = {
+    R32: "R32", R16: "R16", QF: "QF", SF: "SF", F: "F",
+  };
+
+  const roundIds: Record<RoundKey, string[]> = {
+    R32: [...leftR32, ...rightR32],
+    R16: [...leftR16, ...rightR16],
+    QF: [...leftQF, ...rightQF],
+    SF: SF.map((s) => s.id),
+    F: [FINAL.id],
+  };
+
+  // Sort each round chronologically using LA-epoch.
+  const sortedIds = useMemo(() => {
+    const ids = [...roundIds[active]];
+    return ids.sort((a, b) => {
+      const ma = active === "R32" ? M[a] : active === "R16" ? R16.find((r) => r.id === a)! : active === "QF" ? QF.find((q) => q.id === a)! : active === "SF" ? SF.find((s) => s.id === a)! : FINAL;
+      const mb = active === "R32" ? M[b] : active === "R16" ? R16.find((r) => r.id === b)! : active === "QF" ? QF.find((q) => q.id === b)! : active === "SF" ? SF.find((s) => s.id === b)! : FINAL;
+      return laWallClockToEpoch(ma.date, ma.time) - laWallClockToEpoch(mb.date, mb.time);
+    });
+  }, [active]);
+
+  const rounds: RoundKey[] = ["R32", "R16", "QF", "SF", "F"];
+
+  return (
+    <div className="space-y-4">
+      {/* Round tabs — horizontal scroll on very narrow screens */}
+      <div
+        role="tablist"
+        aria-label={locale === "es" ? "Rondas del bracket" : "Bracket rounds"}
+        className="sticky top-16 z-10 -mx-2 flex gap-1 overflow-x-auto border-b border-border bg-background/95 px-2 py-2 backdrop-blur supports-[backdrop-filter]:bg-background/70 sm:top-20"
+      >
+        {rounds.map((r) => {
+          const isActive = r === active;
+          return (
+            <button
+              key={r}
+              role="tab"
+              aria-selected={isActive}
+              aria-controls={`bracket-panel-${r}`}
+              onClick={() => setActive(r)}
+              className={`shrink-0 whitespace-nowrap border px-3 py-1.5 font-display text-[11px] uppercase tracking-wider transition-colors ${
+                isActive
+                  ? "border-primary bg-primary text-primary-foreground"
+                  : "border-border bg-card text-muted-foreground hover:border-primary/60 hover:text-foreground"
+              }`}
+            >
+              <span className="sm:hidden">{shortLabels[r]}</span>
+              <span className="hidden sm:inline">{labels[r][locale]}</span>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Panel */}
+      <div
+        role="tabpanel"
+        id={`bracket-panel-${active}`}
+        className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3"
+      >
+        {sortedIds.map((id) => {
+          if (active === "R32") {
+            const m = M[id];
+            return (
+              <div key={id} className="flex items-start gap-2">
+                <MatchIdBadge id={id} />
+                <MatchCard match={m} side="left" />
+              </div>
+            );
+          }
+          const match = active === "R16"
+            ? R16.find((r) => r.id === id)!
+            : active === "QF"
+              ? QF.find((q) => q.id === id)!
+              : active === "SF"
+                ? SF.find((s) => s.id === id)!
+                : FINAL;
+          return (
+            <div key={id} className="flex items-start gap-2">
+              <MatchIdBadge id={id} />
+              <WinnerCard match={match} side="left" />
+            </div>
+          );
+        })}
+      </div>
+    </div>
   );
 }
