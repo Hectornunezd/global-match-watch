@@ -8,8 +8,8 @@
  */
 import type { Locale } from "@/lib/i18n";
 
-export const LIVE_TZ = "America/Los_Angeles";
-export const LIVE_TZ_LABEL = "PT";
+export const LIVE_TZ = "America/Chicago";
+export const LIVE_TZ_LABEL = "CT";
 
 type Preset = "banner" | "time" | "dayMonth" | "full" | "dayMonthShort";
 
