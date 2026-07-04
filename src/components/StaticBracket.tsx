@@ -298,13 +298,6 @@ export function StaticBracket({ locale, title }: { locale: Locale; title?: strin
   const leftQF = ["M105", "M107"];
   const rightQF = ["M106", "M108"];
 
-  const allMatches = [
-    ...leftR32.map((id) => ({ ...M[id], side: "left" as const })),
-    ...rightR32.map((id) => ({ ...M[id], side: "right" as const })),
-  ].sort((a, b) => {
-    const parse = (m: Match) => laWallClockToEpoch(m.date, m.time);
-    return parse(a) - parse(b);
-  });
 
   return (
     <section className="mx-auto max-w-[1600px] px-2 py-10 sm:px-6 sm:py-14">
