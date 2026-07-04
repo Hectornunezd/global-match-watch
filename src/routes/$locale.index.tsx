@@ -13,6 +13,7 @@ import { buildMeta, jsonLdScript, organizationJsonLd, websiteJsonLd } from "@/li
 import heroTrophy from "@/assets/hero-trophy.jpg";
 import { notFound } from "@tanstack/react-router";
 import { formatLA } from "@/lib/time";
+import { useFixturesRealtime } from "@/hooks/use-fixtures-realtime";
 
 const WORLD_CUP_START = "2026-06-11T16:00:00Z";
 
@@ -65,6 +66,7 @@ function HomePage() {
     serverNow: number;
   };
   const m = t(locale);
+  useFixturesRealtime();
   const [group, setGroup] = useState<string | null>(null);
   const [now, setNow] = useState(serverNow);
   useEffect(() => {
