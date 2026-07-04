@@ -163,6 +163,10 @@ function winnerTeam(matchId: string): Team | undefined {
     if (r32.winner === "away") return r32.away;
     return undefined;
   }
+  const r16 = R16.find((r) => r.id === matchId);
+  if (r16 && r16.winner) {
+    return r16.winner === "home" ? winnerTeam(r16.a) : winnerTeam(r16.b);
+  }
   return undefined;
 }
 
