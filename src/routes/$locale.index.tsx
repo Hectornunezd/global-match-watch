@@ -356,16 +356,7 @@ function NextMatchBanner({
 
   const nextSlug = next ? (locale === "es" ? next.slug_es : next.slug_en) : "";
   const nextPath = next ? `/${locale}/${locale === "es" ? "ver" : "watch"}-${nextSlug}` : "#";
-  const timeStr = next
-    ? new Date(next.match_date).toLocaleString(locale === "es" ? "es-ES" : "en-US", {
-        weekday: "short",
-        day: "numeric",
-        month: "short",
-        hour: "2-digit",
-        minute: "2-digit",
-        timeZone: "America/Chicago",
-      }) + " CT"
-    : "";
+  const timeStr = next ? formatLA(new Date(next.match_date), locale) : "";
 
   const currentSlug = currentMatch ? (locale === "es" ? currentMatch.slug_es : currentMatch.slug_en) : "";
 
