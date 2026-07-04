@@ -13,6 +13,7 @@ import { AdSlot } from "@/components/AdSlot";
 import { AffiliateDisclosure } from "@/components/AffiliateDisclosure";
 import { GamblingDisclaimer } from "@/components/GamblingDisclaimer";
 import { buildMeta, jsonLdScript, sportsEventJsonLd } from "@/lib/seo";
+import { formatLA } from "@/lib/time";
 import { trackClick } from "@/lib/affiliates";
 import surveooBanner from "@/assets/surveoo-banner.webp";
 
@@ -114,12 +115,7 @@ export function MatchPage({ locale }: { locale: Locale }) {
         <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14">
           <span className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
             {fixture.round} •{" "}
-            {new Date(fixture.match_date).toLocaleString(locale === "es" ? "es-ES" : "en-US", {
-              dateStyle: "full",
-              timeStyle: "short",
-              timeZone: "America/Chicago",
-            })}{" "}
-            CT
+            {formatLA(new Date(fixture.match_date), locale, "full")}
           </span>
           <div className="mt-5 grid grid-cols-3 items-center gap-4 sm:gap-8">
             <div className="flex flex-col items-center gap-2 sm:flex-row sm:gap-4">

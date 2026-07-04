@@ -3,6 +3,7 @@ import type { Fixture } from "@/lib/data";
 import type { Locale } from "@/lib/i18n";
 import { t, localeUrl } from "@/lib/i18n";
 import { LiveBadge } from "./LiveBadge";
+import { formatLA } from "@/lib/time";
 import matchCover from "@/assets/match-cover.jpg";
 import mexicoImg from "@/assets/teams/mexico.jpg";
 import mexico2Img from "@/assets/teams/mexico-2.jpg";
@@ -148,12 +149,7 @@ interface Props {
 
 function fmtTime(date: string, locale: Locale): string {
   try {
-    return new Date(date).toLocaleString(locale === "es" ? "es-ES" : "en-US", {
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: false,
-      timeZone: "America/Chicago",
-    }) + " CT";
+    return formatLA(new Date(date), locale, "time");
   } catch {
     return date;
   }

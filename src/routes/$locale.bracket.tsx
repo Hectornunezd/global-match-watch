@@ -4,6 +4,7 @@ import { getHomepageData, type Fixture } from "@/lib/data";
 import { buildMeta } from "@/lib/seo";
 import bracketCover from "@/assets/bracket-cover.jpg";
 import { StaticBracket } from "@/components/StaticBracket";
+import { formatLA } from "@/lib/time";
 
 export const Route = createFileRoute("/$locale/bracket")({
   beforeLoad: ({ params }) => {
@@ -140,10 +141,7 @@ function BracketMatch({
   const slug = locale === "es" ? fixture.slug_es : fixture.slug_en;
   const home = locale === "es" ? fixture.home_team.name_es : fixture.home_team.name_en;
   const away = locale === "es" ? fixture.away_team.name_es : fixture.away_team.name_en;
-  const dateStr = new Date(fixture.match_date).toLocaleString(
-    locale === "es" ? "es-ES" : "en-US",
-    { month: "short", day: "numeric", timeZone: "America/Chicago" },
-  );
+  const dateStr = formatLA(new Date(fixture.match_date), locale, "dayMonth");
   return (
     <Link
       to={localeUrl(locale, slug)}
