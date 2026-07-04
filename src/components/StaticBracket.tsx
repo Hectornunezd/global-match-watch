@@ -76,14 +76,14 @@ const M: Record<string, Match> = {
 
 /* Round of 16 pairings (winner codes: W<matchId>) */
 const R16 = [
-  { id: "M97", a: "M81", b: "M84", date: "05/07/2026", time: "12:00" }, // CAN vs MAR
-  { id: "M98", a: "M83", b: "M86", date: "05/07/2026", time: "16:00" }, // PAR vs FRA
-  { id: "M99", a: "M82", b: "M85", date: "06/07/2026", time: "12:00" }, // BRA vs NOR
-  { id: "M100", a: "M87", b: "M88", date: "06/07/2026", time: "16:00" }, // MEX vs ENG
-  { id: "M101", a: "M90", b: "M89", date: "07/07/2026", time: "12:00" }, // W90 vs BEL
-  { id: "M102", a: "M92", b: "M91", date: "07/07/2026", time: "16:00" }, // W92 vs W91
-  { id: "M103", a: "M93", b: "M96", date: "08/07/2026", time: "12:00" }, // W93 vs W96
-  { id: "M104", a: "M95", b: "M94", date: "08/07/2026", time: "16:00" }, // W95 vs W94
+  { id: "M97", a: "M81", b: "M84", date: "04/07/2026", time: "10:00" }, // CAN vs MAR
+  { id: "M98", a: "M83", b: "M86", date: "04/07/2026", time: "14:00" }, // PAR vs FRA
+  { id: "M99", a: "M82", b: "M85", date: "05/07/2026", time: "13:00" }, // BRA vs NOR
+  { id: "M100", a: "M87", b: "M88", date: "05/07/2026", time: "17:00" }, // MEX vs ENG
+  { id: "M101", a: "M90", b: "M89", date: "06/07/2026", time: "17:00" }, // USA vs BEL
+  { id: "M102", a: "M92", b: "M91", date: "06/07/2026", time: "12:00" }, // POR vs ESP
+  { id: "M103", a: "M93", b: "M96", date: "07/07/2026", time: "13:00" }, // SUI vs COL
+  { id: "M104", a: "M95", b: "M94", date: "07/07/2026", time: "09:00" }, // ARG vs EGY
 ];
 
 const QF = [
