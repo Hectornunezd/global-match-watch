@@ -117,8 +117,8 @@ describe("formatLA", () => {
     });
     it("renders full string in es", () => {
       const s = formatLA(pdt, "es", "full");
-      // ICU en Node emite "A. M." para es; en otras versiones "AM".
-      expect(s).toMatch(/^sábado, 4 de julio de 2026, 10:00 (AM|A\. M\.) PT$/);
+      // ICU emite "A.<NBSP>M." para es en versiones modernas; también "AM" en otras.
+      expect(s).toMatch(/^sábado, 4 de julio de 2026, 10:00 (AM|A\.\sM\.) PT$/);
     });
   });
 
@@ -128,7 +128,7 @@ describe("formatLA", () => {
     });
     it("renders banner in es", () => {
       const s = formatLA(pdt, "es");
-      expect(s).toMatch(/^\S+\s4\s\S+,\s10:00\s(AM|A\. M\.)\sPT$/);
+      expect(s).toMatch(/^\S+ 4 \S+, 10:00 (AM|A\.\sM\.) PT$/);
     });
     it("uses PST label in winter", () => {
       // Both PDT and PST render as "PT" (the label is unified)
