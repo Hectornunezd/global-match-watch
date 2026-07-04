@@ -4,6 +4,7 @@ import { getHomepageData, type Fixture } from "@/lib/data";
 import { buildMeta } from "@/lib/seo";
 import bracketCover from "@/assets/bracket-cover.jpg";
 import { StaticBracket } from "@/components/StaticBracket";
+import { formatLA } from "@/lib/time";
 
 export const Route = createFileRoute("/$locale/bracket")({
   beforeLoad: ({ params }) => {

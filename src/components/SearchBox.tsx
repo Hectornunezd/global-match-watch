@@ -3,6 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { supabase } from "@/integrations/supabase/client";
 import type { Locale } from "@/lib/i18n";
 import { localeUrl } from "@/lib/i18n";
+import { formatLA } from "@/lib/time";
 
 interface SearchFixture {
   id: string;

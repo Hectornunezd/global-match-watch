@@ -3,6 +3,7 @@ import type { Fixture } from "@/lib/data";
 import type { Locale } from "@/lib/i18n";
 import { t, localeUrl } from "@/lib/i18n";
 import { LiveBadge } from "./LiveBadge";
+import { formatLA } from "@/lib/time";
 import matchCover from "@/assets/match-cover.jpg";
 import mexicoImg from "@/assets/teams/mexico.jpg";
 import mexico2Img from "@/assets/teams/mexico-2.jpg";

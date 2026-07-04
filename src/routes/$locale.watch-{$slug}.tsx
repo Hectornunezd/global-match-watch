@@ -13,6 +13,7 @@ import { AdSlot } from "@/components/AdSlot";
 import { AffiliateDisclosure } from "@/components/AffiliateDisclosure";
 import { GamblingDisclaimer } from "@/components/GamblingDisclaimer";
 import { buildMeta, jsonLdScript, sportsEventJsonLd } from "@/lib/seo";
+import { formatLA } from "@/lib/time";
 import { trackClick } from "@/lib/affiliates";
 import surveooBanner from "@/assets/surveoo-banner.webp";
 
