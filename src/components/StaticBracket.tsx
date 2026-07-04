@@ -170,20 +170,28 @@ function WinnerCard({
   match,
   side = "left",
 }: {
-  match: { id: string; a: string; b: string; date: string; time: string };
+  match: { id: string; a: string; b: string; date: string; time: string; homeScore?: number; awayScore?: number; winner?: "home" | "away"; status?: "scheduled" | "finished" };
   side?: "left" | "right";
 }) {
   const teamA = winnerTeam(match.a);
   const teamB = winnerTeam(match.b);
+  const finished = match.status === "finished";
+  const homeWin = match.winner === "home";
+  const awayWin = match.winner === "away";
   return (
     <div className="w-[180px]">
       <div className={`mb-1 flex items-center justify-between font-mono text-[10px] uppercase tracking-wider text-muted-foreground ${side === "right" ? "flex-row-reverse" : ""}`}>
         <span>{match.date}</span>
         <span>{match.time}</span>
       </div>
+      {finished && (
+        <div className={`mb-1 font-mono text-[9px] uppercase tracking-wider text-primary/80 ${side === "right" ? "text-right" : ""}`}>
+          Full time
+        </div>
+      )}
       <div className="space-y-1">
-        {teamA ? <TeamRow team={teamA} /> : <PlaceholderRow label={`W${match.a.replace("M", "")}`} />}
-        {teamB ? <TeamRow team={teamB} /> : <PlaceholderRow label={`W${match.b.replace("M", "")}`} />}
+        {teamA ? <TeamRow team={teamA} score={match.homeScore} winner={homeWin} /> : <PlaceholderRow label={`W${match.a.replace("M", "")}`} />}
+        {teamB ? <TeamRow team={teamB} score={match.awayScore} winner={awayWin} /> : <PlaceholderRow label={`W${match.b.replace("M", "")}`} />}
       </div>
     </div>
   );
