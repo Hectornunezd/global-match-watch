@@ -147,6 +147,14 @@ interface Props {
   locale: Locale;
 }
 
+function fmtDate(date: string, locale: Locale): string {
+  try {
+    return formatLA(new Date(date), locale, "dayMonth");
+  } catch {
+    return date;
+  }
+}
+
 function fmtTime(date: string, locale: Locale): string {
   try {
     return formatLA(new Date(date), locale, "time");
@@ -154,6 +162,7 @@ function fmtTime(date: string, locale: Locale): string {
     return date;
   }
 }
+
 
 export function MatchCard({ fixture, locale }: Props) {
   const m = t(locale);
