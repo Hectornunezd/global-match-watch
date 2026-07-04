@@ -65,25 +65,25 @@ const M: Record<string, Match> = {
   M87: { id: "M87", date: "30/06/2026", time: "18:00", home: T.MEX, away: T.ECU, homeScore: 2, awayScore: 0, winner: "home", status: "finished" },
   M88: { id: "M88", date: "01/07/2026", time: "09:00", home: T.ENG, away: T.COD, homeScore: 2, awayScore: 1, winner: "home", status: "finished" },
   M89: { id: "M89", date: "01/07/2026", time: "13:00", home: T.BEL, away: T.SEN, homeScore: 3, awayScore: 2, winner: "home", status: "finished" },
-  M90: { id: "M90", date: "01/07/2026", time: "17:00", home: T.USA, away: T.BIH, status: "scheduled" },
-  M91: { id: "M91", date: "02/07/2026", time: "12:00", home: T.ESP, away: T.AUT, status: "scheduled" },
-  M92: { id: "M92", date: "02/07/2026", time: "16:00", home: T.POR, away: T.CRO, status: "scheduled" },
-  M93: { id: "M93", date: "02/07/2026", time: "20:00", home: T.SUI, away: T.ALG, status: "scheduled" },
-  M94: { id: "M94", date: "03/07/2026", time: "11:00", home: T.AUS, away: T.EGY, status: "scheduled" },
-  M95: { id: "M95", date: "03/07/2026", time: "15:00", home: T.ARG, away: T.CPV, status: "scheduled" },
-  M96: { id: "M96", date: "03/07/2026", time: "18:30", home: T.COL, away: T.GHA, status: "scheduled" },
+  M90: { id: "M90", date: "01/07/2026", time: "17:00", home: T.USA, away: T.BIH, homeScore: 2, awayScore: 0, winner: "home", status: "finished" },
+  M91: { id: "M91", date: "02/07/2026", time: "12:00", home: T.ESP, away: T.AUT, homeScore: 3, awayScore: 0, winner: "home", status: "finished" },
+  M92: { id: "M92", date: "02/07/2026", time: "16:00", home: T.POR, away: T.CRO, homeScore: 2, awayScore: 1, winner: "home", status: "finished" },
+  M93: { id: "M93", date: "02/07/2026", time: "20:00", home: T.SUI, away: T.ALG, homeScore: 2, awayScore: 0, winner: "home", status: "finished" },
+  M94: { id: "M94", date: "03/07/2026", time: "11:00", home: T.AUS, away: T.EGY, homeScore: 1, awayScore: 1, winner: "away", status: "finished" },
+  M95: { id: "M95", date: "03/07/2026", time: "15:00", home: T.ARG, away: T.CPV, homeScore: 3, awayScore: 2, winner: "home", status: "finished" },
+  M96: { id: "M96", date: "03/07/2026", time: "18:30", home: T.COL, away: T.GHA, homeScore: 1, awayScore: 0, winner: "home", status: "finished" },
 };
 
 /* Round of 16 pairings (winner codes: W<matchId>) */
 const R16 = [
-  { id: "M97", a: "M81", b: "M84", date: "05/07/2026", time: "12:00" }, // CAN vs MAR
-  { id: "M98", a: "M83", b: "M86", date: "05/07/2026", time: "16:00" }, // PAR vs FRA
-  { id: "M99", a: "M82", b: "M85", date: "06/07/2026", time: "12:00" }, // BRA vs NOR
-  { id: "M100", a: "M87", b: "M88", date: "06/07/2026", time: "16:00" }, // MEX vs ENG
-  { id: "M101", a: "M90", b: "M89", date: "07/07/2026", time: "12:00" }, // W90 vs BEL
-  { id: "M102", a: "M92", b: "M91", date: "07/07/2026", time: "16:00" }, // W92 vs W91
-  { id: "M103", a: "M93", b: "M96", date: "08/07/2026", time: "12:00" }, // W93 vs W96
-  { id: "M104", a: "M95", b: "M94", date: "08/07/2026", time: "16:00" }, // W95 vs W94
+  { id: "M97", a: "M81", b: "M84", date: "04/07/2026", time: "10:00" }, // CAN vs MAR
+  { id: "M98", a: "M83", b: "M86", date: "04/07/2026", time: "14:00" }, // PAR vs FRA
+  { id: "M99", a: "M82", b: "M85", date: "05/07/2026", time: "13:00" }, // BRA vs NOR
+  { id: "M100", a: "M87", b: "M88", date: "05/07/2026", time: "17:00" }, // MEX vs ENG
+  { id: "M101", a: "M90", b: "M89", date: "06/07/2026", time: "17:00" }, // USA vs BEL
+  { id: "M102", a: "M92", b: "M91", date: "06/07/2026", time: "12:00" }, // POR vs ESP
+  { id: "M103", a: "M93", b: "M96", date: "07/07/2026", time: "13:00" }, // SUI vs COL
+  { id: "M104", a: "M95", b: "M94", date: "07/07/2026", time: "09:00" }, // ARG vs EGY
 ];
 
 const QF = [
