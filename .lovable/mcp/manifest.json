@@ -1,0 +1,130 @@
+{
+  "version": 1,
+  "sdk_version": "0.20.0",
+  "path": "/mcp",
+  "auth": {
+    "type": "none"
+  },
+  "mcp": {
+    "server": {
+      "name": "matchlivenow-mcp",
+      "version": "0.1.0",
+      "title": "MatchLiveNow MCP"
+    },
+    "tools": [
+      {
+        "name": "list_live_matches",
+        "title": "List live matches",
+        "description": "Return FIFA World Cup 2026 matches currently live (status = 'live').",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_upcoming_matches",
+        "title": "List upcoming matches",
+        "description": "Return the next scheduled FIFA World Cup 2026 matches, ordered by kickoff time.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "limit": {
+              "description": "Max matches to return (default 10).",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50
+            }
+          }
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_match",
+        "title": "Get match by slug",
+        "description": "Look up a single fixture by its English or Spanish slug (e.g. 'usa-vs-mexico').",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "slug": {
+              "type": "string",
+              "minLength": 1,
+              "description": "The match slug (slug_en or slug_es)."
+            }
+          },
+          "required": [
+            "slug"
+          ]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_channels_by_country",
+        "title": "List channels by country",
+        "description": "Return TV and streaming channels showing the FIFA World Cup 2026 in a given country (ISO 3166-1 alpha-2 code, e.g. 'US', 'MX', 'GB').",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "country_code": {
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 2,
+              "description": "ISO 3166-1 alpha-2 country code."
+            }
+          },
+          "required": [
+            "country_code"
+          ]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_teams",
+        "title": "List World Cup teams",
+        "description": "Return the 48 FIFA World Cup 2026 teams. Optionally filter by group letter (A–L).",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "group": {
+              "description": "Group letter A–L to filter by.",
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1
+            }
+          }
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}

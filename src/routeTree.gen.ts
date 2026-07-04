@@ -16,6 +16,7 @@ import { Route as SitemapIndexDotxmlRouteImport } from './routes/sitemap-index[.
 import { Route as SitemapEsDotxmlRouteImport } from './routes/sitemap-es[.]xml'
 import { Route as SitemapEnDotxmlRouteImport } from './routes/sitemap-en[.]xml'
 import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
+import { Route as McpRouteImport } from './routes/mcp'
 import { Route as HowToWatchWorldCupInChar123slugChar125RouteImport } from './routes/how-to-watch-world-cup-in-{$slug}'
 import { Route as DondeVerMundialEnChar123slugChar125RouteImport } from './routes/donde-ver-mundial-en-{$slug}'
 import { Route as BlogsRouteImport } from './routes/blogs'
@@ -26,6 +27,8 @@ import { Route as TeamSlugRouteImport } from './routes/team.$slug'
 import { Route as BlogsSlugRouteImport } from './routes/blogs.$slug'
 import { Route as ApiTrackClickRouteImport } from './routes/api.track-click'
 import { Route as AdminSyncStatusRouteImport } from './routes/admin.sync-status'
+import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
+import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
 import { Route as LocaleWatchChar123slugChar125RouteImport } from './routes/$locale.watch-{$slug}'
 import { Route as LocaleVerChar123slugChar125RouteImport } from './routes/$locale.ver-{$slug}'
 import { Route as LocaleTermsRouteImport } from './routes/$locale.terms'
@@ -37,6 +40,7 @@ import { Route as LocaleDondeVerMundialEnChar123slugChar125RouteImport } from '.
 import { Route as LocaleBracketRouteImport } from './routes/$locale.bracket'
 import { Route as LocaleBlogsRouteImport } from './routes/$locale.blogs'
 import { Route as LocaleBlogsIndexRouteImport } from './routes/$locale.blogs.index'
+import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 import { Route as LocaleTeamSlugRouteImport } from './routes/$locale.team.$slug'
 import { Route as LocaleBlogsSlugRouteImport } from './routes/$locale.blogs.$slug'
 import { Route as ApiPublicHooksSyncFixturesRouteImport } from './routes/api/public/hooks/sync-fixtures'
@@ -74,6 +78,11 @@ const SitemapEnDotxmlRoute = SitemapEnDotxmlRouteImport.update({
 const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
   id: '/robots.txt',
   path: '/robots.txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const McpRoute = McpRouteImport.update({
+  id: '/mcp',
+  path: '/mcp',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HowToWatchWorldCupInChar123slugChar125Route =
@@ -128,6 +137,18 @@ const AdminSyncStatusRoute = AdminSyncStatusRouteImport.update({
   path: '/admin/sync-status',
   getParentRoute: () => rootRouteImport,
 } as any)
+const Char91DotwellKnownChar93OauthProtectedResourceRoute =
+  Char91DotwellKnownChar93OauthProtectedResourceRouteImport.update({
+    id: '/.well-known/oauth-protected-resource',
+    path: '/.well-known/oauth-protected-resource',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const Char91DotmcpChar93ListToolsRoute =
+  Char91DotmcpChar93ListToolsRouteImport.update({
+    id: '/.mcp/list-tools',
+    path: '/.mcp/list-tools',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const LocaleWatchChar123slugChar125Route =
   LocaleWatchChar123slugChar125RouteImport.update({
     id: '/watch-{$slug}',
@@ -188,6 +209,12 @@ const LocaleBlogsIndexRoute = LocaleBlogsIndexRouteImport.update({
   path: '/',
   getParentRoute: () => LocaleBlogsRoute,
 } as any)
+const Char91DotmcpChar93InvokeToolToolRoute =
+  Char91DotmcpChar93InvokeToolToolRouteImport.update({
+    id: '/.mcp/invoke-tool/$tool',
+    path: '/.mcp/invoke-tool/$tool',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const LocaleTeamSlugRoute = LocaleTeamSlugRouteImport.update({
   id: '/team/$slug',
   path: '/team/$slug',
@@ -211,6 +238,7 @@ export interface FileRoutesByFullPath {
   '/blogs': typeof BlogsRouteWithChildren
   '/donde-ver-mundial-en-{$slug}': typeof DondeVerMundialEnChar123slugChar125Route
   '/how-to-watch-world-cup-in-{$slug}': typeof HowToWatchWorldCupInChar123slugChar125Route
+  '/mcp': typeof McpRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap-en.xml': typeof SitemapEnDotxmlRoute
   '/sitemap-es.xml': typeof SitemapEsDotxmlRoute
@@ -228,6 +256,8 @@ export interface FileRoutesByFullPath {
   '/$locale/terms': typeof LocaleTermsRoute
   '/$locale/ver-{$slug}': typeof LocaleVerChar123slugChar125Route
   '/$locale/watch-{$slug}': typeof LocaleWatchChar123slugChar125Route
+  '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/sync-status': typeof AdminSyncStatusRoute
   '/api/track-click': typeof ApiTrackClickRoute
   '/blogs/$slug': typeof BlogsSlugRoute
@@ -235,6 +265,7 @@ export interface FileRoutesByFullPath {
   '/$locale/': typeof LocaleIndexRoute
   '/$locale/blogs/$slug': typeof LocaleBlogsSlugRoute
   '/$locale/team/$slug': typeof LocaleTeamSlugRoute
+  '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/$locale/blogs/': typeof LocaleBlogsIndexRoute
   '/api/public/hooks/sync-fixtures': typeof ApiPublicHooksSyncFixturesRoute
 }
@@ -243,6 +274,7 @@ export interface FileRoutesByTo {
   '/blogs': typeof BlogsRouteWithChildren
   '/donde-ver-mundial-en-{$slug}': typeof DondeVerMundialEnChar123slugChar125Route
   '/how-to-watch-world-cup-in-{$slug}': typeof HowToWatchWorldCupInChar123slugChar125Route
+  '/mcp': typeof McpRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap-en.xml': typeof SitemapEnDotxmlRoute
   '/sitemap-es.xml': typeof SitemapEsDotxmlRoute
@@ -259,6 +291,8 @@ export interface FileRoutesByTo {
   '/$locale/terms': typeof LocaleTermsRoute
   '/$locale/ver-{$slug}': typeof LocaleVerChar123slugChar125Route
   '/$locale/watch-{$slug}': typeof LocaleWatchChar123slugChar125Route
+  '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/sync-status': typeof AdminSyncStatusRoute
   '/api/track-click': typeof ApiTrackClickRoute
   '/blogs/$slug': typeof BlogsSlugRoute
@@ -266,6 +300,7 @@ export interface FileRoutesByTo {
   '/$locale': typeof LocaleIndexRoute
   '/$locale/blogs/$slug': typeof LocaleBlogsSlugRoute
   '/$locale/team/$slug': typeof LocaleTeamSlugRoute
+  '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/$locale/blogs': typeof LocaleBlogsIndexRoute
   '/api/public/hooks/sync-fixtures': typeof ApiPublicHooksSyncFixturesRoute
 }
@@ -276,6 +311,7 @@ export interface FileRoutesById {
   '/blogs': typeof BlogsRouteWithChildren
   '/donde-ver-mundial-en-{$slug}': typeof DondeVerMundialEnChar123slugChar125Route
   '/how-to-watch-world-cup-in-{$slug}': typeof HowToWatchWorldCupInChar123slugChar125Route
+  '/mcp': typeof McpRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap-en.xml': typeof SitemapEnDotxmlRoute
   '/sitemap-es.xml': typeof SitemapEsDotxmlRoute
@@ -293,6 +329,8 @@ export interface FileRoutesById {
   '/$locale/terms': typeof LocaleTermsRoute
   '/$locale/ver-{$slug}': typeof LocaleVerChar123slugChar125Route
   '/$locale/watch-{$slug}': typeof LocaleWatchChar123slugChar125Route
+  '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/sync-status': typeof AdminSyncStatusRoute
   '/api/track-click': typeof ApiTrackClickRoute
   '/blogs/$slug': typeof BlogsSlugRoute
@@ -300,6 +338,7 @@ export interface FileRoutesById {
   '/$locale/': typeof LocaleIndexRoute
   '/$locale/blogs/$slug': typeof LocaleBlogsSlugRoute
   '/$locale/team/$slug': typeof LocaleTeamSlugRoute
+  '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/$locale/blogs/': typeof LocaleBlogsIndexRoute
   '/api/public/hooks/sync-fixtures': typeof ApiPublicHooksSyncFixturesRoute
 }
@@ -311,6 +350,7 @@ export interface FileRouteTypes {
     | '/blogs'
     | '/donde-ver-mundial-en-{$slug}'
     | '/how-to-watch-world-cup-in-{$slug}'
+    | '/mcp'
     | '/robots.txt'
     | '/sitemap-en.xml'
     | '/sitemap-es.xml'
@@ -328,6 +368,8 @@ export interface FileRouteTypes {
     | '/$locale/terms'
     | '/$locale/ver-{$slug}'
     | '/$locale/watch-{$slug}'
+    | '/.mcp/list-tools'
+    | '/.well-known/oauth-protected-resource'
     | '/admin/sync-status'
     | '/api/track-click'
     | '/blogs/$slug'
@@ -335,6 +377,7 @@ export interface FileRouteTypes {
     | '/$locale/'
     | '/$locale/blogs/$slug'
     | '/$locale/team/$slug'
+    | '/.mcp/invoke-tool/$tool'
     | '/$locale/blogs/'
     | '/api/public/hooks/sync-fixtures'
   fileRoutesByTo: FileRoutesByTo
@@ -343,6 +386,7 @@ export interface FileRouteTypes {
     | '/blogs'
     | '/donde-ver-mundial-en-{$slug}'
     | '/how-to-watch-world-cup-in-{$slug}'
+    | '/mcp'
     | '/robots.txt'
     | '/sitemap-en.xml'
     | '/sitemap-es.xml'
@@ -359,6 +403,8 @@ export interface FileRouteTypes {
     | '/$locale/terms'
     | '/$locale/ver-{$slug}'
     | '/$locale/watch-{$slug}'
+    | '/.mcp/list-tools'
+    | '/.well-known/oauth-protected-resource'
     | '/admin/sync-status'
     | '/api/track-click'
     | '/blogs/$slug'
@@ -366,6 +412,7 @@ export interface FileRouteTypes {
     | '/$locale'
     | '/$locale/blogs/$slug'
     | '/$locale/team/$slug'
+    | '/.mcp/invoke-tool/$tool'
     | '/$locale/blogs'
     | '/api/public/hooks/sync-fixtures'
   id:
@@ -375,6 +422,7 @@ export interface FileRouteTypes {
     | '/blogs'
     | '/donde-ver-mundial-en-{$slug}'
     | '/how-to-watch-world-cup-in-{$slug}'
+    | '/mcp'
     | '/robots.txt'
     | '/sitemap-en.xml'
     | '/sitemap-es.xml'
@@ -392,6 +440,8 @@ export interface FileRouteTypes {
     | '/$locale/terms'
     | '/$locale/ver-{$slug}'
     | '/$locale/watch-{$slug}'
+    | '/.mcp/list-tools'
+    | '/.well-known/oauth-protected-resource'
     | '/admin/sync-status'
     | '/api/track-click'
     | '/blogs/$slug'
@@ -399,6 +449,7 @@ export interface FileRouteTypes {
     | '/$locale/'
     | '/$locale/blogs/$slug'
     | '/$locale/team/$slug'
+    | '/.mcp/invoke-tool/$tool'
     | '/$locale/blogs/'
     | '/api/public/hooks/sync-fixtures'
   fileRoutesById: FileRoutesById
@@ -409,6 +460,7 @@ export interface RootRouteChildren {
   BlogsRoute: typeof BlogsRouteWithChildren
   DondeVerMundialEnChar123slugChar125Route: typeof DondeVerMundialEnChar123slugChar125Route
   HowToWatchWorldCupInChar123slugChar125Route: typeof HowToWatchWorldCupInChar123slugChar125Route
+  McpRoute: typeof McpRoute
   RobotsDottxtRoute: typeof RobotsDottxtRoute
   SitemapEnDotxmlRoute: typeof SitemapEnDotxmlRoute
   SitemapEsDotxmlRoute: typeof SitemapEsDotxmlRoute
@@ -416,9 +468,12 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   VerChar123slugChar125Route: typeof VerChar123slugChar125Route
   WatchChar123slugChar125Route: typeof WatchChar123slugChar125Route
+  Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
+  Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   AdminSyncStatusRoute: typeof AdminSyncStatusRoute
   ApiTrackClickRoute: typeof ApiTrackClickRoute
   TeamSlugRoute: typeof TeamSlugRoute
+  Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
   ApiPublicHooksSyncFixturesRoute: typeof ApiPublicHooksSyncFixturesRoute
 }
 
@@ -471,6 +526,13 @@ declare module '@tanstack/react-router' {
       path: '/robots.txt'
       fullPath: '/robots.txt'
       preLoaderRoute: typeof RobotsDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mcp': {
+      id: '/mcp'
+      path: '/mcp'
+      fullPath: '/mcp'
+      preLoaderRoute: typeof McpRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/how-to-watch-world-cup-in-{$slug}': {
@@ -541,6 +603,20 @@ declare module '@tanstack/react-router' {
       path: '/admin/sync-status'
       fullPath: '/admin/sync-status'
       preLoaderRoute: typeof AdminSyncStatusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/.well-known/oauth-protected-resource': {
+      id: '/.well-known/oauth-protected-resource'
+      path: '/.well-known/oauth-protected-resource'
+      fullPath: '/.well-known/oauth-protected-resource'
+      preLoaderRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/.mcp/list-tools': {
+      id: '/.mcp/list-tools'
+      path: '/.mcp/list-tools'
+      fullPath: '/.mcp/list-tools'
+      preLoaderRoute: typeof Char91DotmcpChar93ListToolsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/$locale/watch-{$slug}': {
@@ -619,6 +695,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/$locale/blogs/'
       preLoaderRoute: typeof LocaleBlogsIndexRouteImport
       parentRoute: typeof LocaleBlogsRoute
+    }
+    '/.mcp/invoke-tool/$tool': {
+      id: '/.mcp/invoke-tool/$tool'
+      path: '/.mcp/invoke-tool/$tool'
+      fullPath: '/.mcp/invoke-tool/$tool'
+      preLoaderRoute: typeof Char91DotmcpChar93InvokeToolToolRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/$locale/team/$slug': {
       id: '/$locale/team/$slug'
@@ -711,6 +794,7 @@ const rootRouteChildren: RootRouteChildren = {
     DondeVerMundialEnChar123slugChar125Route,
   HowToWatchWorldCupInChar123slugChar125Route:
     HowToWatchWorldCupInChar123slugChar125Route,
+  McpRoute: McpRoute,
   RobotsDottxtRoute: RobotsDottxtRoute,
   SitemapEnDotxmlRoute: SitemapEnDotxmlRoute,
   SitemapEsDotxmlRoute: SitemapEsDotxmlRoute,
@@ -718,9 +802,13 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   VerChar123slugChar125Route: VerChar123slugChar125Route,
   WatchChar123slugChar125Route: WatchChar123slugChar125Route,
+  Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
+  Char91DotwellKnownChar93OauthProtectedResourceRoute:
+    Char91DotwellKnownChar93OauthProtectedResourceRoute,
   AdminSyncStatusRoute: AdminSyncStatusRoute,
   ApiTrackClickRoute: ApiTrackClickRoute,
   TeamSlugRoute: TeamSlugRoute,
+  Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
   ApiPublicHooksSyncFixturesRoute: ApiPublicHooksSyncFixturesRoute,
 }
 export const routeTree = rootRouteImport
