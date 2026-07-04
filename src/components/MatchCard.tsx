@@ -147,6 +147,14 @@ interface Props {
   locale: Locale;
 }
 
+function fmtDate(date: string, locale: Locale): string {
+  try {
+    return formatLA(new Date(date), locale, "dayMonth");
+  } catch {
+    return date;
+  }
+}
+
 function fmtTime(date: string, locale: Locale): string {
   try {
     return formatLA(new Date(date), locale, "time");
@@ -154,6 +162,7 @@ function fmtTime(date: string, locale: Locale): string {
     return date;
   }
 }
+
 
 export function MatchCard({ fixture, locale }: Props) {
   const m = t(locale);
@@ -197,12 +206,21 @@ export function MatchCard({ fixture, locale }: Props) {
       {/* Content */}
       <div className="relative z-10 flex h-full flex-col justify-between p-5">
         {/* Top: time / live */}
-        <div className="flex items-center justify-between">
-          <span className="font-display text-xs font-bold uppercase tracking-wider text-primary">
-            {isLive ? "" : fmtTime(fixture.match_date, locale)}
-          </span>
+        <div className="flex items-start justify-between">
+          <div className="flex flex-col">
+            <span className="font-display text-[10px] font-bold uppercase tracking-wider text-primary/80">
+              {fmtDate(fixture.match_date, locale)}
+            </span>
+            {!isLive && (
+              <span className="font-display text-xs font-bold uppercase tracking-wider text-primary">
+                {fmtTime(fixture.match_date, locale)}
+              </span>
+            )}
+          </div>
           {isLive && <LiveBadge locale={locale} />}
         </div>
+
+
 
         {/* Bottom: title block */}
         <div>
