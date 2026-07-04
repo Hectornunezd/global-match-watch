@@ -75,8 +75,10 @@ const M: Record<string, Match> = {
 };
 
 /* Round of 16 pairings (winner codes: W<matchId>) */
-const R16 = [
-  { id: "M97", a: "M81", b: "M84", date: "04/07/2026", time: "10:00" }, // CAN vs MAR
+type BracketMatch = { id: string; a: string; b: string; date: string; time: string; homeScore?: number; awayScore?: number; winner?: "home" | "away"; status?: "scheduled" | "finished" };
+
+const R16: BracketMatch[] = [
+  { id: "M97", a: "M81", b: "M84", date: "04/07/2026", time: "10:00", homeScore: 0, awayScore: 3, winner: "away", status: "finished" }, // CAN 0-3 MAR
   { id: "M98", a: "M83", b: "M86", date: "04/07/2026", time: "14:00" }, // PAR vs FRA
   { id: "M99", a: "M82", b: "M85", date: "05/07/2026", time: "13:00" }, // BRA vs NOR
   { id: "M100", a: "M87", b: "M88", date: "05/07/2026", time: "17:00" }, // MEX vs ENG
@@ -163,6 +165,10 @@ function winnerTeam(matchId: string): Team | undefined {
     if (r32.winner === "away") return r32.away;
     return undefined;
   }
+  const r16 = R16.find((r) => r.id === matchId);
+  if (r16 && r16.winner) {
+    return r16.winner === "home" ? winnerTeam(r16.a) : winnerTeam(r16.b);
+  }
   return undefined;
 }
 
@@ -170,20 +176,28 @@ function WinnerCard({
   match,
   side = "left",
 }: {
-  match: { id: string; a: string; b: string; date: string; time: string };
+  match: { id: string; a: string; b: string; date: string; time: string; homeScore?: number; awayScore?: number; winner?: "home" | "away"; status?: "scheduled" | "finished" };
   side?: "left" | "right";
 }) {
   const teamA = winnerTeam(match.a);
   const teamB = winnerTeam(match.b);
+  const finished = match.status === "finished";
+  const homeWin = match.winner === "home";
+  const awayWin = match.winner === "away";
   return (
     <div className="w-[180px]">
       <div className={`mb-1 flex items-center justify-between font-mono text-[10px] uppercase tracking-wider text-muted-foreground ${side === "right" ? "flex-row-reverse" : ""}`}>
         <span>{match.date}</span>
         <span>{match.time}</span>
       </div>
+      {finished && (
+        <div className={`mb-1 font-mono text-[9px] uppercase tracking-wider text-primary/80 ${side === "right" ? "text-right" : ""}`}>
+          Full time
+        </div>
+      )}
       <div className="space-y-1">
-        {teamA ? <TeamRow team={teamA} /> : <PlaceholderRow label={`W${match.a.replace("M", "")}`} />}
-        {teamB ? <TeamRow team={teamB} /> : <PlaceholderRow label={`W${match.b.replace("M", "")}`} />}
+        {teamA ? <TeamRow team={teamA} score={match.homeScore} winner={homeWin} /> : <PlaceholderRow label={`W${match.a.replace("M", "")}`} />}
+        {teamB ? <TeamRow team={teamB} score={match.awayScore} winner={awayWin} /> : <PlaceholderRow label={`W${match.b.replace("M", "")}`} />}
       </div>
     </div>
   );
