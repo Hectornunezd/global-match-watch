@@ -81,9 +81,9 @@ type BracketMatch = { id: string; a: string; b: string; date: string; time: stri
 
 const R16: BracketMatch[] = [
   { id: "M97", a: "M81", b: "M84", date: "04/07/2026", time: "10:00", homeScore: 0, awayScore: 3, winner: "away", status: "finished" }, // CAN 0-3 MAR
-  { id: "M98", a: "M83", b: "M86", date: "04/07/2026", time: "14:00", homeScore: 0, awayScore: 0 }, // PAR vs FRA (live)
-  { id: "M99", a: "M82", b: "M85", date: "05/07/2026", time: "13:00" }, // BRA vs NOR
-  { id: "M100", a: "M87", b: "M88", date: "05/07/2026", time: "17:00" }, // MEX vs ENG
+  { id: "M98", a: "M83", b: "M86", date: "04/07/2026", time: "14:00", homeScore: 0, awayScore: 1, winner: "away", status: "finished" }, // PAR 0-1 FRA
+  { id: "M99", a: "M82", b: "M85", date: "05/07/2026", time: "13:00", homeScore: 1, awayScore: 2, winner: "away", status: "finished" }, // BRA 1-2 NOR
+  { id: "M100", a: "M87", b: "M88", date: "05/07/2026", time: "17:00", homeScore: 2, awayScore: 3, winner: "away", status: "finished" }, // MEX 2-3 ENG
   { id: "M101", a: "M90", b: "M89", date: "06/07/2026", time: "17:00" }, // USA vs BEL
   { id: "M102", a: "M92", b: "M91", date: "06/07/2026", time: "12:00" }, // POR vs ESP
   { id: "M103", a: "M93", b: "M96", date: "07/07/2026", time: "13:00" }, // SUI vs COL
@@ -91,9 +91,9 @@ const R16: BracketMatch[] = [
 ];
 
 const QF = [
-  { id: "M105", a: "M97", b: "M98", date: "10/07/2026", time: "14:00" },
-  { id: "M106", a: "M99", b: "M100", date: "11/07/2026", time: "14:00" },
-  { id: "M107", a: "M101", b: "M102", date: "10/07/2026", time: "18:00" },
+  { id: "M105", a: "M97", b: "M98", date: "09/07/2026", time: "13:00" }, // MAR vs FRA
+  { id: "M106", a: "M99", b: "M100", date: "11/07/2026", time: "14:00" }, // NOR vs ENG
+  { id: "M107", a: "M101", b: "M102", date: "10/07/2026", time: "12:00" }, // W(USA/BEL) vs W(POR/ESP)
   { id: "M108", a: "M103", b: "M104", date: "11/07/2026", time: "18:00" },
 ];
 
