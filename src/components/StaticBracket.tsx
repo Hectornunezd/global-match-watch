@@ -84,10 +84,10 @@ const R16: BracketMatch[] = [
   { id: "M98", a: "M83", b: "M86", date: "04/07/2026", time: "14:00", homeScore: 0, awayScore: 1, winner: "away", status: "finished" }, // PAR 0-1 FRA
   { id: "M99", a: "M82", b: "M85", date: "05/07/2026", time: "13:00", homeScore: 1, awayScore: 2, winner: "away", status: "finished" }, // BRA 1-2 NOR
   { id: "M100", a: "M87", b: "M88", date: "05/07/2026", time: "17:00", homeScore: 2, awayScore: 3, winner: "away", status: "finished" }, // MEX 2-3 ENG
-  { id: "M101", a: "M90", b: "M89", date: "06/07/2026", time: "17:00" }, // USA vs BEL
+  { id: "M101", a: "M90", b: "M89", date: "06/07/2026", time: "17:00", homeScore: 1, awayScore: 4, winner: "away", status: "finished" }, // USA 1-4 BEL
   { id: "M102", a: "M92", b: "M91", date: "06/07/2026", time: "12:00", homeScore: 0, awayScore: 1, winner: "away", status: "finished" }, // POR 0-1 ESP (Merino 90+1')
-  { id: "M103", a: "M93", b: "M96", date: "07/07/2026", time: "13:00" }, // SUI vs COL
-  { id: "M104", a: "M95", b: "M94", date: "07/07/2026", time: "09:00" }, // ARG vs EGY
+  { id: "M103", a: "M93", b: "M96", date: "07/07/2026", time: "13:00", homeScore: 0, awayScore: 0, winner: "home", status: "finished" }, // SUI 0-0 COL (SUI won on pens)
+  { id: "M104", a: "M95", b: "M94", date: "07/07/2026", time: "09:00", homeScore: 3, awayScore: 2, winner: "home", status: "finished" }, // ARG 3-2 EGY
 ];
 
 const QF = [
