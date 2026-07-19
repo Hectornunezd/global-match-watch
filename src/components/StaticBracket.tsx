@@ -367,10 +367,17 @@ export function StaticBracket({ locale, title }: { locale: Locale; title?: strin
                 {FINAL.date} · {FINAL.time} · FINAL
               </div>
               <div className="space-y-1">
-                <PlaceholderRow label={`W${FINAL.a.replace("M", "")}`} />
-                <PlaceholderRow label={`W${FINAL.b.replace("M", "")}`} />
+                {winnerTeam(FINAL.a) ? <TeamRow team={winnerTeam(FINAL.a)} /> : <PlaceholderRow label={`W${FINAL.a.replace("M", "")}`} />}
+                {winnerTeam(FINAL.b) ? <TeamRow team={winnerTeam(FINAL.b)} /> : <PlaceholderRow label={`W${FINAL.b.replace("M", "")}`} />}
               </div>
               <div className="mt-2 text-center font-display text-lg text-primary">★</div>
+              <div className="mt-1 text-center font-mono text-[9px] uppercase tracking-wider text-muted-foreground">
+                MetLife Stadium
+              </div>
+            </div>
+            <div className="rounded-md border border-border bg-card/60 p-2 text-center">
+              <div className="font-mono text-[9px] uppercase tracking-wider text-muted-foreground">3rd Place · Jul 18</div>
+              <div className="mt-1 font-mono text-[11px] text-foreground/90">🏴󠁧󠁢󠁥󠁮󠁧󠁿 ENG <span className="text-primary font-bold">6</span> — <span className="text-muted-foreground">4</span> FRA 🇫🇷</div>
             </div>
             <div className="flex items-start gap-2">
               <MatchIdBadge id={SF[1].id} />
