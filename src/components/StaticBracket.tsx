@@ -90,16 +90,16 @@ const R16: BracketMatch[] = [
   { id: "M104", a: "M95", b: "M94", date: "07/07/2026", time: "09:00", homeScore: 3, awayScore: 2, winner: "home", status: "finished" }, // ARG 3-2 EGY
 ];
 
-const QF = [
-  { id: "M105", a: "M97", b: "M98", date: "09/07/2026", time: "13:00" }, // MAR vs FRA
-  { id: "M106", a: "M99", b: "M100", date: "11/07/2026", time: "14:00" }, // NOR vs ENG
-  { id: "M107", a: "M101", b: "M102", date: "10/07/2026", time: "12:00" }, // W(USA/BEL) vs W(POR/ESP)
-  { id: "M108", a: "M103", b: "M104", date: "11/07/2026", time: "18:00" },
+const QF: BracketMatch[] = [
+  { id: "M105", a: "M97", b: "M98", date: "09/07/2026", time: "13:00", homeScore: 1, awayScore: 2, winner: "away" as const, status: "finished" as const }, // MAR 1-2 FRA
+  { id: "M106", a: "M99", b: "M100", date: "11/07/2026", time: "14:00", homeScore: 1, awayScore: 2, winner: "away" as const, status: "finished" as const }, // NOR 1-2 ENG
+  { id: "M107", a: "M101", b: "M102", date: "10/07/2026", time: "12:00", homeScore: 1, awayScore: 2, winner: "away" as const, status: "finished" as const }, // BEL 1-2 ESP
+  { id: "M108", a: "M103", b: "M104", date: "11/07/2026", time: "18:00", homeScore: 2, awayScore: 3, winner: "away" as const, status: "finished" as const }, // SUI 2-3 ARG (aet)
 ];
 
-const SF = [
-  { id: "M109", a: "M105", b: "M106", date: "14/07/2026", time: "15:00" },
-  { id: "M110", a: "M107", b: "M108", date: "15/07/2026", time: "15:00" },
+const SF: BracketMatch[] = [
+  { id: "M109", a: "M105", b: "M107", date: "14/07/2026", time: "15:00", homeScore: 0, awayScore: 2, winner: "away" as const, status: "finished" as const }, // FRA 0-2 ESP
+  { id: "M110", a: "M106", b: "M108", date: "15/07/2026", time: "15:00", homeScore: 1, awayScore: 3, winner: "away" as const, status: "finished" as const }, // ENG 1-3 ARG (aet)
 ];
 
 const FINAL = { id: "M111", a: "M109", b: "M110", date: "19/07/2026", time: "12:00" };
@@ -205,6 +205,14 @@ function winnerTeam(matchId: string): Team | undefined {
   const r16 = R16.find((r) => r.id === matchId);
   if (r16 && r16.winner) {
     return r16.winner === "home" ? winnerTeam(r16.a) : winnerTeam(r16.b);
+  }
+  const qf = QF.find((q) => q.id === matchId);
+  if (qf && qf.winner) {
+    return qf.winner === "home" ? winnerTeam(qf.a) : winnerTeam(qf.b);
+  }
+  const sf = SF.find((s) => s.id === matchId);
+  if (sf && sf.winner) {
+    return sf.winner === "home" ? winnerTeam(sf.a) : winnerTeam(sf.b);
   }
   return undefined;
 }
@@ -359,10 +367,17 @@ export function StaticBracket({ locale, title }: { locale: Locale; title?: strin
                 {FINAL.date} · {FINAL.time} · FINAL
               </div>
               <div className="space-y-1">
-                <PlaceholderRow label={`W${FINAL.a.replace("M", "")}`} />
-                <PlaceholderRow label={`W${FINAL.b.replace("M", "")}`} />
+                {winnerTeam(FINAL.a) ? <TeamRow team={winnerTeam(FINAL.a)} /> : <PlaceholderRow label={`W${FINAL.a.replace("M", "")}`} />}
+                {winnerTeam(FINAL.b) ? <TeamRow team={winnerTeam(FINAL.b)} /> : <PlaceholderRow label={`W${FINAL.b.replace("M", "")}`} />}
               </div>
               <div className="mt-2 text-center font-display text-lg text-primary">★</div>
+              <div className="mt-1 text-center font-mono text-[9px] uppercase tracking-wider text-muted-foreground">
+                MetLife Stadium
+              </div>
+            </div>
+            <div className="rounded-md border border-border bg-card/60 p-2 text-center">
+              <div className="font-mono text-[9px] uppercase tracking-wider text-muted-foreground">3rd Place · Jul 18</div>
+              <div className="mt-1 font-mono text-[11px] text-foreground/90">🏴󠁧󠁢󠁥󠁮󠁧󠁿 ENG <span className="text-primary font-bold">6</span> — <span className="text-muted-foreground">4</span> FRA 🇫🇷</div>
             </div>
             <div className="flex items-start gap-2">
               <MatchIdBadge id={SF[1].id} />
