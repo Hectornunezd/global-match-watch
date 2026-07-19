@@ -91,15 +91,15 @@ const R16: BracketMatch[] = [
 ];
 
 const QF = [
-  { id: "M105", a: "M97", b: "M98", date: "09/07/2026", time: "13:00" }, // MAR vs FRA
-  { id: "M106", a: "M99", b: "M100", date: "11/07/2026", time: "14:00" }, // NOR vs ENG
-  { id: "M107", a: "M101", b: "M102", date: "10/07/2026", time: "12:00" }, // W(USA/BEL) vs W(POR/ESP)
-  { id: "M108", a: "M103", b: "M104", date: "11/07/2026", time: "18:00" },
+  { id: "M105", a: "M97", b: "M98", date: "09/07/2026", time: "13:00", homeScore: 1, awayScore: 2, winner: "away" as const, status: "finished" as const }, // MAR 1-2 FRA
+  { id: "M106", a: "M99", b: "M100", date: "11/07/2026", time: "14:00", homeScore: 1, awayScore: 2, winner: "away" as const, status: "finished" as const }, // NOR 1-2 ENG
+  { id: "M107", a: "M101", b: "M102", date: "10/07/2026", time: "12:00", homeScore: 1, awayScore: 2, winner: "away" as const, status: "finished" as const }, // BEL 1-2 ESP
+  { id: "M108", a: "M103", b: "M104", date: "11/07/2026", time: "18:00", homeScore: 2, awayScore: 3, winner: "away" as const, status: "finished" as const }, // SUI 2-3 ARG (aet)
 ];
 
 const SF = [
-  { id: "M109", a: "M105", b: "M106", date: "14/07/2026", time: "15:00" },
-  { id: "M110", a: "M107", b: "M108", date: "15/07/2026", time: "15:00" },
+  { id: "M109", a: "M105", b: "M107", date: "14/07/2026", time: "15:00", homeScore: 0, awayScore: 2, winner: "away" as const, status: "finished" as const }, // FRA 0-2 ESP
+  { id: "M110", a: "M106", b: "M108", date: "15/07/2026", time: "15:00", homeScore: 1, awayScore: 3, winner: "away" as const, status: "finished" as const }, // ENG 1-3 ARG (aet)
 ];
 
 const FINAL = { id: "M111", a: "M109", b: "M110", date: "19/07/2026", time: "12:00" };
