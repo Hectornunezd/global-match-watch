@@ -97,7 +97,7 @@ const QF: BracketMatch[] = [
   { id: "M108", a: "M103", b: "M104", date: "11/07/2026", time: "18:00", homeScore: 2, awayScore: 3, winner: "away" as const, status: "finished" as const }, // SUI 2-3 ARG (aet)
 ];
 
-const SF = [
+const SF: BracketMatch[] = [
   { id: "M109", a: "M105", b: "M107", date: "14/07/2026", time: "15:00", homeScore: 0, awayScore: 2, winner: "away" as const, status: "finished" as const }, // FRA 0-2 ESP
   { id: "M110", a: "M106", b: "M108", date: "15/07/2026", time: "15:00", homeScore: 1, awayScore: 3, winner: "away" as const, status: "finished" as const }, // ENG 1-3 ARG (aet)
 ];
