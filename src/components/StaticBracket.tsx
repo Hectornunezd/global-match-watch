@@ -90,7 +90,7 @@ const R16: BracketMatch[] = [
   { id: "M104", a: "M95", b: "M94", date: "07/07/2026", time: "09:00", homeScore: 3, awayScore: 2, winner: "home", status: "finished" }, // ARG 3-2 EGY
 ];
 
-const QF = [
+const QF: BracketMatch[] = [
   { id: "M105", a: "M97", b: "M98", date: "09/07/2026", time: "13:00", homeScore: 1, awayScore: 2, winner: "away" as const, status: "finished" as const }, // MAR 1-2 FRA
   { id: "M106", a: "M99", b: "M100", date: "11/07/2026", time: "14:00", homeScore: 1, awayScore: 2, winner: "away" as const, status: "finished" as const }, // NOR 1-2 ENG
   { id: "M107", a: "M101", b: "M102", date: "10/07/2026", time: "12:00", homeScore: 1, awayScore: 2, winner: "away" as const, status: "finished" as const }, // BEL 1-2 ESP
