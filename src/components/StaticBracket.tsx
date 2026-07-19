@@ -206,6 +206,14 @@ function winnerTeam(matchId: string): Team | undefined {
   if (r16 && r16.winner) {
     return r16.winner === "home" ? winnerTeam(r16.a) : winnerTeam(r16.b);
   }
+  const qf = QF.find((q) => q.id === matchId);
+  if (qf && qf.winner) {
+    return qf.winner === "home" ? winnerTeam(qf.a) : winnerTeam(qf.b);
+  }
+  const sf = SF.find((s) => s.id === matchId);
+  if (sf && sf.winner) {
+    return sf.winner === "home" ? winnerTeam(sf.a) : winnerTeam(sf.b);
+  }
   return undefined;
 }
 
