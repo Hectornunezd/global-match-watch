@@ -102,7 +102,8 @@ const SF: BracketMatch[] = [
   { id: "M110", a: "M106", b: "M108", date: "15/07/2026", time: "15:00", homeScore: 1, awayScore: 3, winner: "away" as const, status: "finished" as const }, // ENG 1-3 ARG (aet)
 ];
 
-const FINAL = { id: "M111", a: "M109", b: "M110", date: "19/07/2026", time: "12:00" };
+const FINAL: BracketMatch = { id: "M111", a: "M109", b: "M110", date: "19/07/2026", time: "12:00", homeScore: 2, awayScore: 1, winner: "home", status: "finished" }; // ESP 2-1 ARG
+const CHAMPION: Team = T.ESP;
 
 /* ---------- UI atoms ---------- */
 
