@@ -310,9 +310,16 @@ export function StaticBracket({ locale, title }: { locale: Locale; title?: strin
 
   return (
     <section className="mx-auto max-w-[1600px] px-2 py-10 sm:px-6 sm:py-14">
-      <h2 className="mb-6 font-display text-3xl uppercase sm:text-4xl">
+      <h2 className="mb-3 font-display text-3xl uppercase sm:text-4xl">
         <span className="text-primary">[</span> {heading} <span className="text-primary">]</span>
       </h2>
+      <div className="mb-6 flex items-center gap-3 rounded-md border-2 border-primary bg-primary/10 px-4 py-3 shadow-[0_0_20px_rgba(255,0,0,0.2)]">
+        <span className="text-2xl sm:text-3xl">{CHAMPION.flag}</span>
+        <div className="font-display uppercase leading-tight">
+          <div className="text-[10px] tracking-widest text-primary">★ {locale === "es" ? "Campeón Mundial 2026" : "World Cup 2026 Champion"} ★</div>
+          <div className="text-lg sm:text-2xl">{CHAMPION.name} — {locale === "es" ? "¡Campeón!" : "Champions!"}</div>
+        </div>
+      </div>
 
       {/* Desktop bracket */}
       <div className="hidden overflow-x-auto xl:block">
