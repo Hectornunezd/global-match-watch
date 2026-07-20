@@ -368,10 +368,16 @@ export function StaticBracket({ locale, title }: { locale: Locale; title?: strin
                 {FINAL.date} · {FINAL.time} · FINAL
               </div>
               <div className="space-y-1">
-                {winnerTeam(FINAL.a) ? <TeamRow team={winnerTeam(FINAL.a)} /> : <PlaceholderRow label={`W${FINAL.a.replace("M", "")}`} />}
-                {winnerTeam(FINAL.b) ? <TeamRow team={winnerTeam(FINAL.b)} /> : <PlaceholderRow label={`W${FINAL.b.replace("M", "")}`} />}
+                <TeamRow team={winnerTeam(FINAL.a)} score={FINAL.homeScore} winner={FINAL.winner === "home"} />
+                <TeamRow team={winnerTeam(FINAL.b)} score={FINAL.awayScore} winner={FINAL.winner === "away"} />
               </div>
-              <div className="mt-2 text-center font-display text-lg text-primary">★</div>
+              <div className="mt-2 flex items-center justify-center gap-1 font-display text-lg text-primary">
+                <span>★</span>
+                <span className="text-xs uppercase tracking-widest">
+                  {locale === "es" ? "Campeón" : "Champion"}: {CHAMPION.flag} {CHAMPION.name}
+                </span>
+                <span>★</span>
+              </div>
               <div className="mt-1 text-center font-mono text-[9px] uppercase tracking-wider text-muted-foreground">
                 MetLife Stadium
               </div>
