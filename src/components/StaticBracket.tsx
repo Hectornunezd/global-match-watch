@@ -102,7 +102,8 @@ const SF: BracketMatch[] = [
   { id: "M110", a: "M106", b: "M108", date: "15/07/2026", time: "15:00", homeScore: 1, awayScore: 3, winner: "away" as const, status: "finished" as const }, // ENG 1-3 ARG (aet)
 ];
 
-const FINAL = { id: "M111", a: "M109", b: "M110", date: "19/07/2026", time: "12:00" };
+const FINAL: BracketMatch = { id: "M111", a: "M109", b: "M110", date: "19/07/2026", time: "12:00", homeScore: 2, awayScore: 1, winner: "home", status: "finished" }; // ESP 2-1 ARG
+const CHAMPION: Team = T.ESP;
 
 /* ---------- UI atoms ---------- */
 
@@ -309,9 +310,16 @@ export function StaticBracket({ locale, title }: { locale: Locale; title?: strin
 
   return (
     <section className="mx-auto max-w-[1600px] px-2 py-10 sm:px-6 sm:py-14">
-      <h2 className="mb-6 font-display text-3xl uppercase sm:text-4xl">
+      <h2 className="mb-3 font-display text-3xl uppercase sm:text-4xl">
         <span className="text-primary">[</span> {heading} <span className="text-primary">]</span>
       </h2>
+      <div className="mb-6 flex items-center gap-3 rounded-md border-2 border-primary bg-primary/10 px-4 py-3 shadow-[0_0_20px_rgba(255,0,0,0.2)]">
+        <span className="text-2xl sm:text-3xl">{CHAMPION.flag}</span>
+        <div className="font-display uppercase leading-tight">
+          <div className="text-[10px] tracking-widest text-primary">★ {locale === "es" ? "Campeón Mundial 2026" : "World Cup 2026 Champion"} ★</div>
+          <div className="text-lg sm:text-2xl">{CHAMPION.name} — {locale === "es" ? "¡Campeón!" : "Champions!"}</div>
+        </div>
+      </div>
 
       {/* Desktop bracket */}
       <div className="hidden overflow-x-auto xl:block">
@@ -367,10 +375,16 @@ export function StaticBracket({ locale, title }: { locale: Locale; title?: strin
                 {FINAL.date} · {FINAL.time} · FINAL
               </div>
               <div className="space-y-1">
-                {winnerTeam(FINAL.a) ? <TeamRow team={winnerTeam(FINAL.a)} /> : <PlaceholderRow label={`W${FINAL.a.replace("M", "")}`} />}
-                {winnerTeam(FINAL.b) ? <TeamRow team={winnerTeam(FINAL.b)} /> : <PlaceholderRow label={`W${FINAL.b.replace("M", "")}`} />}
+                <TeamRow team={winnerTeam(FINAL.a)} score={FINAL.homeScore} winner={FINAL.winner === "home"} />
+                <TeamRow team={winnerTeam(FINAL.b)} score={FINAL.awayScore} winner={FINAL.winner === "away"} />
               </div>
-              <div className="mt-2 text-center font-display text-lg text-primary">★</div>
+              <div className="mt-2 flex items-center justify-center gap-1 font-display text-lg text-primary">
+                <span>★</span>
+                <span className="text-xs uppercase tracking-widest">
+                  {locale === "es" ? "Campeón" : "Champion"}: {CHAMPION.flag} {CHAMPION.name}
+                </span>
+                <span>★</span>
+              </div>
               <div className="mt-1 text-center font-mono text-[9px] uppercase tracking-wider text-muted-foreground">
                 MetLife Stadium
               </div>
