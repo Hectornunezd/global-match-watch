@@ -9,7 +9,13 @@ export const Route = createFileRoute("/sitemap-es.xml")({
     handlers: {
       GET: async () => {
         const data = await getAllSlugs();
-        const urls: string[] = [`${SITE}/es`, `${SITE}/es/blogs`];
+        const urls: string[] = [
+          `${SITE}/es`,
+          `${SITE}/es/tabla`,
+          `${SITE}/es/calendario`,
+          `${SITE}/es/liguilla`,
+          `${SITE}/es/blogs`,
+        ];
         for (const f of data.fixtures) if (f.slug_es) urls.push(`${SITE}/es/${f.slug_es}`);
         for (const t of data.teams) if (t.slug_es) urls.push(`${SITE}/es/team/${t.slug_es}`);
         for (const c of data.countries) if (c.slug_es) urls.push(`${SITE}/es/donde-ver-mundial-en-${c.slug_es}`);
