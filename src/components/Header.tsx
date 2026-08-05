@@ -98,7 +98,11 @@ export function Header({ locale, altPath }: { locale: Locale; altPath?: string }
             </MenuLink>
           </MenuRow>
 
-
+          <MenuRow>
+            <MenuLink to={localeUrl(locale, "/blogs")} onClick={() => setOpen(false)}>
+              BLOG
+            </MenuLink>
+          </MenuRow>
 
           <MenuRow>
             <MenuLink to={localeUrl(locale)} onClick={() => setOpen(false)}>
