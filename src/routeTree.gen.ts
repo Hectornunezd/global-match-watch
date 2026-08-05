@@ -36,6 +36,7 @@ import { Route as LocaleTablaRouteImport } from './routes/$locale.tabla'
 import { Route as LocaleResponsibleGamblingRouteImport } from './routes/$locale.responsible-gambling'
 import { Route as LocalePrivacyPolicyRouteImport } from './routes/$locale.privacy-policy'
 import { Route as LocalePartnersRouteImport } from './routes/$locale.partners'
+import { Route as LocaleLiguillaRouteImport } from './routes/$locale.liguilla'
 import { Route as LocaleHowToWatchWorldCupInChar123slugChar125RouteImport } from './routes/$locale.how-to-watch-world-cup-in-{$slug}'
 import { Route as LocaleDondeVerMundialEnChar123slugChar125RouteImport } from './routes/$locale.donde-ver-mundial-en-{$slug}'
 import { Route as LocaleCalendarioRouteImport } from './routes/$locale.calendario'
@@ -189,6 +190,11 @@ const LocalePartnersRoute = LocalePartnersRouteImport.update({
   path: '/partners',
   getParentRoute: () => LocaleRoute,
 } as any)
+const LocaleLiguillaRoute = LocaleLiguillaRouteImport.update({
+  id: '/liguilla',
+  path: '/liguilla',
+  getParentRoute: () => LocaleRoute,
+} as any)
 const LocaleHowToWatchWorldCupInChar123slugChar125Route =
   LocaleHowToWatchWorldCupInChar123slugChar125RouteImport.update({
     id: '/how-to-watch-world-cup-in-{$slug}',
@@ -263,6 +269,7 @@ export interface FileRoutesByFullPath {
   '/$locale/calendario': typeof LocaleCalendarioRoute
   '/$locale/donde-ver-mundial-en-{$slug}': typeof LocaleDondeVerMundialEnChar123slugChar125Route
   '/$locale/how-to-watch-world-cup-in-{$slug}': typeof LocaleHowToWatchWorldCupInChar123slugChar125Route
+  '/$locale/liguilla': typeof LocaleLiguillaRoute
   '/$locale/partners': typeof LocalePartnersRoute
   '/$locale/privacy-policy': typeof LocalePrivacyPolicyRoute
   '/$locale/responsible-gambling': typeof LocaleResponsibleGamblingRoute
@@ -300,6 +307,7 @@ export interface FileRoutesByTo {
   '/$locale/calendario': typeof LocaleCalendarioRoute
   '/$locale/donde-ver-mundial-en-{$slug}': typeof LocaleDondeVerMundialEnChar123slugChar125Route
   '/$locale/how-to-watch-world-cup-in-{$slug}': typeof LocaleHowToWatchWorldCupInChar123slugChar125Route
+  '/$locale/liguilla': typeof LocaleLiguillaRoute
   '/$locale/partners': typeof LocalePartnersRoute
   '/$locale/privacy-policy': typeof LocalePrivacyPolicyRoute
   '/$locale/responsible-gambling': typeof LocaleResponsibleGamblingRoute
@@ -340,6 +348,7 @@ export interface FileRoutesById {
   '/$locale/calendario': typeof LocaleCalendarioRoute
   '/$locale/donde-ver-mundial-en-{$slug}': typeof LocaleDondeVerMundialEnChar123slugChar125Route
   '/$locale/how-to-watch-world-cup-in-{$slug}': typeof LocaleHowToWatchWorldCupInChar123slugChar125Route
+  '/$locale/liguilla': typeof LocaleLiguillaRoute
   '/$locale/partners': typeof LocalePartnersRoute
   '/$locale/privacy-policy': typeof LocalePrivacyPolicyRoute
   '/$locale/responsible-gambling': typeof LocaleResponsibleGamblingRoute
@@ -381,6 +390,7 @@ export interface FileRouteTypes {
     | '/$locale/calendario'
     | '/$locale/donde-ver-mundial-en-{$slug}'
     | '/$locale/how-to-watch-world-cup-in-{$slug}'
+    | '/$locale/liguilla'
     | '/$locale/partners'
     | '/$locale/privacy-policy'
     | '/$locale/responsible-gambling'
@@ -418,6 +428,7 @@ export interface FileRouteTypes {
     | '/$locale/calendario'
     | '/$locale/donde-ver-mundial-en-{$slug}'
     | '/$locale/how-to-watch-world-cup-in-{$slug}'
+    | '/$locale/liguilla'
     | '/$locale/partners'
     | '/$locale/privacy-policy'
     | '/$locale/responsible-gambling'
@@ -457,6 +468,7 @@ export interface FileRouteTypes {
     | '/$locale/calendario'
     | '/$locale/donde-ver-mundial-en-{$slug}'
     | '/$locale/how-to-watch-world-cup-in-{$slug}'
+    | '/$locale/liguilla'
     | '/$locale/partners'
     | '/$locale/privacy-policy'
     | '/$locale/responsible-gambling'
@@ -692,6 +704,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocalePartnersRouteImport
       parentRoute: typeof LocaleRoute
     }
+    '/$locale/liguilla': {
+      id: '/$locale/liguilla'
+      path: '/liguilla'
+      fullPath: '/$locale/liguilla'
+      preLoaderRoute: typeof LocaleLiguillaRouteImport
+      parentRoute: typeof LocaleRoute
+    }
     '/$locale/how-to-watch-world-cup-in-{$slug}': {
       id: '/$locale/how-to-watch-world-cup-in-{$slug}'
       path: '/how-to-watch-world-cup-in-{$slug}'
@@ -785,6 +804,7 @@ interface LocaleRouteChildren {
   LocaleCalendarioRoute: typeof LocaleCalendarioRoute
   LocaleDondeVerMundialEnChar123slugChar125Route: typeof LocaleDondeVerMundialEnChar123slugChar125Route
   LocaleHowToWatchWorldCupInChar123slugChar125Route: typeof LocaleHowToWatchWorldCupInChar123slugChar125Route
+  LocaleLiguillaRoute: typeof LocaleLiguillaRoute
   LocalePartnersRoute: typeof LocalePartnersRoute
   LocalePrivacyPolicyRoute: typeof LocalePrivacyPolicyRoute
   LocaleResponsibleGamblingRoute: typeof LocaleResponsibleGamblingRoute
@@ -804,6 +824,7 @@ const LocaleRouteChildren: LocaleRouteChildren = {
     LocaleDondeVerMundialEnChar123slugChar125Route,
   LocaleHowToWatchWorldCupInChar123slugChar125Route:
     LocaleHowToWatchWorldCupInChar123slugChar125Route,
+  LocaleLiguillaRoute: LocaleLiguillaRoute,
   LocalePartnersRoute: LocalePartnersRoute,
   LocalePrivacyPolicyRoute: LocalePrivacyPolicyRoute,
   LocaleResponsibleGamblingRoute: LocaleResponsibleGamblingRoute,
