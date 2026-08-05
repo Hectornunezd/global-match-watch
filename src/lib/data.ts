@@ -66,12 +66,18 @@ export interface Country {
   meta_description_es: string | null;
 }
 
+const TEAM_SELECT =
+  "id,name_en,name_es,slug_en,slug_es,country_code,flag_url,group_letter,short_code,stadium";
+
 const FIXTURE_SELECT = `
-  id, match_date, status, home_score, away_score, venue, city, round,
+  id, match_date, status, home_score, away_score, venue, city, round, matchday, stage,
   slug_en, slug_es, meta_title_en, meta_title_es, meta_description_en, meta_description_es,
-  home_team:teams!fixtures_home_team_id_fkey(id,name_en,name_es,slug_en,slug_es,country_code,flag_url,group_letter),
-  away_team:teams!fixtures_away_team_id_fkey(id,name_en,name_es,slug_en,slug_es,country_code,flag_url,group_letter)
+  home_team:teams!fixtures_home_team_id_fkey(${TEAM_SELECT}),
+  away_team:teams!fixtures_away_team_id_fkey(${TEAM_SELECT})
 `;
+
+export const COMPETITION = "Liga MX Apertura 2026";
+
 
 function setCache(seconds: number) {
   try {
