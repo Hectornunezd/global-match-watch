@@ -81,16 +81,23 @@ export function Header({ locale, altPath }: { locale: Locale; altPath?: string }
 
 
           <MenuRow>
-            <MenuLink to={localeUrl(locale, "/bracket")} onClick={() => setOpen(false)}>
-              {locale === "es" ? "BRACKET" : "BRACKET"}
+            <MenuLink to={localeUrl(locale, "/tabla")} onClick={() => setOpen(false)}>
+              {locale === "es" ? "TABLA" : "TABLE"}
             </MenuLink>
           </MenuRow>
 
           <MenuRow>
-            <MenuLink to={localeUrl(locale, "/blogs")} onClick={() => setOpen(false)}>
-              {locale === "es" ? "BLOG" : "BLOG"}
+            <MenuLink to={localeUrl(locale, "/calendario")} onClick={() => setOpen(false)}>
+              {locale === "es" ? "CALENDARIO" : "SCHEDULE"}
             </MenuLink>
           </MenuRow>
+
+          <MenuRow>
+            <MenuLink to={localeUrl(locale, "/liguilla")} onClick={() => setOpen(false)}>
+              LIGUILLA
+            </MenuLink>
+          </MenuRow>
+
 
 
           <MenuRow>
