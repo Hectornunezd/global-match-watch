@@ -32,6 +32,7 @@ import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]
 import { Route as LocaleWatchChar123slugChar125RouteImport } from './routes/$locale.watch-{$slug}'
 import { Route as LocaleVerChar123slugChar125RouteImport } from './routes/$locale.ver-{$slug}'
 import { Route as LocaleTermsRouteImport } from './routes/$locale.terms'
+import { Route as LocaleTablaRouteImport } from './routes/$locale.tabla'
 import { Route as LocaleResponsibleGamblingRouteImport } from './routes/$locale.responsible-gambling'
 import { Route as LocalePrivacyPolicyRouteImport } from './routes/$locale.privacy-policy'
 import { Route as LocalePartnersRouteImport } from './routes/$locale.partners'
@@ -166,6 +167,11 @@ const LocaleTermsRoute = LocaleTermsRouteImport.update({
   path: '/terms',
   getParentRoute: () => LocaleRoute,
 } as any)
+const LocaleTablaRoute = LocaleTablaRouteImport.update({
+  id: '/tabla',
+  path: '/tabla',
+  getParentRoute: () => LocaleRoute,
+} as any)
 const LocaleResponsibleGamblingRoute =
   LocaleResponsibleGamblingRouteImport.update({
     id: '/responsible-gambling',
@@ -253,6 +259,7 @@ export interface FileRoutesByFullPath {
   '/$locale/partners': typeof LocalePartnersRoute
   '/$locale/privacy-policy': typeof LocalePrivacyPolicyRoute
   '/$locale/responsible-gambling': typeof LocaleResponsibleGamblingRoute
+  '/$locale/tabla': typeof LocaleTablaRoute
   '/$locale/terms': typeof LocaleTermsRoute
   '/$locale/ver-{$slug}': typeof LocaleVerChar123slugChar125Route
   '/$locale/watch-{$slug}': typeof LocaleWatchChar123slugChar125Route
@@ -288,6 +295,7 @@ export interface FileRoutesByTo {
   '/$locale/partners': typeof LocalePartnersRoute
   '/$locale/privacy-policy': typeof LocalePrivacyPolicyRoute
   '/$locale/responsible-gambling': typeof LocaleResponsibleGamblingRoute
+  '/$locale/tabla': typeof LocaleTablaRoute
   '/$locale/terms': typeof LocaleTermsRoute
   '/$locale/ver-{$slug}': typeof LocaleVerChar123slugChar125Route
   '/$locale/watch-{$slug}': typeof LocaleWatchChar123slugChar125Route
@@ -326,6 +334,7 @@ export interface FileRoutesById {
   '/$locale/partners': typeof LocalePartnersRoute
   '/$locale/privacy-policy': typeof LocalePrivacyPolicyRoute
   '/$locale/responsible-gambling': typeof LocaleResponsibleGamblingRoute
+  '/$locale/tabla': typeof LocaleTablaRoute
   '/$locale/terms': typeof LocaleTermsRoute
   '/$locale/ver-{$slug}': typeof LocaleVerChar123slugChar125Route
   '/$locale/watch-{$slug}': typeof LocaleWatchChar123slugChar125Route
@@ -365,6 +374,7 @@ export interface FileRouteTypes {
     | '/$locale/partners'
     | '/$locale/privacy-policy'
     | '/$locale/responsible-gambling'
+    | '/$locale/tabla'
     | '/$locale/terms'
     | '/$locale/ver-{$slug}'
     | '/$locale/watch-{$slug}'
@@ -400,6 +410,7 @@ export interface FileRouteTypes {
     | '/$locale/partners'
     | '/$locale/privacy-policy'
     | '/$locale/responsible-gambling'
+    | '/$locale/tabla'
     | '/$locale/terms'
     | '/$locale/ver-{$slug}'
     | '/$locale/watch-{$slug}'
@@ -437,6 +448,7 @@ export interface FileRouteTypes {
     | '/$locale/partners'
     | '/$locale/privacy-policy'
     | '/$locale/responsible-gambling'
+    | '/$locale/tabla'
     | '/$locale/terms'
     | '/$locale/ver-{$slug}'
     | '/$locale/watch-{$slug}'
@@ -640,6 +652,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocaleTermsRouteImport
       parentRoute: typeof LocaleRoute
     }
+    '/$locale/tabla': {
+      id: '/$locale/tabla'
+      path: '/tabla'
+      fullPath: '/$locale/tabla'
+      preLoaderRoute: typeof LocaleTablaRouteImport
+      parentRoute: typeof LocaleRoute
+    }
     '/$locale/responsible-gambling': {
       id: '/$locale/responsible-gambling'
       path: '/responsible-gambling'
@@ -749,6 +768,7 @@ interface LocaleRouteChildren {
   LocalePartnersRoute: typeof LocalePartnersRoute
   LocalePrivacyPolicyRoute: typeof LocalePrivacyPolicyRoute
   LocaleResponsibleGamblingRoute: typeof LocaleResponsibleGamblingRoute
+  LocaleTablaRoute: typeof LocaleTablaRoute
   LocaleTermsRoute: typeof LocaleTermsRoute
   LocaleVerChar123slugChar125Route: typeof LocaleVerChar123slugChar125Route
   LocaleWatchChar123slugChar125Route: typeof LocaleWatchChar123slugChar125Route
@@ -766,6 +786,7 @@ const LocaleRouteChildren: LocaleRouteChildren = {
   LocalePartnersRoute: LocalePartnersRoute,
   LocalePrivacyPolicyRoute: LocalePrivacyPolicyRoute,
   LocaleResponsibleGamblingRoute: LocaleResponsibleGamblingRoute,
+  LocaleTablaRoute: LocaleTablaRoute,
   LocaleTermsRoute: LocaleTermsRoute,
   LocaleVerChar123slugChar125Route: LocaleVerChar123slugChar125Route,
   LocaleWatchChar123slugChar125Route: LocaleWatchChar123slugChar125Route,
