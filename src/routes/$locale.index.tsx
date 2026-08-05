@@ -189,7 +189,7 @@ function HomePage() {
             <span className="live-pulse h-2.5 w-2.5 rounded-full bg-[var(--success)]" />
             <h2 className="text-2xl">{m.sections.liveNow}</h2>
           </div>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-2 lg:grid-cols-2">
             {live.map((f) => (
               <MatchCard key={f.id} fixture={f} locale={locale} />
             ))}
@@ -226,7 +226,7 @@ function HomePage() {
             }}
           />
         </div>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-2 lg:grid-cols-2">
           {filtered.slice(0, 18).map((f) => (
             <MatchCard key={f.id} fixture={f} locale={locale} />
           ))}
