@@ -244,7 +244,7 @@ function HomePage() {
             {m.sections.fullTable} →
           </Link>
         </div>
-        <StandingsTable rows={rows} locale={locale} limit={10} showForm={false} />
+        <StandingsTable rows={rows} locale={locale} showForm={false} />
       </section>
 
       {/* Country guides nav */}
