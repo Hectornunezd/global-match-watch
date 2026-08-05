@@ -12,7 +12,10 @@ export interface Team {
   country_code: string;
   flag_url: string | null;
   group_letter: string | null;
+  short_code?: string | null;
+  stadium?: string | null;
 }
+
 
 export interface Fixture {
   id: string;
