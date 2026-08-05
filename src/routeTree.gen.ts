@@ -38,6 +38,7 @@ import { Route as LocalePrivacyPolicyRouteImport } from './routes/$locale.privac
 import { Route as LocalePartnersRouteImport } from './routes/$locale.partners'
 import { Route as LocaleHowToWatchWorldCupInChar123slugChar125RouteImport } from './routes/$locale.how-to-watch-world-cup-in-{$slug}'
 import { Route as LocaleDondeVerMundialEnChar123slugChar125RouteImport } from './routes/$locale.donde-ver-mundial-en-{$slug}'
+import { Route as LocaleCalendarioRouteImport } from './routes/$locale.calendario'
 import { Route as LocaleBracketRouteImport } from './routes/$locale.bracket'
 import { Route as LocaleBlogsRouteImport } from './routes/$locale.blogs'
 import { Route as LocaleBlogsIndexRouteImport } from './routes/$locale.blogs.index'
@@ -200,6 +201,11 @@ const LocaleDondeVerMundialEnChar123slugChar125Route =
     path: '/donde-ver-mundial-en-{$slug}',
     getParentRoute: () => LocaleRoute,
   } as any)
+const LocaleCalendarioRoute = LocaleCalendarioRouteImport.update({
+  id: '/calendario',
+  path: '/calendario',
+  getParentRoute: () => LocaleRoute,
+} as any)
 const LocaleBracketRoute = LocaleBracketRouteImport.update({
   id: '/bracket',
   path: '/bracket',
@@ -254,6 +260,7 @@ export interface FileRoutesByFullPath {
   '/watch-{$slug}': typeof WatchChar123slugChar125Route
   '/$locale/blogs': typeof LocaleBlogsRouteWithChildren
   '/$locale/bracket': typeof LocaleBracketRoute
+  '/$locale/calendario': typeof LocaleCalendarioRoute
   '/$locale/donde-ver-mundial-en-{$slug}': typeof LocaleDondeVerMundialEnChar123slugChar125Route
   '/$locale/how-to-watch-world-cup-in-{$slug}': typeof LocaleHowToWatchWorldCupInChar123slugChar125Route
   '/$locale/partners': typeof LocalePartnersRoute
@@ -290,6 +297,7 @@ export interface FileRoutesByTo {
   '/ver-{$slug}': typeof VerChar123slugChar125Route
   '/watch-{$slug}': typeof WatchChar123slugChar125Route
   '/$locale/bracket': typeof LocaleBracketRoute
+  '/$locale/calendario': typeof LocaleCalendarioRoute
   '/$locale/donde-ver-mundial-en-{$slug}': typeof LocaleDondeVerMundialEnChar123slugChar125Route
   '/$locale/how-to-watch-world-cup-in-{$slug}': typeof LocaleHowToWatchWorldCupInChar123slugChar125Route
   '/$locale/partners': typeof LocalePartnersRoute
@@ -329,6 +337,7 @@ export interface FileRoutesById {
   '/watch-{$slug}': typeof WatchChar123slugChar125Route
   '/$locale/blogs': typeof LocaleBlogsRouteWithChildren
   '/$locale/bracket': typeof LocaleBracketRoute
+  '/$locale/calendario': typeof LocaleCalendarioRoute
   '/$locale/donde-ver-mundial-en-{$slug}': typeof LocaleDondeVerMundialEnChar123slugChar125Route
   '/$locale/how-to-watch-world-cup-in-{$slug}': typeof LocaleHowToWatchWorldCupInChar123slugChar125Route
   '/$locale/partners': typeof LocalePartnersRoute
@@ -369,6 +378,7 @@ export interface FileRouteTypes {
     | '/watch-{$slug}'
     | '/$locale/blogs'
     | '/$locale/bracket'
+    | '/$locale/calendario'
     | '/$locale/donde-ver-mundial-en-{$slug}'
     | '/$locale/how-to-watch-world-cup-in-{$slug}'
     | '/$locale/partners'
@@ -405,6 +415,7 @@ export interface FileRouteTypes {
     | '/ver-{$slug}'
     | '/watch-{$slug}'
     | '/$locale/bracket'
+    | '/$locale/calendario'
     | '/$locale/donde-ver-mundial-en-{$slug}'
     | '/$locale/how-to-watch-world-cup-in-{$slug}'
     | '/$locale/partners'
@@ -443,6 +454,7 @@ export interface FileRouteTypes {
     | '/watch-{$slug}'
     | '/$locale/blogs'
     | '/$locale/bracket'
+    | '/$locale/calendario'
     | '/$locale/donde-ver-mundial-en-{$slug}'
     | '/$locale/how-to-watch-world-cup-in-{$slug}'
     | '/$locale/partners'
@@ -694,6 +706,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocaleDondeVerMundialEnChar123slugChar125RouteImport
       parentRoute: typeof LocaleRoute
     }
+    '/$locale/calendario': {
+      id: '/$locale/calendario'
+      path: '/calendario'
+      fullPath: '/$locale/calendario'
+      preLoaderRoute: typeof LocaleCalendarioRouteImport
+      parentRoute: typeof LocaleRoute
+    }
     '/$locale/bracket': {
       id: '/$locale/bracket'
       path: '/bracket'
@@ -763,6 +782,7 @@ const LocaleBlogsRouteWithChildren = LocaleBlogsRoute._addFileChildren(
 interface LocaleRouteChildren {
   LocaleBlogsRoute: typeof LocaleBlogsRouteWithChildren
   LocaleBracketRoute: typeof LocaleBracketRoute
+  LocaleCalendarioRoute: typeof LocaleCalendarioRoute
   LocaleDondeVerMundialEnChar123slugChar125Route: typeof LocaleDondeVerMundialEnChar123slugChar125Route
   LocaleHowToWatchWorldCupInChar123slugChar125Route: typeof LocaleHowToWatchWorldCupInChar123slugChar125Route
   LocalePartnersRoute: typeof LocalePartnersRoute
@@ -779,6 +799,7 @@ interface LocaleRouteChildren {
 const LocaleRouteChildren: LocaleRouteChildren = {
   LocaleBlogsRoute: LocaleBlogsRouteWithChildren,
   LocaleBracketRoute: LocaleBracketRoute,
+  LocaleCalendarioRoute: LocaleCalendarioRoute,
   LocaleDondeVerMundialEnChar123slugChar125Route:
     LocaleDondeVerMundialEnChar123slugChar125Route,
   LocaleHowToWatchWorldCupInChar123slugChar125Route:
