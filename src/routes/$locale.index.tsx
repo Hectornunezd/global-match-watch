@@ -393,10 +393,16 @@ function NextMatchBanner({
               <span className="live-pulse mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-[var(--success)]" />
               [ {happeningNowLabel} ]
             </div>
-            <div className="mt-1 truncate font-display text-xl uppercase leading-tight text-foreground transition-colors group-hover/current:text-primary sm:text-2xl">
-              {currentMatch.home_team[locale === "es" ? "name_es" : "name_en"]}
-              <span className="mx-2 text-primary">·</span>
-              {currentMatch.away_team[locale === "es" ? "name_es" : "name_en"]}
+            <div className="mt-1 flex min-w-0 items-center gap-2 font-display text-xl uppercase leading-tight text-foreground transition-colors group-hover/current:text-primary sm:text-2xl">
+              <TeamCrest team={currentMatch.home_team} size={28} />
+              <span className="truncate">
+                {currentMatch.home_team[locale === "es" ? "name_es" : "name_en"]}
+              </span>
+              <span className="text-primary">·</span>
+              <TeamCrest team={currentMatch.away_team} size={28} />
+              <span className="truncate">
+                {currentMatch.away_team[locale === "es" ? "name_es" : "name_en"]}
+              </span>
             </div>
             <div className="mt-1 text-xs text-muted-foreground">
               {currentMatch.venue ?? ""}
