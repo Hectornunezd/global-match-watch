@@ -433,7 +433,7 @@ function NextMatchBanner({
                 {next.away_team[locale === "es" ? "name_es" : "name_en"]}
               </span>
             </div>
-            <div className="mt-1 text-xs text-muted-foreground">
+            <div className="mt-1 text-xs text-muted-foreground" suppressHydrationWarning>
               {timeStr}
               {next.venue ? ` ${inLabel} ${next.venue}` : ""}
             </div>
