@@ -23,6 +23,8 @@ export interface Fixture {
   venue: string | null;
   city: string | null;
   round: string | null;
+  matchday: number | null;
+  stage: string;
   slug_en: string;
   slug_es: string;
   meta_title_en: string | null;
@@ -32,6 +34,7 @@ export interface Fixture {
   home_team: Team;
   away_team: Team;
 }
+
 
 export interface Channel {
   id: string;
