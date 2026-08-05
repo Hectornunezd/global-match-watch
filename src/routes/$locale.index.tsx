@@ -15,6 +15,7 @@ import heroTrophy from "@/assets/hero-trophy.jpg";
 import { formatLA } from "@/lib/time";
 import { useFixturesRealtime } from "@/hooks/use-fixtures-realtime";
 import type { Fixture } from "@/lib/data";
+import { TeamCrest } from "@/components/TeamCrest";
 
 export const Route = createFileRoute("/$locale/")({
   beforeLoad: ({ params }) => {
