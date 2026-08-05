@@ -159,6 +159,7 @@ export type Database = {
           home_team_id: string
           id: string
           match_date: string
+          matchday: number | null
           meta_description_en: string | null
           meta_description_es: string | null
           meta_title_en: string | null
@@ -166,6 +167,7 @@ export type Database = {
           round: string | null
           slug_en: string
           slug_es: string
+          stage: string
           status: string
           updated_at: string
           venue: string | null
@@ -181,6 +183,7 @@ export type Database = {
           home_team_id: string
           id?: string
           match_date: string
+          matchday?: number | null
           meta_description_en?: string | null
           meta_description_es?: string | null
           meta_title_en?: string | null
@@ -188,6 +191,7 @@ export type Database = {
           round?: string | null
           slug_en: string
           slug_es: string
+          stage?: string
           status?: string
           updated_at?: string
           venue?: string | null
@@ -203,6 +207,7 @@ export type Database = {
           home_team_id?: string
           id?: string
           match_date?: string
+          matchday?: number | null
           meta_description_en?: string | null
           meta_description_es?: string | null
           meta_title_en?: string | null
@@ -210,6 +215,7 @@ export type Database = {
           round?: string | null
           slug_en?: string
           slug_es?: string
+          stage?: string
           status?: string
           updated_at?: string
           venue?: string | null
@@ -241,8 +247,10 @@ export type Database = {
           id: string
           name_en: string
           name_es: string
+          short_code: string | null
           slug_en: string
           slug_es: string
+          stadium: string | null
         }
         Insert: {
           api_football_id?: number | null
@@ -253,8 +261,10 @@ export type Database = {
           id?: string
           name_en: string
           name_es: string
+          short_code?: string | null
           slug_en: string
           slug_es: string
+          stadium?: string | null
         }
         Update: {
           api_football_id?: number | null
@@ -265,8 +275,10 @@ export type Database = {
           id?: string
           name_en?: string
           name_es?: string
+          short_code?: string | null
           slug_en?: string
           slug_es?: string
+          stadium?: string | null
         }
         Relationships: []
       }
