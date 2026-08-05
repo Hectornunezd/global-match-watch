@@ -11,7 +11,7 @@ import { Liguilla } from "@/components/Liguilla";
 import { AdSlot } from "@/components/AdSlot";
 import { MatchTimeDebug } from "@/components/MatchTimeDebug";
 import { buildMeta, jsonLdScript, organizationJsonLd, websiteJsonLd } from "@/lib/seo";
-import heroTrophy from "@/assets/hero-trophy.jpg";
+import heroBanner from "@/assets/liga-mx-hero.png.asset.json";
 import { formatLA } from "@/lib/time";
 import { useFixturesRealtime } from "@/hooks/use-fixtures-realtime";
 import type { Fixture } from "@/lib/data";
@@ -52,7 +52,7 @@ export const Route = createFileRoute("/$locale/")({
       path,
       altPath,
       locale,
-      ogImage: `https://matchlivenow.com${heroTrophy}`,
+      ogImage: `https://matchlivenow.com${heroBanner.url}`,
       keywords:
         locale === "en"
           ? "Liga MX, where to watch Liga MX, Liga MX standings, Liga MX schedule, Apertura 2026, Liga MX streaming"
@@ -136,10 +136,9 @@ function HomePage() {
       {/* Hero */}
       <section className="group relative isolate overflow-hidden border-b border-primary/30 gradient-hero">
         <img
-          src={heroTrophy}
-          alt=""
-          aria-hidden
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center opacity-0 grayscale transition-opacity duration-700 group-hover:opacity-40"
+          src={heroBanner.url}
+          alt="Liga MX México 2026 — 18 equipos, 1 campeón"
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center opacity-45 transition-opacity duration-700 group-hover:opacity-70"
         />
         <div
           aria-hidden
@@ -434,7 +433,7 @@ function NextMatchBanner({
                 {next.away_team[locale === "es" ? "name_es" : "name_en"]}
               </span>
             </div>
-            <div className="mt-1 text-xs text-muted-foreground">
+            <div className="mt-1 text-xs text-muted-foreground" suppressHydrationWarning>
               {timeStr}
               {next.venue ? ` ${inLabel} ${next.venue}` : ""}
             </div>
