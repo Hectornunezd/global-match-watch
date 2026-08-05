@@ -1,6 +1,8 @@
 import { Link } from "@tanstack/react-router";
 import type { StandingRow } from "@/lib/standings";
 import { t, localeUrl, type Locale } from "@/lib/i18n";
+import { TeamCrest } from "./TeamCrest";
+
 
 const FORM_COLORS: Record<string, string> = {
   W: "bg-[var(--success)]/20 text-[var(--success)] border-[var(--success)]/40",
