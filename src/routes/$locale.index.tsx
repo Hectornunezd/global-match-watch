@@ -423,10 +423,16 @@ function NextMatchBanner({
             <div className="font-display text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
               [ {nextLabel} ]
             </div>
-            <div className="mt-1 truncate font-display text-xl uppercase leading-tight text-foreground transition-colors group-hover/next:text-primary sm:text-2xl">
-              {next.home_team[locale === "es" ? "name_es" : "name_en"]}
-              <span className="mx-2 text-primary">·</span>
-              {next.away_team[locale === "es" ? "name_es" : "name_en"]}
+            <div className="mt-1 flex min-w-0 items-center gap-2 font-display text-xl uppercase leading-tight text-foreground transition-colors group-hover/next:text-primary sm:text-2xl">
+              <TeamCrest team={next.home_team} size={28} />
+              <span className="truncate">
+                {next.home_team[locale === "es" ? "name_es" : "name_en"]}
+              </span>
+              <span className="text-primary">·</span>
+              <TeamCrest team={next.away_team} size={28} />
+              <span className="truncate">
+                {next.away_team[locale === "es" ? "name_es" : "name_en"]}
+              </span>
             </div>
             <div className="mt-1 text-xs text-muted-foreground">
               {timeStr}
