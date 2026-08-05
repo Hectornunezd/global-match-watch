@@ -22,11 +22,16 @@ export function Header({ locale, altPath }: { locale: Locale; altPath?: string }
     <header className="sticky top-0 z-40 border-b border-border bg-[var(--surface)]">
       <div className="border-b border-primary/40 bg-primary/10">
         <div className="mx-auto flex max-w-6xl items-center justify-center gap-2 px-4 py-1.5 text-center font-display text-[11px] uppercase tracking-widest text-primary sm:text-xs">
-          <span>★</span>
-          <span>🇪🇸 {locale === "es" ? "España, Campeón del Mundial 2026" : "Spain — 2026 World Cup Champions"}</span>
-          <span>★</span>
+          <span>▸</span>
+          <span>
+            {locale === "es"
+              ? "Liga MX Apertura 2026 — Partidos, tabla y canales"
+              : "Liga MX Apertura 2026 — Fixtures, table & channels"}
+          </span>
+          <span>◂</span>
         </div>
       </div>
+
       <div className="relative mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
         <Link
           to={localeUrl(locale)}
@@ -76,17 +81,28 @@ export function Header({ locale, altPath }: { locale: Locale; altPath?: string }
 
 
           <MenuRow>
-            <MenuLink to={localeUrl(locale, "/bracket")} onClick={() => setOpen(false)}>
-              {locale === "es" ? "BRACKET" : "BRACKET"}
+            <MenuLink to={localeUrl(locale, "/tabla")} onClick={() => setOpen(false)}>
+              {locale === "es" ? "TABLA" : "TABLE"}
+            </MenuLink>
+          </MenuRow>
+
+          <MenuRow>
+            <MenuLink to={localeUrl(locale, "/calendario")} onClick={() => setOpen(false)}>
+              {locale === "es" ? "CALENDARIO" : "SCHEDULE"}
+            </MenuLink>
+          </MenuRow>
+
+          <MenuRow>
+            <MenuLink to={localeUrl(locale, "/liguilla")} onClick={() => setOpen(false)}>
+              LIGUILLA
             </MenuLink>
           </MenuRow>
 
           <MenuRow>
             <MenuLink to={localeUrl(locale, "/blogs")} onClick={() => setOpen(false)}>
-              {locale === "es" ? "BLOG" : "BLOG"}
+              BLOG
             </MenuLink>
           </MenuRow>
-
 
           <MenuRow>
             <MenuLink to={localeUrl(locale)} onClick={() => setOpen(false)}>

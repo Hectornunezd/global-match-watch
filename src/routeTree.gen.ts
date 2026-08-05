@@ -32,11 +32,14 @@ import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]
 import { Route as LocaleWatchChar123slugChar125RouteImport } from './routes/$locale.watch-{$slug}'
 import { Route as LocaleVerChar123slugChar125RouteImport } from './routes/$locale.ver-{$slug}'
 import { Route as LocaleTermsRouteImport } from './routes/$locale.terms'
+import { Route as LocaleTablaRouteImport } from './routes/$locale.tabla'
 import { Route as LocaleResponsibleGamblingRouteImport } from './routes/$locale.responsible-gambling'
 import { Route as LocalePrivacyPolicyRouteImport } from './routes/$locale.privacy-policy'
 import { Route as LocalePartnersRouteImport } from './routes/$locale.partners'
+import { Route as LocaleLiguillaRouteImport } from './routes/$locale.liguilla'
 import { Route as LocaleHowToWatchWorldCupInChar123slugChar125RouteImport } from './routes/$locale.how-to-watch-world-cup-in-{$slug}'
 import { Route as LocaleDondeVerMundialEnChar123slugChar125RouteImport } from './routes/$locale.donde-ver-mundial-en-{$slug}'
+import { Route as LocaleCalendarioRouteImport } from './routes/$locale.calendario'
 import { Route as LocaleBracketRouteImport } from './routes/$locale.bracket'
 import { Route as LocaleBlogsRouteImport } from './routes/$locale.blogs'
 import { Route as LocaleBlogsIndexRouteImport } from './routes/$locale.blogs.index'
@@ -166,6 +169,11 @@ const LocaleTermsRoute = LocaleTermsRouteImport.update({
   path: '/terms',
   getParentRoute: () => LocaleRoute,
 } as any)
+const LocaleTablaRoute = LocaleTablaRouteImport.update({
+  id: '/tabla',
+  path: '/tabla',
+  getParentRoute: () => LocaleRoute,
+} as any)
 const LocaleResponsibleGamblingRoute =
   LocaleResponsibleGamblingRouteImport.update({
     id: '/responsible-gambling',
@@ -182,6 +190,11 @@ const LocalePartnersRoute = LocalePartnersRouteImport.update({
   path: '/partners',
   getParentRoute: () => LocaleRoute,
 } as any)
+const LocaleLiguillaRoute = LocaleLiguillaRouteImport.update({
+  id: '/liguilla',
+  path: '/liguilla',
+  getParentRoute: () => LocaleRoute,
+} as any)
 const LocaleHowToWatchWorldCupInChar123slugChar125Route =
   LocaleHowToWatchWorldCupInChar123slugChar125RouteImport.update({
     id: '/how-to-watch-world-cup-in-{$slug}',
@@ -194,6 +207,11 @@ const LocaleDondeVerMundialEnChar123slugChar125Route =
     path: '/donde-ver-mundial-en-{$slug}',
     getParentRoute: () => LocaleRoute,
   } as any)
+const LocaleCalendarioRoute = LocaleCalendarioRouteImport.update({
+  id: '/calendario',
+  path: '/calendario',
+  getParentRoute: () => LocaleRoute,
+} as any)
 const LocaleBracketRoute = LocaleBracketRouteImport.update({
   id: '/bracket',
   path: '/bracket',
@@ -248,11 +266,14 @@ export interface FileRoutesByFullPath {
   '/watch-{$slug}': typeof WatchChar123slugChar125Route
   '/$locale/blogs': typeof LocaleBlogsRouteWithChildren
   '/$locale/bracket': typeof LocaleBracketRoute
+  '/$locale/calendario': typeof LocaleCalendarioRoute
   '/$locale/donde-ver-mundial-en-{$slug}': typeof LocaleDondeVerMundialEnChar123slugChar125Route
   '/$locale/how-to-watch-world-cup-in-{$slug}': typeof LocaleHowToWatchWorldCupInChar123slugChar125Route
+  '/$locale/liguilla': typeof LocaleLiguillaRoute
   '/$locale/partners': typeof LocalePartnersRoute
   '/$locale/privacy-policy': typeof LocalePrivacyPolicyRoute
   '/$locale/responsible-gambling': typeof LocaleResponsibleGamblingRoute
+  '/$locale/tabla': typeof LocaleTablaRoute
   '/$locale/terms': typeof LocaleTermsRoute
   '/$locale/ver-{$slug}': typeof LocaleVerChar123slugChar125Route
   '/$locale/watch-{$slug}': typeof LocaleWatchChar123slugChar125Route
@@ -283,11 +304,14 @@ export interface FileRoutesByTo {
   '/ver-{$slug}': typeof VerChar123slugChar125Route
   '/watch-{$slug}': typeof WatchChar123slugChar125Route
   '/$locale/bracket': typeof LocaleBracketRoute
+  '/$locale/calendario': typeof LocaleCalendarioRoute
   '/$locale/donde-ver-mundial-en-{$slug}': typeof LocaleDondeVerMundialEnChar123slugChar125Route
   '/$locale/how-to-watch-world-cup-in-{$slug}': typeof LocaleHowToWatchWorldCupInChar123slugChar125Route
+  '/$locale/liguilla': typeof LocaleLiguillaRoute
   '/$locale/partners': typeof LocalePartnersRoute
   '/$locale/privacy-policy': typeof LocalePrivacyPolicyRoute
   '/$locale/responsible-gambling': typeof LocaleResponsibleGamblingRoute
+  '/$locale/tabla': typeof LocaleTablaRoute
   '/$locale/terms': typeof LocaleTermsRoute
   '/$locale/ver-{$slug}': typeof LocaleVerChar123slugChar125Route
   '/$locale/watch-{$slug}': typeof LocaleWatchChar123slugChar125Route
@@ -321,11 +345,14 @@ export interface FileRoutesById {
   '/watch-{$slug}': typeof WatchChar123slugChar125Route
   '/$locale/blogs': typeof LocaleBlogsRouteWithChildren
   '/$locale/bracket': typeof LocaleBracketRoute
+  '/$locale/calendario': typeof LocaleCalendarioRoute
   '/$locale/donde-ver-mundial-en-{$slug}': typeof LocaleDondeVerMundialEnChar123slugChar125Route
   '/$locale/how-to-watch-world-cup-in-{$slug}': typeof LocaleHowToWatchWorldCupInChar123slugChar125Route
+  '/$locale/liguilla': typeof LocaleLiguillaRoute
   '/$locale/partners': typeof LocalePartnersRoute
   '/$locale/privacy-policy': typeof LocalePrivacyPolicyRoute
   '/$locale/responsible-gambling': typeof LocaleResponsibleGamblingRoute
+  '/$locale/tabla': typeof LocaleTablaRoute
   '/$locale/terms': typeof LocaleTermsRoute
   '/$locale/ver-{$slug}': typeof LocaleVerChar123slugChar125Route
   '/$locale/watch-{$slug}': typeof LocaleWatchChar123slugChar125Route
@@ -360,11 +387,14 @@ export interface FileRouteTypes {
     | '/watch-{$slug}'
     | '/$locale/blogs'
     | '/$locale/bracket'
+    | '/$locale/calendario'
     | '/$locale/donde-ver-mundial-en-{$slug}'
     | '/$locale/how-to-watch-world-cup-in-{$slug}'
+    | '/$locale/liguilla'
     | '/$locale/partners'
     | '/$locale/privacy-policy'
     | '/$locale/responsible-gambling'
+    | '/$locale/tabla'
     | '/$locale/terms'
     | '/$locale/ver-{$slug}'
     | '/$locale/watch-{$slug}'
@@ -395,11 +425,14 @@ export interface FileRouteTypes {
     | '/ver-{$slug}'
     | '/watch-{$slug}'
     | '/$locale/bracket'
+    | '/$locale/calendario'
     | '/$locale/donde-ver-mundial-en-{$slug}'
     | '/$locale/how-to-watch-world-cup-in-{$slug}'
+    | '/$locale/liguilla'
     | '/$locale/partners'
     | '/$locale/privacy-policy'
     | '/$locale/responsible-gambling'
+    | '/$locale/tabla'
     | '/$locale/terms'
     | '/$locale/ver-{$slug}'
     | '/$locale/watch-{$slug}'
@@ -432,11 +465,14 @@ export interface FileRouteTypes {
     | '/watch-{$slug}'
     | '/$locale/blogs'
     | '/$locale/bracket'
+    | '/$locale/calendario'
     | '/$locale/donde-ver-mundial-en-{$slug}'
     | '/$locale/how-to-watch-world-cup-in-{$slug}'
+    | '/$locale/liguilla'
     | '/$locale/partners'
     | '/$locale/privacy-policy'
     | '/$locale/responsible-gambling'
+    | '/$locale/tabla'
     | '/$locale/terms'
     | '/$locale/ver-{$slug}'
     | '/$locale/watch-{$slug}'
@@ -640,6 +676,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocaleTermsRouteImport
       parentRoute: typeof LocaleRoute
     }
+    '/$locale/tabla': {
+      id: '/$locale/tabla'
+      path: '/tabla'
+      fullPath: '/$locale/tabla'
+      preLoaderRoute: typeof LocaleTablaRouteImport
+      parentRoute: typeof LocaleRoute
+    }
     '/$locale/responsible-gambling': {
       id: '/$locale/responsible-gambling'
       path: '/responsible-gambling'
@@ -661,6 +704,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocalePartnersRouteImport
       parentRoute: typeof LocaleRoute
     }
+    '/$locale/liguilla': {
+      id: '/$locale/liguilla'
+      path: '/liguilla'
+      fullPath: '/$locale/liguilla'
+      preLoaderRoute: typeof LocaleLiguillaRouteImport
+      parentRoute: typeof LocaleRoute
+    }
     '/$locale/how-to-watch-world-cup-in-{$slug}': {
       id: '/$locale/how-to-watch-world-cup-in-{$slug}'
       path: '/how-to-watch-world-cup-in-{$slug}'
@@ -673,6 +723,13 @@ declare module '@tanstack/react-router' {
       path: '/donde-ver-mundial-en-{$slug}'
       fullPath: '/$locale/donde-ver-mundial-en-{$slug}'
       preLoaderRoute: typeof LocaleDondeVerMundialEnChar123slugChar125RouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/calendario': {
+      id: '/$locale/calendario'
+      path: '/calendario'
+      fullPath: '/$locale/calendario'
+      preLoaderRoute: typeof LocaleCalendarioRouteImport
       parentRoute: typeof LocaleRoute
     }
     '/$locale/bracket': {
@@ -744,11 +801,14 @@ const LocaleBlogsRouteWithChildren = LocaleBlogsRoute._addFileChildren(
 interface LocaleRouteChildren {
   LocaleBlogsRoute: typeof LocaleBlogsRouteWithChildren
   LocaleBracketRoute: typeof LocaleBracketRoute
+  LocaleCalendarioRoute: typeof LocaleCalendarioRoute
   LocaleDondeVerMundialEnChar123slugChar125Route: typeof LocaleDondeVerMundialEnChar123slugChar125Route
   LocaleHowToWatchWorldCupInChar123slugChar125Route: typeof LocaleHowToWatchWorldCupInChar123slugChar125Route
+  LocaleLiguillaRoute: typeof LocaleLiguillaRoute
   LocalePartnersRoute: typeof LocalePartnersRoute
   LocalePrivacyPolicyRoute: typeof LocalePrivacyPolicyRoute
   LocaleResponsibleGamblingRoute: typeof LocaleResponsibleGamblingRoute
+  LocaleTablaRoute: typeof LocaleTablaRoute
   LocaleTermsRoute: typeof LocaleTermsRoute
   LocaleVerChar123slugChar125Route: typeof LocaleVerChar123slugChar125Route
   LocaleWatchChar123slugChar125Route: typeof LocaleWatchChar123slugChar125Route
@@ -759,13 +819,16 @@ interface LocaleRouteChildren {
 const LocaleRouteChildren: LocaleRouteChildren = {
   LocaleBlogsRoute: LocaleBlogsRouteWithChildren,
   LocaleBracketRoute: LocaleBracketRoute,
+  LocaleCalendarioRoute: LocaleCalendarioRoute,
   LocaleDondeVerMundialEnChar123slugChar125Route:
     LocaleDondeVerMundialEnChar123slugChar125Route,
   LocaleHowToWatchWorldCupInChar123slugChar125Route:
     LocaleHowToWatchWorldCupInChar123slugChar125Route,
+  LocaleLiguillaRoute: LocaleLiguillaRoute,
   LocalePartnersRoute: LocalePartnersRoute,
   LocalePrivacyPolicyRoute: LocalePrivacyPolicyRoute,
   LocaleResponsibleGamblingRoute: LocaleResponsibleGamblingRoute,
+  LocaleTablaRoute: LocaleTablaRoute,
   LocaleTermsRoute: LocaleTermsRoute,
   LocaleVerChar123slugChar125Route: LocaleVerChar123slugChar125Route,
   LocaleWatchChar123slugChar125Route: LocaleWatchChar123slugChar125Route,
