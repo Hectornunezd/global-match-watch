@@ -69,7 +69,19 @@ export const Route = createFileRoute("/$locale/")({
 const MATCH_DURATION_MS = 2.5 * 60 * 60 * 1000;
 
 function HomePage() {
-  const { live: liveFromDb, upcoming, season, locale, serverNow } = Route.useLoaderData();
+  const {
+    live: liveFromDb,
+    upcoming,
+    season,
+    locale,
+    serverNow,
+  } = Route.useLoaderData() as {
+    live: Fixture[];
+    upcoming: Fixture[];
+    season: { fixtures: Fixture[] };
+    locale: Locale;
+    serverNow: number;
+  };
   const m = t(locale);
   useFixturesRealtime();
 
