@@ -15,6 +15,7 @@ import heroTrophy from "@/assets/hero-trophy.jpg";
 import { formatLA } from "@/lib/time";
 import { useFixturesRealtime } from "@/hooks/use-fixtures-realtime";
 import type { Fixture } from "@/lib/data";
+import { TeamCrest } from "@/components/TeamCrest";
 
 export const Route = createFileRoute("/$locale/")({
   beforeLoad: ({ params }) => {
@@ -392,10 +393,16 @@ function NextMatchBanner({
               <span className="live-pulse mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-[var(--success)]" />
               [ {happeningNowLabel} ]
             </div>
-            <div className="mt-1 truncate font-display text-xl uppercase leading-tight text-foreground transition-colors group-hover/current:text-primary sm:text-2xl">
-              {currentMatch.home_team[locale === "es" ? "name_es" : "name_en"]}
-              <span className="mx-2 text-primary">·</span>
-              {currentMatch.away_team[locale === "es" ? "name_es" : "name_en"]}
+            <div className="mt-1 flex min-w-0 items-center gap-2 font-display text-xl uppercase leading-tight text-foreground transition-colors group-hover/current:text-primary sm:text-2xl">
+              <TeamCrest team={currentMatch.home_team} size={28} />
+              <span className="truncate">
+                {currentMatch.home_team[locale === "es" ? "name_es" : "name_en"]}
+              </span>
+              <span className="text-primary">·</span>
+              <TeamCrest team={currentMatch.away_team} size={28} />
+              <span className="truncate">
+                {currentMatch.away_team[locale === "es" ? "name_es" : "name_en"]}
+              </span>
             </div>
             <div className="mt-1 text-xs text-muted-foreground">
               {currentMatch.venue ?? ""}
@@ -416,10 +423,16 @@ function NextMatchBanner({
             <div className="font-display text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
               [ {nextLabel} ]
             </div>
-            <div className="mt-1 truncate font-display text-xl uppercase leading-tight text-foreground transition-colors group-hover/next:text-primary sm:text-2xl">
-              {next.home_team[locale === "es" ? "name_es" : "name_en"]}
-              <span className="mx-2 text-primary">·</span>
-              {next.away_team[locale === "es" ? "name_es" : "name_en"]}
+            <div className="mt-1 flex min-w-0 items-center gap-2 font-display text-xl uppercase leading-tight text-foreground transition-colors group-hover/next:text-primary sm:text-2xl">
+              <TeamCrest team={next.home_team} size={28} />
+              <span className="truncate">
+                {next.home_team[locale === "es" ? "name_es" : "name_en"]}
+              </span>
+              <span className="text-primary">·</span>
+              <TeamCrest team={next.away_team} size={28} />
+              <span className="truncate">
+                {next.away_team[locale === "es" ? "name_es" : "name_en"]}
+              </span>
             </div>
             <div className="mt-1 text-xs text-muted-foreground">
               {timeStr}
