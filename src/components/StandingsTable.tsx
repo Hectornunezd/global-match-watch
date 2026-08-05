@@ -66,9 +66,8 @@ export function StandingsTable({
                     to={localeUrl(locale, `/team/${slug}`)}
                     className="flex items-center gap-2 font-display text-xs uppercase tracking-wide text-foreground hover:text-primary"
                   >
-                    <span className="inline-flex h-6 w-8 shrink-0 items-center justify-center border border-primary/40 font-mono text-[10px] text-primary">
-                      {r.team.short_code ?? "—"}
-                    </span>
+                    <TeamCrest team={r.team} size={22} />
+
                     <span className="truncate">{name}</span>
                   </Link>
                 </td>
