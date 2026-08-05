@@ -427,7 +427,7 @@ function NextMatchBanner({
               <span className="truncate">
                 {next.home_team[locale === "es" ? "name_es" : "name_en"]}
               </span>
-              <span className="text-primary">·</span>
+              <span className="shrink-0 text-base text-primary sm:text-lg">VS</span>
               <TeamCrest team={next.away_team} size={28} />
               <span className="truncate">
                 {next.away_team[locale === "es" ? "name_es" : "name_en"]}
