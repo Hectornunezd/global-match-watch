@@ -11,7 +11,7 @@ import { Liguilla } from "@/components/Liguilla";
 import { AdSlot } from "@/components/AdSlot";
 import { MatchTimeDebug } from "@/components/MatchTimeDebug";
 import { buildMeta, jsonLdScript, organizationJsonLd, websiteJsonLd } from "@/lib/seo";
-import heroTrophy from "@/assets/hero-trophy.jpg";
+import heroBanner from "@/assets/liga-mx-hero.png.asset.json";
 import { formatLA } from "@/lib/time";
 import { useFixturesRealtime } from "@/hooks/use-fixtures-realtime";
 import type { Fixture } from "@/lib/data";
