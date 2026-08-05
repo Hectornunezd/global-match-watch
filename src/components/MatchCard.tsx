@@ -4,6 +4,8 @@ import type { Locale } from "@/lib/i18n";
 import { t, localeUrl } from "@/lib/i18n";
 import { LiveBadge } from "./LiveBadge";
 import { formatLA } from "@/lib/time";
+import { TeamCrest } from "./TeamCrest";
+
 
 interface Props {
   fixture: Fixture;
@@ -27,13 +29,9 @@ function fmtTime(date: string, locale: Locale): string {
 }
 
 function TeamBadge({ team }: { team: Team }) {
-  const code = (team.short_code ?? team.name_en ?? "").slice(0, 3).toUpperCase();
-  return (
-    <span className="inline-flex h-9 w-11 shrink-0 items-center justify-center border border-primary/40 bg-primary/10 font-display text-[11px] font-bold tracking-wider text-primary">
-      {code || "—"}
-    </span>
-  );
+  return <TeamCrest team={team} size={32} />;
 }
+
 
 export function MatchCard({ fixture, locale }: Props) {
   const m = t(locale);
