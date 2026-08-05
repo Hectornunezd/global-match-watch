@@ -4,6 +4,8 @@ import type { Locale } from "@/lib/i18n";
 import { t, localeUrl } from "@/lib/i18n";
 import { LiveBadge } from "./LiveBadge";
 import { formatLA } from "@/lib/time";
+import { TeamCrest } from "./TeamCrest";
+
 
 interface Props {
   fixture: Fixture;
