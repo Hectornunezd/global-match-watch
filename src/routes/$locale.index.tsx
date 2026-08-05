@@ -136,10 +136,9 @@ function HomePage() {
       {/* Hero */}
       <section className="group relative isolate overflow-hidden border-b border-primary/30 gradient-hero">
         <img
-          src={heroTrophy}
-          alt=""
-          aria-hidden
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center opacity-0 grayscale transition-opacity duration-700 group-hover:opacity-40"
+          src={heroBanner.url}
+          alt="Liga MX México 2026 — 18 equipos, 1 campeón"
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center opacity-45 transition-opacity duration-700 group-hover:opacity-70"
         />
         <div
           aria-hidden
