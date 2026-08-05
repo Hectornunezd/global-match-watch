@@ -52,7 +52,7 @@ export const Route = createFileRoute("/$locale/")({
       path,
       altPath,
       locale,
-      ogImage: `https://matchlivenow.com${heroTrophy}`,
+      ogImage: `https://matchlivenow.com${heroBanner.url}`,
       keywords:
         locale === "en"
           ? "Liga MX, where to watch Liga MX, Liga MX standings, Liga MX schedule, Apertura 2026, Liga MX streaming"
