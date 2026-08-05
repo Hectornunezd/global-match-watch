@@ -77,7 +77,12 @@ export function MatchCard({ fixture, locale }: Props) {
             </span>
           )}
         </div>
-        <div className="mt-2 flex items-center gap-2">
+        <div className="mt-1 flex items-center gap-2 pl-[38px]">
+          <span className="font-display text-[10px] font-bold uppercase tracking-[0.2em] text-primary">
+            vs
+          </span>
+        </div>
+        <div className="mt-1 flex items-center gap-2">
           <TeamBadge team={away} />
           <span className="min-w-0 flex-1 truncate font-display text-base font-bold uppercase leading-none text-foreground transition-colors group-hover:text-primary sm:text-lg">
             {awayName}
