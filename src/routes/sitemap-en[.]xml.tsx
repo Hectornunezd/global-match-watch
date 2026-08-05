@@ -5,7 +5,13 @@ import { BLOG_POSTS } from "@/lib/blog-posts";
 const SITE = "https://matchlivenow.com";
 
 function buildSitemap(locale: "en" | "es", data: Awaited<ReturnType<typeof getAllSlugs>>): string {
-  const urls: string[] = [`${SITE}/${locale}`, `${SITE}/${locale}/blogs`];
+  const urls: string[] = [
+    `${SITE}/${locale}`,
+    `${SITE}/${locale}/tabla`,
+    `${SITE}/${locale}/calendario`,
+    `${SITE}/${locale}/liguilla`,
+    `${SITE}/${locale}/blogs`,
+  ];
   for (const f of data.fixtures) {
     const slug = locale === "es" ? f.slug_es : f.slug_en;
     if (slug) urls.push(`${SITE}/${locale}/${slug}`);
