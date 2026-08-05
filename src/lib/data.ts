@@ -216,3 +216,20 @@ export const getAllSlugs = createServerFn({ method: "GET" }).handler(async () =>
   ]);
   return { fixtures: fixtures ?? [], teams: teams ?? [], countries: countries ?? [] };
 });
+
+/** Full Liga MX season: every team plus every fixture (used for standings + calendar). */
+export const getSeason = createServerFn({ method: "GET" }).handler(async () => {
+  setCache(60);
+  const [teamsRes, fixturesRes] = await Promise.all([
+    supabase.from("teams").select(TEAM_SELECT).order("name_es", { ascending: true }),
+    supabase
+      .from("fixtures")
+      .select(FIXTURE_SELECT)
+      .eq("competition", COMPETITION)
+      .order("match_date", { ascending: true }),
+  ]);
+  return {
+    teams: (teamsRes.data ?? []) as unknown as Team[],
+    fixtures: (fixturesRes.data ?? []) as unknown as Fixture[],
+  };
+});
