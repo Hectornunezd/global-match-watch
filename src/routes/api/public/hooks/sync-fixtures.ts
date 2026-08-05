@@ -1,63 +1,155 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-// API-Football: Liga MX = league 262
-const LEAGUE_ID = 262;
-const DEFAULT_SEASON = 2026;
-const API_BASE = "https://v3.football.api-sports.io";
+/**
+ * Liga MX Apertura 2026 sync — scrapes the official tournament page via
+ * Firecrawl and refreshes kickoff times, scores and status for every
+ * fixture. No API-Football dependency.
+ */
+const SOURCE_URL = "https://es.wikipedia.org/wiki/Torneo_Apertura_2026_(M%C3%A9xico)";
 const COMPETITION = "Liga MX Apertura 2026";
 
-interface ApiTeam {
-  id: number;
-  name: string;
-  code: string | null;
-  logo: string | null;
+/** Wikipedia club label -> our team slug_en. */
+const TEAM_SLUGS: Record<string, string> = {
+  america: "america",
+  atlante: "atlante",
+  atlas: "atlas",
+  atleticodesanluis: "atletico-san-luis",
+  atleticosanluis: "atletico-san-luis",
+  cruzazul: "cruz-azul",
+  guadalajara: "guadalajara",
+  chivas: "guadalajara",
+  juarez: "fc-juarez",
+  fcjuarez: "fc-juarez",
+  leon: "leon",
+  monterrey: "monterrey",
+  necaxa: "necaxa",
+  pachuca: "pachuca",
+  puebla: "puebla",
+  pumasunam: "pumas-unam",
+  queretaro: "queretaro",
+  santoslaguna: "santos-laguna",
+  santos: "santos-laguna",
+  tigresuanl: "tigres-uanl",
+  tijuana: "tijuana",
+  toluca: "toluca",
+};
+
+const MONTHS: Record<string, number> = {
+  enero: 1,
+  febrero: 2,
+  marzo: 3,
+  abril: 4,
+  mayo: 5,
+  junio: 6,
+  julio: 7,
+  agosto: 8,
+  septiembre: 9,
+  octubre: 10,
+  noviembre: 11,
+  diciembre: 12,
+};
+
+function slugKey(name: string): string {
+  return name
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z]/g, "");
 }
 
-interface ApiFixtureResponse {
-  fixture: {
-    id: number;
-    date: string;
-    status: { short: string };
-    venue: { name: string | null; city: string | null };
+/** Strips markdown links/bold from a table cell. */
+function cellText(cell: string): string {
+  return cell
+    .replace(/\[([^\]]*)\]\([^)]*\)/g, "$1")
+    .replace(/\*\*/g, "")
+    .replace(/\s*"[^"]*"\)?$/, "")
+    .trim();
+}
+
+export interface ScrapedMatch {
+  matchday: number;
+  homeSlug: string;
+  awaySlug: string;
+  homeScore: number | null;
+  awayScore: number | null;
+  kickoffUtc: string;
+}
+
+/** Parses the "Torneo regular" jornada tables out of the page markdown. */
+export function parseMatches(markdown: string): ScrapedMatch[] {
+  const out: ScrapedMatch[] = [];
+  let matchday: number | null = null;
+  let lastDate: [number, number] | null = null;
+  let lastTime: string | null = null;
+  const perDay = new Map<number, number>();
+
+  for (const line of markdown.split("\n")) {
+    const jm = line.match(/^\|\s*\*\*Jornada (\d+)\*\*/);
+    if (jm) {
+      matchday = Number(jm[1]);
+      lastDate = null;
+      lastTime = null;
+      continue;
+    }
+    if (matchday === null || !line.startsWith("|")) continue;
+    if ((perDay.get(matchday) ?? 0) >= 9) continue;
+
+    const cells = line.trim().replace(/^\|/, "").replace(/\|$/, "").split("|").map(cellText);
+    if (cells.length < 4 || cells.includes("Resultado")) continue;
+
+    const homeSlug = TEAM_SLUGS[slugKey(cells[0] ?? "")];
+    const awaySlug = TEAM_SLUGS[slugKey(cells[2] ?? "")];
+    if (!homeSlug || !awaySlug || homeSlug === awaySlug) continue;
+
+    let homeScore: number | null = null;
+    let awayScore: number | null = null;
+    const sm = (cells[1] ?? "").match(/^(\d+)\s*[–-]\s*(\d+)$/);
+    if (sm) {
+      homeScore = Number(sm[1]);
+      awayScore = Number(sm[2]);
+    }
+
+    for (const c of cells) {
+      const dm = c.match(/^(\d{1,2}) de ([A-Za-zé]+)/);
+      if (dm && MONTHS[dm[2]!.toLowerCase()]) lastDate = [Number(dm[1]), MONTHS[dm[2]!.toLowerCase()]!];
+      if (/^\d{1,2}:\d{2}$/.test(c)) lastTime = c;
+    }
+    if (!lastDate || !lastTime) continue;
+
+    const [day, month] = lastDate;
+    const [hh, mm] = lastTime.split(":").map(Number);
+    // Times are Mexico City (UTC-6, no DST).
+    const kickoff = new Date(Date.UTC(2026, month - 1, day, (hh ?? 0) + 6, mm ?? 0));
+
+    out.push({
+      matchday,
+      homeSlug,
+      awaySlug,
+      homeScore,
+      awayScore,
+      kickoffUtc: kickoff.toISOString(),
+    });
+    perDay.set(matchday, (perDay.get(matchday) ?? 0) + 1);
+  }
+
+  return out;
+}
+
+async function scrapeMarkdown(apiKey: string): Promise<string> {
+  const res = await fetch("https://api.firecrawl.dev/v2/scrape", {
+    method: "POST",
+    headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
+    body: JSON.stringify({ url: SOURCE_URL, formats: ["markdown"], onlyMainContent: true }),
+  });
+  const json = (await res.json()) as {
+    markdown?: string;
+    data?: { markdown?: string };
+    error?: string;
   };
-  league: { round: string };
-  teams: { home: ApiTeam; away: ApiTeam };
-  goals: { home: number | null; away: number | null };
-}
-
-function mapStatus(s: string): string {
-  if (["1H", "HT", "2H", "ET", "BT", "P", "LIVE", "INT"].includes(s)) return "live";
-  if (["FT", "AET", "PEN"].includes(s)) return "finished";
-  if (["PST", "CANC", "ABD", "AWD", "WO", "SUSP"].includes(s)) return "postponed";
-  return "scheduled";
-}
-
-/** "Apertura - 7" / "Regular Season - 7" -> 7 ; "Liguilla" rounds -> null */
-function parseRound(round: string): { matchday: number | null; stage: string } {
-  const lower = round.toLowerCase();
-  const isKnockout =
-    lower.includes("final") ||
-    lower.includes("semi") ||
-    lower.includes("quarter") ||
-    lower.includes("liguilla") ||
-    lower.includes("play");
-  const m = round.match(/(\d+)\s*$/);
-  return {
-    matchday: isKnockout ? null : m ? Number(m[1]) : null,
-    stage: isKnockout ? "liguilla" : "regular",
-  };
-}
-
-async function fetchApi<T>(path: string, key: string): Promise<T> {
-  const res = await fetch(`${API_BASE}${path}`, { headers: { "x-apisports-key": key } });
-  if (!res.ok) throw new Error(`API-Football ${path} -> ${res.status}`);
-  const json = (await res.json()) as { response: T; errors?: unknown };
-  const errs = json.errors;
-  const hasErrors = Array.isArray(errs)
-    ? errs.length > 0
-    : errs && Object.keys(errs).length > 0;
-  if (hasErrors) throw new Error(`API-Football errors: ${JSON.stringify(errs)}`);
-  return json.response;
+  if (!res.ok) throw new Error(json.error ?? `Firecrawl failed with ${res.status}`);
+  const markdown = json.markdown ?? json.data?.markdown;
+  if (!markdown) throw new Error("Firecrawl returned no markdown");
+  return markdown;
 }
 
 export const Route = createFileRoute("/api/public/hooks/sync-fixtures")({
@@ -65,130 +157,87 @@ export const Route = createFileRoute("/api/public/hooks/sync-fixtures")({
     handlers: {
       POST: async ({ request }) => {
         const authHeader = request.headers.get("authorization");
-        const expected = process.env["SUPABASE_PUBLISHABLE_KEY"];
-        if (!authHeader || !expected || authHeader !== `Bearer ${expected}`) {
-          return Response.json({ error: "Unauthorized" }, { status: 401 });
-        }
+        const apikey = request.headers.get("apikey");
+        const expected = process.env["SUPABASE_PUBLISHABLE_KEY"] ?? process.env["SUPABASE_ANON_KEY"];
+        const authorized =
+          !!expected && (authHeader === `Bearer ${expected}` || apikey === expected);
+        if (!authorized) return Response.json({ error: "Unauthorized" }, { status: 401 });
 
-        const apiKey = process.env["API_FOOTBALL_KEY"];
-        if (!apiKey) {
-          return Response.json({ error: "Missing API_FOOTBALL_KEY" }, { status: 500 });
+        const firecrawlKey = process.env["FIRECRAWL_API_KEY"];
+        if (!firecrawlKey) {
+          return Response.json({ error: "Missing FIRECRAWL_API_KEY" }, { status: 500 });
         }
-
-        const url = new URL(request.url);
-        const season = Number(url.searchParams.get("season") ?? DEFAULT_SEASON);
 
         try {
           const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+          const markdown = await scrapeMarkdown(firecrawlKey);
+          const matches = parseMatches(markdown);
 
-          // --- Teams: refresh logos / stadiums, build api id -> uuid map ---
-          const apiTeams = await fetchApi<
-            Array<{ team: ApiTeam; venue: { name: string | null; city: string | null } }>
-          >(`/teams?league=${LEAGUE_ID}&season=${season}`, apiKey);
+          const { data: teams } = await supabaseAdmin.from("teams").select("id, slug_en");
+          const teamId = new Map((teams ?? []).map((t) => [t.slug_en, t.id]));
 
-          const { data: dbTeams } = await supabaseAdmin
-            .from("teams")
-            .select("id, api_football_id, short_code, name_en");
+          const { data: fixtures } = await supabaseAdmin
+            .from("fixtures")
+            .select("id, home_team_id, away_team_id, matchday, match_date, status, home_score, away_score")
+            .eq("competition", COMPETITION);
 
-          const byApiId = new Map<number, string>();
-          const norm = (s: string) =>
-            s
-              .toLowerCase()
-              .normalize("NFD")
-              .replace(/[\u0300-\u036f]/g, "")
-              .replace(/[^a-z]/g, "");
-
-          for (const row of dbTeams ?? []) {
-            if (row.api_football_id) byApiId.set(row.api_football_id, row.id);
-          }
-
-          for (const t of apiTeams) {
-            let id = byApiId.get(t.team.id);
-            if (!id) {
-              const match = (dbTeams ?? []).find((r) =>
-                norm(t.team.name).includes(norm(r.name_en).slice(0, 6)),
-              );
-              if (match) {
-                id = match.id;
-                byApiId.set(t.team.id, id);
-                await supabaseAdmin
-                  .from("teams")
-                  .update({ api_football_id: t.team.id })
-                  .eq("id", id);
-              }
-            }
-            if (!id) continue;
-            await supabaseAdmin
-              .from("teams")
-              .update({
-                flag_url: t.team.logo,
-                ...(t.venue.name ? { stadium: t.venue.name } : {}),
-              })
-              .eq("id", id);
-          }
-
-          // --- Fixtures: upsert scores, status, dates ---
-          const apiFixtures = await fetchApi<ApiFixtureResponse[]>(
-            `/fixtures?league=${LEAGUE_ID}&season=${season}`,
-            apiKey,
+          const key = (md: number, h: string, a: string) => `${md}|${h}|${a}`;
+          const byKey = new Map(
+            (fixtures ?? []).map((f) => [
+              key(f.matchday ?? 0, f.home_team_id, f.away_team_id),
+              f,
+            ]),
           );
 
+          const now = Date.now();
           let updated = 0;
           let skipped = 0;
 
-          for (const f of apiFixtures) {
-            const homeId = byApiId.get(f.teams.home.id);
-            const awayId = byApiId.get(f.teams.away.id);
+          for (const m of matches) {
+            const homeId = teamId.get(m.homeSlug);
+            const awayId = teamId.get(m.awaySlug);
             if (!homeId || !awayId) {
               skipped++;
               continue;
             }
-            const { matchday, stage } = parseRound(f.league.round);
-            const patch = {
-              api_football_id: f.fixture.id,
-              match_date: f.fixture.date,
-              status: mapStatus(f.fixture.status.short),
-              home_score: f.goals.home,
-              away_score: f.goals.away,
-              venue: f.fixture.venue.name,
-              city: f.fixture.venue.city,
-              round: f.league.round,
-              matchday,
-              stage,
-            };
-
-            // Prefer matching on api_football_id, else on teams + matchday.
-            const { data: existing } = await supabaseAdmin
-              .from("fixtures")
-              .select("id")
-              .eq("api_football_id", f.fixture.id)
-              .maybeSingle();
-
-            let targetId = existing?.id ?? null;
-            if (!targetId && matchday != null) {
-              const { data: byTeams } = await supabaseAdmin
-                .from("fixtures")
-                .select("id")
-                .eq("home_team_id", homeId)
-                .eq("away_team_id", awayId)
-                .eq("competition", COMPETITION)
-                .maybeSingle();
-              targetId = byTeams?.id ?? null;
-            }
-
-            if (targetId) {
-              await supabaseAdmin.from("fixtures").update(patch).eq("id", targetId);
-              updated++;
-            } else {
+            const fixture = byKey.get(key(m.matchday, homeId, awayId));
+            if (!fixture) {
               skipped++;
+              continue;
             }
+
+            const kickoff = new Date(m.kickoffUtc).getTime();
+            const hasScore = m.homeScore !== null && m.awayScore !== null;
+            const status = hasScore
+              ? "finished"
+              : now >= kickoff && now < kickoff + 2.5 * 60 * 60 * 1000
+                ? "live"
+                : "scheduled";
+
+            const changed =
+              fixture.status !== status ||
+              fixture.home_score !== m.homeScore ||
+              fixture.away_score !== m.awayScore ||
+              new Date(fixture.match_date).getTime() !== kickoff;
+
+            if (!changed) continue;
+
+            await supabaseAdmin
+              .from("fixtures")
+              .update({
+                match_date: m.kickoffUtc,
+                status,
+                home_score: m.homeScore,
+                away_score: m.awayScore,
+              })
+              .eq("id", fixture.id);
+            updated++;
           }
 
           return Response.json({
             success: true,
-            season,
-            teams: byApiId.size,
-            fixturesFromApi: apiFixtures.length,
+            source: SOURCE_URL,
+            scraped: matches.length,
             updated,
             skipped,
             ranAt: new Date().toISOString(),
